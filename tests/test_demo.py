@@ -7,7 +7,7 @@ class DemoTests(unittest.TestCase):
     def test_correction_demo_runs(self):
         output = run_demo("correction")
         self.assertIn("Do not call this a memory layer", output)
-        self.assertIn("learned experience for autonomous agents", output)
+        self.assertIn("learned experience layer for autonomous agents", output)
         self.assertIn("<aeonik_ingrain_context>", output)
 
     def test_banana_demo_runs(self):

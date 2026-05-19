@@ -2,7 +2,7 @@
 
 Put agents into practice.
 
-**Learned experience for autonomous agents.**
+**Learned experience layer for autonomous agents.**
 
 Ingrain turns live agent runs, corrections, decisions, and repeated work into behavior that carries forward across sessions.
 
@@ -172,6 +172,8 @@ It checks whether Ingrain can:
 - keep hydration compact and relevant
 
 The v0 eval requires no API key and no LLM.
+
+The default `100/100` is expected for the committed v0 fixture suite. It means the current compiler and hydration rules pass the launch scenarios in this repo: project recall, correction carry-forward, stale-plan avoidance, track-record recall, and compactness. It is a regression gate and product proof, not a claim that Ingrain has solved all agent memory problems.
 
 The same command also prints a deterministic substrate comparison: Hermes default memory, Hermes + OpenViking-style retrieval, and Hermes + Ingrain. The OpenViking row is a local retrieval baseline, not a live server benchmark.
 

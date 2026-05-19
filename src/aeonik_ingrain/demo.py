@@ -15,8 +15,8 @@ DEMO_EVENTS = {
         ("assistant", "I will describe Aeonik Ingrain as a generic memory layer."),
         (
             "user",
-            "No, that's wrong. Don't call this a memory layer; call it learned "
-            "experience for autonomous agents.",
+            "No, that's wrong. Don't call this a memory layer; call it a learned "
+            "experience layer for autonomous agents.",
         ),
     ],
     "banana": [
@@ -85,4 +85,3 @@ def _run_demo_in_store(name: str, store: IngrainStore) -> str:
         ]
     )
     return "\n".join(lines)
-

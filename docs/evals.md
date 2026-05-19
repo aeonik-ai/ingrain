@@ -14,6 +14,8 @@ Aeonik Ingrain ships with deterministic, local evals. They do not require an LLM
 | Track-record query | Completed outcomes can be reported. |
 | Context compactness | Hydration stays small and relevant. |
 
+The committed v0 fixture suite should score `100/100`. Treat that as a regression gate: every launch scenario we claim to support is passing. Do not treat it as an external benchmark or a universal score for agent memory. As the scenario set gets harder, the score should remain useful by making regressions visible.
+
 ## Comparison Harness
 
 The comparison harness stress-tests the differentiator: learned experience and judgment.

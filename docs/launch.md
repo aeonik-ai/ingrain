@@ -9,7 +9,7 @@ Aeonik Ingrain gives autonomous agents learned experience, so every run can make
 ```text
 Aeonik Ingrain
 Put agents into practice.
-Learned experience for autonomous agents.
+Learned experience layer for autonomous agents.
 ```
 
 ## X / Twitter
@@ -65,7 +65,7 @@ We score this with LES-100: Learned Experience Score.
 ## LinkedIn
 
 ```text
-We are open-sourcing Aeonik Ingrain: learned experience for autonomous agents.
+We are open-sourcing Aeonik Ingrain: learned experience layer for autonomous agents.
 
 The problem is not just that agents forget. The deeper problem is that their experience does not reliably change future behavior.
 
@@ -81,7 +81,7 @@ Org repost:
 ```text
 Aeonik Ingrain is live.
 
-Learned experience for autonomous agents:
+Learned experience layer for autonomous agents:
 - local SQLite ledger
 - deterministic compiler
 - compact hydration

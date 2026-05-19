@@ -4,7 +4,7 @@
   <rect width="1600" height="900" fill="#0E1116"/>
   <rect x="56" y="52" width="1488" height="796" rx="28" fill="#151A22" stroke="#2B3442" stroke-width="2"/>
   <text x="104" y="128" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="760">Aeonik Ingrain</text>
-  <text x="104" y="178" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="30">Learned experience for autonomous agents</text>
+  <text x="104" y="178" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="30">Learned experience layer for autonomous agents</text>
 
   <rect x="104" y="244" width="324" height="150" rx="18" fill="#202938" stroke="#3B4657" stroke-width="2"/>
   <text x="136" y="300" fill="#EAF0F7" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Agent run</text>

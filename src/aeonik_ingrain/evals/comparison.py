@@ -37,7 +37,7 @@ SCENARIOS = (
         query="write the public launch framing",
         events=(
             "The assistant called Aeonik Ingrain a generic memory layer.",
-            "No, that's wrong. Don't call this a memory layer; call it learned experience for autonomous agents.",
+            "No, that's wrong. Don't call this a memory layer; call it a learned experience layer for autonomous agents.",
         ),
         expected=("learned experience", "autonomous agents"),
         forbidden=("generic memory layer",),

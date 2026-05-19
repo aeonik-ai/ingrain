@@ -77,3 +77,8 @@ Next:
 - Fixed project URLs to `https://github.com/aeonik-ai/ingrain`.
 - Added `docs/publishing.md` with the PyPI release checklist.
 - Updated launch docs with the recommended personal-account first, org-account amplification posture.
+
+## 2026-05-19 02:05 PDT
+
+- Updated the tagline to "Learned experience layer for autonomous agents."
+- Clarified that LES-100 `100/100` is the expected score for the committed v0 fixture suite and should be read as a regression gate, not a universal benchmark claim.
