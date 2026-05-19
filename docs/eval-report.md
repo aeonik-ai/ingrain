@@ -62,6 +62,6 @@ Important caveat: this checked OpenViking's live resource upload, indexing, sear
 
 LES stands for **Learned Experience Score**. LES-100 measures the learned-experience substrate: project recall, correction carry-forward, stale-plan avoidance, track-record reporting, and compact hydration.
 
-`100/100` is the expected score for the committed v0 fixture suite. It means Ingrain passes its current launch scenarios. It is a regression gate and proof-of-behavior for this repo, not an external benchmark or a claim of universal memory quality.
+`100/100` is the expected score for the committed v0 fixture suite. It means Ingrain passes its current launch scenarios. It is a regression gate for this repo's claimed behaviors, not an external benchmark or a claim of universal memory quality.
 
-The comparison harness is intentionally deterministic. `Hermes + OpenViking-style retrieval` means raw semantic retrieval over the same fixture history, not a live OpenViking server benchmark. It shows the distinction: retrieval can find relevant fragments, but Ingrain promotes current lessons and suppresses stale truth.
+The comparison harness is intentionally deterministic. `Hermes + OpenViking-style retrieval` means raw semantic retrieval over the same fixture history, not a live OpenViking server benchmark and not a full evaluation of OpenViking. In these fixtures, retrieval can find relevant fragments, while Ingrain promotes current lessons and filters stale plans.

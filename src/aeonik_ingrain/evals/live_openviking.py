@@ -1,8 +1,8 @@
 """Optional live OpenViking comparison harness.
 
 The default eval is deterministic and dependency-free. This module is for
-launch-time proof: point it at a running OpenViking server and compare the same
-learned-experience scenarios against live resource retrieval.
+optional launch-time validation: point it at a running OpenViking server and
+compare the same learned-experience scenarios against live resource retrieval.
 """
 
 from __future__ import annotations

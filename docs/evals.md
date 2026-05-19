@@ -16,13 +16,13 @@ LES stands for **Learned Experience Score**. The `100` is the maximum score in t
 | Track-record query | Completed outcomes can be reported. |
 | Context compactness | Hydration stays small and relevant. |
 
-The committed v0 fixture suite should score `100/100`. Treat that as a regression gate: every launch scenario we claim to support is passing. Do not treat it as an external benchmark or a universal score for agent memory. As the scenario set gets harder, the score should remain useful by making regressions visible.
+The committed v0 fixture suite should score `100/100`. Treat that as a regression gate: every launch scenario we claim to support is passing. Do not treat it as an external benchmark, a provider leaderboard, or a universal score for agent memory. As the scenario set gets harder, the score should remain useful by making regressions visible.
 
 ## Comparison Harness
 
 The comparison harness stress-tests the differentiator: learned experience and judgment.
 
-It compares three substrates:
+It compares three fixture substrates:
 
 | Mode | Meaning |
 |---|---|
@@ -30,7 +30,7 @@ It compares three substrates:
 | Hermes + OpenViking-style retrieval | Raw semantic retrieval baseline; finds fragments but does not resolve current truth. |
 | Hermes + Ingrain | Promotion, supersession, compilation, and compact hydration. |
 
-The OpenViking row is intentionally described as `OpenViking-style retrieval`: it is a deterministic local baseline, not a live OpenViking server benchmark. This keeps the eval runnable without services while showing the product distinction honestly.
+The OpenViking row is intentionally described as `OpenViking-style retrieval`: it is a deterministic local retrieval baseline, not a live OpenViking server benchmark and not a full evaluation of OpenViking. This keeps the eval runnable without services while showing the Ingrain-specific behavior distinction honestly.
 
 Run:
 

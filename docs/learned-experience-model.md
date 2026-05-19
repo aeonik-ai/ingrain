@@ -9,7 +9,7 @@ compiled pages    what should carry forward
 hydration         what this turn needs
 ```
 
-The goal is not to store more. The goal is to make future behavior better with less context.
+The goal is not to store more. The goal is to make future behavior more consistent with less context.
 
 ## Ledger
 
@@ -36,4 +36,4 @@ A correction is not a ledger event type. It is promoted from observations, inter
 
 ## Hydration
 
-Hydration is compact, source-linked, and instruction-safe. It should help the agent act better without becoming a second prompt written by an attacker.
+Hydration is compact, source-linked, and instruction-safe. It should help the agent act more consistently without becoming a second prompt written by an attacker.

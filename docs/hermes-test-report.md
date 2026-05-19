@@ -59,9 +59,11 @@ client=True
 tools=['viking_search', 'viking_read', 'viking_browse', 'viking_remember', 'viking_add_resource']
 ```
 
-The live resource-retrieval benchmark returned `96/120`. Ingrain's deterministic compile/hydrate path returns `120/120` on the same scenarios.
+The live resource-retrieval benchmark returned `96/120`. For context, Ingrain's deterministic compile/hydrate path is designed around these learned-experience fixtures and returns `120/120` on the same scenarios.
 
 Limit: OpenViking long-term memory extraction requires model credentials. In the isolated temp server, `viking_remember` stored a session message, but commit-time extraction failed because no `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` was present. That is why the launch eval distinguishes:
 
 - `Hermes + OpenViking-style retrieval`: deterministic local raw-retrieval baseline.
 - `ingrain compare --live-openviking`: real OpenViking resource upload/index/search/read path.
+
+This report should not be read as a general OpenViking benchmark. It checks whether the Ingrain launch scenarios are more naturally handled as learned experience than as raw resource retrieval.

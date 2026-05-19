@@ -176,9 +176,9 @@ It checks whether Ingrain can:
 
 The v0 eval requires no API key and no LLM.
 
-The default `100/100` is expected for the committed v0 fixture suite. It means the current compiler and hydration rules pass the launch scenarios in this repo: project recall, correction carry-forward, stale-plan avoidance, track-record recall, and compactness. It is a regression gate and product proof, not a claim that Ingrain has solved all agent memory problems.
+The default `100/100` is expected for the committed v0 fixture suite. It means the current compiler and hydration rules pass the launch scenarios in this repo: project recall, correction carry-forward, stale-plan avoidance, track-record recall, and compactness. It is a regression gate for the repo's launch behaviors, not an external benchmark or a claim that Ingrain has solved all agent memory problems.
 
-The same command also prints a deterministic substrate comparison: Hermes default memory, Hermes + OpenViking-style retrieval, and Hermes + Ingrain. The OpenViking row is a local retrieval baseline, not a live server benchmark.
+The same command also prints a deterministic fixture comparison: Hermes default memory, Hermes + OpenViking-style retrieval, and Hermes + Ingrain. The OpenViking row is a local retrieval baseline, not a live server benchmark or a full evaluation of OpenViking.
 
 For a live OpenViking resource-retrieval check, run a local OpenViking server and then:
 
@@ -202,7 +202,7 @@ flowchart LR
     C --> D["Compiled experience<br/>what should carry forward"]
     D --> E["Hydration<br/>what this turn needs"]
     E --> F["Better next run<br/>experience changes behavior"]
-    F --> G["LES-100 eval<br/>did behavior improve?"]
+    F --> G["LES-100 eval<br/>did experience carry forward?"]
 
     H["Hermes goals, missions, Kanban"] -. "owns active intent" .-> A
     D -. "background context only" .-> A
@@ -214,7 +214,7 @@ agent run
   -> promotions             what matters
   -> compiled markdown      what should carry forward
   -> hydration              what this turn needs
-  -> LES-100 eval           whether it improved the substrate
+  -> LES-100 eval           whether experience carried forward
 ```
 
 Local project state:

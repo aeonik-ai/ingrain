@@ -93,3 +93,10 @@ Next:
 - Researched all eight Hermes memory providers from the upstream provider docs, bundled provider READMEs, and public provider docs/repos.
 - Added `docs/hermes-memory-provider-comparison.md` with provider-by-provider positioning, a capability matrix, recommended use cases, and launch-safe framing.
 - Added `assets/memory-provider-positioning.svg` as a shareable graphic for repo docs and launch content.
+
+## 2026-05-19 03:10 PDT
+
+- Ran a launch-safety editorial pass across README, eval docs, launch notes, provider comparison, and visual copy.
+- Removed or softened overclaim language around "proof", provider leaderboards, OpenViking comparisons, and broad memory claims.
+- Added explicit Hindsight positioning: Hindsight is the stronger general-purpose memory backend; Ingrain's claim is narrower, local, auditable practice memory for runner agents.
+- Clarified LES-100 as a deterministic fixture/regression check, not an external benchmark or provider leaderboard.

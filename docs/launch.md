@@ -2,7 +2,7 @@
 
 ## One-Liner
 
-Aeonik Ingrain gives autonomous agents learned experience, so every run can make the next one better.
+Aeonik Ingrain gives autonomous agents learned experience, so lessons from one run can shape the next.
 
 ## Hero
 
@@ -23,8 +23,8 @@ Recommended account order:
 Why: personal launch posts travel farther because they have a human author, while the org gives the repo durability and a place to accumulate stars, issues, and follow-up releases.
 
 ```text
-Most agents do not need bigger memory.
-They need learned experience.
+Some agent failures are not bigger-memory problems.
+They are learned-experience problems.
 
 Today we are open-sourcing Aeonik Ingrain.
 
@@ -57,9 +57,9 @@ The demo is simple:
 3. Start fresh.
 4. Ask it to do related work.
 
-With Ingrain, the correction carries forward without replaying the transcript.
+With Ingrain, the correction can carry forward without replaying the transcript.
 
-We score this with LES-100: Learned Experience Score.
+We track this with LES-100: Learned Experience Score.
 ```
 
 ## LinkedIn
@@ -67,7 +67,7 @@ We score this with LES-100: Learned Experience Score.
 ```text
 We are open-sourcing Aeonik Ingrain: learned experience layer for autonomous agents.
 
-The problem is not just that agents forget. The deeper problem is that their experience does not reliably change future behavior.
+The problem is not just that agents forget. The deeper problem is that their experience does not reliably shape future behavior.
 
 Ingrain watches live runs, promotes durable lessons, compiles readable project memory, and hydrates future sessions with the small amount of context that matters.
 
@@ -104,7 +104,7 @@ Giving Hermes Learned Experience with Aeonik Ingrain
 
 Arc:
 
-1. Show default cold-start failure.
+1. Show a cold-start miss.
 2. Correct Hermes once.
 3. Compile with Ingrain.
 4. Start a clean session.
@@ -129,3 +129,6 @@ ingrain eval
 - OpenViking replacement
 - active goal, mission, or Kanban manager
 - live OpenViking benchmark unless a real server was configured and tested
+- "better than Hindsight" or "SOTA memory"
+- universal memory benchmark claims
+- provider leaderboard claims from the deterministic fixture eval

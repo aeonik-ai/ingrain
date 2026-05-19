@@ -10,7 +10,7 @@ class EvalTests(unittest.TestCase):
         result = run_eval(include_comparison=False)
         self.assertEqual(result["total"], 100)
 
-    def test_ingrain_beats_retrieval_baselines_on_learned_experience(self):
+    def test_ingrain_scores_higher_on_learned_experience_fixtures(self):
         result = run_comparison()
         modes = result["modes"]
         self.assertGreater(modes["Hermes + Ingrain"]["score"], modes["Hermes + OpenViking-style retrieval"]["score"])

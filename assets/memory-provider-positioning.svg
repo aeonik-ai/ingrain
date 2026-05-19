@@ -4,7 +4,7 @@
   <rect width="1600" height="960" fill="#0E1116"/>
   <rect x="64" y="60" width="1472" height="820" rx="30" fill="#151A22" stroke="#2B3442" stroke-width="2"/>
   <text x="112" y="128" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="760">Hermes Memory Providers</text>
-  <text x="112" y="174" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="26">Ingrain is the learned-experience layer, not another generic recall backend.</text>
+  <text x="112" y="174" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="26">Ingrain is a learned-experience layer for runner agents.</text>
 
   <line x1="230" y1="760" x2="1350" y2="760" stroke="#586477" stroke-width="3"/>
   <line x1="230" y1="760" x2="230" y2="248" stroke="#586477" stroke-width="3"/>
@@ -60,7 +60,7 @@
   <text x="1048" y="371" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="19">when retrieval is the bottleneck.</text>
 
   <rect x="1016" y="408" width="324" height="132" rx="22" fill="#101820" stroke="#2B3442" stroke-width="2"/>
-  <text x="1048" y="450" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="760">Ingrain claim</text>
+  <text x="1048" y="450" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="760">Ingrain focus</text>
   <text x="1048" y="488" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="19">Corrections should change future</text>
   <text x="1048" y="515" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="19">behavior without becoming task state.</text>
 </svg>

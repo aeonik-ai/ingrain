@@ -1,6 +1,6 @@
 # Philosophy
 
-Most agent memory products are framed as recall. Ingrain is framed as learned experience.
+Many agent memory products are framed around recall. Ingrain is framed around learned experience.
 
 Recall answers: what did I see before?
 
