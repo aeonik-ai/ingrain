@@ -10,9 +10,8 @@ Ingrain turns live agent runs, corrections, decisions, and repeated work into be
 
 ```bash
 pipx install "git+https://github.com/aeonik-ai/ingrain.git"
-ingrain init
-ingrain eval
-ingrain demo correction
+ingrain attach --agent codex
+ingrain hydrate --level brief --query "what should I know before this task?"
 ```
 
 ```text
@@ -26,6 +25,12 @@ Track-record query            20/20
 Context compactness           20/20
 
 Total                         100/100
+
+Practice layer checks
+PRACTICE.md generated                        pass
+Practice cards generated                     pass
+Brief hydration generated                    pass
+Evidence hydration includes confidence       pass
 ```
 
 ## Why
@@ -64,7 +69,7 @@ pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 cd your-project
 ingrain init
 ingrain remember --type correction "Do not announce unapproved features as shipped. Offer approval-safe alternatives."
-ingrain compile
+ingrain practice
 ingrain hydrate --query "draft the launch post"
 ```
 
@@ -75,6 +80,44 @@ pipx install aeonik-ingrain
 ```
 
 The hydration output is fenced as background learned experience, not a new user command.
+
+## CLI + Skill Setup
+
+The lowest-friction adoption path is CLI + Skill:
+
+```bash
+ingrain attach --agent codex
+```
+
+That initializes local storage, writes `PRACTICE.md`, creates source-linked practice cards under `.ingrain/practice/cards/`, and installs an agent skill. Supported skill targets:
+
+```bash
+ingrain skill install codex
+ingrain skill install claude
+ingrain skill install cursor
+ingrain skill install generic
+```
+
+Use `--target-dir` to write the skill somewhere explicit:
+
+```bash
+ingrain skill install codex --target-dir ./.ingrain/skills/ingrain
+```
+
+The generated skill teaches agents to:
+
+- hydrate before meaningful work
+- remember durable corrections, decisions, lessons, and completed outcomes
+- refresh `PRACTICE.md`
+- avoid storing active goals, missions, Kanban state, transient todos, secrets, or chain-of-thought
+
+Tiered hydration:
+
+```bash
+ingrain hydrate --level brief --query "small context"
+ingrain hydrate --level cards --query "normal agent context"
+ingrain hydrate --level evidence --query "audit source-linked context"
+```
 
 ## Hermes Setup
 
@@ -145,7 +188,7 @@ OpenViking is excellent for external knowledge and resource memory: docs, refere
 
 Ingrain is for learned experience from agent runs: corrections, decisions, project rules, stale plans, repeated failures, and completed outcomes.
 
-| Need | Best tool |
+| Need | Suggested tool |
 |---|---|
 | Search docs/resources | OpenViking |
 | Browse external knowledge | OpenViking |
@@ -189,6 +232,7 @@ ingrain compare --live-openviking --openviking-endpoint http://127.0.0.1:1933
 This uses real OpenViking upload, indexing, search, and read endpoints. It does not exercise OpenViking's LLM memory extraction unless your OpenViking server has model credentials configured.
 
 See [docs/evals.md](docs/evals.md).
+CLI + Skill details live in [docs/cli-skill.md](docs/cli-skill.md).
 Launch copy and demo framing live in [docs/launch.md](docs/launch.md).
 Current Hermes compatibility is mapped in [docs/hermes-current-map.md](docs/hermes-current-map.md).
 Hermes memory-provider positioning lives in [docs/hermes-memory-provider-comparison.md](docs/hermes-memory-provider-comparison.md).
@@ -199,21 +243,24 @@ Hermes memory-provider positioning lives in [docs/hermes-memory-provider-compari
 flowchart LR
     A["Agent run<br/>Hermes, Codex, Claude Code"] --> B["Ledger events<br/>what happened"]
     B --> C["Promotions<br/>what matters"]
-    C --> D["Compiled experience<br/>what should carry forward"]
-    D --> E["Hydration<br/>what this turn needs"]
-    E --> F["Better next run<br/>experience changes behavior"]
-    F --> G["LES-100 eval<br/>did experience carry forward?"]
+    C --> D["Practice cards<br/>source-linked lessons"]
+    D --> E["PRACTICE.md<br/>human-readable artifact"]
+    E --> F["Hydration<br/>brief, cards, evidence"]
+    F --> S["Agent skill<br/>Codex, Claude, Cursor"]
+    S --> G["Better next run<br/>experience changes behavior"]
+    G --> H2["LES-100 eval<br/>did experience carry forward?"]
 
     H["Hermes goals, missions, Kanban"] -. "owns active intent" .-> A
-    D -. "background context only" .-> A
+    E -. "background context only" .-> A
 ```
 
 ```text
 agent run
   -> ledger events          what happened
   -> promotions             what matters
-  -> compiled markdown      what should carry forward
-  -> hydration              what this turn needs
+  -> practice cards         source-linked lessons
+  -> PRACTICE.md            human-readable learned experience
+  -> skill + hydration      what this turn needs
   -> LES-100 eval           whether experience carried forward
 ```
 
@@ -222,6 +269,8 @@ Local project state:
 ```text
 .ingrain/
   mind.db
+  practice/
+    cards/
   compiled/
     index.md
     projects.md
@@ -230,6 +279,7 @@ Local project state:
     lessons.md
     track-record.md
   evals/
+./PRACTICE.md
 ```
 
 The ledger uses Aeonik MIND's canonical event vocabulary where possible:
@@ -251,7 +301,7 @@ Ingrain is local-first.
 - redacts common secrets before storage
 - does not store chain-of-thought
 - does not mutate Hermes goals, missions, Kanban, scheduling, or task lifecycle
-- includes source event IDs in compiled pages
+- includes source event IDs in compiled pages and practice cards
 
 ## Commands
 
@@ -263,7 +313,11 @@ ingrain compare
 ingrain compare --live-openviking --openviking-endpoint http://127.0.0.1:1933
 ingrain ingest hermes
 ingrain compile
+ingrain practice
 ingrain hydrate --query "review this launch copy"
+ingrain hydrate --level brief --query "review this launch copy"
+ingrain skill install codex
+ingrain attach --agent codex
 ingrain eval
 ingrain report
 ingrain doctor

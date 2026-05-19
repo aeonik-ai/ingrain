@@ -13,9 +13,21 @@ External provider slot: one provider at a time
 Ingrain can run as:
 
 - a sidecar CLI that ingests Hermes state and prints hydration context
+- a CLI + Skill practice layer that keeps `PRACTICE.md` beside the repo
 - a live provider that owns the external slot
 
 This means Ingrain and OpenViking can be used together in sidecar mode today, but not as simultaneous live providers unless Hermes gains provider chaining.
+
+Recommended v0 default:
+
+```bash
+ingrain attach --agent codex
+ingrain ingest hermes
+ingrain practice
+ingrain hydrate --level brief --query "continue this Hermes project"
+```
+
+This keeps the current Hermes memory provider intact.
 
 ## Goals, Missions, And Kanban Boundary
 

@@ -22,8 +22,10 @@ from aeonik_ingrain.evals.live_openviking import (
 )
 from aeonik_ingrain.evals.runner import format_eval, run_eval
 from aeonik_ingrain.ingest.hermes import hermes_home, ingest_hermes
+from aeonik_ingrain.practice import write_practice_artifacts
 from aeonik_ingrain.report import build_report
 from aeonik_ingrain.security import has_likely_secret
+from aeonik_ingrain.skills import AGENTS, install_skill, render_skill
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -50,6 +52,24 @@ def build_parser() -> argparse.ArgumentParser:
     hyd.add_argument("--query", default="", help="What the agent is about to do.")
     hyd.add_argument("--limit", type=int, default=12)
     hyd.add_argument("--max-chars", type=int, default=6000)
+    hyd.add_argument("--level", choices=["brief", "cards", "evidence"], default="cards", help="Hydration detail level.")
+
+    practice = sub.add_parser("practice", help="Write PRACTICE.md and source-linked practice cards.")
+    practice.add_argument("--output", help="Output path. Defaults to ./PRACTICE.md.")
+
+    skill = sub.add_parser("skill", help="Install or print agent skill instructions.")
+    skill_sub = skill.add_subparsers(dest="skill_command")
+    skill_install = skill_sub.add_parser("install", help="Install an Ingrain skill for an agent.")
+    skill_install.add_argument("agent", nargs="?", default="generic", choices=AGENTS)
+    skill_install.add_argument("--target-dir", help="Directory to write the skill into. Defaults to the agent's conventional location.")
+    skill_show = skill_sub.add_parser("show", help="Print an Ingrain skill template.")
+    skill_show.add_argument("agent", nargs="?", default="generic", choices=AGENTS)
+
+    attach = sub.add_parser("attach", help="Initialize, compile PRACTICE.md, and install an agent skill.")
+    attach.add_argument("--agent", default="generic", choices=AGENTS)
+    attach.add_argument("--target-dir", help="Directory to write the skill into.")
+    attach.add_argument("--practice-path", help="PRACTICE.md output path. Defaults to ./PRACTICE.md.")
+    attach.add_argument("--no-skill", action="store_true", help="Only initialize and write PRACTICE.md.")
 
     eval_parser = sub.add_parser("eval", help="Run deterministic LES-100 (Learned Experience Score) eval.")
     eval_parser.add_argument("--no-comparison", action="store_true", help="Skip substrate comparison table.")
@@ -127,8 +147,37 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "hydrate":
-        output = hydrate(store, query=args.query, limit=args.limit, max_chars=args.max_chars)
+        output = hydrate(store, query=args.query, limit=args.limit, max_chars=args.max_chars, level=args.level)
         print(output or "No learned experience found. Run `ingrain remember ...` or `ingrain ingest hermes` first.")
+        return 0
+
+    if args.command == "practice":
+        compile_store(store)
+        result = write_practice_artifacts(store, output_path=args.output)
+        print(f"Wrote {result['practice_path']}")
+        print(f"Wrote {result['card_count']} practice cards into {store.practice_cards_dir}")
+        return 0
+
+    if args.command == "skill":
+        if args.skill_command == "install":
+            target = install_skill(args.agent, target_dir=args.target_dir)
+            print(f"Installed Ingrain {args.agent} skill to {target}")
+            return 0
+        if args.skill_command == "show":
+            print(render_skill(args.agent))
+            return 0
+        print("Specify a skill command, e.g. `ingrain skill install codex`", file=sys.stderr)
+        return 2
+
+    if args.command == "attach":
+        store.initialize()
+        compile_store(store)
+        practice_result = write_practice_artifacts(store, output_path=args.practice_path)
+        print(f"Wrote {practice_result['practice_path']}")
+        print(f"Wrote {practice_result['card_count']} practice cards into {store.practice_cards_dir}")
+        if not args.no_skill:
+            target = install_skill(args.agent, target_dir=args.target_dir)
+            print(f"Installed Ingrain {args.agent} skill to {target}")
         return 0
 
     if args.command == "eval":
@@ -195,6 +244,7 @@ def _doctor(store: IngrainStore) -> int:
     lines.append(f"Ingrain home: {store.home}")
     lines.append(f"Database exists: {store.db_path.exists()}")
     lines.append(f"Compiled dir exists: {store.compiled_dir.exists()}")
+    lines.append(f"Practice cards dir exists: {store.practice_cards_dir.exists()}")
     h_home = hermes_home(None)
     lines.append(f"Hermes home: {h_home}")
     lines.append(f"Hermes state.db exists: {(h_home / 'state.db').exists()}")

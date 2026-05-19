@@ -84,6 +84,8 @@ Aeonik Ingrain is live.
 Learned experience layer for autonomous agents:
 - local SQLite ledger
 - deterministic compiler
+- PRACTICE.md
+- generated agent skill
 - compact hydration
 - Hermes integration
 - LES-100 eval
@@ -117,6 +119,8 @@ Arc:
 ```bash
 ingrain demo correction
 ingrain demo banana
+ingrain attach --agent codex --target-dir ./.ingrain/skills/ingrain
+ingrain hydrate --level brief --query "write launch copy"
 ingrain compare
 ingrain eval
 ```

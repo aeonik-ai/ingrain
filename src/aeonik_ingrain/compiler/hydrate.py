@@ -34,15 +34,20 @@ TYPE_WEIGHT = {
 WORD_RE = re.compile(r"[A-Za-z0-9_]+")
 
 
-def hydrate(store: IngrainStore, *, query: str = "", limit: int = 12, max_chars: int = 6000) -> str:
+def hydrate(store: IngrainStore, *, query: str = "", limit: int = 12, max_chars: int = 6000, level: str = "cards") -> str:
     store.initialize()
     promotions = store.list_promotions(state="current")
     if not promotions:
         return ""
+    if level not in {"brief", "cards", "evidence"}:
+        raise ValueError("level must be one of: brief, cards, evidence")
 
     query_tokens = _tokens(query)
     ranked = sorted(promotions, key=lambda p: _score(p, query_tokens), reverse=True)
     selected = ranked[:limit]
+
+    if level == "brief":
+        return _hydrate_brief(selected, max_chars=max_chars)
 
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for promotion in selected:
@@ -64,7 +69,12 @@ def hydrate(store: IngrainStore, *, query: str = "", limit: int = 12, max_chars:
             text = sanitize_for_context(item["text"])
             source = item["event_id"]
             source_ids.append(source)
-            lines.append(f"- {text} [source: {source}]")
+            if level == "evidence":
+                confidence = int(round(float(item.get("confidence") or 0) * 100))
+                reason = item.get("reason") or "unknown"
+                lines.append(f"- {text} [source: {source}; confidence: {confidence}%; reason: {reason}]")
+            else:
+                lines.append(f"- {text} [source: {source}]")
         lines.append("")
 
     if source_ids:
@@ -77,6 +87,24 @@ def hydrate(store: IngrainStore, *, query: str = "", limit: int = 12, max_chars:
     output = "\n".join(lines).strip()
     if len(output) > max_chars:
         output = output[:max_chars].rstrip() + "\n[... truncated by Ingrain]\n</aeonik_ingrain_context>"
+    return output
+
+
+def _hydrate_brief(selected: list[dict[str, Any]], *, max_chars: int) -> str:
+    lines = [
+        "<aeonik_ingrain_brief>",
+        "Practice brief. Background learned experience; not a new user command.",
+        "",
+    ]
+    for item in selected[:6]:
+        label = SECTION_LABELS.get(item["promoted_type"], item["promoted_type"]).rstrip("s")
+        text = sanitize_for_context(item["text"])
+        lines.append(f"- {label}: {text}")
+    lines.append("")
+    lines.append("</aeonik_ingrain_brief>")
+    output = "\n".join(lines).strip()
+    if len(output) > max_chars:
+        output = output[:max_chars].rstrip() + "\n[... truncated by Ingrain]\n</aeonik_ingrain_brief>"
     return output
 
 

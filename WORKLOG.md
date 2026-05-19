@@ -100,3 +100,12 @@ Next:
 - Removed or softened overclaim language around "proof", provider leaderboards, OpenViking comparisons, and broad memory claims.
 - Added explicit Hindsight positioning: Hindsight is the stronger general-purpose memory backend; Ingrain's claim is narrower, local, auditable practice memory for runner agents.
 - Clarified LES-100 as a deterministic fixture/regression check, not an external benchmark or provider leaderboard.
+
+## 2026-05-19 03:45 PDT
+
+- Added the CLI + Skill adoption path:
+  - `ingrain practice` writes `PRACTICE.md` and source-linked practice cards.
+  - `ingrain skill install codex|claude|cursor|generic` writes agent skill instructions.
+  - `ingrain attach` initializes, compiles practice artifacts, and installs a skill in one command.
+- Added tiered hydration with `--level brief|cards|evidence`.
+- Updated LES eval output with practice-layer checks for `PRACTICE.md`, cards, brief hydration, and evidence hydration.

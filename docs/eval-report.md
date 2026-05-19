@@ -14,6 +14,12 @@ Context compactness             20/20
 
 Total                           100/100
 
+Practice layer checks
+PRACTICE.md generated                        pass
+Practice cards generated                     pass
+Brief hydration generated                    pass
+Evidence hydration includes confidence       pass
+
 Learned Experience Comparison
 
 Hermes default memory                   36/120
@@ -63,5 +69,7 @@ Important caveat: this checked OpenViking's live resource upload, indexing, sear
 LES stands for **Learned Experience Score**. LES-100 measures the learned-experience substrate: project recall, correction carry-forward, stale-plan avoidance, track-record reporting, and compact hydration.
 
 `100/100` is the expected score for the committed v0 fixture suite. It means Ingrain passes its current launch scenarios. It is a regression gate for this repo's claimed behaviors, not an external benchmark or a claim of universal memory quality.
+
+The practice layer checks verify that the adoption path works as a local artifact flow: `PRACTICE.md`, source-linked practice cards, brief hydration, and evidence hydration.
 
 The comparison harness is intentionally deterministic. `Hermes + OpenViking-style retrieval` means raw semantic retrieval over the same fixture history, not a live OpenViking server benchmark and not a full evaluation of OpenViking. In these fixtures, retrieval can find relevant fragments, while Ingrain promotes current lessons and filters stale plans.

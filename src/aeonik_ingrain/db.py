@@ -73,12 +73,15 @@ class IngrainStore:
         self.compiled_dir = self.home / "compiled"
         self.evals_dir = self.home / "evals"
         self.examples_dir = self.home / "examples"
+        self.practice_dir = self.home / "practice"
+        self.practice_cards_dir = self.practice_dir / "cards"
 
     def initialize(self) -> None:
         self.home.mkdir(parents=True, exist_ok=True)
         self.compiled_dir.mkdir(parents=True, exist_ok=True)
         self.evals_dir.mkdir(parents=True, exist_ok=True)
         self.examples_dir.mkdir(parents=True, exist_ok=True)
+        self.practice_cards_dir.mkdir(parents=True, exist_ok=True)
         with self.session() as conn:
             conn.executescript(self._schema_sql())
 

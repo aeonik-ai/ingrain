@@ -13,6 +13,7 @@ from aeonik_ingrain.compiler.pages import compile_store
 from aeonik_ingrain.db import IngrainStore, utc_now
 from aeonik_ingrain.evals.comparison import format_comparison, run_comparison
 from aeonik_ingrain.ingest.generic_jsonl import ingest_jsonl
+from aeonik_ingrain.practice import write_practice_artifacts
 
 FIXTURES = [
     "project_continuity.jsonl",
@@ -30,8 +31,11 @@ def run_eval(*, output_home: str | Path | None = None, include_comparison: bool 
         for fixture in FIXTURES:
             ingest_jsonl(store, fixture_dir.joinpath(fixture), source="eval_fixture", runner="hermes")
         compile_store(store)
+        practice_result = write_practice_artifacts(store, output_path=Path(tmp) / "PRACTICE.md")
 
         launch_context = hydrate(store, query="draft the launch post for Aeonik Ingrain", limit=12)
+        brief_context = hydrate(store, query="draft the launch post for Aeonik Ingrain", limit=12, level="brief")
+        evidence_context = hydrate(store, query="draft the launch post for Aeonik Ingrain", limit=12, level="evidence")
         status_context = hydrate(store, query="what has been completed", limit=12)
 
         scores = {
@@ -50,6 +54,12 @@ def run_eval(*, output_home: str | Path | None = None, include_comparison: bool 
             "max_total": 100,
             "launch_context_chars": len(launch_context),
             "status_context_chars": len(status_context),
+            "practice_checks": {
+                "PRACTICE.md generated": Path(practice_result["practice_path"]).exists(),
+                "Practice cards generated": practice_result["card_count"] > 0,
+                "Brief hydration generated": "<aeonik_ingrain_brief>" in brief_context,
+                "Evidence hydration includes confidence": "confidence:" in evidence_context,
+            },
         }
 
     if include_comparison:
@@ -67,6 +77,11 @@ def format_eval(result: dict[str, Any]) -> str:
     for key, value in result["scores"].items():
         lines.append(f"{key:<31} {value}/20")
     lines.extend(["", f"Total{'':<26} {result['total']}/100"])
+    if result.get("practice_checks"):
+        lines.extend(["", "Practice layer checks"])
+        for key, value in result["practice_checks"].items():
+            status = "pass" if value else "fail"
+            lines.append(f"{key:<44} {status}")
     if result.get("comparison"):
         lines.extend(["", format_comparison(result["comparison"])])
     return "\n".join(lines)

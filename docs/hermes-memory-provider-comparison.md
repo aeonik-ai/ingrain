@@ -48,6 +48,7 @@ Ingrain should not compete with that head-on. Ingrain's claim is narrower:
 - no hosted service or LLM required for the v0 path
 - small enough to audit
 - project-run oriented
+- usable as CLI + Skill without replacing the active memory provider
 - explicit about goals, missions, and Kanban boundaries
 - focused on corrections, stale-plan avoidance, decisions, and completed outcomes
 
@@ -68,7 +69,7 @@ Launch-safe wording:
 | RetainDB | Cloud memory API and hybrid search | RetainDB cloud | Persistent user/project memory, vector + BM25 + reranking, typed memories | Good persistent memory; project-run lessons are mediated through a service/API rather than a repo-local ledger. | Use RetainDB for app/user memory infra; use Ingrain for local autonomous-agent run learning. |
 | ByteRover | CLI knowledge tree and federated memory search | Local-first CLI with optional cloud sync | Hierarchical project knowledge, curation, search, pre-compression extraction | Can curate decisions and patterns into a tree; Ingrain makes correction/outcome semantics explicit. | Pair when you want ByteRover's knowledge tree and Ingrain's explicit correction/lesson compiler. |
 | Supermemory | Memory/context API with RAG, profiles, connectors | Supermemory cloud/API | Profile recall, hybrid memory + documents, connectors, file processing, containers | Broad context memory; practice memory is one use case inside a larger context stack. | Use Supermemory for product-grade context API/RAG; use Ingrain for agent practice memory. |
-| Ingrain | Learned experience for autonomous agents | Local SQLite ledger + compiled markdown; sidecar or provider slot | Corrections, decisions, stale-plan avoidance, track record, compact hydration | Purpose-built for corrections, decisions, stale-plan avoidance, outcomes, and compact practice memory. | Use as sidecar with retrieval providers today; use provider mode when learned experience is the bottleneck. |
+| Ingrain | Learned experience for autonomous agents | Local SQLite ledger + `PRACTICE.md` + Skill; sidecar or provider slot | Corrections, decisions, stale-plan avoidance, track record, compact hydration | Purpose-built for corrections, decisions, stale-plan avoidance, outcomes, and compact practice memory. | Use as CLI + Skill beside retrieval providers today; use provider mode when learned experience is the bottleneck. |
 
 ## Capability Matrix
 

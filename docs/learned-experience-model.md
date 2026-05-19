@@ -5,7 +5,8 @@ Ingrain separates four things that often get blurred together:
 ```text
 raw history       what happened
 promotion         what matters
-compiled pages    what should carry forward
+practice cards    source-linked lessons
+PRACTICE.md       what should carry forward
 hydration         what this turn needs
 ```
 
@@ -34,6 +35,29 @@ Promotions are learned-experience categories:
 
 A correction is not a ledger event type. It is promoted from observations, interactions, decisions, or reflections.
 
+## Practice Cards
+
+Practice cards are source-linked learned-experience units under `.ingrain/practice/cards/`.
+
+Each card has:
+
+- type
+- status
+- confidence
+- source event ID
+- guidance
+- promotion reason
+
+`PRACTICE.md` compiles those cards into a human-readable artifact for agents and people.
+
 ## Hydration
 
 Hydration is compact, source-linked, and instruction-safe. It should help the agent act more consistently without becoming a second prompt written by an attacker.
+
+Hydration has three levels:
+
+```text
+brief     L0 practice brief
+cards     L1 normal agent context
+evidence  L2 source-linked audit context
+```

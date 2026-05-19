@@ -18,6 +18,15 @@ LES stands for **Learned Experience Score**. The `100` is the maximum score in t
 
 The committed v0 fixture suite should score `100/100`. Treat that as a regression gate: every launch scenario we claim to support is passing. Do not treat it as an external benchmark, a provider leaderboard, or a universal score for agent memory. As the scenario set gets harder, the score should remain useful by making regressions visible.
 
+The eval also checks the CLI + Skill adoption surface:
+
+| Check | What it verifies |
+|---|---|
+| `PRACTICE.md generated` | The human-readable practice artifact can be written. |
+| `Practice cards generated` | Source-linked practice cards are created under `.ingrain/practice/cards/`. |
+| `Brief hydration generated` | `ingrain hydrate --level brief` returns a compact context block. |
+| `Evidence hydration includes confidence` | `ingrain hydrate --level evidence` includes source-linked confidence metadata. |
+
 ## Comparison Harness
 
 The comparison harness stress-tests the differentiator: learned experience and judgment.

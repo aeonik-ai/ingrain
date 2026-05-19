@@ -40,6 +40,7 @@ python3 -m venv /tmp/ingrain-publish-smoke
 /tmp/ingrain-publish-smoke/bin/python -m pip install aeonik-ingrain
 /tmp/ingrain-publish-smoke/bin/ingrain --version
 /tmp/ingrain-publish-smoke/bin/ingrain eval --no-comparison
+/tmp/ingrain-publish-smoke/bin/ingrain skill show codex
 ```
 
 Expected result:
@@ -55,5 +56,6 @@ Total                           100/100
 - Tag `v0.1.0`.
 - Attach the eval report.
 - Mention that the project is local-first and has no network or LLM dependency by default.
+- Mention CLI + Skill + PRACTICE.md as the default adoption path.
 - Mention that OpenViking live provider chaining is roadmap, not v0.
 - Link the architecture graphic: `assets/ingrain-architecture.svg`.
