@@ -1,6 +1,7 @@
 # Hermes Notes
 
 Current upstream map: [hermes-current-map.md](hermes-current-map.md).
+Memory-provider comparison: [hermes-memory-provider-comparison.md](hermes-memory-provider-comparison.md).
 
 Hermes has built-in memory plus one external memory-provider slot.
 

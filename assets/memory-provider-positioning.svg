@@ -1,0 +1,66 @@
+<svg width="1600" height="960" viewBox="0 0 1600 960" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Hermes memory provider positioning map</title>
+  <desc id="desc">A positioning map comparing Ingrain with Hermes-supported memory providers.</desc>
+  <rect width="1600" height="960" fill="#0E1116"/>
+  <rect x="64" y="60" width="1472" height="820" rx="30" fill="#151A22" stroke="#2B3442" stroke-width="2"/>
+  <text x="112" y="128" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="760">Hermes Memory Providers</text>
+  <text x="112" y="174" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="26">Ingrain is the learned-experience layer, not another generic recall backend.</text>
+
+  <line x1="230" y1="760" x2="1350" y2="760" stroke="#586477" stroke-width="3"/>
+  <line x1="230" y1="760" x2="230" y2="248" stroke="#586477" stroke-width="3"/>
+  <path d="M1350 760L1318 742V778L1350 760Z" fill="#586477"/>
+  <path d="M230 248L212 280H248L230 248Z" fill="#586477"/>
+  <text x="592" y="830" fill="#C5CEDA" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="650">External knowledge scale and semantic retrieval</text>
+  <text x="84" y="548" fill="#C5CEDA" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="650" transform="rotate(-90 84 548)">Behavior-shaping learned experience</text>
+
+  <text x="236" y="804" fill="#778395" font-family="Inter, Arial, sans-serif" font-size="18">local facts</text>
+  <text x="1212" y="804" fill="#778395" font-family="Inter, Arial, sans-serif" font-size="18">large KB / cloud</text>
+  <text x="112" y="258" fill="#778395" font-family="Inter, Arial, sans-serif" font-size="18">high</text>
+  <text x="112" y="764" fill="#778395" font-family="Inter, Arial, sans-serif" font-size="18">low</text>
+
+  <rect x="326" y="314" width="226" height="82" rx="20" fill="#1B2B2A" stroke="#74D3AE" stroke-width="3"/>
+  <text x="356" y="352" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="760">Ingrain</text>
+  <text x="356" y="379" fill="#B8D9CE" font-family="Inter, Arial, sans-serif" font-size="18">lessons, corrections</text>
+
+  <rect x="500" y="390" width="214" height="74" rx="18" fill="#202938" stroke="#4E7AB8" stroke-width="2"/>
+  <text x="530" y="423" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Hindsight</text>
+  <text x="530" y="449" fill="#BFD4EF" font-family="Inter, Arial, sans-serif" font-size="17">graph + reflect</text>
+
+  <rect x="378" y="498" width="214" height="74" rx="18" fill="#2A2636" stroke="#8B7CE0" stroke-width="2"/>
+  <text x="408" y="531" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Honcho</text>
+  <text x="408" y="557" fill="#CFC8F0" font-family="Inter, Arial, sans-serif" font-size="17">user modeling</text>
+
+  <rect x="626" y="544" width="198" height="72" rx="18" fill="#302727" stroke="#C77979" stroke-width="2"/>
+  <text x="656" y="577" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Mem0</text>
+  <text x="656" y="602" fill="#E7C2C2" font-family="Inter, Arial, sans-serif" font-size="17">managed facts</text>
+
+  <rect x="850" y="510" width="226" height="74" rx="18" fill="#312D1E" stroke="#F3C969" stroke-width="2"/>
+  <text x="880" y="543" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">OpenViking</text>
+  <text x="880" y="569" fill="#EAD49B" font-family="Inter, Arial, sans-serif" font-size="17">context DB</text>
+
+  <rect x="1056" y="594" width="210" height="74" rx="18" fill="#263028" stroke="#8FD17B" stroke-width="2"/>
+  <text x="1086" y="627" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Supermemory</text>
+  <text x="1086" y="653" fill="#CAE8C0" font-family="Inter, Arial, sans-serif" font-size="17">API + RAG</text>
+
+  <rect x="934" y="668" width="182" height="70" rx="18" fill="#2D2934" stroke="#C89CE5" stroke-width="2"/>
+  <text x="964" y="700" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">RetainDB</text>
+  <text x="964" y="725" fill="#E2C8F2" font-family="Inter, Arial, sans-serif" font-size="17">hybrid API</text>
+
+  <rect x="654" y="676" width="190" height="70" rx="18" fill="#1F293A" stroke="#83AFE8" stroke-width="2"/>
+  <text x="684" y="708" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">ByteRover</text>
+  <text x="684" y="733" fill="#BFD4EF" font-family="Inter, Arial, sans-serif" font-size="17">CLI tree</text>
+
+  <rect x="304" y="638" width="228" height="72" rx="18" fill="#252B34" stroke="#9FAABD" stroke-width="2"/>
+  <text x="334" y="671" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Holographic</text>
+  <text x="334" y="696" fill="#CCD4DE" font-family="Inter, Arial, sans-serif" font-size="17">local facts + HRR</text>
+
+  <rect x="1016" y="264" width="324" height="132" rx="22" fill="#101820" stroke="#2B3442" stroke-width="2"/>
+  <text x="1048" y="306" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="760">Launch framing</text>
+  <text x="1048" y="344" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="19">Use OpenViking/Supermemory/RetainDB</text>
+  <text x="1048" y="371" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="19">when retrieval is the bottleneck.</text>
+
+  <rect x="1016" y="408" width="324" height="132" rx="22" fill="#101820" stroke="#2B3442" stroke-width="2"/>
+  <text x="1048" y="450" fill="#F7FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="760">Ingrain claim</text>
+  <text x="1048" y="488" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="19">Corrections should change future</text>
+  <text x="1048" y="515" fill="#AEB8C5" font-family="Inter, Arial, sans-serif" font-size="19">behavior without becoming task state.</text>
+</svg>

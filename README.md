@@ -191,6 +191,7 @@ This uses real OpenViking upload, indexing, search, and read endpoints. It does 
 See [docs/evals.md](docs/evals.md).
 Launch copy and demo framing live in [docs/launch.md](docs/launch.md).
 Current Hermes compatibility is mapped in [docs/hermes-current-map.md](docs/hermes-current-map.md).
+Hermes memory-provider positioning lives in [docs/hermes-memory-provider-comparison.md](docs/hermes-memory-provider-comparison.md).
 
 ## How It Works
 

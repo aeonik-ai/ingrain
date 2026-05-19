@@ -5,7 +5,7 @@ Verified against the official upstream repo:
 ```text
 repo: https://github.com/NousResearch/hermes-agent.git
 branch: origin/main
-commit: 12c39830f fix(doctor): attach codex CLI hint to OpenAI Codex auth warning for #27975
+commit: a0bd11d02 fix(tests): catch up 25 stale tests after recent merges (#28626)
 fetched: 2026-05-19
 ```
 

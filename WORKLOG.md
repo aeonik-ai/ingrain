@@ -86,3 +86,10 @@ Next:
 ## 2026-05-19 02:12 PDT
 
 - Expanded LES as "Learned Experience Score" at the first README/eval output touchpoints so the acronym is not unexplained.
+
+## 2026-05-19 02:40 PDT
+
+- Fetched current official Hermes upstream and refreshed the compatibility map to `a0bd11d02`.
+- Researched all eight Hermes memory providers from the upstream provider docs, bundled provider READMEs, and public provider docs/repos.
+- Added `docs/hermes-memory-provider-comparison.md` with provider-by-provider positioning, a capability matrix, recommended use cases, and launch-safe framing.
+- Added `assets/memory-provider-positioning.svg` as a shareable graphic for repo docs and launch content.
