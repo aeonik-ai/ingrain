@@ -29,9 +29,9 @@ ingrain = "aeonik_ingrain.cli:main"
 aeonik-ingrain = "aeonik_ingrain.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/aeonik/ingrain"
-Repository = "https://github.com/aeonik/ingrain"
-Issues = "https://github.com/aeonik/ingrain/issues"
+Homepage = "https://github.com/aeonik-ai/ingrain"
+Repository = "https://github.com/aeonik-ai/ingrain"
+Issues = "https://github.com/aeonik-ai/ingrain/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

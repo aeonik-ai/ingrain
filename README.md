@@ -6,8 +6,10 @@ Put agents into practice.
 
 Ingrain turns live agent runs, corrections, decisions, and repeated work into behavior that carries forward across sessions.
 
+![Aeonik Ingrain architecture](assets/ingrain-architecture.svg)
+
 ```bash
-pipx install aeonik-ingrain
+pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 ingrain init
 ingrain eval
 ingrain demo correction
@@ -54,13 +56,21 @@ It is not a vector database, a doc store, or a replacement for your runner agent
 
 ## Quick Start
 
+Current GitHub install:
+
 ```bash
-pipx install aeonik-ingrain
+pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 cd your-project
 ingrain init
 ingrain remember --type correction "Do not announce unapproved features as shipped. Offer approval-safe alternatives."
 ingrain compile
 ingrain hydrate --query "draft the launch post"
+```
+
+After the PyPI release:
+
+```bash
+pipx install aeonik-ingrain
 ```
 
 The hydration output is fenced as background learned experience, not a new user command.
@@ -178,6 +188,19 @@ Launch copy and demo framing live in [docs/launch.md](docs/launch.md).
 Current Hermes compatibility is mapped in [docs/hermes-current-map.md](docs/hermes-current-map.md).
 
 ## How It Works
+
+```mermaid
+flowchart LR
+    A["Agent run<br/>Hermes, Codex, Claude Code"] --> B["Ledger events<br/>what happened"]
+    B --> C["Promotions<br/>what matters"]
+    C --> D["Compiled experience<br/>what should carry forward"]
+    D --> E["Hydration<br/>what this turn needs"]
+    E --> F["Better next run<br/>experience changes behavior"]
+    F --> G["LES-100 eval<br/>did behavior improve?"]
+
+    H["Hermes goals, missions, Kanban"] -. "owns active intent" .-> A
+    D -. "background context only" .-> A
+```
 
 ```text
 agent run

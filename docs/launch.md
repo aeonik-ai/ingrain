@@ -14,6 +14,14 @@ Learned experience for autonomous agents.
 
 ## X / Twitter
 
+Recommended account order:
+
+1. Personal account posts the story and demo.
+2. `aeonik-ai` quotes or reposts with the canonical repo link.
+3. Pin the repo on the org profile.
+
+Why: personal launch posts travel farther because they have a human author, while the org gives the repo durability and a place to accumulate stars, issues, and follow-up releases.
+
 ```text
 Most agents do not need bigger memory.
 They need learned experience.
@@ -25,6 +33,18 @@ It turns live agent runs, corrections, decisions, and repeated work into behavio
 Put agents into practice.
 
 Works with Hermes first. Local-first. No API key required.
+```
+
+Install line for the first post before PyPI is live:
+
+```text
+pipx install "git+https://github.com/aeonik-ai/ingrain.git"
+```
+
+Install line after PyPI is live:
+
+```text
+pipx install aeonik-ingrain
 ```
 
 Follow-up:
@@ -55,6 +75,23 @@ It is local-first, eval-driven, and starts with Hermes Agent.
 
 The goal is simple: put agents into practice.
 ```
+
+Org repost:
+
+```text
+Aeonik Ingrain is live.
+
+Learned experience for autonomous agents:
+- local SQLite ledger
+- deterministic compiler
+- compact hydration
+- Hermes integration
+- LES-100 eval
+
+Hermes owns intent. Ingrain owns experience.
+```
+
+Suggested visual: `assets/ingrain-architecture.svg`.
 
 ## Demo Video
 

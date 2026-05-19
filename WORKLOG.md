@@ -68,3 +68,12 @@ Next:
 - Added `ingrain compare --live-openviking` to run a real OpenViking resource upload/index/search/read benchmark.
 - Live OpenViking resource-retrieval result: `96/120` on the learned-experience comparison scenarios.
 - OpenViking long-term memory extraction was not fully benchmarked because the isolated server had no `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY`; commit-time extraction logged a missing-credentials error.
+
+## 2026-05-19 01:50 PDT
+
+- Added a README architecture graphic at `assets/ingrain-architecture.svg`.
+- Added a Mermaid diagram to the README so the repo explains the product at a glance.
+- Updated install instructions to use the GitHub `pipx install` path until PyPI is live.
+- Fixed project URLs to `https://github.com/aeonik-ai/ingrain`.
+- Added `docs/publishing.md` with the PyPI release checklist.
+- Updated launch docs with the recommended personal-account first, org-account amplification posture.
