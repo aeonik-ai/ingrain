@@ -51,7 +51,7 @@ def build_parser() -> argparse.ArgumentParser:
     hyd.add_argument("--limit", type=int, default=12)
     hyd.add_argument("--max-chars", type=int, default=6000)
 
-    eval_parser = sub.add_parser("eval", help="Run deterministic LES-100 eval.")
+    eval_parser = sub.add_parser("eval", help="Run deterministic LES-100 (Learned Experience Score) eval.")
     eval_parser.add_argument("--no-comparison", action="store_true", help="Skip substrate comparison table.")
     eval_parser.add_argument("--json", action="store_true", help="Print JSON instead of text.")
 

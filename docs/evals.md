@@ -4,6 +4,8 @@ Aeonik Ingrain ships with deterministic, local evals. They do not require an LLM
 
 ## LES-100
 
+LES stands for **Learned Experience Score**. The `100` is the maximum score in the v0 fixture suite.
+
 `ingrain eval` scores five learned-experience dimensions:
 
 | Dimension | What it checks |

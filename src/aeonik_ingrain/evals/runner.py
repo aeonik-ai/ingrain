@@ -43,7 +43,7 @@ def run_eval(*, output_home: str | Path | None = None, include_comparison: bool 
         }
         total = sum(scores.values())
         result = {
-            "name": "Aeonik Ingrain LES-100 Eval",
+            "name": "Aeonik Ingrain LES-100 Eval (Learned Experience Score)",
             "created_at": utc_now(),
             "scores": scores,
             "total": total,

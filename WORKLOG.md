@@ -82,3 +82,7 @@ Next:
 
 - Updated the tagline to "Learned experience layer for autonomous agents."
 - Clarified that LES-100 `100/100` is the expected score for the committed v0 fixture suite and should be read as a regression gate, not a universal benchmark claim.
+
+## 2026-05-19 02:12 PDT
+
+- Expanded LES as "Learned Experience Score" at the first README/eval output touchpoints so the acronym is not unexplained.

@@ -46,6 +46,7 @@ Expected result:
 
 ```text
 Aeonik Ingrain LES-100 Eval
+Learned Experience Score
 Total                           100/100
 ```
 

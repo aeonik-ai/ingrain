@@ -17,6 +17,7 @@ ingrain demo correction
 
 ```text
 Aeonik Ingrain LES-100 Eval
+Learned Experience Score
 
 Cold-start project recall     20/20
 Correction carry-forward      20/20
@@ -161,7 +162,9 @@ Provider chaining is on the roadmap so Ingrain can handle learned experience whi
 
 ## LES-100
 
-`ingrain eval` runs a deterministic local eval called **LES-100**, the Learned Experience Score.
+`ingrain eval` runs a deterministic local eval called **LES-100**.
+
+LES stands for **Learned Experience Score**. The `100` is the maximum score in the v0 fixture suite.
 
 It checks whether Ingrain can:
 

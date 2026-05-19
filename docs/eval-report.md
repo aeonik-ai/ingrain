@@ -4,6 +4,7 @@ Generated from deterministic local fixtures. No LLM, network, or hosted service 
 
 ```text
 Aeonik Ingrain LES-100 Eval
+Learned Experience Score
 
 Cold-start project recall       20/20
 Correction carry-forward        20/20
@@ -59,7 +60,7 @@ Important caveat: this checked OpenViking's live resource upload, indexing, sear
 
 ## Interpretation
 
-LES-100 measures the learned-experience substrate: project recall, correction carry-forward, stale-plan avoidance, track-record reporting, and compact hydration.
+LES stands for **Learned Experience Score**. LES-100 measures the learned-experience substrate: project recall, correction carry-forward, stale-plan avoidance, track-record reporting, and compact hydration.
 
 `100/100` is the expected score for the committed v0 fixture suite. It means Ingrain passes its current launch scenarios. It is a regression gate and proof-of-behavior for this repo, not an external benchmark or a claim of universal memory quality.
 
