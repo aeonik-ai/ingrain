@@ -114,10 +114,10 @@ SCENARIOS = (
         rationale="Completed outcomes should be reportable without reviving old todos.",
         query="what work is already done?",
         events=(
-            "Completed: Built CLI, SQLite ledger, compiler, hydration, Hermes provider, and LES-100 eval.",
+            "Completed: Built CLI, SQLite ledger, compiler, hydration, Hermes provider, and LES-Core eval.",
             "Tests passed: compileall and deterministic CLI eval succeeded.",
         ),
-        expected=("SQLite ledger", "Hermes provider", "LES-100 eval"),
+        expected=("SQLite ledger", "Hermes provider", "LES-Core eval"),
         forbidden=(),
         action_terms=("built", "succeeded"),
     ),

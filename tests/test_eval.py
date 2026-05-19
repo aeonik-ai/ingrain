@@ -58,10 +58,19 @@ class EvalTests(unittest.TestCase):
         )
         self.assertLess(stale["score"], score["score"])
 
+    def test_live_les_provider_errors_score_zero(self):
+        universe = UNIVERSES[0]
+        score = score_live_output(
+            '{"error": "Failed to reflect: operation not permitted"}',
+            universe,
+        )
+        self.assertEqual(score["score"], 0)
+        self.assertIn("Failed to reflect", score["provider_error"])
+
     def test_live_les_formatter_reports_blocked_providers(self):
         text = format_live_les(
             {
-                "name": "Live LES-100 Provider Eval",
+                "name": "Live LES-Core Provider Smoke Eval",
                 "claim": "test",
                 "score_threshold": 90,
                 "max_total": 100,

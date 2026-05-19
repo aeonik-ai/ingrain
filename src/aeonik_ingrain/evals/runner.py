@@ -1,4 +1,4 @@
-"""Deterministic LES-100 eval."""
+"""Deterministic LES-Core eval."""
 
 from __future__ import annotations
 
@@ -42,12 +42,12 @@ def run_eval(*, output_home: str | Path | None = None, include_comparison: bool 
             "Cold-start project recall": _score_contains(launch_context, ["Aeonik Ingrain", "local-first", "runner agents"]),
             "Correction carry-forward": _score_contains(launch_context, ["unapproved investor-facing", "approval-safe"]),
             "Stale-plan avoidance": _score_stale_plan(launch_context),
-            "Track-record query": _score_contains(status_context, ["Hermes integration", "LES-100 eval harness"]),
+            "Track-record query": _score_contains(status_context, ["Hermes integration", "LES-Core eval harness"]),
             "Context compactness": 20 if len(launch_context) <= 3500 else max(0, 20 - ((len(launch_context) - 3500) // 250)),
         }
         total = sum(scores.values())
         result = {
-            "name": "Aeonik Ingrain LES-100 Eval (Learned Experience Score)",
+            "name": "Aeonik Ingrain LES-Core Smoke Eval (Learned Experience Score)",
             "created_at": utc_now(),
             "scores": scores,
             "total": total,

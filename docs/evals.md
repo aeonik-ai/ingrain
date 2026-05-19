@@ -2,9 +2,9 @@
 
 Aeonik Ingrain ships with deterministic, local evals. They do not require an LLM or network access.
 
-## LES-100
+## LES-Core
 
-LES stands for **Learned Experience Score**. The `100` is the maximum score in the v0 fixture suite.
+LES stands for **Learned Experience Score**. LES-Core is the deterministic smoke test for the v0 fixture suite.
 
 `ingrain eval` scores five learned-experience dimensions:
 
@@ -16,7 +16,7 @@ LES stands for **Learned Experience Score**. The `100` is the maximum score in t
 | Track-record query | Completed outcomes can be reported. |
 | Context compactness | Hydration stays small and relevant. |
 
-The committed v0 fixture suite should score `100/100`. Treat that as a regression gate: every launch scenario we claim to support is passing. Do not treat it as an external benchmark, a provider leaderboard, or a universal score for agent memory. As the scenario set gets harder, the score should remain useful by making regressions visible.
+The committed v0 fixture suite currently scores `100/100`. Treat that as a regression gate: every launch scenario we claim to support is passing. Do not treat it as an external benchmark, a provider leaderboard, or a universal score for agent memory. As the scenario set gets harder, the score should remain useful by making regressions visible.
 
 The eval also checks the CLI + Skill adoption surface:
 
@@ -71,9 +71,9 @@ Current deterministic comparison result:
 
 See [learned-experience-results.md](learned-experience-results.md) for the polished results page and claim boundary.
 
-## Live LES Provider Eval
+## Live LES-Core Provider Smoke Eval
 
-`ingrain live-eval` is the launch evidence harness. It is designed to be scientifically safer than the deterministic comparison table:
+`ingrain live-eval` is the live provider smoke harness. It is designed to be scientifically safer than the deterministic comparison table:
 
 | Rule | Meaning |
 |---|---|
@@ -94,11 +94,11 @@ Current committed live result:
 | Provider | Result | Interpretation |
 |---|---:|---|
 | Hermes default memory | 88/100 | Fails the 90 threshold because raw memory carries stale launch/product claims alongside the correction. |
-| Hermes + Ingrain | 100/100 | Passes by promoting the current lesson and suppressing stale claims in hydration. |
-| Hindsight | blocked | Hermes provider found no Hindsight package, service URL, or API key in this environment. |
-| OpenViking | blocked | No healthy OpenViking server was reachable at `http://127.0.0.1:1933`; see [OpenViking startup recheck](evidence/openviking-startup-recheck.md). |
+| Hermes + Ingrain | 100/100 | Passes this small smoke test by promoting the current lesson and suppressing stale claims in hydration. |
+| Hindsight | fail in current local embedded run | Hermes found real Hindsight packages, but local embedded calls timed out without a usable local LLM/service configuration. |
+| OpenViking | blocked | Doctor passes after configuring Codex OAuth for VLM, but server startup still fails in the official local GGUF embedding path; see [OpenViking startup recheck](evidence/openviking-startup-recheck.md). |
 
-On these preregistered local universes, this run supports a narrow claim: Ingrain's Hermes provider can improve learned-experience carry-forward over Hermes default memory. It does not show that Ingrain is a better general-purpose memory system than Hindsight, OpenViking, or any other provider.
+On these preregistered local smoke-test universes, this run supports only a narrow claim: Ingrain's Hermes provider can pass the current learned-experience carry-forward gate. It does not show that Ingrain is a better general-purpose memory system than Hindsight, OpenViking, or any other provider.
 
 Run an optional live OpenViking resource-retrieval benchmark:
 

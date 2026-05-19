@@ -14,7 +14,7 @@ Hermes + OpenViking-style retrieval,stale_product_name,16,20,8,0,4,2,2,149
 Hermes + OpenViking-style retrieval,approval_judgment,16,20,8,0,4,2,2,219
 Hermes + OpenViking-style retrieval,kanban_boundary,20,20,8,4,4,2,2,295
 Hermes + OpenViking-style retrieval,sandbox_recovery,20,20,8,4,4,2,2,230
-Hermes + OpenViking-style retrieval,track_record,20,20,8,4,4,2,2,201
+Hermes + OpenViking-style retrieval,track_record,20,20,8,4,4,2,2,202
 Hermes + OpenViking-style retrieval,active_goal_stale_plan,16,20,8,0,4,2,2,371
 Hermes + OpenViking-style retrieval,completed_vs_todo,16,20,8,0,4,2,2,285
 Hermes + OpenViking-style retrieval,preference_exception,16,20,8,0,4,2,2,205
@@ -24,7 +24,7 @@ Hermes + Hindsight-style synthesis,stale_product_name,20,20,8,4,4,2,2,210
 Hermes + Hindsight-style synthesis,approval_judgment,20,20,8,4,4,2,2,299
 Hermes + Hindsight-style synthesis,kanban_boundary,20,20,8,4,4,2,2,443
 Hermes + Hindsight-style synthesis,sandbox_recovery,20,20,8,4,4,2,2,365
-Hermes + Hindsight-style synthesis,track_record,20,20,8,4,4,2,2,329
+Hermes + Hindsight-style synthesis,track_record,20,20,8,4,4,2,2,330
 Hermes + Hindsight-style synthesis,active_goal_stale_plan,20,20,8,4,4,2,2,441
 Hermes + Hindsight-style synthesis,completed_vs_todo,20,20,8,4,4,2,2,361
 Hermes + Hindsight-style synthesis,preference_exception,20,20,8,4,4,2,2,287
@@ -34,7 +34,7 @@ Hermes + Ingrain,stale_product_name,20,20,8,4,4,2,2,278
 Hermes + Ingrain,approval_judgment,20,20,8,4,4,2,2,320
 Hermes + Ingrain,kanban_boundary,20,20,8,4,4,2,2,530
 Hermes + Ingrain,sandbox_recovery,20,20,8,4,4,2,2,468
-Hermes + Ingrain,track_record,20,20,8,4,4,2,2,426
+Hermes + Ingrain,track_record,20,20,8,4,4,2,2,427
 Hermes + Ingrain,active_goal_stale_plan,20,20,8,4,4,2,2,527
 Hermes + Ingrain,completed_vs_todo,20,20,8,4,4,2,2,420
 Hermes + Ingrain,preference_exception,20,20,8,4,4,2,2,327

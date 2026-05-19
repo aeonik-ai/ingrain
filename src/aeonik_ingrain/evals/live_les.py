@@ -143,9 +143,9 @@ def run_live_les(
     runtime = _resolve_hermes_runtime(hermes_root=hermes_root, hermes_python=hermes_python)
     created_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
     result: dict[str, Any] = {
-        "name": "Live LES-100 Provider Eval",
+        "name": "Live LES-Core Provider Smoke Eval",
         "created_at": created_at,
-        "claim": "Does the provider return current learned experience from preregistered universes?",
+        "claim": "Does the provider return current learned experience from preregistered smoke-test universes?",
         "score_threshold": 90,
         "max_total": 100,
         "universes": [asdict(u) for u in UNIVERSES],
@@ -185,7 +185,7 @@ def run_live_les(
 
 def format_live_les(result: dict[str, Any]) -> str:
     lines = [
-        result.get("name", "Live LES-100 Provider Eval"),
+        result.get("name", "Live LES-Core Provider Smoke Eval"),
         "",
         f"Claim: {result.get('claim')}",
         f"Score threshold: {result.get('score_threshold', 90)}/{result.get('max_total', 100)}",
@@ -230,17 +230,17 @@ def format_live_les(result: dict[str, Any]) -> str:
 def format_live_les_markdown(result: dict[str, Any]) -> str:
     env = result.get("environment", {})
     lines = [
-        "# Live LES-100 Provider Eval",
+        "# Live LES-Core Provider Smoke Eval",
         "",
         "## Hypothesis",
         "",
-        "A learned-experience layer should return the current lesson from prior runs, suppress stale claims, and keep the recall compact enough to inject into a runner agent.",
+        "A learned-experience layer should return the current lesson from prior runs, suppress stale claims, and keep the recall compact enough to inject into a runner agent. This is a provider smoke test, not an external memory benchmark.",
         "",
         "## Method",
         "",
         "| Control | Implementation |",
         "|---|---|",
-        "| Preregistered universes | Five universes are defined in `src/aeonik_ingrain/evals/live_les.py` before providers run. |",
+        "| Preregistered universes | Five smoke-test universes are defined in `src/aeonik_ingrain/evals/live_les.py` before providers run. |",
         "| Same input per provider | Every provider receives the same event list and query for each universe. |",
         "| Real provider APIs | Hermes default uses `tools.memory_tool.MemoryStore`; Ingrain loads through Hermes `plugins.memory.load_memory_provider('ingrain')`. |",
         "| Raw output audit | Each provider output is saved under `raw/<provider>/<universe>.txt`. |",
@@ -267,7 +267,12 @@ def format_live_les_markdown(result: dict[str, Any]) -> str:
             lines.append(f"| {provider} | blocked |  | {data.get('blocked_reason', '')} |")
         else:
             status = "pass" if data.get("passed_threshold") else "fail"
-            lines.append(f"| {provider} | {status} | {data.get('score')}/{data.get('max')} | threshold {result.get('score_threshold', 90)}/{result.get('max_total', 100)} |")
+            note = f"threshold {result.get('score_threshold', 90)}/{result.get('max_total', 100)}"
+            failures = data.get("failures") or []
+            if failures:
+                first = failures[0].get("error") or failures[0].get("stderr") or "provider subprocess failed"
+                note = f"{note}; first failure: {str(first)[:140]}"
+            lines.append(f"| {provider} | {status} | {data.get('score')}/{data.get('max')} | {note} |")
 
     lines.extend([
         "",
@@ -295,7 +300,7 @@ def format_live_les_markdown(result: dict[str, Any]) -> str:
         "",
         "## Interpretation",
         "",
-        "On these preregistered local universes, this run supports the narrow claim that Ingrain's Hermes provider can improve learned-experience carry-forward over Hermes default memory. It does not show that Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or any other provider.",
+        "On these preregistered local smoke-test universes, this run can support only the narrow claim that a provider carried forward the expected learned-experience snippets. It does not show that Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or any other provider. A 100/100 here means the provider passed this small regression gate; it is not a public SOTA claim.",
         "",
         "## Artifacts",
         "",
@@ -309,6 +314,20 @@ def format_live_les_markdown(result: dict[str, Any]) -> str:
 
 
 def score_live_output(output: str, universe: LiveUniverse) -> dict[str, Any]:
+    provider_error = _provider_output_error(output)
+    if provider_error:
+        return {
+            "score": 0,
+            "max": 20,
+            "expected_score": 0,
+            "forbidden_score": 0,
+            "compact_score": 0,
+            "expected_hits": [],
+            "missing_expected": list(universe.expected),
+            "forbidden_hits": [],
+            "output_chars": len(output or ""),
+            "provider_error": provider_error,
+        }
     lower = (output or "").lower()
     expected_hits = [item for item in universe.expected if item.lower() in lower]
     forbidden_hits = [item for item in universe.forbidden if item.lower() in lower]
@@ -326,6 +345,7 @@ def score_live_output(output: str, universe: LiveUniverse) -> dict[str, Any]:
         "missing_expected": [item for item in universe.expected if item not in expected_hits],
         "forbidden_hits": forbidden_hits,
         "output_chars": len(output or ""),
+        "provider_error": "",
     }
 
 
@@ -393,7 +413,7 @@ def _run_hindsight_provider(
         command_dir=command_dir,
         timeout=timeout,
         script=HINDSIGHT_PROVIDER_SCRIPT,
-        env_builder=lambda _tmp, universe: {"HINDSIGHT_BANK_ID": f"ingrain-les-{universe.name}"},
+        env_builder=_hindsight_env,
     )
 
 
@@ -448,16 +468,27 @@ def _run_provider_universes(
             env.pop("PYTHONPATH", None)
             env["HERMES_HOME"] = str(hermes_home)
             env.update(env_builder(tmp, universe))
-            proc = subprocess.run(
-                [str(runtime.python), "-c", script, str(payload_path)],
-                cwd=str(runtime.root),
-                env=env,
-                capture_output=True,
-                text=True,
-                timeout=timeout,
-            )
-            output = proc.stdout.strip()
-            stderr = proc.stderr.strip()
+            command = [str(runtime.python), "-c", script, str(payload_path)]
+            timed_out = False
+            timeout_error = ""
+            try:
+                proc = subprocess.run(
+                    command,
+                    cwd=str(runtime.root),
+                    env=env,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout,
+                )
+                returncode = proc.returncode
+                output = proc.stdout.strip()
+                stderr = proc.stderr.strip()
+            except subprocess.TimeoutExpired as exc:
+                timed_out = True
+                returncode = None
+                output = _decode_timeout_stream(exc.stdout).strip()
+                stderr = _decode_timeout_stream(exc.stderr).strip()
+                timeout_error = f"provider subprocess timed out after {timeout}s"
             (raw_dir / f"{universe.name}.txt").write_text(output + ("\n" if output else ""), encoding="utf-8")
             (command_dir / f"{universe.name}.json").write_text(
                 json.dumps(
@@ -465,9 +496,11 @@ def _run_provider_universes(
                         "command": [str(runtime.python), "-c", "<script>", str(payload_path)],
                         "cwd": str(runtime.root),
                         "hermes_home": str(hermes_home),
-                        "returncode": proc.returncode,
+                        "returncode": returncode,
                         "stdout_chars": len(output),
                         "stderr": stderr,
+                        "timed_out": timed_out,
+                        "timeout_seconds": timeout if timed_out else None,
                     },
                     indent=2,
                     sort_keys=True,
@@ -476,8 +509,22 @@ def _run_provider_universes(
                 encoding="utf-8",
             )
             score = score_live_output(output, universe)
-            if proc.returncode != 0:
-                failures.append({"universe": universe.name, "returncode": proc.returncode, "stderr": stderr})
+            if timed_out:
+                score = {
+                    **score,
+                    "score": 0,
+                    "expected_score": 0,
+                    "forbidden_score": 0,
+                    "compact_score": 0,
+                    "provider_error": timeout_error,
+                }
+                failures.append({"universe": universe.name, "returncode": returncode, "stderr": stderr, "error": timeout_error})
+            elif returncode != 0:
+                failures.append({"universe": universe.name, "returncode": returncode, "stderr": stderr})
+            if score.get("provider_error"):
+                failure = {"universe": universe.name, "returncode": returncode, "stderr": stderr, "error": score["provider_error"]}
+                if failure not in failures:
+                    failures.append(failure)
             total += score["score"]
             rows.append({"universe": universe.name, **score, "raw_output": str(raw_dir / f"{universe.name}.txt")})
     status = "pass" if total >= 90 and not failures else "fail"
@@ -545,7 +592,11 @@ def _write_artifacts(out_dir: Path, result: dict[str, Any]) -> None:
                 "blocked_reason": "",
             })
     with (out_dir / "results.csv").open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["provider", "status", "score", "max", "universe", "blocked_reason"])
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=["provider", "status", "score", "max", "universe", "blocked_reason"],
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -596,6 +647,23 @@ def _make_ingrain_cli_shim(tmp: Path) -> Path:
     return bin_dir
 
 
+def _hindsight_env(tmp: Path, universe: LiveUniverse) -> dict[str, str]:
+    home = tmp / "hindsight-home"
+    home.mkdir(parents=True, exist_ok=True)
+    return {
+        "HOME": str(home),
+        "HINDSIGHT_BANK_ID": f"ingrain-les-{universe.name}",
+    }
+
+
+def _decode_timeout_stream(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace")
+    return str(value)
+
+
 def _install_hermes_provider(hermes_home: Path) -> Path:
     target_dir = hermes_home / "plugins" / "ingrain"
     target_dir.mkdir(parents=True, exist_ok=True)
@@ -630,6 +698,30 @@ def _openviking_healthy(endpoint: str) -> bool:
             return 200 <= response.status < 300
     except (OSError, urllib.error.URLError):
         return False
+
+
+def _provider_output_error(output: str) -> str:
+    text = (output or "").strip()
+    if not text:
+        return ""
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError:
+        data = None
+    if isinstance(data, dict) and data.get("error"):
+        return str(data["error"])
+    lower = text.lower()
+    markers = (
+        "failed to retain",
+        "failed to recall",
+        "failed to reflect",
+        "traceback",
+        "permissionerror",
+        "operation not permitted",
+    )
+    if any(marker in lower for marker in markers):
+        return text[:1000]
+    return ""
 
 
 def _blocked(reason: str, **extra: Any) -> dict[str, Any]:

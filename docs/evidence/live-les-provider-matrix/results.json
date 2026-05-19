@@ -1,16 +1,16 @@
 {
   "artifact_dir": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix",
-  "claim": "Does the provider return current learned experience from preregistered universes?",
-  "created_at": "2026-05-19T10:08:43+00:00",
+  "claim": "Does the provider return current learned experience from preregistered smoke-test universes?",
+  "created_at": "2026-05-19T16:20:56+00:00",
   "environment": {
     "hermes_available": true,
     "hermes_python": "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
     "hermes_root": "/Users/benlloyd/.hermes/hermes-agent",
-    "hindsight_env_present": false,
+    "hindsight_env_present": true,
     "openviking_endpoint": "http://127.0.0.1:1933"
   },
   "max_total": 100,
-  "name": "Live LES-100 Provider Eval",
+  "name": "Live LES-Core Provider Smoke Eval",
   "providers": {
     "hermes-default": {
       "failures": [],
@@ -33,6 +33,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 342,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/launch_framing_correction.txt",
           "score": 16,
           "universe": "launch_framing_correction"
@@ -51,6 +52,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 248,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/product_rename_supersession.txt",
           "score": 16,
           "universe": "product_rename_supersession"
@@ -68,6 +70,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 544,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/goals_missions_boundary.txt",
           "score": 20,
           "universe": "goals_missions_boundary"
@@ -85,6 +88,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 341,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/sandbox_recovery.txt",
           "score": 20,
           "universe": "sandbox_recovery"
@@ -104,6 +108,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 359,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/launch_claim_safety.txt",
           "score": 16,
           "universe": "launch_claim_safety"
@@ -111,29 +116,132 @@
       ]
     },
     "hindsight": {
-      "blocked_reason": "Hindsight is not available: no usable Hindsight package/service/API key was detected by the Hermes provider.",
-      "probe": {
-        "available": false,
-        "env": {
-          "ANTHROPIC_API_KEY": false,
-          "GEMINI_API_KEY": false,
-          "HINDSIGHT_API_KEY": false,
-          "HINDSIGHT_API_URL": false,
-          "HINDSIGHT_MODE": false,
-          "OPENAI_API_KEY": false,
-          "OPENROUTER_API_KEY": false
+      "failures": [
+        {
+          "error": "provider subprocess timed out after 25s",
+          "returncode": null,
+          "stderr": "",
+          "universe": "launch_framing_correction"
         },
-        "imports": {
-          "hindsight": false,
-          "hindsight_client": false,
-          "hindsight_embed": false
+        {
+          "error": "provider subprocess timed out after 25s",
+          "returncode": null,
+          "stderr": "",
+          "universe": "product_rename_supersession"
         },
-        "provider": "hindsight",
-        "reason": "Hindsight is not available: no usable Hindsight package/service/API key was detected by the Hermes provider.",
-        "returncode": 0,
-        "stderr": ""
-      },
-      "status": "blocked"
+        {
+          "error": "provider subprocess timed out after 25s",
+          "returncode": null,
+          "stderr": "",
+          "universe": "goals_missions_boundary"
+        },
+        {
+          "error": "provider subprocess timed out after 25s",
+          "returncode": null,
+          "stderr": "",
+          "universe": "sandbox_recovery"
+        },
+        {
+          "error": "provider subprocess timed out after 25s",
+          "returncode": null,
+          "stderr": "",
+          "universe": "launch_claim_safety"
+        }
+      ],
+      "max": 100,
+      "passed_threshold": false,
+      "score": 0,
+      "status": "fail",
+      "universes": [
+        {
+          "compact_score": 0,
+          "expected_hits": [],
+          "expected_score": 0,
+          "forbidden_hits": [],
+          "forbidden_score": 0,
+          "max": 20,
+          "missing_expected": [
+            "learned experience layer",
+            "autonomous agents"
+          ],
+          "output_chars": 0,
+          "provider_error": "provider subprocess timed out after 25s",
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/launch_framing_correction.txt",
+          "score": 0,
+          "universe": "launch_framing_correction"
+        },
+        {
+          "compact_score": 0,
+          "expected_hits": [],
+          "expected_score": 0,
+          "forbidden_hits": [],
+          "forbidden_score": 0,
+          "max": 20,
+          "missing_expected": [
+            "Product name is Aeonik Ingrain",
+            "not MindCompiler"
+          ],
+          "output_chars": 0,
+          "provider_error": "provider subprocess timed out after 25s",
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/product_rename_supersession.txt",
+          "score": 0,
+          "universe": "product_rename_supersession"
+        },
+        {
+          "compact_score": 0,
+          "expected_hits": [],
+          "expected_score": 0,
+          "forbidden_hits": [],
+          "forbidden_score": 0,
+          "max": 20,
+          "missing_expected": [
+            "Hermes owns active goals",
+            "Ingrain owns learned experience",
+            "Do not let Ingrain create"
+          ],
+          "output_chars": 0,
+          "provider_error": "provider subprocess timed out after 25s",
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/goals_missions_boundary.txt",
+          "score": 0,
+          "universe": "goals_missions_boundary"
+        },
+        {
+          "compact_score": 0,
+          "expected_hits": [],
+          "expected_score": 0,
+          "forbidden_hits": [],
+          "forbidden_score": 0,
+          "max": 20,
+          "missing_expected": [
+            "request sandbox escalation",
+            "dependency installs",
+            "network-backed package resolution"
+          ],
+          "output_chars": 0,
+          "provider_error": "provider subprocess timed out after 25s",
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/sandbox_recovery.txt",
+          "score": 0,
+          "universe": "sandbox_recovery"
+        },
+        {
+          "compact_score": 0,
+          "expected_hits": [],
+          "expected_score": 0,
+          "forbidden_hits": [],
+          "forbidden_score": 0,
+          "max": 20,
+          "missing_expected": [
+            "Do not claim Ingrain is better",
+            "narrow learned-experience layer",
+            "resource memory"
+          ],
+          "output_chars": 0,
+          "provider_error": "provider subprocess timed out after 25s",
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/launch_claim_safety.txt",
+          "score": 0,
+          "universe": "launch_claim_safety"
+        }
+      ]
     },
     "ingrain": {
       "failures": [],
@@ -154,6 +262,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 326,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/launch_framing_correction.txt",
           "score": 20,
           "universe": "launch_framing_correction"
@@ -170,6 +279,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 278,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/product_rename_supersession.txt",
           "score": 20,
           "universe": "product_rename_supersession"
@@ -187,6 +297,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 748,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/goals_missions_boundary.txt",
           "score": 20,
           "universe": "goals_missions_boundary"
@@ -204,6 +315,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 476,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/sandbox_recovery.txt",
           "score": 20,
           "universe": "sandbox_recovery"
@@ -221,6 +333,7 @@
           "max": 20,
           "missing_expected": [],
           "output_chars": 360,
+          "provider_error": "",
           "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/launch_claim_safety.txt",
           "score": 20,
           "universe": "launch_claim_safety"

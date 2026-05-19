@@ -59,7 +59,7 @@ The demo is simple:
 
 With Ingrain, the correction can carry forward without replaying the transcript.
 
-We track this with LES-100: Learned Experience Score.
+We track the launch regression gate with LES-Core: Learned Experience Score.
 ```
 
 ## LinkedIn
@@ -88,7 +88,7 @@ Learned experience layer for autonomous agents:
 - generated agent skill
 - compact hydration
 - Hermes integration
-- LES-100 eval
+- LES-Core eval
 
 Hermes owns intent. Ingrain owns experience.
 ```
@@ -111,7 +111,7 @@ Arc:
 3. Compile with Ingrain.
 4. Start a clean session.
 5. Show the correction carrying forward.
-6. Show LES-100 and the comparison harness.
+6. Show LES-Core, the comparison harness, and the claim boundary.
 7. Explain why this is not RAG and not a vector database.
 
 ## Live Terminal Commands

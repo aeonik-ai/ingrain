@@ -1,14 +1,14 @@
-# Live LES-100 Provider Eval
+# Live LES-Core Provider Smoke Eval
 
 ## Hypothesis
 
-A learned-experience layer should return the current lesson from prior runs, suppress stale claims, and keep the recall compact enough to inject into a runner agent.
+A learned-experience layer should return the current lesson from prior runs, suppress stale claims, and keep the recall compact enough to inject into a runner agent. This is a provider smoke test, not an external memory benchmark.
 
 ## Method
 
 | Control | Implementation |
 |---|---|
-| Preregistered universes | Five universes are defined in `src/aeonik_ingrain/evals/live_les.py` before providers run. |
+| Preregistered universes | Five smoke-test universes are defined in `src/aeonik_ingrain/evals/live_les.py` before providers run. |
 | Same input per provider | Every provider receives the same event list and query for each universe. |
 | Real provider APIs | Hermes default uses `tools.memory_tool.MemoryStore`; Ingrain loads through Hermes `plugins.memory.load_memory_provider('ingrain')`. |
 | Raw output audit | Each provider output is saved under `raw/<provider>/<universe>.txt`. |
@@ -22,7 +22,7 @@ A learned-experience layer should return the current lesson from prior runs, sup
 | Hermes root | `/Users/benlloyd/.hermes/hermes-agent` |
 | Hermes python | `/Users/benlloyd/.hermes/hermes-agent/venv/bin/python` |
 | Hermes available | `True` |
-| Hindsight env present | `False` |
+| Hindsight env present | `True` |
 | OpenViking endpoint | `http://127.0.0.1:1933` |
 
 ## Results
@@ -30,19 +30,19 @@ A learned-experience layer should return the current lesson from prior runs, sup
 | Provider | Status | Score | Notes |
 |---|---|---:|---|
 | hermes-default | fail | 88/100 | threshold 90/100 |
+| hindsight | fail | 0/100 | threshold 90/100; first failure: provider subprocess timed out after 25s |
 | ingrain | pass | 100/100 | threshold 90/100 |
-| hindsight | blocked |  | Hindsight is not available: no usable Hindsight package/service/API key was detected by the Hermes provider. |
 | openviking | blocked |  | OpenViking health check failed at http://127.0.0.1:1933; start a real server or set OPENVIKING_ENDPOINT. |
 
 ## Universe Breakdown
 
 | Universe | Difficulty | Rationale | Scores |
 |---|---:|---|---|
-| `launch_framing_correction` | 1 | A user correction should become future launch-writing practice, not raw stale copy. | hermes-default=16/20; ingrain=20/20; hindsight=blocked; openviking=blocked |
-| `product_rename_supersession` | 2 | The current decision must win over an older product-name decision. | hermes-default=16/20; ingrain=20/20; hindsight=blocked; openviking=blocked |
-| `goals_missions_boundary` | 3 | Memory must improve judgment without becoming a second task system. | hermes-default=20/20; ingrain=20/20; hindsight=blocked; openviking=blocked |
-| `sandbox_recovery` | 4 | A prior execution failure should alter the next attempt. | hermes-default=20/20; ingrain=20/20; hindsight=blocked; openviking=blocked |
-| `launch_claim_safety` | 5 | Launch memory should prevent overclaiming against adjacent systems. | hermes-default=16/20; ingrain=20/20; hindsight=blocked; openviking=blocked |
+| `launch_framing_correction` | 1 | A user correction should become future launch-writing practice, not raw stale copy. | hermes-default=16/20; hindsight=0/20; ingrain=20/20; openviking=blocked |
+| `product_rename_supersession` | 2 | The current decision must win over an older product-name decision. | hermes-default=16/20; hindsight=0/20; ingrain=20/20; openviking=blocked |
+| `goals_missions_boundary` | 3 | Memory must improve judgment without becoming a second task system. | hermes-default=20/20; hindsight=0/20; ingrain=20/20; openviking=blocked |
+| `sandbox_recovery` | 4 | A prior execution failure should alter the next attempt. | hermes-default=20/20; hindsight=0/20; ingrain=20/20; openviking=blocked |
+| `launch_claim_safety` | 5 | Launch memory should prevent overclaiming against adjacent systems. | hermes-default=16/20; hindsight=0/20; ingrain=20/20; openviking=blocked |
 
 ## Scoring Rubric
 
@@ -50,7 +50,7 @@ Each universe is worth 20 points: expected lesson recall 14, forbidden stale cla
 
 ## Interpretation
 
-On these preregistered local universes, this run supports the narrow claim that Ingrain's Hermes provider can improve learned-experience carry-forward over Hermes default memory. It does not show that Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or any other provider.
+On these preregistered local smoke-test universes, this run can support only the narrow claim that a provider carried forward the expected learned-experience snippets. It does not show that Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or any other provider. A 100/100 here means the provider passed this small regression gate; it is not a public SOTA claim.
 
 ## Artifacts
 

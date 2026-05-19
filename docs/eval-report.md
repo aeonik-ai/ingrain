@@ -2,12 +2,12 @@
 
 Generated on 2026-05-19 from local fixtures and the installed Hermes runtime on this machine.
 
-## Deterministic LES-100
+## Deterministic LES-Core
 
 No LLM, network, or hosted service required.
 
 ```text
-Aeonik Ingrain LES-100 Eval (Learned Experience Score)
+Aeonik Ingrain LES-Core Smoke Eval (Learned Experience Score)
 
 Cold-start project recall       20/20
 Correction carry-forward        20/20
@@ -58,7 +58,7 @@ Result:
 ```text
 Hermes default memory  88/100
 Hermes + Ingrain      100/100
-Hindsight             blocked
+Hindsight             fail: local embedded timeout
 OpenViking            blocked
 ```
 
@@ -66,8 +66,8 @@ The live harness sends five preregistered universes through actual Hermes provid
 
 Why Hermes default lost points: default memory returned both the stale statement and the later correction in several universes. Ingrain compiled the later correction into current learned experience and suppressed the stale claim in hydration.
 
-Why Hindsight/OpenViking are blocked here: Hindsight packages/API keys were not available in the Hermes runtime, and no healthy OpenViking server was reachable at `http://127.0.0.1:1933`. A follow-up OpenViking recheck tried the existing OpenViking 0.3.17 install and a clean Python 3.11 OpenViking 0.3.17 install; the local GGUF embedder did not produce a healthy server in this environment. See [OpenViking startup recheck](evidence/openviking-startup-recheck.md). The harness does not simulate those providers.
+Why Hindsight/OpenViking did not produce positive scores here: Hindsight is now installed in the Hermes runtime and the provider probe succeeds, but local embedded retain/reflect calls time out without a usable local LLM/service configuration. OpenViking doctor passes after configuring VLM through Codex OAuth, but server startup still fails in the official local GGUF embedding path with `ValueError: Failed to create llama_context`. See [OpenViking startup recheck](evidence/openviking-startup-recheck.md). The harness does not simulate those providers.
 
 ## Claim Boundary
 
-On these preregistered local universes, this run supports a narrow launch claim: Ingrain can improve learned-experience carry-forward over Hermes default memory. It does not show Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or any other Hermes provider.
+On these preregistered local smoke-test universes, this run supports only a narrow launch claim: Ingrain's Hermes provider passes the current learned-experience carry-forward gate. It does not show Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or any other Hermes provider.

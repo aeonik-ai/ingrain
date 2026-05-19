@@ -83,7 +83,7 @@ def build_parser() -> argparse.ArgumentParser:
     attach.add_argument("--practice-path", help="PRACTICE.md output path. Defaults to ./PRACTICE.md.")
     attach.add_argument("--no-skill", action="store_true", help="Only initialize and write PRACTICE.md.")
 
-    eval_parser = sub.add_parser("eval", help="Run deterministic LES-100 (Learned Experience Score) eval.")
+    eval_parser = sub.add_parser("eval", help="Run deterministic LES-Core (Learned Experience Score) smoke eval.")
     eval_parser.add_argument("--no-comparison", action="store_true", help="Skip substrate comparison table.")
     eval_parser.add_argument("--json", action="store_true", help="Print JSON instead of text.")
 
@@ -97,7 +97,7 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("--openviking-agent", default=os.environ.get("OPENVIKING_AGENT", "hermes"))
     compare.add_argument("--openviking-timeout", type=int, default=90)
 
-    live_eval = sub.add_parser("live-eval", help="Run live LES-100 provider eval against installed Hermes provider APIs.")
+    live_eval = sub.add_parser("live-eval", help="Run live LES-Core provider smoke eval against installed Hermes provider APIs.")
     live_eval.add_argument("--json", action="store_true", help="Print JSON instead of text.")
     live_eval.add_argument("--output-dir", default="docs/evidence/live-les-first-loop", help="Directory for raw outputs, command logs, JSON, CSV, and report.")
     live_eval.add_argument("--report", default="docs/live-eval-report.md", help="Markdown report path to update.")

@@ -99,7 +99,7 @@ Qualitative read from the official Hermes provider docs and each provider's publ
 | "I want no-service local fact memory." | Holographic, ByteRover, Ingrain depending on use case |
 | "My agent repeats corrected mistakes." | Ingrain |
 | "My agent revives stale plans as if they are current." | Ingrain |
-| "I want a local regression check for learned-experience behavior." | Ingrain LES-100 |
+| "I want a local regression check for learned-experience behavior." | Ingrain LES-Core |
 | "I want one live Hermes provider today and a resource-heavy workflow." | OpenViking live + Ingrain sidecar |
 | "I want one live Hermes provider today and the bottleneck is learned experience." | Ingrain live provider |
 

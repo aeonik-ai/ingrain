@@ -46,10 +46,12 @@ python3 -m venv /tmp/ingrain-publish-smoke
 Expected result:
 
 ```text
-Aeonik Ingrain LES-100 Eval
+Aeonik Ingrain LES-Core Smoke Eval
 Learned Experience Score
 Total                           100/100
 ```
+
+Only use this as a local regression-gate screenshot. Do not frame it as an external benchmark, provider leaderboard, or proof that Ingrain beats Hindsight/OpenViking.
 
 ## GitHub Release Checklist
 

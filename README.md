@@ -15,7 +15,7 @@ ingrain hydrate --level brief --query "what should I know before this task?"
 ```
 
 ```text
-Aeonik Ingrain LES-100 Eval (Learned Experience Score)
+Aeonik Ingrain LES-Core Smoke Eval
 
 Cold-start project recall     20/20
 Correction carry-forward      20/20
@@ -24,6 +24,9 @@ Track-record query            20/20
 Context compactness           20/20
 
 Total                         100/100
+
+Interpretation: local regression gate passed.
+Not an external benchmark or provider leaderboard.
 
 Practice layer checks
 PRACTICE.md generated                        pass
@@ -202,11 +205,11 @@ Use Ingrain when your bottleneck is behavioral carry-forward.
 
 Provider chaining is on the roadmap so Ingrain can handle learned experience while OpenViking handles resource retrieval.
 
-## LES-100
+## Evals
 
-`ingrain eval` runs a deterministic local eval called **LES-100**.
+`ingrain eval` runs a deterministic local smoke eval called **LES-Core**.
 
-LES stands for **Learned Experience Score**. The `100` is the maximum score in the v0 fixture suite.
+LES stands for **Learned Experience Score**. The default CLI still reports a 100-point local fixture score for compatibility, but the public interpretation is now stricter: this is a regression gate, not a benchmark headline.
 
 It checks whether Ingrain can:
 
@@ -218,7 +221,7 @@ It checks whether Ingrain can:
 
 The v0 eval requires no API key and no LLM.
 
-The default `100/100` is expected for the committed v0 fixture suite. It means the current compiler and hydration rules pass the launch scenarios in this repo: project recall, correction carry-forward, stale-plan avoidance, track-record recall, and compactness. It is a regression gate for the repo's launch behaviors, not an external benchmark or a claim that Ingrain has solved all agent memory problems.
+The default `100/100` is expected for the committed v0 fixture suite. It means the current compiler and hydration rules pass the launch scenarios in this repo: project recall, correction carry-forward, stale-plan avoidance, track-record recall, and compactness. It is a regression gate for the repo's launch behaviors, not an external benchmark, provider leaderboard, or claim that Ingrain has solved all agent memory problems.
 
 The same command also prints a deterministic fixture comparison. Treat that comparison as a local regression check, not evidence against live providers.
 
@@ -229,6 +232,8 @@ ingrain live-eval
 ```
 
 The current live run is committed under `docs/evidence/live-les-provider-matrix/`. It sends the same preregistered universes through Hermes default memory and the Ingrain Hermes provider. Hindsight and OpenViking are only scored when a real Hindsight service/package or OpenViking server is available; otherwise the report marks them blocked with the exact reason. The current OpenViking startup recheck is documented in [docs/evidence/openviking-startup-recheck.md](docs/evidence/openviking-startup-recheck.md).
+
+For the benchmark posture and external standards, see [docs/eval-standards.md](docs/eval-standards.md). The short version: LES-Core is a smoke test, deterministic comparison is an engineering harness, and broad comparative claims require live providers or external benchmarks such as LongMemEval, LoCoMo, BEAM, LongMemEval-V2, or EvoMemBench.
 
 For a live OpenViking resource-retrieval check, run a local OpenViking server and then:
 
@@ -256,7 +261,7 @@ flowchart LR
     E --> F["Hydration<br/>brief, cards, evidence"]
     F --> S["Agent skill<br/>Codex, Claude, Cursor"]
     S --> G["Better next run<br/>experience changes behavior"]
-    G --> H2["LES-100 eval<br/>did experience carry forward?"]
+    G --> H2["LES-Core eval<br/>did experience carry forward?"]
 
     H["Hermes goals, missions, Kanban"] -. "owns active intent" .-> A
     E -. "background context only" .-> A
@@ -269,7 +274,7 @@ agent run
   -> practice cards         source-linked lessons
   -> PRACTICE.md            human-readable learned experience
   -> skill + hydration      what this turn needs
-  -> LES-100 eval           whether experience carried forward
+  -> LES-Core eval          whether experience carried forward
 ```
 
 Local project state:
