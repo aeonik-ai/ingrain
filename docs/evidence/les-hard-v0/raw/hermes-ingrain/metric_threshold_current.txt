@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current decisions:
+- Passing threshold is 90/100 for provider smoke evals, and provider subprocess failures fail the run. [source: evt_cebc862cc1b4f5636147ec06]
+
+Sources:
+- evt_cebc862cc1b4f5636147ec06
+
+</aeonik_ingrain_context>

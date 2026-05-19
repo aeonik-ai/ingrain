@@ -1,6 +1,8 @@
 import unittest
 
 from aeonik_ingrain.evals.comparison import run_comparison
+from aeonik_ingrain.evals.les_hard import SCENARIOS as HARD_SCENARIOS
+from aeonik_ingrain.evals.les_hard import run_les_hard, score_hard_output
 from aeonik_ingrain.evals.live_les import UNIVERSES, format_live_les, score_live_output
 from aeonik_ingrain.evals.live_openviking import _candidate_read_uris, format_live_openviking_comparison
 from aeonik_ingrain.evals.runner import run_eval
@@ -18,6 +20,20 @@ class EvalTests(unittest.TestCase):
         self.assertGreater(modes["Hermes + Hindsight-style synthesis"]["score"], modes["Hermes + OpenViking-style retrieval"]["score"])
         self.assertGreater(modes["Hermes + Ingrain"]["score"], modes["Hermes + OpenViking-style retrieval"]["score"])
         self.assertGreater(modes["Hermes + OpenViking-style retrieval"]["score"], modes["Hermes default memory"]["score"])
+
+    def test_les_hard_has_room_to_improve(self):
+        result = run_les_hard()
+        modes = result["modes"]
+        ingrain = modes["Hermes + Ingrain"]["score"]
+        self.assertGreaterEqual(result["scenario_count"], 20)
+        self.assertGreater(ingrain, modes["Hermes default memory"]["score"])
+        self.assertLess(ingrain, modes["Hermes + Ingrain"]["max"])
+
+    def test_les_hard_abstention_rewards_caution(self):
+        scenario = next(item for item in HARD_SCENARIOS if item.name == "missing_evidence_abstention")
+        cautious = score_hard_output("No sufficient retained evidence for pricing.", scenario)
+        invented = score_hard_output("The approved pricing is $20 per seat.", scenario)
+        self.assertGreater(cautious["score"], invented["score"])
 
     def test_live_openviking_uri_candidates_skip_summary_placeholders(self):
         result = {

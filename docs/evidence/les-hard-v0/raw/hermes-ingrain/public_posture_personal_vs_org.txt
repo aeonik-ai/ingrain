@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current decisions:
+- Post first from Ben's personal page for reach, then amplify from aeonik-ai organization. [source: evt_772068ed00c9b1d9e5165fbe]
+
+Sources:
+- evt_772068ed00c9b1d9e5165fbe
+
+</aeonik_ingrain_context>

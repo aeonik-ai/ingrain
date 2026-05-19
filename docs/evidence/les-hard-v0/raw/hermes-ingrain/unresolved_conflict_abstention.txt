@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Lessons:
+- No final decision resolved local-first versus cloud-first for tomorrow's launch. [source: evt_e61afb07b4d543c70cd42761]
+
+Sources:
+- evt_e61afb07b4d543c70cd42761
+
+</aeonik_ingrain_context>

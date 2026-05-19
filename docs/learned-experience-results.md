@@ -25,6 +25,27 @@ Result:
 
 The Hindsight-style row is intentionally strong and intentionally labeled. It models a plausible synthesized-memory behavior, but it does not exercise Hindsight's real graph, entity, temporal, cloud, or local runtime.
 
+## LES-Hard v0
+
+LES-Hard is the tougher deterministic benchmark. It keeps the same claim boundary as the comparison harness, but expands the scenario set to include implicit corrections, unresolved conflicts, missing evidence, project namespace collisions, blocked-provider claims, and current-status premise traps.
+
+Command:
+
+```bash
+PYTHONPATH=src python3 -m aeonik_ingrain.cli les-hard
+```
+
+Current result:
+
+| Mode | Score | What it means |
+|---|---:|---|
+| Hermes default memory | 194/560 | Bounded curated memory only. |
+| Hermes + OpenViking-style retrieval | 501/560 | Deterministic raw retrieval baseline, not live OpenViking. |
+| Hermes + Hindsight-style synthesis | 536/560 | Strong deterministic retain/recall/reflect-style baseline, not live Hindsight. |
+| Hermes + Ingrain | 545/560 | Actual Ingrain compiler and hydration path. |
+
+The important part is not just that Ingrain leads the deterministic baselines. It is that Ingrain does **not** score perfectly. The remaining misses are useful product gaps: project namespace precision, missing-evidence abstention, blocked-provider wording, and unresolved conflicts without an explicit resolution marker.
+
 ## What The Eval Tests
 
 The comparison uses ten preregistered universes:
@@ -78,6 +99,7 @@ Hindsight is now installed in the Hermes runtime and the provider probe succeeds
 Artifacts:
 
 - Deterministic comparison: [evidence/deterministic-les-comparison/report.md](evidence/deterministic-les-comparison/report.md)
+- LES-Hard v0: [evidence/les-hard-v0/report.md](evidence/les-hard-v0/report.md)
 - Live provider matrix: [evidence/live-les-provider-matrix/report.md](evidence/live-les-provider-matrix/report.md)
 - Hindsight probe: [evidence/live-les-provider-matrix/commands/hindsight/hindsight-probe.json](evidence/live-les-provider-matrix/commands/hindsight/hindsight-probe.json)
 - OpenViking recheck: [evidence/openviking-startup-recheck.md](evidence/openviking-startup-recheck.md)
@@ -87,6 +109,8 @@ Artifacts:
 Safe public wording:
 
 > On deterministic learned-experience universes, Ingrain scored `200/200`, ahead of a strong labeled Hindsight-style synthesis baseline at `196/200`.
+
+> On LES-Hard v0, Ingrain scored `545/560` against 28 preregistered deterministic scenarios, ahead of a labeled Hindsight-style synthesis baseline at `536/560`.
 
 Do not say:
 

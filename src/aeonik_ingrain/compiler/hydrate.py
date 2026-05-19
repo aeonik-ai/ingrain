@@ -32,6 +32,17 @@ TYPE_WEIGHT = {
 }
 
 WORD_RE = re.compile(r"[A-Za-z0-9_]+")
+GENERIC_QUERY_TOKENS = {
+    "before",
+    "context",
+    "continue",
+    "know",
+    "launch",
+    "next",
+    "runner",
+    "task",
+    "work",
+}
 
 
 def hydrate(store: IngrainStore, *, query: str = "", limit: int = 12, max_chars: int = 6000, level: str = "cards") -> str:
@@ -43,8 +54,14 @@ def hydrate(store: IngrainStore, *, query: str = "", limit: int = 12, max_chars:
         raise ValueError("level must be one of: brief, cards, evidence")
 
     query_tokens = _tokens(query)
-    ranked = sorted(promotions, key=lambda p: _score(p, query_tokens), reverse=True)
+    ranked = sorted(
+        (p for p in promotions if _include_for_query(p, query_tokens, query)),
+        key=lambda p: _score(p, query_tokens),
+        reverse=True,
+    )
     selected = ranked[:limit]
+    if not selected:
+        return ""
 
     if level == "brief":
         return _hydrate_brief(selected, max_chars=max_chars)
@@ -114,6 +131,49 @@ def _score(promotion: dict[str, Any], query_tokens: set[str]) -> float:
     overlap = len(text_tokens & query_tokens) if query_tokens else 0
     confidence = float(promotion.get("confidence") or 0)
     return base + overlap * 2 + confidence
+
+
+def _include_for_query(promotion: dict[str, Any], query_tokens: set[str], query: str) -> bool:
+    if not query_tokens or _is_generic_query(query_tokens):
+        return True
+    text = promotion.get("text", "")
+    text_tokens = _tokens(text)
+    if _namespace_mismatch(text, query):
+        return False
+    if promotion.get("promoted_type") == "correction":
+        return True
+    if _type_matches_query(promotion.get("promoted_type", ""), query_tokens):
+        return True
+    return bool(text_tokens & query_tokens)
+
+
+def _is_generic_query(query_tokens: set[str]) -> bool:
+    return bool(query_tokens & GENERIC_QUERY_TOKENS) and len(query_tokens) <= 8
+
+
+def _namespace_mismatch(text: str, query: str) -> bool:
+    text_names = _project_names(text)
+    query_names = _project_names(query)
+    if not text_names or not query_names:
+        return False
+    return text_names.isdisjoint(query_names)
+
+
+def _type_matches_query(promoted_type: str, query_tokens: set[str]) -> bool:
+    type_tokens = {
+        "track_record": {"completed", "done", "shipped", "finished", "already", "readiness"},
+        "status": {"status", "ready", "readiness"},
+        "correction": {"correction", "rule", "avoid", "remember"},
+        "decision": {"decision", "decide", "decided", "name", "threshold", "claim", "boundary"},
+        "risk": {"risk", "blocked", "failure", "failed"},
+        "lesson": {"lesson", "learned", "gotcha"},
+        "project_fact": {"project", "fact"},
+    }
+    return bool(type_tokens.get(promoted_type, set()) & query_tokens)
+
+
+def _project_names(text: str) -> set[str]:
+    return {match.group(1).lower() for match in re.finditer(r"\bproject\s+([A-Za-z0-9_-]+)", text)}
 
 
 def _tokens(text: str) -> set[str]:

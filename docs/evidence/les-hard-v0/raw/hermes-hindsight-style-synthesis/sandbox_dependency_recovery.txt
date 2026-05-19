@@ -1,0 +1,6 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+Current reflection:
+- From now on: request sandbox escalation before dependency installs or network-backed package resolution. [evidence: memory_02]
+- dependency install failed because network access was restricted in the sandbox. [evidence: memory_01]
+Action guidance:
+- Preserve: request sandbox escalation.

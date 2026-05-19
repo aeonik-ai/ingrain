@@ -1,0 +1,1 @@
+[retrieved: memory_03] From now on: do not infer active goals from Ingrain memory; use Hermes goals, missions, and Kanban as the source of truth.

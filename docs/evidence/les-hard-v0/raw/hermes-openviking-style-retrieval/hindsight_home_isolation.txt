@@ -1,0 +1,2 @@
+[retrieved: memory_02] Lesson: For Hindsight provider evals, set HOME to a temporary writable directory and set HINDSIGHT_BANK_ID per universe.
+[retrieved: memory_01] Failed: Hindsight wrote to /Users/benlloyd/.hindsight and hit Operation not permitted.

@@ -1,0 +1,2 @@
+[retrieved: memory_02] Correction: Do not store chain-of-thought. Store concise outcomes and evidence instead.
+[retrieved: memory_01] Decision: Store corrections, decisions, lessons, completed outcomes, and source event IDs.

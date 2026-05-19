@@ -15,6 +15,7 @@ from aeonik_ingrain.compiler.pages import compile_store
 from aeonik_ingrain.db import IngrainStore, MIND_EVENT_TYPES
 from aeonik_ingrain.demo import DEMO_EVENTS, run_demo
 from aeonik_ingrain.evals.comparison import format_comparison, run_comparison, write_comparison_artifacts
+from aeonik_ingrain.evals.les_hard import format_les_hard, run_les_hard, write_les_hard_artifacts
 from aeonik_ingrain.evals.live_openviking import (
     OpenVikingLiveError,
     format_live_openviking_comparison,
@@ -96,6 +97,11 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("--openviking-user", default=os.environ.get("OPENVIKING_USER", "default"))
     compare.add_argument("--openviking-agent", default=os.environ.get("OPENVIKING_AGENT", "hermes"))
     compare.add_argument("--openviking-timeout", type=int, default=90)
+
+    les_hard = sub.add_parser("les-hard", help="Run LES-Hard v0 deterministic learned-experience benchmark.")
+    les_hard.add_argument("--json", action="store_true", help="Print JSON instead of text.")
+    les_hard.add_argument("--output-dir", default="docs/evidence/les-hard-v0", help="Directory for raw outputs, JSON, CSV, and report.")
+    les_hard.add_argument("--report", default="docs/les-hard-report.md", help="Markdown report path to update.")
 
     live_eval = sub.add_parser("live-eval", help="Run live LES-Core provider smoke eval against installed Hermes provider APIs.")
     live_eval.add_argument("--json", action="store_true", help="Print JSON instead of text.")
@@ -256,6 +262,22 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(result, indent=2, sort_keys=True))
         else:
             print(formatter(result))
+        return 0
+
+    if args.command == "les-hard":
+        result = run_les_hard()
+        artifacts = write_les_hard_artifacts(result, args.output_dir)
+        if args.report:
+            report_path = Path(args.report).expanduser()
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            report_path.write_text(Path(artifacts["report"]).read_text(encoding="utf-8"), encoding="utf-8")
+        if args.json:
+            print(json.dumps(result, indent=2, sort_keys=True))
+        else:
+            print(format_les_hard(result))
+            print(f"\nWrote {artifacts['report']}")
+            if args.report:
+                print(f"Wrote {args.report}")
         return 0
 
     if args.command == "live-eval":

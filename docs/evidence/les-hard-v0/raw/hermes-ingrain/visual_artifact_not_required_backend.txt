@@ -1,0 +1,12 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current decisions:
+- No hosted backend is required for launch. [source: evt_00eb5887036de1b8aa94c7e6]
+- A polished visual architecture graphic helps adoption but is not required for LES-Hard evidence. [source: evt_dd6d9378102ef0bf5e6b4935]
+
+Sources:
+- evt_00eb5887036de1b8aa94c7e6
+- evt_dd6d9378102ef0bf5e6b4935
+
+</aeonik_ingrain_context>

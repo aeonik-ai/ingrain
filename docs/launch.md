@@ -60,6 +60,7 @@ The demo is simple:
 With Ingrain, the correction can carry forward without replaying the transcript.
 
 We track the launch regression gate with LES-Core: Learned Experience Score.
+For the harder benchmark, see LES-Hard v0: 28 preregistered learned-experience scenarios with raw artifacts and non-perfect results.
 ```
 
 ## LinkedIn
@@ -89,6 +90,7 @@ Learned experience layer for autonomous agents:
 - compact hydration
 - Hermes integration
 - LES-Core eval
+- LES-Hard benchmark
 
 Hermes owns intent. Ingrain owns experience.
 ```
@@ -112,7 +114,8 @@ Arc:
 4. Start a clean session.
 5. Show the correction carrying forward.
 6. Show LES-Core, the comparison harness, and the claim boundary.
-7. Explain why this is not RAG and not a vector database.
+7. Show LES-Hard as the credible proof page: harder scenarios, raw artifacts, and misses we still need to improve.
+8. Explain why this is not RAG and not a vector database.
 
 ## Live Terminal Commands
 
@@ -122,6 +125,7 @@ ingrain demo banana
 ingrain attach --agent codex --target-dir ./.ingrain/skills/ingrain
 ingrain hydrate --level brief --query "write launch copy"
 ingrain compare
+ingrain les-hard
 ingrain eval
 ```
 

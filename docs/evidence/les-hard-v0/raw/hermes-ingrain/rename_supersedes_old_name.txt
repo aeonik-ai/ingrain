@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current decisions:
+- Product name is Aeonik Ingrain, not MindCompiler. [source: evt_2b2a5fb8c5d72ef342d2803d]
+
+Sources:
+- evt_2b2a5fb8c5d72ef342d2803d
+
+</aeonik_ingrain_context>

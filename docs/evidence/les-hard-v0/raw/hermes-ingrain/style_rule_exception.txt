@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Keep normal docs concise, but eval pages must include method, artifacts, blockers, and claim boundaries. [source: evt_72b68fb5f9dd8296b2206f53]
+
+Sources:
+- evt_72b68fb5f9dd8296b2206f53
+
+</aeonik_ingrain_context>

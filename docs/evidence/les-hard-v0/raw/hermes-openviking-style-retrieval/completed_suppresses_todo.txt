@@ -1,0 +1,2 @@
+[retrieved: memory_03] Tests passed: unit suite, deterministic LES, and live Hermes provider matrix.
+[retrieved: memory_02] Completed: Built the Hermes provider, CLI attach flow, and eval report.

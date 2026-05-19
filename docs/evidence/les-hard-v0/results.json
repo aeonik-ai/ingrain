@@ -1,0 +1,2331 @@
+{
+  "claim": "Does prior execution experience become current, cautious, source-linked guidance under stale, conflicting, and missing-evidence conditions?",
+  "created_at": "2026-05-19T23:10:55+00:00",
+  "modes": {
+    "Hermes + Hindsight-style synthesis": {
+      "max": 560,
+      "note": "Deterministic retain/recall/reflect-style synthesis, not live Hindsight.",
+      "scenarios": [
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 210,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/rename_supersedes_old_name.txt",
+          "scenario": "rename_supersedes_old_name",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 226,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/general_hosting_supersession.txt",
+          "scenario": "general_hosting_supersession",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 287,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/style_rule_exception.txt",
+          "scenario": "style_rule_exception",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 591,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/active_goal_boundary.txt",
+          "scenario": "active_goal_boundary",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 441,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/old_plan_not_active_goal.txt",
+          "scenario": "old_plan_not_active_goal",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 326,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/completed_suppresses_todo.txt",
+          "scenario": "completed_suppresses_todo",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 5,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 394,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/blocked_provider_not_failure_claim.txt",
+          "scenario": "blocked_provider_not_failure_claim",
+          "score": 18
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 382,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/deterministic_baseline_boundary.txt",
+          "scenario": "deterministic_baseline_boundary",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 381,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/sandbox_dependency_recovery.txt",
+          "scenario": "sandbox_dependency_recovery",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 401,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/hindsight_home_isolation.txt",
+          "scenario": "hindsight_home_isolation",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 270,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/secret_redaction.txt",
+          "scenario": "secret_redaction",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 370,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/chain_of_thought_boundary.txt",
+          "scenario": "chain_of_thought_boundary",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 339,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/project_namespace_collision.txt",
+          "scenario": "project_namespace_collision",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 1,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 119,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/missing_evidence_abstention.txt",
+          "scenario": "missing_evidence_abstention",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 381,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/unresolved_conflict_abstention.txt",
+          "scenario": "unresolved_conflict_abstention",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 4,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 295,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/source_linked_claim_boundary.txt",
+          "scenario": "source_linked_claim_boundary",
+          "score": 17
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 307,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/raw_transcript_not_lesson.txt",
+          "scenario": "raw_transcript_not_lesson",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 253,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/metric_threshold_current.txt",
+          "scenario": "metric_threshold_current",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 248,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/public_posture_personal_vs_org.txt",
+          "scenario": "public_posture_personal_vs_org",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 266,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/avoid_pypi_claim_before_release.txt",
+          "scenario": "avoid_pypi_claim_before_release",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 321,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/visual_artifact_not_required_backend.txt",
+          "scenario": "visual_artifact_not_required_backend",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 372,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/environment_fact_not_global_truth.txt",
+          "scenario": "environment_fact_not_global_truth",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 313,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/practice_memory_wording.txt",
+          "scenario": "practice_memory_wording",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 321,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/eval_score_humility.txt",
+          "scenario": "eval_score_humility",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 350,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/external_benchmark_direction.txt",
+          "scenario": "external_benchmark_direction",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 333,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/implicit_user_correction.txt",
+          "scenario": "implicit_user_correction",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 0,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 286,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/unresolved_conflict_without_marker.txt",
+          "scenario": "unresolved_conflict_without_marker",
+          "score": 17
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 295,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-hindsight-style-synthesis/current_status_requires_live_check.txt",
+          "scenario": "current_status_requires_live_check",
+          "score": 20
+        }
+      ],
+      "score": 536
+    },
+    "Hermes + Ingrain": {
+      "max": 560,
+      "note": "Actual Ingrain compiler and hydration path.",
+      "scenarios": [
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 278,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/rename_supersedes_old_name.txt",
+          "scenario": "rename_supersedes_old_name",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 301,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/general_hosting_supersession.txt",
+          "scenario": "general_hosting_supersession",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 327,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/style_rule_exception.txt",
+          "scenario": "style_rule_exception",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 748,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/active_goal_boundary.txt",
+          "scenario": "active_goal_boundary",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 527,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/old_plan_not_active_goal.txt",
+          "scenario": "old_plan_not_active_goal",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 434,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/completed_suppresses_todo.txt",
+          "scenario": "completed_suppresses_todo",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 5,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 303,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/blocked_provider_not_failure_claim.txt",
+          "scenario": "blocked_provider_not_failure_claim",
+          "score": 18
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 499,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/deterministic_baseline_boundary.txt",
+          "scenario": "deterministic_baseline_boundary",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 476,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/sandbox_dependency_recovery.txt",
+          "scenario": "sandbox_dependency_recovery",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 482,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/hindsight_home_isolation.txt",
+          "scenario": "hindsight_home_isolation",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 267,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/secret_redaction.txt",
+          "scenario": "secret_redaction",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 471,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/chain_of_thought_boundary.txt",
+          "scenario": "chain_of_thought_boundary",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 468,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/project_namespace_collision.txt",
+          "scenario": "project_namespace_collision",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 0,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/missing_evidence_abstention.txt",
+          "scenario": "missing_evidence_abstention",
+          "score": 17
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 299,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/unresolved_conflict_abstention.txt",
+          "scenario": "unresolved_conflict_abstention",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 584,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/source_linked_claim_boundary.txt",
+          "scenario": "source_linked_claim_boundary",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 326,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/raw_transcript_not_lesson.txt",
+          "scenario": "raw_transcript_not_lesson",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 329,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/metric_threshold_current.txt",
+          "scenario": "metric_threshold_current",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 317,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/public_posture_personal_vs_org.txt",
+          "scenario": "public_posture_personal_vs_org",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 336,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/avoid_pypi_claim_before_release.txt",
+          "scenario": "avoid_pypi_claim_before_release",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 439,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/visual_artifact_not_required_backend.txt",
+          "scenario": "visual_artifact_not_required_backend",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 487,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/environment_fact_not_global_truth.txt",
+          "scenario": "environment_fact_not_global_truth",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 371,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/practice_memory_wording.txt",
+          "scenario": "practice_memory_wording",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 361,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/eval_score_humility.txt",
+          "scenario": "eval_score_humility",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 393,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/external_benchmark_direction.txt",
+          "scenario": "external_benchmark_direction",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 278,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/implicit_user_correction.txt",
+          "scenario": "implicit_user_correction",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 0,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 392,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/unresolved_conflict_without_marker.txt",
+          "scenario": "unresolved_conflict_without_marker",
+          "score": 14
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 428,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-ingrain/current_status_requires_live_check.txt",
+          "scenario": "current_status_requires_live_check",
+          "score": 20
+        }
+      ],
+      "score": 545
+    },
+    "Hermes + OpenViking-style retrieval": {
+      "max": 560,
+      "note": "Deterministic raw semantic retrieval baseline, not a live OpenViking result.",
+      "scenarios": [
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 145,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/rename_supersedes_old_name.txt",
+          "scenario": "rename_supersedes_old_name",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 187,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/general_hosting_supersession.txt",
+          "scenario": "general_hosting_supersession",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 205,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/style_rule_exception.txt",
+          "scenario": "style_rule_exception",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 2,
+            "compactness": 1,
+            "expected_recall": 2,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 147,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/active_goal_boundary.txt",
+          "scenario": "active_goal_boundary",
+          "score": 14
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 2,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 145,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/old_plan_not_active_goal.txt",
+          "scenario": "old_plan_not_active_goal",
+          "score": 15
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 195,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/completed_suppresses_todo.txt",
+          "scenario": "completed_suppresses_todo",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 5,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 115,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/blocked_provider_not_failure_claim.txt",
+          "scenario": "blocked_provider_not_failure_claim",
+          "score": 18
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 252,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/deterministic_baseline_boundary.txt",
+          "scenario": "deterministic_baseline_boundary",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 1,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 110,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/sandbox_dependency_recovery.txt",
+          "scenario": "sandbox_dependency_recovery",
+          "score": 10
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 253,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/hindsight_home_isolation.txt",
+          "scenario": "hindsight_home_isolation",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 79,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/secret_redaction.txt",
+          "scenario": "secret_redaction",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 224,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/chain_of_thought_boundary.txt",
+          "scenario": "chain_of_thought_boundary",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 209,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/project_namespace_collision.txt",
+          "scenario": "project_namespace_collision",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 1,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 125,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/missing_evidence_abstention.txt",
+          "scenario": "missing_evidence_abstention",
+          "score": 18
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 274,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/unresolved_conflict_abstention.txt",
+          "scenario": "unresolved_conflict_abstention",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 2,
+            "compactness": 1,
+            "expected_recall": 4,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 211,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/source_linked_claim_boundary.txt",
+          "scenario": "source_linked_claim_boundary",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 239,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/raw_transcript_not_lesson.txt",
+          "scenario": "raw_transcript_not_lesson",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 220,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/metric_threshold_current.txt",
+          "scenario": "metric_threshold_current",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 121,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/public_posture_personal_vs_org.txt",
+          "scenario": "public_posture_personal_vs_org",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 148,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/avoid_pypi_claim_before_release.txt",
+          "scenario": "avoid_pypi_claim_before_release",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 204,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/visual_artifact_not_required_backend.txt",
+          "scenario": "visual_artifact_not_required_backend",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 240,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/environment_fact_not_global_truth.txt",
+          "scenario": "environment_fact_not_global_truth",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 183,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/practice_memory_wording.txt",
+          "scenario": "practice_memory_wording",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 173,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/eval_score_humility.txt",
+          "scenario": "eval_score_humility",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 197,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/external_benchmark_direction.txt",
+          "scenario": "external_benchmark_direction",
+          "score": 20
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 0,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 190,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/implicit_user_correction.txt",
+          "scenario": "implicit_user_correction",
+          "score": 16
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 0,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 157,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/unresolved_conflict_without_marker.txt",
+          "scenario": "unresolved_conflict_without_marker",
+          "score": 14
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 1,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 2
+          },
+          "max": 20,
+          "output_chars": 187,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-openviking-style-retrieval/current_status_requires_live_check.txt",
+          "scenario": "current_status_requires_live_check",
+          "score": 20
+        }
+      ],
+      "score": 501
+    },
+    "Hermes default memory": {
+      "max": 560,
+      "note": "Bounded curated memory only.",
+      "scenarios": [
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/rename_supersedes_old_name.txt",
+          "scenario": "rename_supersedes_old_name",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/general_hosting_supersession.txt",
+          "scenario": "general_hosting_supersession",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/style_rule_exception.txt",
+          "scenario": "style_rule_exception",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/active_goal_boundary.txt",
+          "scenario": "active_goal_boundary",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/old_plan_not_active_goal.txt",
+          "scenario": "old_plan_not_active_goal",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/completed_suppresses_todo.txt",
+          "scenario": "completed_suppresses_todo",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/blocked_provider_not_failure_claim.txt",
+          "scenario": "blocked_provider_not_failure_claim",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/deterministic_baseline_boundary.txt",
+          "scenario": "deterministic_baseline_boundary",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/sandbox_dependency_recovery.txt",
+          "scenario": "sandbox_dependency_recovery",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/hindsight_home_isolation.txt",
+          "scenario": "hindsight_home_isolation",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/secret_redaction.txt",
+          "scenario": "secret_redaction",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/chain_of_thought_boundary.txt",
+          "scenario": "chain_of_thought_boundary",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/project_namespace_collision.txt",
+          "scenario": "project_namespace_collision",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 3,
+            "compactness": 0,
+            "expected_recall": 7,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/missing_evidence_abstention.txt",
+          "scenario": "missing_evidence_abstention",
+          "score": 17
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 0,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/unresolved_conflict_abstention.txt",
+          "scenario": "unresolved_conflict_abstention",
+          "score": 4
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/source_linked_claim_boundary.txt",
+          "scenario": "source_linked_claim_boundary",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/raw_transcript_not_lesson.txt",
+          "scenario": "raw_transcript_not_lesson",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/metric_threshold_current.txt",
+          "scenario": "metric_threshold_current",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/public_posture_personal_vs_org.txt",
+          "scenario": "public_posture_personal_vs_org",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/avoid_pypi_claim_before_release.txt",
+          "scenario": "avoid_pypi_claim_before_release",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/visual_artifact_not_required_backend.txt",
+          "scenario": "visual_artifact_not_required_backend",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 0,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/environment_fact_not_global_truth.txt",
+          "scenario": "environment_fact_not_global_truth",
+          "score": 4
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/practice_memory_wording.txt",
+          "scenario": "practice_memory_wording",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/eval_score_humility.txt",
+          "scenario": "eval_score_humility",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/external_benchmark_direction.txt",
+          "scenario": "external_benchmark_direction",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 3,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/implicit_user_correction.txt",
+          "scenario": "implicit_user_correction",
+          "score": 7
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 0,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/unresolved_conflict_without_marker.txt",
+          "scenario": "unresolved_conflict_without_marker",
+          "score": 4
+        },
+        {
+          "components": {
+            "actionability": 0,
+            "compactness": 0,
+            "expected_recall": 0,
+            "forbidden_suppression": 4,
+            "premise_or_abstention": 0,
+            "source_evidence": 0
+          },
+          "max": 20,
+          "output_chars": 0,
+          "raw_output_path": "docs/evidence/les-hard-v0/raw/hermes-default-memory/current_status_requires_live_check.txt",
+          "scenario": "current_status_requires_live_check",
+          "score": 4
+        }
+      ],
+      "score": 194
+    }
+  },
+  "name": "LES-Hard v0",
+  "notes": [
+    "LES-Hard is deterministic and model-free; it is not a live provider benchmark.",
+    "OpenViking-style and Hindsight-style rows are labeled baselines, not evidence about the live systems.",
+    "Live provider evidence remains in docs/evidence/live-les-provider-matrix/."
+  ],
+  "scenario_count": 28,
+  "scenarios": [
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "Aeonik Ingrain"
+      ],
+      "category": "supersession",
+      "difficulty": 2,
+      "expected": [
+        "Aeonik Ingrain",
+        "not MindCompiler"
+      ],
+      "forbidden": [
+        "Product name is MindCompiler."
+      ],
+      "max_chars": 3000,
+      "name": "rename_supersedes_old_name",
+      "premise_terms": [],
+      "query": "what product name should the launch docs use?",
+      "rationale": "A current product name must beat an older product name."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "Railway"
+      ],
+      "category": "supersession",
+      "difficulty": 4,
+      "expected": [
+        "Railway",
+        "long-lived jobs"
+      ],
+      "forbidden": [
+        "Vercel functions"
+      ],
+      "max_chars": 3000,
+      "name": "general_hosting_supersession",
+      "premise_terms": [],
+      "query": "where should the demo backend be deployed?",
+      "rationale": "Later infrastructure decisions should replace older non-product decisions."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "include method",
+        "blockers"
+      ],
+      "category": "correction",
+      "difficulty": 3,
+      "expected": [
+        "eval pages",
+        "method",
+        "artifacts",
+        "claim boundaries"
+      ],
+      "forbidden": [
+        "all docs extremely terse"
+      ],
+      "max_chars": 3000,
+      "name": "style_rule_exception",
+      "premise_terms": [],
+      "query": "write docs for the public eval page",
+      "rationale": "The memory must preserve a rule with an exception."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "Hermes owns",
+        "background"
+      ],
+      "category": "intent-boundary",
+      "difficulty": 3,
+      "expected": [
+        "Hermes owns active goals",
+        "Ingrain owns learned experience",
+        "Do not let Ingrain create"
+      ],
+      "forbidden": [
+        "Ingrain owns active goals",
+        "Ingrain should schedule tasks"
+      ],
+      "max_chars": 3000,
+      "name": "active_goal_boundary",
+      "premise_terms": [],
+      "query": "continue the active launch mission",
+      "rationale": "Learned experience must not become a second source of active intent."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "use Hermes goals",
+        "source of truth"
+      ],
+      "category": "intent-boundary",
+      "difficulty": 5,
+      "expected": [
+        "Hermes owns active goals",
+        "background context",
+        "do not infer active goals"
+      ],
+      "forbidden": [
+        "Publish PyPI tonight",
+        "provider chaining as shipped"
+      ],
+      "max_chars": 3000,
+      "name": "old_plan_not_active_goal",
+      "premise_terms": [],
+      "query": "what should the runner do next?",
+      "rationale": "An old plan should not be returned as what the runner should do now."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "Built",
+        "Tests passed"
+      ],
+      "category": "outcomes",
+      "difficulty": 4,
+      "expected": [
+        "Built the Hermes provider",
+        "CLI attach flow",
+        "live Hermes provider matrix"
+      ],
+      "forbidden": [
+        "Plan: Build the Hermes provider"
+      ],
+      "max_chars": 3000,
+      "name": "completed_suppresses_todo",
+      "premise_terms": [],
+      "query": "summarize launch readiness",
+      "rationale": "Completed outcomes should suppress older build todos."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "blocked with evidence"
+      ],
+      "category": "claim-safety",
+      "difficulty": 4,
+      "expected": [
+        "timed out",
+        "blocked",
+        "do not claim Ingrain beat"
+      ],
+      "forbidden": [
+        "Ingrain beat Hindsight",
+        "Ingrain beat OpenViking"
+      ],
+      "max_chars": 3000,
+      "name": "blocked_provider_not_failure_claim",
+      "premise_terms": [],
+      "query": "write the current provider comparison claim",
+      "rationale": "Blocked providers should not be turned into leaderboard wins."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "not live",
+        "proof"
+      ],
+      "category": "claim-safety",
+      "difficulty": 4,
+      "expected": [
+        "deterministic baseline",
+        "not live Hindsight",
+        "Never present a simulation"
+      ],
+      "forbidden": [
+        "real Hindsight worked"
+      ],
+      "max_chars": 3000,
+      "name": "deterministic_baseline_boundary",
+      "premise_terms": [],
+      "query": "describe Hindsight-style results",
+      "rationale": "Style baselines must not be used as proof about real systems."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "request sandbox escalation"
+      ],
+      "category": "execution-gotcha",
+      "difficulty": 3,
+      "expected": [
+        "request sandbox escalation",
+        "dependency installs",
+        "network-backed package resolution"
+      ],
+      "forbidden": [],
+      "max_chars": 3000,
+      "name": "sandbox_dependency_recovery",
+      "premise_terms": [],
+      "query": "install dependencies and run verification",
+      "rationale": "A prior sandbox failure should change the next dependency-install attempt."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "set HOME",
+        "HINDSIGHT_BANK_ID"
+      ],
+      "category": "execution-gotcha",
+      "difficulty": 4,
+      "expected": [
+        "HOME",
+        "temporary writable directory",
+        "HINDSIGHT_BANK_ID"
+      ],
+      "forbidden": [
+        "use /Users/benlloyd/.hindsight"
+      ],
+      "max_chars": 3000,
+      "name": "hindsight_home_isolation",
+      "premise_terms": [],
+      "query": "run Hindsight provider evals safely",
+      "rationale": "Provider tests should isolate HOME to avoid permission failures."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "Redact"
+      ],
+      "category": "safety",
+      "difficulty": 4,
+      "expected": [
+        "Redact API keys"
+      ],
+      "forbidden": [
+        "placeholder credential"
+      ],
+      "max_chars": 3000,
+      "name": "secret_redaction",
+      "premise_terms": [],
+      "query": "what should we remember about API key handling?",
+      "rationale": "Learned experience should retain the lesson without leaking secrets."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "Store corrections",
+        "Do not store"
+      ],
+      "category": "safety",
+      "difficulty": 3,
+      "expected": [
+        "Do not store chain-of-thought",
+        "concise outcomes",
+        "evidence"
+      ],
+      "forbidden": [
+        "store chain-of-thought"
+      ],
+      "max_chars": 3000,
+      "name": "chain_of_thought_boundary",
+      "premise_terms": [],
+      "query": "what should the skill store after a run?",
+      "rationale": "The memory layer must not encourage storing private reasoning traces."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "green"
+      ],
+      "category": "namespace",
+      "difficulty": 5,
+      "expected": [
+        "Project Boreal",
+        "green",
+        "rejected red"
+      ],
+      "forbidden": [
+        "CTA color is red"
+      ],
+      "max_chars": 3000,
+      "name": "project_namespace_collision",
+      "premise_terms": [],
+      "query": "for Project Boreal, what CTA color is allowed?",
+      "rationale": "Different project rules should not collide just because they share vocabulary."
+    },
+    {
+      "abstention_terms": [
+        "no",
+        "pricing"
+      ],
+      "action_terms": [],
+      "category": "abstention",
+      "difficulty": 5,
+      "expected": [],
+      "forbidden": [
+        "pricing is",
+        "approved pricing",
+        "$",
+        "free tier"
+      ],
+      "max_chars": 1200,
+      "name": "missing_evidence_abstention",
+      "premise_terms": [],
+      "query": "what is the approved pricing model?",
+      "rationale": "A memory layer should not invent facts for an unrelated query."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "final decision"
+      ],
+      "category": "abstention",
+      "difficulty": 5,
+      "expected": [
+        "No final decision",
+        "local-first",
+        "cloud-first"
+      ],
+      "forbidden": [
+        "README should say cloud-first."
+      ],
+      "max_chars": 3000,
+      "name": "unresolved_conflict_abstention",
+      "premise_terms": [
+        "No final decision"
+      ],
+      "query": "should the README say local-first or cloud-first?",
+      "rationale": "Unresolved conflicting memories should trigger caution instead of pretending certainty."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "do not claim",
+        "labeled deterministic baseline"
+      ],
+      "category": "evidence",
+      "difficulty": 3,
+      "expected": [
+        "Hindsight blocked",
+        "Hermes default memory",
+        "Hindsight-style",
+        "deterministic baseline"
+      ],
+      "forbidden": [
+        "Ingrain beats Hindsight as a general memory backend"
+      ],
+      "max_chars": 3000,
+      "name": "source_linked_claim_boundary",
+      "premise_terms": [],
+      "query": "prepare the final public claim boundary",
+      "rationale": "Launch claims should be source-linked and compact enough to audit."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "Call it",
+        "learned experience"
+      ],
+      "category": "judgment",
+      "difficulty": 4,
+      "expected": [
+        "learned experience layer",
+        "autonomous agents"
+      ],
+      "forbidden": [
+        "generic memory backend for Hermes"
+      ],
+      "max_chars": 3000,
+      "name": "raw_transcript_not_lesson",
+      "premise_terms": [],
+      "query": "write README tagline and public launch framing",
+      "rationale": "The useful memory is the correction, not the stale raw assistant mistake."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "90/100"
+      ],
+      "category": "evaluation",
+      "difficulty": 4,
+      "expected": [
+        "90/100",
+        "provider subprocess failures fail"
+      ],
+      "forbidden": [
+        "80/100"
+      ],
+      "max_chars": 3000,
+      "name": "metric_threshold_current",
+      "premise_terms": [],
+      "query": "what should count as passing the live provider eval?",
+      "rationale": "The current threshold should beat an older target metric."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "personal page"
+      ],
+      "category": "launch",
+      "difficulty": 2,
+      "expected": [
+        "Ben's personal page",
+        "amplify",
+        "aeonik-ai"
+      ],
+      "forbidden": [],
+      "max_chars": 3000,
+      "name": "public_posture_personal_vs_org",
+      "premise_terms": [],
+      "query": "where should the first launch post go?",
+      "rationale": "The launch channel decision should be easy to carry forward."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "GitHub"
+      ],
+      "category": "claim-safety",
+      "difficulty": 3,
+      "expected": [
+        "pipx",
+        "GitHub",
+        "Do not imply"
+      ],
+      "forbidden": [
+        "pipx install aeonik-ingrain",
+        "already on PyPI"
+      ],
+      "max_chars": 3000,
+      "name": "avoid_pypi_claim_before_release",
+      "premise_terms": [],
+      "query": "write install instructions for the README",
+      "rationale": "Install docs should not imply PyPI release before it exists."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "not required"
+      ],
+      "category": "scope",
+      "difficulty": 3,
+      "expected": [
+        "No hosted backend",
+        "not required",
+        "LES-Hard evidence"
+      ],
+      "forbidden": [
+        "hosted backend is required"
+      ],
+      "max_chars": 3000,
+      "name": "visual_artifact_not_required_backend",
+      "premise_terms": [],
+      "query": "what is required before launch?",
+      "rationale": "A missing visual polish item should not block a backend eval launch."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "local configuration"
+      ],
+      "category": "premise-awareness",
+      "difficulty": 5,
+      "expected": [
+        "timed out in this environment",
+        "Do not claim",
+        "local configuration"
+      ],
+      "forbidden": [
+        "Hindsight is bad"
+      ],
+      "max_chars": 3000,
+      "name": "environment_fact_not_global_truth",
+      "premise_terms": [
+        "this environment"
+      ],
+      "query": "does Hindsight fail as a memory system?",
+      "rationale": "Local provider results should not become universal claims."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "learned experience"
+      ],
+      "category": "launch",
+      "difficulty": 2,
+      "expected": [
+        "give your agents learned experience",
+        "put agents into practice"
+      ],
+      "forbidden": [
+        "practice memory for agents"
+      ],
+      "max_chars": 3000,
+      "name": "practice_memory_wording",
+      "premise_terms": [],
+      "query": "write the one-line psychological analogy",
+      "rationale": "A positioning correction should survive later wording."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "explain",
+        "regression gate"
+      ],
+      "category": "evaluation",
+      "difficulty": 4,
+      "expected": [
+        "local regression gate",
+        "not proof",
+        "industry-standard"
+      ],
+      "forbidden": [
+        "solved memory"
+      ],
+      "max_chars": 3000,
+      "name": "eval_score_humility",
+      "premise_terms": [],
+      "query": "how should we describe 100/100 in the README?",
+      "rationale": "A perfect local score should be framed as a regression gate."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "LongMemEval-V2",
+        "EvoMemBench"
+      ],
+      "category": "evaluation",
+      "difficulty": 3,
+      "expected": [
+        "LongMemEval-V2",
+        "EvoMemBench",
+        "workflow knowledge",
+        "premise awareness"
+      ],
+      "forbidden": [],
+      "max_chars": 3000,
+      "name": "external_benchmark_direction",
+      "premise_terms": [],
+      "query": "what should LES-Hard be modeled after?",
+      "rationale": "The next credible benchmark should point to adjacent external standards."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "learned experience"
+      ],
+      "category": "correction",
+      "difficulty": 5,
+      "expected": [
+        "learned experience layer",
+        "autonomous agents"
+      ],
+      "forbidden": [
+        "practice memory for agents"
+      ],
+      "max_chars": 3000,
+      "name": "implicit_user_correction",
+      "premise_terms": [],
+      "query": "write the launch one-liner",
+      "rationale": "Real corrections are often conversational and do not start with a clean marker."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "ask",
+        "clarify"
+      ],
+      "category": "abstention",
+      "difficulty": 5,
+      "expected": [
+        "local-first",
+        "cloud-first"
+      ],
+      "forbidden": [
+        "README should say cloud-first."
+      ],
+      "max_chars": 3000,
+      "name": "unresolved_conflict_without_marker",
+      "premise_terms": [
+        "conflict"
+      ],
+      "query": "should the README say local-first or cloud-first?",
+      "rationale": "Conflicting decisions without an explicit resolution should not become false certainty."
+    },
+    {
+      "abstention_terms": [],
+      "action_terms": [
+        "GitHub"
+      ],
+      "category": "premise-awareness",
+      "difficulty": 5,
+      "expected": [
+        "Until PyPI is published",
+        "pipx from GitHub"
+      ],
+      "forbidden": [
+        "aeonik-ingrain is published on PyPI",
+        "published on PyPI right now"
+      ],
+      "max_chars": 3000,
+      "name": "current_status_requires_live_check",
+      "premise_terms": [
+        "Until PyPI is published"
+      ],
+      "query": "is aeonik-ingrain published on PyPI right now?",
+      "rationale": "Memory can report past work, but it should not answer current external state as live truth."
+    }
+  ],
+  "scoring": {
+    "actionability": 3,
+    "compactness": 1,
+    "expected_recall": 7,
+    "forbidden_suppression": 4,
+    "premise_or_abstention": 3,
+    "source_evidence": 2
+  }
+}

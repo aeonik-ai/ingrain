@@ -235,6 +235,14 @@ The current live run is committed under `docs/evidence/live-les-provider-matrix/
 
 For the benchmark posture and external standards, see [docs/eval-standards.md](docs/eval-standards.md). The short version: LES-Core is a smoke test, deterministic comparison is an engineering harness, and broad comparative claims require live providers or external benchmarks such as LongMemEval, LoCoMo, BEAM, LongMemEval-V2, or EvoMemBench.
 
+For a harder local benchmark with room to improve, run:
+
+```bash
+ingrain les-hard
+```
+
+The current LES-Hard v0 result is committed under `docs/evidence/les-hard-v0/`: Ingrain scores `545/560` across 28 preregistered scenarios, versus `536/560` for a deterministic Hindsight-style synthesis baseline, `501/560` for OpenViking-style retrieval, and `194/560` for default Hermes-style memory. This is still a deterministic benchmark, not a live Hindsight/OpenViking claim.
+
 For a live OpenViking resource-retrieval check, run a local OpenViking server and then:
 
 ```bash
@@ -323,6 +331,7 @@ ingrain init
 ingrain remember --type correction "Never use yellow CTAs in enterprise demos."
 ingrain demo banana
 ingrain compare
+ingrain les-hard
 ingrain live-eval
 ingrain compare --live-openviking --openviking-endpoint http://127.0.0.1:1933
 ingrain ingest hermes

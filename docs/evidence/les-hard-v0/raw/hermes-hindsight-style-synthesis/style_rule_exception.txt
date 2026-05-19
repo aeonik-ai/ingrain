@@ -1,0 +1,6 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+Current reflection:
+- Keep normal docs concise, but eval pages must include method, artifacts, blockers, and claim boundaries. [evidence: memory_02]
+Action guidance:
+- Preserve: include method.
+- Preserve: blockers.

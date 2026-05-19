@@ -1,0 +1,6 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+Current reflection:
+- Use Hindsight-style only as a labeled deterministic baseline when live Hindsight cannot run. [evidence: memory_03]
+Action guidance:
+- Preserve: do not claim.
+- Preserve: labeled deterministic baseline.

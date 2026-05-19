@@ -1,0 +1,2 @@
+[retrieved: memory_02] Correction: Until PyPI is published, say current install is pipx from GitHub.
+[retrieved: memory_01] Completed: Drafted PyPI install instructions for after release.

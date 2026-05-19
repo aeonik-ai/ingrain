@@ -1,0 +1,7 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+Current reflection:
+- For Hindsight provider evals, set HOME to a temporary writable directory and set HINDSIGHT_BANK_ID per universe. [evidence: memory_02]
+- Hindsight wrote to /Users/benlloyd/.hindsight and hit Operation not permitted. [evidence: memory_01]
+Action guidance:
+- Preserve: set HOME.
+- Preserve: HINDSIGHT_BANK_ID.

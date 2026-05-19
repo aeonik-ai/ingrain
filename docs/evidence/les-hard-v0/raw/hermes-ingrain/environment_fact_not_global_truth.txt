@@ -1,0 +1,14 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not claim this proves Hindsight is bad. It only proves this local configuration did not complete the smoke eval. [source: evt_76514770cc7c43fc0521cfad]
+
+Lessons:
+- Live local Hindsight provider calls timed out in this environment. [source: evt_47771eb9864498386a5db5e2]
+
+Sources:
+- evt_47771eb9864498386a5db5e2
+- evt_76514770cc7c43fc0521cfad
+
+</aeonik_ingrain_context>

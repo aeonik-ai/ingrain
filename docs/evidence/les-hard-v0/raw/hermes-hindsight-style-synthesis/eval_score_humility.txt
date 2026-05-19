@@ -1,0 +1,6 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+Current reflection:
+- If we score 100/100, explain it is a local regression gate, not proof that the eval is industry-standard or that the system solved memory. [evidence: memory_01]
+Action guidance:
+- Preserve: explain.
+- Preserve: regression gate.

@@ -1,0 +1,7 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+Current reflection:
+- Never present a simulation, style baseline, mock provider, or fixture as proof that the real provider worked. [evidence: memory_02]
+- Hindsight-style synthesis is a deterministic baseline, not live Hindsight. [evidence: memory_01]
+Action guidance:
+- Preserve: not live.
+- Preserve: proof.

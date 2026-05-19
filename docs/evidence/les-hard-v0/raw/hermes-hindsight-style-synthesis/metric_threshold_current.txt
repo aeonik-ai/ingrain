@@ -1,0 +1,5 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+Current reflection:
+- Passing threshold is 90/100 for provider smoke evals, and provider subprocess failures fail the run. [evidence: memory_02]
+Action guidance:
+- Preserve: 90/100.

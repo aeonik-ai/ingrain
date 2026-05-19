@@ -1,0 +1,6 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+Current reflection:
+- Project Boreal decision: CTA color is green because the compliance team rejected red. [evidence: memory_02]
+- Project Atlas decision: CTA color is red because the brand campaign uses red. [evidence: memory_01]
+Action guidance:
+- Preserve: green.

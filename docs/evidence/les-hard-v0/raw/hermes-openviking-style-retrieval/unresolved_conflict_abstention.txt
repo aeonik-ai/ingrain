@@ -1,0 +1,3 @@
+[retrieved: memory_02] Decision: README should say cloud-first after hosted backend launches.
+[retrieved: memory_01] Decision: README should say local-first.
+[retrieved: memory_03] Observation: No final decision resolved local-first versus cloud-first for tomorrow's launch.

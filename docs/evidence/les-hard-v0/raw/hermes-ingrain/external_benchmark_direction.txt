@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current decisions:
+- LES-Hard should borrow from LongMemEval-V2 and EvoMemBench: workflow knowledge, environment gotchas, premise awareness, and execution-oriented cross-episode memory. [source: evt_4165e8a59dda4ef815d1e4a5]
+
+Sources:
+- evt_4165e8a59dda4ef815d1e4a5
+
+</aeonik_ingrain_context>

@@ -1,0 +1,2 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+No sufficient retained evidence for this query.

@@ -40,6 +40,7 @@ python3 -m venv /tmp/ingrain-publish-smoke
 /tmp/ingrain-publish-smoke/bin/python -m pip install aeonik-ingrain
 /tmp/ingrain-publish-smoke/bin/ingrain --version
 /tmp/ingrain-publish-smoke/bin/ingrain eval --no-comparison
+/tmp/ingrain-publish-smoke/bin/ingrain les-hard --output-dir /tmp/ingrain-les-hard
 /tmp/ingrain-publish-smoke/bin/ingrain skill show codex
 ```
 
@@ -53,11 +54,21 @@ Total                           100/100
 
 Only use this as a local regression-gate screenshot. Do not frame it as an external benchmark, provider leaderboard, or proof that Ingrain beats Hindsight/OpenViking.
 
+For a stronger launch artifact, use LES-Hard:
+
+```text
+Hermes + Ingrain                545/560
+Hermes + Hindsight-style        536/560
+```
+
+Label it exactly as deterministic LES-Hard v0. Do not call the Hindsight-style row live Hindsight.
+
 ## GitHub Release Checklist
 
 - Tag `v0.1.0`.
 - Attach the eval report.
 - Mention that the project is local-first and has no network or LLM dependency by default.
 - Mention CLI + Skill + PRACTICE.md as the default adoption path.
+- Link LES-Hard v0 results and raw artifacts.
 - Mention that OpenViking live provider chaining is roadmap, not v0.
 - Link the architecture graphic: `assets/ingrain-architecture.svg`.

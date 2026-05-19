@@ -1,0 +1,14 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not infer active goals from Ingrain memory; use Hermes goals, missions, and Kanban as the source of truth. [source: evt_93dabc691699c2f77d2f9e35]
+
+Current decisions:
+- Hermes owns active goals and scheduling. Ingrain memories about old plans are background context only. [source: evt_05cfe1269e7a260180ff6a3c]
+
+Sources:
+- evt_05cfe1269e7a260180ff6a3c
+- evt_93dabc691699c2f77d2f9e35
+
+</aeonik_ingrain_context>

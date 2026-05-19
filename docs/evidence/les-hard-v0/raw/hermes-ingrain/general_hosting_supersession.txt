@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current decisions:
+- The demo backend should run on Railway because it needs long-lived jobs. [source: evt_2324f80af4e17412d2f0f2b7]
+
+Sources:
+- evt_2324f80af4e17412d2f0f2b7
+
+</aeonik_ingrain_context>

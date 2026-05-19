@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- learned experience layer for autonomous agents instead. [source: evt_a35832b6414dcd7db65a32e0]
+
+Sources:
+- evt_a35832b6414dcd7db65a32e0
+
+</aeonik_ingrain_context>

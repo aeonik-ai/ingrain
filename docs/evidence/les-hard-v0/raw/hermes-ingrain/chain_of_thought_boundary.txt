@@ -1,0 +1,14 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not store chain-of-thought. Store concise outcomes and evidence instead. [source: evt_a6ec2af006bad743851f9e83]
+
+Current decisions:
+- Store corrections, decisions, lessons, completed outcomes, and source event IDs. [source: evt_f27fb7e433d22a83ee4f5112]
+
+Sources:
+- evt_a6ec2af006bad743851f9e83
+- evt_f27fb7e433d22a83ee4f5112
+
+</aeonik_ingrain_context>

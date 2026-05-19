@@ -41,8 +41,9 @@ Do not use this language:
 |---|---|---|---|
 | 0 | LES-Core | Small deterministic smoke test for the compiler, hydration, practice cards, and source evidence. | A 100/100 means the local regression gate passed. It is not a benchmark headline. |
 | 1 | Deterministic learned-experience comparison | Local comparison across Hermes default, OpenViking-style retrieval, Hindsight-style synthesis, and Ingrain on preregistered universes. | Useful for engineering iteration. It is not evidence against live Hindsight or live OpenViking. |
-| 2 | Live Hermes provider matrix | Real installed Hermes providers only; blocked providers are recorded as blocked with command logs. | Valid evidence about this machine and this configuration. |
-| 3 | External memory benchmarks | LongMemEval, BEAM, LoCoMo, LongMemEval-V2, or EvoMemBench adapters where licensing and runtime allow. | The only tier suitable for broad comparative claims. |
+| 2 | LES-Hard | Harder deterministic benchmark modeled after LongMemEval-V2/EvoMemBench themes: environment gotchas, premise awareness, stale intent, abstention, and execution-oriented memory. | Better public engineering evidence than LES-Core, but still not a live provider benchmark. |
+| 3 | Live Hermes provider matrix | Real installed Hermes providers only; blocked providers are recorded as blocked with command logs. | Valid evidence about this machine and this configuration. |
+| 4 | External memory benchmarks | LongMemEval, BEAM, LoCoMo, LongMemEval-V2, or EvoMemBench adapters where licensing and runtime allow. | The only tier suitable for broad comparative claims. |
 
 ## What A Karpathy-Safe Eval Should Look Like
 
@@ -56,9 +57,9 @@ Do not use this language:
 - Report latency, setup complexity, credentials, and cost when live providers are used.
 - Make the repo useful even if the launch headline is modest.
 
-## Next Benchmark Direction
+## LES-Hard Direction
 
-The best next public-facing benchmark is not a bigger LES-Core screenshot. It is **LES-Hard**, modeled after LongMemEval-V2 and EvoMemBench:
+The best public-facing deterministic benchmark is **LES-Hard**, modeled after LongMemEval-V2 and EvoMemBench:
 
 - environment gotchas
 - workflow knowledge
@@ -70,4 +71,4 @@ The best next public-facing benchmark is not a bigger LES-Core screenshot. It is
 - compact evidence gathering under a token budget
 - latency and cost alongside quality
 
-LES-Hard should have enough scenarios that Ingrain can land below perfect on day one. That gives the project a credible improvement curve instead of a brittle launch number.
+LES-Hard now has enough scenarios that Ingrain lands below perfect. Current v0 result: `545/560` for Ingrain versus `536/560` for the deterministic Hindsight-style baseline. Treat this as engineering evidence with raw artifacts, not as proof that Ingrain beats live Hindsight.

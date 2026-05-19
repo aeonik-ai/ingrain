@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Until PyPI is published, say current install is pipx from GitHub. Do not imply aeonik-ingrain is already on PyPI. [source: evt_291803b3e0776fbc1dd17291]
+
+Sources:
+- evt_291803b3e0776fbc1dd17291
+
+</aeonik_ingrain_context>

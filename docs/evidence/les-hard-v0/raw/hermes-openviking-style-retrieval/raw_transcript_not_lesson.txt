@@ -1,0 +1,2 @@
+[retrieved: memory_02] No, that's wrong. Do not call Ingrain a generic memory backend. Call it a learned experience layer for autonomous agents.
+[retrieved: memory_01] Assistant draft: Aeonik Ingrain is a generic memory backend for Hermes.

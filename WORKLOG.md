@@ -159,3 +159,23 @@ Next:
   - Hermes + Hindsight-style synthesis: `196/200`
   - Hermes + Ingrain: `200/200`
 - Added `docs/learned-experience-results.md` and deterministic artifacts under `docs/evidence/deterministic-les-comparison/`.
+
+## 2026-05-19 05:55 PDT
+
+- Created the 10-minute heartbeat `continue-ingrain-les-hard-build` for continued autonomous work.
+- Added `ingrain les-hard`, a harder deterministic benchmark with 28 preregistered scenarios covering supersession, active-intent boundaries, blocked-provider claim safety, sandbox gotchas, secret redaction, project namespace collisions, abstention, premise awareness, implicit corrections, and unresolved conflicts.
+- Saved LES-Hard raw outputs, CSV, JSON, and markdown report under `docs/evidence/les-hard-v0/` and mirrored the public report to `docs/les-hard-report.md`.
+- Improved general compiler/hydration behavior surfaced by LES-Hard:
+  - promote explicit `Lesson:` and `Observation:` lines
+  - promote conversational "use X instead" corrections
+  - preserve `Project ...` namespace text for project facts
+  - supersede older same-subject decisions when a later decision clearly replaces them
+  - preserve `Tests passed` track-record wording
+  - filter specific hydration queries away from unrelated project namespaces
+  - treat empty specific-query hydration as a valid abstention signal in LES-Hard
+- Current LES-Hard v0 result:
+  - Hermes default memory: `194/560`
+  - Hermes + OpenViking-style retrieval: `501/560`
+  - Hermes + Hindsight-style synthesis: `536/560`
+  - Hermes + Ingrain: `545/560`
+- Updated README, eval standards, eval docs, learned-experience results, launch notes, and publishing notes with LES-Hard framing and claim boundaries.

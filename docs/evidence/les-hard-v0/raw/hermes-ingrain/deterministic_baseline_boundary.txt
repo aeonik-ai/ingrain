@@ -1,0 +1,14 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Never present a simulation, style baseline, mock provider, or fixture as proof that the real provider worked. [source: evt_05bc3c069a66673e11ecc08a]
+
+Current decisions:
+- Hindsight-style synthesis is a deterministic baseline, not live Hindsight. [source: evt_057203dac1ee0362af7e34cf]
+
+Sources:
+- evt_057203dac1ee0362af7e34cf
+- evt_05bc3c069a66673e11ecc08a
+
+</aeonik_ingrain_context>

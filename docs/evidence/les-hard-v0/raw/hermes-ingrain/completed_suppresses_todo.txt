@@ -1,0 +1,12 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Track record:
+- Built the Hermes provider, CLI attach flow, and eval report. [source: evt_9dc6c9ee197e53463ea3771f]
+- Tests passed: unit suite, deterministic LES, and live Hermes provider matrix. [source: evt_d15a9e561f628ae7800abf07]
+
+Sources:
+- evt_9dc6c9ee197e53463ea3771f
+- evt_d15a9e561f628ae7800abf07
+
+</aeonik_ingrain_context>

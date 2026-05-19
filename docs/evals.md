@@ -71,6 +71,33 @@ Current deterministic comparison result:
 
 See [learned-experience-results.md](learned-experience-results.md) for the polished results page and claim boundary.
 
+## LES-Hard
+
+`ingrain les-hard` is the harder deterministic benchmark. It is designed to make the score less brittle than LES-Core by adding stale intent, superseded decisions, missing evidence, project namespace collisions, implicit corrections, launch overclaims, and blocked-provider claim safety.
+
+Run:
+
+```bash
+ingrain les-hard
+```
+
+Current LES-Hard v0 result:
+
+| Mode | Score | Meaning |
+|---|---:|---|
+| Hermes default memory | 194/560 | Bounded curated memory only. |
+| Hermes + OpenViking-style retrieval | 501/560 | Deterministic raw retrieval baseline, not live OpenViking. |
+| Hermes + Hindsight-style synthesis | 536/560 | Deterministic retain/recall/reflect-style baseline, not live Hindsight. |
+| Hermes + Ingrain | 545/560 | Actual Ingrain compiler and hydration path. |
+
+The Ingrain score is intentionally not perfect. The current misses are useful: project namespace precision, missing-evidence abstention, blocked-provider phrasing, and unresolved conflicts without an explicit resolution marker.
+
+Artifacts:
+
+- [LES-Hard report](les-hard-report.md)
+- [LES-Hard evidence](evidence/les-hard-v0/report.md)
+- raw outputs under `docs/evidence/les-hard-v0/raw/`
+
 ## Live LES-Core Provider Smoke Eval
 
 `ingrain live-eval` is the live provider smoke harness. It is designed to be scientifically safer than the deterministic comparison table:

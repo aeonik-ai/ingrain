@@ -1,0 +1,6 @@
+Hindsight-style synthesis baseline (deterministic; not live Hindsight).
+Current reflection:
+- LES-Hard should borrow from LongMemEval-V2 and EvoMemBench: workflow knowledge, environment gotchas, premise awareness, and execution-oriented cross-episode memory. [evidence: memory_01]
+Action guidance:
+- Preserve: LongMemEval-V2.
+- Preserve: EvoMemBench.

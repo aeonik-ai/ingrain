@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- If we score 100/100, explain it is a local regression gate, not proof that the eval is industry-standard or that the system solved memory. [source: evt_1105b4dd1e83851f8ab80ef4]
+
+Sources:
+- evt_1105b4dd1e83851f8ab80ef4
+
+</aeonik_ingrain_context>

@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not say 'practice memory for agents' as the headline; it sounds useless. Say 'give your agents learned experience' or 'put agents into practice'. [source: evt_12e8e05a7c751c14b05dd090]
+
+Sources:
+- evt_12e8e05a7c751c14b05dd090
+
+</aeonik_ingrain_context>

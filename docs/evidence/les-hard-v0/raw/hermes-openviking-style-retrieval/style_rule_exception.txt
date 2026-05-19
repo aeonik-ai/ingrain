@@ -1,0 +1,2 @@
+[retrieved: memory_02] Correction: Keep normal docs concise, but eval pages must include method, artifacts, blockers, and claim boundaries.
+[retrieved: memory_01] Preference: Keep all docs extremely terse.

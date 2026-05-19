@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not call Ingrain a generic memory backend. Call it a learned experience layer for autonomous agents. [source: evt_36d9dda0a25bad5965766249]
+
+Sources:
+- evt_36d9dda0a25bad5965766249
+
+</aeonik_ingrain_context>

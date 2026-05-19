@@ -1,0 +1,12 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current project facts:
+- Project Boreal decision: CTA color is green because the compliance team rejected red. [source: evt_25b64812442b1474892f4472]
+- Project Atlas decision: CTA color is red because the brand campaign uses red. [source: evt_0f5e098a814102049255b54e]
+
+Sources:
+- evt_0f5e098a814102049255b54e
+- evt_25b64812442b1474892f4472
+
+</aeonik_ingrain_context>

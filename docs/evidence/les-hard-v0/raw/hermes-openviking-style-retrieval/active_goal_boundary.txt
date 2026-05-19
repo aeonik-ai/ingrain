@@ -1,0 +1,1 @@
+[retrieved: memory_01] Decision: Hermes owns active goals, missions, Kanban columns, scheduling, task lifecycle, and what the agent should do next.

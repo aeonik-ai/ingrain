@@ -1,0 +1,14 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Until PyPI is published, say current install is pipx from GitHub. [source: evt_b3e159b7f13de023081e7b00]
+
+Track record:
+- Drafted PyPI install instructions for after release. [source: evt_aec120e8da56de019ea28e4a]
+
+Sources:
+- evt_aec120e8da56de019ea28e4a
+- evt_b3e159b7f13de023081e7b00
+
+</aeonik_ingrain_context>

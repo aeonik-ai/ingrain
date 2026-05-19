@@ -28,6 +28,7 @@ CORRECTION_PATTERNS = [
     re.compile(r"\balways\b\s+(.+)", re.I),
     re.compile(r"\bfrom now on\b[:,]?\s*(.+)", re.I),
     re.compile(r"\bno[, ]+that's wrong[.:]?\s*(.+)", re.I),
+    re.compile(r"\buse\b\s+(.+\binstead\b\.?)", re.I),
 ]
 
 DECISION_PATTERNS = [
@@ -41,6 +42,11 @@ PLAN_PATTERNS = [
     re.compile(r"\bthe plan is\b\s*(.+)", re.I),
 ]
 
+LESSON_PATTERNS = [
+    re.compile(r"^\s*lesson\b[:,]?\s*(.+)", re.I),
+    re.compile(r"^\s*observation\b[:,]?\s*(.+)", re.I),
+]
+
 PROJECT_PATTERNS = [
     re.compile(r"^\s*project\b[:,]?\s*(.+)", re.I),
     re.compile(r"\bactive project\b[:,]?\s*(.+)", re.I),
@@ -50,14 +56,34 @@ TRACK_PATTERNS = [
     re.compile(r"^\s*completed\b[:,]?\s*(.+)", re.I),
     re.compile(r"^\s*shipped\b[:,]?\s*(.+)", re.I),
     re.compile(r"^\s*fixed\b[:,]?\s*(.+)", re.I),
-    re.compile(r"^\s*tests? passed\b[:,]?\s*(.+)?", re.I),
+    re.compile(r"^\s*(tests? passed\b[:,]?.*)", re.I),
 ]
 
 RISK_PATTERNS = [
     re.compile(r"\bblocked\b[:,]?\s*(.+)", re.I),
     re.compile(r"\bfailed\b[:,]?\s*(.+)", re.I),
+    re.compile(r"^\s*(.+\btimed out\b.+)", re.I),
     re.compile(r"\bavoid\b\s+(.+)", re.I),
 ]
+
+STOPWORDS = {
+    "the",
+    "and",
+    "for",
+    "that",
+    "this",
+    "with",
+    "from",
+    "into",
+    "because",
+    "should",
+    "would",
+    "could",
+    "after",
+    "before",
+    "decision",
+    "project",
+}
 
 
 def extract_promotions(events: list[dict[str, Any]]) -> list[PromotionCandidate]:
@@ -95,6 +121,16 @@ def _extract_from_event(event: dict[str, Any]) -> list[PromotionCandidate]:
             out.append(PromotionCandidate(event_id, "correction", _clean_correction(match, text), 0.9, "correction phrase"))
             return out
 
+    for pattern in LESSON_PATTERNS:
+        if match := pattern.search(text):
+            out.append(PromotionCandidate(event_id, "lesson", _clean_match(match, text), 0.76, "lesson or observation phrase"))
+            return out
+
+    for pattern in PROJECT_PATTERNS:
+        if match := pattern.search(text):
+            out.append(PromotionCandidate(event_id, "project_fact", _clean_project_match(match, text), 0.84, "project phrase"))
+            return out
+
     for pattern in DECISION_PATTERNS:
         if match := pattern.search(text):
             out.append(PromotionCandidate(event_id, "decision", _clean_match(match, text), 0.88, "decision phrase"))
@@ -103,11 +139,6 @@ def _extract_from_event(event: dict[str, Any]) -> list[PromotionCandidate]:
     for pattern in PLAN_PATTERNS:
         if match := pattern.search(text):
             out.append(PromotionCandidate(event_id, "decision", _clean_match(match, text), 0.72, "plan phrase", meta={"kind": "plan"}))
-            break
-
-    for pattern in PROJECT_PATTERNS:
-        if match := pattern.search(text):
-            out.append(PromotionCandidate(event_id, "project_fact", _clean_match(match, text), 0.84, "project phrase"))
             break
 
     for pattern in TRACK_PATTERNS:
@@ -164,6 +195,11 @@ def _clean_correction(match: re.Match[str], fallback: str) -> str:
     return value.rstrip(" .") + "."
 
 
+def _clean_project_match(match: re.Match[str], fallback: str) -> str:
+    value = fallback.strip()
+    return value.rstrip(" .") + "."
+
+
 def _meta(event: dict[str, Any]) -> dict[str, Any]:
     meta = event.get("meta") or event.get("meta_json") or {}
     if isinstance(meta, str):
@@ -211,6 +247,23 @@ def _mark_superseded(candidates: list[PromotionCandidate]) -> None:
                     previous.current_state = "superseded"
                     previous.meta["superseded_by"] = candidate.event_id
 
+        if _is_no_final_decision(lower):
+            current_tokens = _tokens(lower)
+            for previous in candidates[:idx]:
+                if previous.promoted_type != "decision":
+                    continue
+                if len(current_tokens & _tokens(previous.text)) >= 2:
+                    previous.current_state = "superseded"
+                    previous.meta["superseded_by"] = candidate.event_id
+
+        if candidate.promoted_type == "decision":
+            for previous in candidates[:idx]:
+                if previous.promoted_type != "decision":
+                    continue
+                if _should_supersede_decision(previous.text, candidate.text):
+                    previous.current_state = "superseded"
+                    previous.meta["superseded_by"] = candidate.event_id
+
 
 def _names_product(text: str) -> bool:
     lower = text.lower()
@@ -221,6 +274,40 @@ def _is_active_intent_boundary(lower: str) -> bool:
     has_intent = "active goal" in lower or "active intent" in lower or "kanban" in lower or "mission" in lower
     has_boundary = "background context" in lower or "source of truth" in lower or "do not infer" in lower
     return has_intent and has_boundary
+
+
+def _is_no_final_decision(lower: str) -> bool:
+    return "no final decision" in lower or "not resolved" in lower or "unresolved" in lower
+
+
+def _should_supersede_decision(previous: str, current: str) -> bool:
+    prev_lower = previous.lower()
+    current_lower = current.lower()
+    if _project_names(prev_lower) != _project_names(current_lower):
+        return False
+    if "no final decision" in current_lower:
+        return True
+    prev_tokens = _subject_tokens(prev_lower)
+    current_tokens = _subject_tokens(current_lower)
+    overlap = prev_tokens & current_tokens
+    if len(overlap) < 3:
+        return False
+    has_decision_shape = any(marker in current_lower for marker in (" should ", " threshold ", " run on ", " is "))
+    has_replacement_signal = previous.strip() != current.strip() and (
+        "not " in current_lower
+        or "because" in current_lower
+        or any(char.isdigit() for char in previous + current)
+        or "instead" in current_lower
+    )
+    return has_decision_shape and has_replacement_signal
+
+
+def _project_names(lower: str) -> set[str]:
+    return set(re.findall(r"\bproject\s+([a-z0-9_-]+)", lower))
+
+
+def _subject_tokens(lower: str) -> set[str]:
+    return {token for token in _tokens(lower) if token not in STOPWORDS}
 
 
 def _tokens(text: str) -> set[str]:

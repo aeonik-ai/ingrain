@@ -1,0 +1,12 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current decisions:
+- README should say local-first. [source: evt_8ddba3f883aa2a893844883b]
+- README should say cloud-first after hosted backend launches. [source: evt_dac74628aaaff909cbc9b8cd]
+
+Sources:
+- evt_8ddba3f883aa2a893844883b
+- evt_dac74628aaaff909cbc9b8cd
+
+</aeonik_ingrain_context>

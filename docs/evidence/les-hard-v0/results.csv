@@ -1,0 +1,113 @@
+mode,scenario,category,difficulty,score,max,expected_recall,forbidden_suppression,actionability,premise_or_abstention,source_evidence,compactness,output_chars
+Hermes default memory,rename_supersedes_old_name,supersession,2,7,20,0,4,0,3,0,0,0
+Hermes default memory,general_hosting_supersession,supersession,4,7,20,0,4,0,3,0,0,0
+Hermes default memory,style_rule_exception,correction,3,7,20,0,4,0,3,0,0,0
+Hermes default memory,active_goal_boundary,intent-boundary,3,7,20,0,4,0,3,0,0,0
+Hermes default memory,old_plan_not_active_goal,intent-boundary,5,7,20,0,4,0,3,0,0,0
+Hermes default memory,completed_suppresses_todo,outcomes,4,7,20,0,4,0,3,0,0,0
+Hermes default memory,blocked_provider_not_failure_claim,claim-safety,4,7,20,0,4,0,3,0,0,0
+Hermes default memory,deterministic_baseline_boundary,claim-safety,4,7,20,0,4,0,3,0,0,0
+Hermes default memory,sandbox_dependency_recovery,execution-gotcha,3,7,20,0,4,0,3,0,0,0
+Hermes default memory,hindsight_home_isolation,execution-gotcha,4,7,20,0,4,0,3,0,0,0
+Hermes default memory,secret_redaction,safety,4,7,20,0,4,0,3,0,0,0
+Hermes default memory,chain_of_thought_boundary,safety,3,7,20,0,4,0,3,0,0,0
+Hermes default memory,project_namespace_collision,namespace,5,7,20,0,4,0,3,0,0,0
+Hermes default memory,missing_evidence_abstention,abstention,5,17,20,7,4,3,3,0,0,0
+Hermes default memory,unresolved_conflict_abstention,abstention,5,4,20,0,4,0,0,0,0,0
+Hermes default memory,source_linked_claim_boundary,evidence,3,7,20,0,4,0,3,0,0,0
+Hermes default memory,raw_transcript_not_lesson,judgment,4,7,20,0,4,0,3,0,0,0
+Hermes default memory,metric_threshold_current,evaluation,4,7,20,0,4,0,3,0,0,0
+Hermes default memory,public_posture_personal_vs_org,launch,2,7,20,0,4,0,3,0,0,0
+Hermes default memory,avoid_pypi_claim_before_release,claim-safety,3,7,20,0,4,0,3,0,0,0
+Hermes default memory,visual_artifact_not_required_backend,scope,3,7,20,0,4,0,3,0,0,0
+Hermes default memory,environment_fact_not_global_truth,premise-awareness,5,4,20,0,4,0,0,0,0,0
+Hermes default memory,practice_memory_wording,launch,2,7,20,0,4,0,3,0,0,0
+Hermes default memory,eval_score_humility,evaluation,4,7,20,0,4,0,3,0,0,0
+Hermes default memory,external_benchmark_direction,evaluation,3,7,20,0,4,0,3,0,0,0
+Hermes default memory,implicit_user_correction,correction,5,7,20,0,4,0,3,0,0,0
+Hermes default memory,unresolved_conflict_without_marker,abstention,5,4,20,0,4,0,0,0,0,0
+Hermes default memory,current_status_requires_live_check,premise-awareness,5,4,20,0,4,0,0,0,0,0
+Hermes + OpenViking-style retrieval,rename_supersedes_old_name,supersession,2,20,20,7,4,3,3,2,1,145
+Hermes + OpenViking-style retrieval,general_hosting_supersession,supersession,4,16,20,7,0,3,3,2,1,187
+Hermes + OpenViking-style retrieval,style_rule_exception,correction,3,16,20,7,0,3,3,2,1,205
+Hermes + OpenViking-style retrieval,active_goal_boundary,intent-boundary,3,14,20,2,4,2,3,2,1,147
+Hermes + OpenViking-style retrieval,old_plan_not_active_goal,intent-boundary,5,15,20,2,4,3,3,2,1,145
+Hermes + OpenViking-style retrieval,completed_suppresses_todo,outcomes,4,20,20,7,4,3,3,2,1,195
+Hermes + OpenViking-style retrieval,blocked_provider_not_failure_claim,claim-safety,4,18,20,5,4,3,3,2,1,115
+Hermes + OpenViking-style retrieval,deterministic_baseline_boundary,claim-safety,4,20,20,7,4,3,3,2,1,252
+Hermes + OpenViking-style retrieval,sandbox_dependency_recovery,execution-gotcha,3,10,20,0,4,0,3,2,1,110
+Hermes + OpenViking-style retrieval,hindsight_home_isolation,execution-gotcha,4,20,20,7,4,3,3,2,1,253
+Hermes + OpenViking-style retrieval,secret_redaction,safety,4,20,20,7,4,3,3,2,1,79
+Hermes + OpenViking-style retrieval,chain_of_thought_boundary,safety,3,20,20,7,4,3,3,2,1,224
+Hermes + OpenViking-style retrieval,project_namespace_collision,namespace,5,16,20,7,0,3,3,2,1,209
+Hermes + OpenViking-style retrieval,missing_evidence_abstention,abstention,5,18,20,7,4,3,1,2,1,125
+Hermes + OpenViking-style retrieval,unresolved_conflict_abstention,abstention,5,20,20,7,4,3,3,2,1,274
+Hermes + OpenViking-style retrieval,source_linked_claim_boundary,evidence,3,16,20,4,4,2,3,2,1,211
+Hermes + OpenViking-style retrieval,raw_transcript_not_lesson,judgment,4,16,20,7,0,3,3,2,1,239
+Hermes + OpenViking-style retrieval,metric_threshold_current,evaluation,4,16,20,7,0,3,3,2,1,220
+Hermes + OpenViking-style retrieval,public_posture_personal_vs_org,launch,2,20,20,7,4,3,3,2,1,121
+Hermes + OpenViking-style retrieval,avoid_pypi_claim_before_release,claim-safety,3,20,20,7,4,3,3,2,1,148
+Hermes + OpenViking-style retrieval,visual_artifact_not_required_backend,scope,3,20,20,7,4,3,3,2,1,204
+Hermes + OpenViking-style retrieval,environment_fact_not_global_truth,premise-awareness,5,20,20,7,4,3,3,2,1,240
+Hermes + OpenViking-style retrieval,practice_memory_wording,launch,2,20,20,7,4,3,3,2,1,183
+Hermes + OpenViking-style retrieval,eval_score_humility,evaluation,4,20,20,7,4,3,3,2,1,173
+Hermes + OpenViking-style retrieval,external_benchmark_direction,evaluation,3,20,20,7,4,3,3,2,1,197
+Hermes + OpenViking-style retrieval,implicit_user_correction,correction,5,16,20,7,0,3,3,2,1,190
+Hermes + OpenViking-style retrieval,unresolved_conflict_without_marker,abstention,5,14,20,7,4,0,0,2,1,157
+Hermes + OpenViking-style retrieval,current_status_requires_live_check,premise-awareness,5,20,20,7,4,3,3,2,1,187
+Hermes + Hindsight-style synthesis,rename_supersedes_old_name,supersession,2,20,20,7,4,3,3,2,1,210
+Hermes + Hindsight-style synthesis,general_hosting_supersession,supersession,4,20,20,7,4,3,3,2,1,226
+Hermes + Hindsight-style synthesis,style_rule_exception,correction,3,20,20,7,4,3,3,2,1,287
+Hermes + Hindsight-style synthesis,active_goal_boundary,intent-boundary,3,20,20,7,4,3,3,2,1,591
+Hermes + Hindsight-style synthesis,old_plan_not_active_goal,intent-boundary,5,20,20,7,4,3,3,2,1,441
+Hermes + Hindsight-style synthesis,completed_suppresses_todo,outcomes,4,20,20,7,4,3,3,2,1,326
+Hermes + Hindsight-style synthesis,blocked_provider_not_failure_claim,claim-safety,4,18,20,5,4,3,3,2,1,394
+Hermes + Hindsight-style synthesis,deterministic_baseline_boundary,claim-safety,4,20,20,7,4,3,3,2,1,382
+Hermes + Hindsight-style synthesis,sandbox_dependency_recovery,execution-gotcha,3,20,20,7,4,3,3,2,1,381
+Hermes + Hindsight-style synthesis,hindsight_home_isolation,execution-gotcha,4,20,20,7,4,3,3,2,1,401
+Hermes + Hindsight-style synthesis,secret_redaction,safety,4,16,20,7,0,3,3,2,1,270
+Hermes + Hindsight-style synthesis,chain_of_thought_boundary,safety,3,20,20,7,4,3,3,2,1,370
+Hermes + Hindsight-style synthesis,project_namespace_collision,namespace,5,16,20,7,0,3,3,2,1,339
+Hermes + Hindsight-style synthesis,missing_evidence_abstention,abstention,5,16,20,7,4,3,1,0,1,119
+Hermes + Hindsight-style synthesis,unresolved_conflict_abstention,abstention,5,20,20,7,4,3,3,2,1,381
+Hermes + Hindsight-style synthesis,source_linked_claim_boundary,evidence,3,17,20,4,4,3,3,2,1,295
+Hermes + Hindsight-style synthesis,raw_transcript_not_lesson,judgment,4,20,20,7,4,3,3,2,1,307
+Hermes + Hindsight-style synthesis,metric_threshold_current,evaluation,4,20,20,7,4,3,3,2,1,253
+Hermes + Hindsight-style synthesis,public_posture_personal_vs_org,launch,2,20,20,7,4,3,3,2,1,248
+Hermes + Hindsight-style synthesis,avoid_pypi_claim_before_release,claim-safety,3,20,20,7,4,3,3,2,1,266
+Hermes + Hindsight-style synthesis,visual_artifact_not_required_backend,scope,3,20,20,7,4,3,3,2,1,321
+Hermes + Hindsight-style synthesis,environment_fact_not_global_truth,premise-awareness,5,20,20,7,4,3,3,2,1,372
+Hermes + Hindsight-style synthesis,practice_memory_wording,launch,2,20,20,7,4,3,3,2,1,313
+Hermes + Hindsight-style synthesis,eval_score_humility,evaluation,4,20,20,7,4,3,3,2,1,321
+Hermes + Hindsight-style synthesis,external_benchmark_direction,evaluation,3,20,20,7,4,3,3,2,1,350
+Hermes + Hindsight-style synthesis,implicit_user_correction,correction,5,16,20,7,0,3,3,2,1,333
+Hermes + Hindsight-style synthesis,unresolved_conflict_without_marker,abstention,5,17,20,7,4,3,0,2,1,286
+Hermes + Hindsight-style synthesis,current_status_requires_live_check,premise-awareness,5,20,20,7,4,3,3,2,1,295
+Hermes + Ingrain,rename_supersedes_old_name,supersession,2,20,20,7,4,3,3,2,1,278
+Hermes + Ingrain,general_hosting_supersession,supersession,4,20,20,7,4,3,3,2,1,301
+Hermes + Ingrain,style_rule_exception,correction,3,20,20,7,4,3,3,2,1,327
+Hermes + Ingrain,active_goal_boundary,intent-boundary,3,20,20,7,4,3,3,2,1,748
+Hermes + Ingrain,old_plan_not_active_goal,intent-boundary,5,20,20,7,4,3,3,2,1,527
+Hermes + Ingrain,completed_suppresses_todo,outcomes,4,20,20,7,4,3,3,2,1,434
+Hermes + Ingrain,blocked_provider_not_failure_claim,claim-safety,4,18,20,5,4,3,3,2,1,303
+Hermes + Ingrain,deterministic_baseline_boundary,claim-safety,4,20,20,7,4,3,3,2,1,499
+Hermes + Ingrain,sandbox_dependency_recovery,execution-gotcha,3,20,20,7,4,3,3,2,1,476
+Hermes + Ingrain,hindsight_home_isolation,execution-gotcha,4,20,20,7,4,3,3,2,1,482
+Hermes + Ingrain,secret_redaction,safety,4,20,20,7,4,3,3,2,1,267
+Hermes + Ingrain,chain_of_thought_boundary,safety,3,20,20,7,4,3,3,2,1,471
+Hermes + Ingrain,project_namespace_collision,namespace,5,16,20,7,0,3,3,2,1,468
+Hermes + Ingrain,missing_evidence_abstention,abstention,5,17,20,7,4,3,3,0,0,0
+Hermes + Ingrain,unresolved_conflict_abstention,abstention,5,20,20,7,4,3,3,2,1,299
+Hermes + Ingrain,source_linked_claim_boundary,evidence,3,20,20,7,4,3,3,2,1,584
+Hermes + Ingrain,raw_transcript_not_lesson,judgment,4,20,20,7,4,3,3,2,1,326
+Hermes + Ingrain,metric_threshold_current,evaluation,4,20,20,7,4,3,3,2,1,329
+Hermes + Ingrain,public_posture_personal_vs_org,launch,2,20,20,7,4,3,3,2,1,317
+Hermes + Ingrain,avoid_pypi_claim_before_release,claim-safety,3,20,20,7,4,3,3,2,1,336
+Hermes + Ingrain,visual_artifact_not_required_backend,scope,3,20,20,7,4,3,3,2,1,439
+Hermes + Ingrain,environment_fact_not_global_truth,premise-awareness,5,20,20,7,4,3,3,2,1,487
+Hermes + Ingrain,practice_memory_wording,launch,2,20,20,7,4,3,3,2,1,371
+Hermes + Ingrain,eval_score_humility,evaluation,4,20,20,7,4,3,3,2,1,361
+Hermes + Ingrain,external_benchmark_direction,evaluation,3,20,20,7,4,3,3,2,1,393
+Hermes + Ingrain,implicit_user_correction,correction,5,20,20,7,4,3,3,2,1,278
+Hermes + Ingrain,unresolved_conflict_without_marker,abstention,5,14,20,7,4,0,0,2,1,392
+Hermes + Ingrain,current_status_requires_live_check,premise-awareness,5,20,20,7,4,3,3,2,1,428
