@@ -63,7 +63,7 @@ ingrain compare
 | Same input per provider | Each provider receives the same events and query. |
 | Raw outputs saved | Every provider output is written under `docs/evidence/live-les-provider-matrix/raw/`. |
 | Command logs saved | Each subprocess command, return code, stderr, and Hermes home is written under `docs/evidence/live-les-provider-matrix/commands/`. |
-| No modeled provider rows | Hindsight and OpenViking are scored only if real local services/packages are available. |
+| No simulated provider rows | Hindsight and OpenViking are scored only if real local services/packages are available. |
 
 Run:
 
@@ -78,9 +78,9 @@ Current committed live result:
 | Hermes default memory | 88/100 | Fails the 90 threshold because raw memory carries stale launch/product claims alongside the correction. |
 | Hermes + Ingrain | 100/100 | Passes by promoting the current lesson and suppressing stale claims in hydration. |
 | Hindsight | blocked | Hermes provider found no Hindsight package, service URL, or API key in this environment. |
-| OpenViking | blocked | No healthy OpenViking server was reachable at `http://127.0.0.1:1933`. |
+| OpenViking | blocked | No healthy OpenViking server was reachable at `http://127.0.0.1:1933`; see [OpenViking startup recheck](evidence/openviking-startup-recheck.md). |
 
-This proves a narrow claim: Ingrain's Hermes provider can improve learned-experience carry-forward on these local universes. It does not prove that Ingrain is a better general-purpose memory system than Hindsight, OpenViking, or any other provider.
+On these preregistered local universes, this run supports a narrow claim: Ingrain's Hermes provider can improve learned-experience carry-forward over Hermes default memory. It does not show that Ingrain is a better general-purpose memory system than Hindsight, OpenViking, or any other provider.
 
 Run an optional live OpenViking resource-retrieval benchmark:
 

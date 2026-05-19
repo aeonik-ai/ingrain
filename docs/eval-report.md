@@ -47,8 +47,8 @@ The live harness sends five preregistered universes through actual Hermes provid
 
 Why Hermes default lost points: default memory returned both the stale statement and the later correction in several universes. Ingrain compiled the later correction into current learned experience and suppressed the stale claim in hydration.
 
-Why Hindsight/OpenViking are blocked here: Hindsight packages/API keys were not available in the Hermes runtime, and no healthy OpenViking server was reachable at `http://127.0.0.1:1933`. The harness does not simulate those providers.
+Why Hindsight/OpenViking are blocked here: Hindsight packages/API keys were not available in the Hermes runtime, and no healthy OpenViking server was reachable at `http://127.0.0.1:1933`. A follow-up OpenViking recheck tried the existing OpenViking 0.3.17 install and a clean Python 3.11 OpenViking 0.3.17 install; the local GGUF embedder did not produce a healthy server in this environment. See [OpenViking startup recheck](evidence/openviking-startup-recheck.md). The harness does not simulate those providers.
 
 ## Claim Boundary
 
-This proves a narrow launch claim: Ingrain can improve learned-experience carry-forward for runner agents on these local universes. It does not prove Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or any other Hermes provider.
+On these preregistered local universes, this run supports a narrow launch claim: Ingrain can improve learned-experience carry-forward over Hermes default memory. It does not show Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or any other Hermes provider.

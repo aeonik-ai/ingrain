@@ -44,7 +44,7 @@ Reason: `OPENVIKING_ENDPOINT` was not configured in the current environment.
 
 ## Live OpenViking Smoke Test
 
-OpenViking was then installed into an isolated temp virtualenv and run locally:
+OpenViking was then installed into an isolated temp virtualenv and run locally during the first integration pass:
 
 ```text
 OpenViking HTTP Server is running on 127.0.0.1:1933
@@ -67,3 +67,17 @@ Limit: OpenViking long-term memory extraction requires model credentials. In the
 - `ingrain compare --live-openviking`: real OpenViking resource upload/index/search/read path.
 
 This report should not be read as a general OpenViking benchmark. It checks whether the Ingrain launch scenarios are more naturally handled as learned experience than as raw resource retrieval.
+
+## Current OpenViking Recheck
+
+The later live provider matrix did not score OpenViking because no healthy OpenViking server was reachable at `http://127.0.0.1:1933`.
+
+This was rechecked on 2026-05-19 before launch cleanup:
+
+| Attempt | Result |
+|---|---|
+| Existing `/private/tmp/openviking-venv` with OpenViking 0.3.17 | `openviking health` failed because no server was reachable. Direct `llama_cpp.Llama(...)` initialization against the cached GGUF embedder raised `ValueError: Failed to create llama_context`. |
+| Clean Python 3.11 venv at `/private/tmp/openviking-uv311` with `openviking[local-embed]==0.3.17` | Installation completed, but direct GGUF initialization still raised `ValueError: Failed to create llama_context`. |
+| Fresh OpenViking home at `/private/tmp/openviking-fresh-home` | Server startup reached the StreamableHTTP session-manager log line, but `/health` remained unreachable and the process had to be stopped. |
+
+Current interpretation: OpenViking remains a real integration target, but it is not part of the committed live LES provider score until a healthy server is available. The repo should keep saying `blocked`, not `0`, for OpenViking in the provider matrix.

@@ -128,3 +128,15 @@ Next:
   - OpenViking: blocked, no healthy server at `http://127.0.0.1:1933`
 - Saved raw outputs and command logs under `docs/evidence/live-les-provider-matrix/`.
 - Tightened loose `plan` and `project` promotion regexes after raw output showed harmless but noisy over-promotion in the goals/missions boundary universe.
+
+## 2026-05-19 04:40 PDT
+
+- Rechecked OpenViking before launch cleanup:
+  - stopped the stale OpenViking server attempt after it failed to answer `/health`
+  - verified the existing OpenViking 0.3.17 temp install could not reach a healthy server
+  - installed OpenViking 0.3.17 with local embeddings into a clean Python 3.11 venv at `/private/tmp/openviking-uv311`
+  - confirmed both the existing and clean installs failed local GGUF initialization with `ValueError: Failed to create llama_context`
+  - confirmed a fresh OpenViking home reached server startup logs but still did not expose a healthy `/health`
+- Added `docs/evidence/openviking-startup-recheck.md`.
+- Clarified public docs so the historical OpenViking smoke result is not confused with the current live provider matrix.
+- Softened evidence wording from "proves" to "supports" for public-facing scientific caution.
