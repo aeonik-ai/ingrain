@@ -89,6 +89,33 @@ class PracticeSkillTests(unittest.TestCase):
             self.assertTrue((root / "PRACTICE.md").exists())
             self.assertTrue((root / "skill" / "SKILL.md").exists())
 
+    def test_cli_record_preserves_raw_event_shape(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            home = root / ".ingrain"
+            with redirect_stdout(StringIO()):
+                code = main([
+                    "--home",
+                    str(home),
+                    "record",
+                    "--source",
+                    "hermes_live",
+                    "--runner",
+                    "hermes",
+                    "--event-type",
+                    "interaction",
+                    "--actor",
+                    "user",
+                    "--session-id",
+                    "session-1",
+                    "Remember: Do not call Ingrain a generic memory backend.",
+                ])
+            self.assertEqual(code, 0)
+            store = IngrainStore(home)
+            events = store.list_events()
+            self.assertEqual(events[0]["source"], "hermes_live")
+            self.assertEqual(events[0]["session_id"], "session-1")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,16 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not let Ingrain create, move, close, schedule, or revive tasks by itself. [source: evt_ffd359942f3ead61f61d556b]
+
+Current decisions:
+- Hermes owns active goals, missions, Kanban columns, scheduling, task lifecycle, and what the agent should do next. [source: evt_b9cf674717fb643427346834]
+- Ingrain owns learned experience only: corrections, decisions, lessons, stale-plan warnings, completed outcomes, prior failures, and project rules learned from execution. [source: evt_a702ee2d049e2bba1f8aab7f]
+
+Sources:
+- evt_a702ee2d049e2bba1f8aab7f
+- evt_b9cf674717fb643427346834
+- evt_ffd359942f3ead61f61d556b
+
+</aeonik_ingrain_context>

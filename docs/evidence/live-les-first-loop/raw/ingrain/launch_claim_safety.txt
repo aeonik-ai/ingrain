@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not claim Ingrain is better than Hindsight or OpenViking. Say it is a narrow learned-experience layer that pairs with resource memory. [source: evt_6d286f9af085a59e45d53bed]
+
+Sources:
+- evt_6d286f9af085a59e45d53bed
+
+</aeonik_ingrain_context>

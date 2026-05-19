@@ -109,3 +109,22 @@ Next:
   - `ingrain attach` initializes, compiles practice artifacts, and installs a skill in one command.
 - Added tiered hydration with `--level brief|cards|evidence`.
 - Updated LES eval output with practice-layer checks for `PRACTICE.md`, cards, brief hydration, and evidence hydration.
+
+## 2026-05-19 04:10 PDT
+
+- Removed the modeled Hindsight-style universe comparison before committing it as evidence.
+- Added `ingrain live-eval`, a live-only LES provider matrix:
+  - calls Hermes default memory through the installed Hermes `tools.memory_tool` API
+  - calls Ingrain through Hermes' installed memory-provider plugin loader
+  - probes Hindsight through Hermes and marks it blocked when no package/service/API key is available
+  - checks OpenViking health and marks it blocked when no real server is reachable
+- Ran the first live loop on the installed Hermes runtime:
+  - Hermes default memory: `88/100`
+  - Hermes + Ingrain: `100/100`
+- Ran the expanded provider matrix on the same preregistered universes:
+  - Hermes default memory: `88/100`
+  - Hermes + Ingrain: `100/100`
+  - Hindsight: blocked, no Hindsight package/service/API key detected
+  - OpenViking: blocked, no healthy server at `http://127.0.0.1:1933`
+- Saved raw outputs and command logs under `docs/evidence/live-les-provider-matrix/`.
+- Tightened loose `plan` and `project` promotion regexes after raw output showed harmless but noisy over-promotion in the goals/missions boundary universe.

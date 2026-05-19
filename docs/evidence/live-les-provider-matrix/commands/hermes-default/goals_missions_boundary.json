@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
+    "-c",
+    "<script>",
+    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hermes-default-4szge9ov/goals_missions_boundary.json"
+  ],
+  "cwd": "/Users/benlloyd/.hermes/hermes-agent",
+  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hermes-default-4szge9ov/hermes/goals_missions_boundary",
+  "returncode": 0,
+  "stderr": "",
+  "stdout_chars": 544
+}

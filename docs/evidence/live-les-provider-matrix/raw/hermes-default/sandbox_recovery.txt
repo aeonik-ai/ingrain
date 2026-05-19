@@ -1,0 +1,6 @@
+══════════════════════════════════════════════
+MEMORY (your personal notes) [1% — 194/12,000 chars]
+══════════════════════════════════════════════
+Failed: dependency install failed because network access was restricted in the sandbox.
+§
+From now on: request sandbox escalation before dependency installs or network-backed package resolution.

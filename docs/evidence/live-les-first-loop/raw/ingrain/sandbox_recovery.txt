@@ -1,0 +1,14 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- request sandbox escalation before dependency installs or network-backed package resolution. [source: evt_19a49ca5dc60123125cf2812]
+
+Lessons:
+- dependency install failed because network access was restricted in the sandbox. [source: evt_4506a340ea4ae6cb85b92a45]
+
+Sources:
+- evt_19a49ca5dc60123125cf2812
+- evt_4506a340ea4ae6cb85b92a45
+
+</aeonik_ingrain_context>

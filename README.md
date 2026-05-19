@@ -221,7 +221,15 @@ The v0 eval requires no API key and no LLM.
 
 The default `100/100` is expected for the committed v0 fixture suite. It means the current compiler and hydration rules pass the launch scenarios in this repo: project recall, correction carry-forward, stale-plan avoidance, track-record recall, and compactness. It is a regression gate for the repo's launch behaviors, not an external benchmark or a claim that Ingrain has solved all agent memory problems.
 
-The same command also prints a deterministic fixture comparison: Hermes default memory, Hermes + OpenViking-style retrieval, and Hermes + Ingrain. The OpenViking row is a local retrieval baseline, not a live server benchmark or a full evaluation of OpenViking.
+The same command also prints a deterministic fixture comparison. Treat that comparison as a local regression check, not proof against live providers.
+
+For proof against the installed Hermes provider API, run the live LES provider eval:
+
+```bash
+ingrain live-eval
+```
+
+The current live run is committed under `docs/evidence/live-les-provider-matrix/`. It sends the same preregistered universes through Hermes default memory and the Ingrain Hermes provider. Hindsight and OpenViking are only scored when a real Hindsight service/package or OpenViking server is available; otherwise the report marks them blocked with the exact reason.
 
 For a live OpenViking resource-retrieval check, run a local OpenViking server and then:
 
@@ -310,6 +318,7 @@ ingrain init
 ingrain remember --type correction "Never use yellow CTAs in enterprise demos."
 ingrain demo banana
 ingrain compare
+ingrain live-eval
 ingrain compare --live-openviking --openviking-endpoint http://127.0.0.1:1933
 ingrain ingest hermes
 ingrain compile

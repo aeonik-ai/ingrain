@@ -1,0 +1,297 @@
+{
+  "artifact_dir": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop",
+  "claim": "Does the provider return current learned experience from preregistered universes?",
+  "created_at": "2026-05-19T09:44:48+00:00",
+  "environment": {
+    "hermes_available": true,
+    "hermes_python": "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
+    "hermes_root": "/Users/benlloyd/.hermes/hermes-agent",
+    "hindsight_env_present": false,
+    "openviking_endpoint": "http://127.0.0.1:1933"
+  },
+  "max_total": 100,
+  "name": "Live LES-100 Provider Eval",
+  "providers": {
+    "hermes-default": {
+      "failures": [],
+      "max": 100,
+      "passed_threshold": false,
+      "score": 88,
+      "status": "fail",
+      "universes": [
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "learned experience layer",
+            "autonomous agents"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [
+            "is a generic memory backend"
+          ],
+          "forbidden_score": 0,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 342,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/hermes-default/launch_framing_correction.txt",
+          "score": 16,
+          "universe": "launch_framing_correction"
+        },
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "Product name is Aeonik Ingrain",
+            "not MindCompiler"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [
+            "Product name is MindCompiler."
+          ],
+          "forbidden_score": 0,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 248,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/hermes-default/product_rename_supersession.txt",
+          "score": 16,
+          "universe": "product_rename_supersession"
+        },
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "Hermes owns active goals",
+            "Ingrain owns learned experience",
+            "Do not let Ingrain create"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [],
+          "forbidden_score": 4,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 544,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/hermes-default/goals_missions_boundary.txt",
+          "score": 20,
+          "universe": "goals_missions_boundary"
+        },
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "request sandbox escalation",
+            "dependency installs",
+            "network-backed package resolution"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [],
+          "forbidden_score": 4,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 341,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/hermes-default/sandbox_recovery.txt",
+          "score": 20,
+          "universe": "sandbox_recovery"
+        },
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "Do not claim Ingrain is better",
+            "narrow learned-experience layer",
+            "resource memory"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [
+            "Ingrain beats Hindsight"
+          ],
+          "forbidden_score": 0,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 359,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/hermes-default/launch_claim_safety.txt",
+          "score": 16,
+          "universe": "launch_claim_safety"
+        }
+      ]
+    },
+    "ingrain": {
+      "failures": [],
+      "max": 100,
+      "passed_threshold": true,
+      "score": 100,
+      "status": "pass",
+      "universes": [
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "learned experience layer",
+            "autonomous agents"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [],
+          "forbidden_score": 4,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 326,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/ingrain/launch_framing_correction.txt",
+          "score": 20,
+          "universe": "launch_framing_correction"
+        },
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "Product name is Aeonik Ingrain",
+            "not MindCompiler"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [],
+          "forbidden_score": 4,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 278,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/ingrain/product_rename_supersession.txt",
+          "score": 20,
+          "universe": "product_rename_supersession"
+        },
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "Hermes owns active goals",
+            "Ingrain owns learned experience",
+            "Do not let Ingrain create"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [],
+          "forbidden_score": 4,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 748,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/ingrain/goals_missions_boundary.txt",
+          "score": 20,
+          "universe": "goals_missions_boundary"
+        },
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "request sandbox escalation",
+            "dependency installs",
+            "network-backed package resolution"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [],
+          "forbidden_score": 4,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 476,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/ingrain/sandbox_recovery.txt",
+          "score": 20,
+          "universe": "sandbox_recovery"
+        },
+        {
+          "compact_score": 2,
+          "expected_hits": [
+            "Do not claim Ingrain is better",
+            "narrow learned-experience layer",
+            "resource memory"
+          ],
+          "expected_score": 14,
+          "forbidden_hits": [],
+          "forbidden_score": 4,
+          "max": 20,
+          "missing_expected": [],
+          "output_chars": 360,
+          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop/raw/ingrain/launch_claim_safety.txt",
+          "score": 20,
+          "universe": "launch_claim_safety"
+        }
+      ]
+    }
+  },
+  "score_threshold": 90,
+  "universes": [
+    {
+      "difficulty": 1,
+      "events": [
+        "Assistant draft: Aeonik Ingrain is a generic memory backend for Hermes.",
+        "No, that's wrong. Do not call Ingrain a generic memory backend. Call it a learned experience layer for autonomous agents."
+      ],
+      "expected": [
+        "learned experience layer",
+        "autonomous agents"
+      ],
+      "forbidden": [
+        "is a generic memory backend"
+      ],
+      "name": "launch_framing_correction",
+      "query": "write README tagline and public launch framing",
+      "rationale": "A user correction should become future launch-writing practice, not raw stale copy."
+    },
+    {
+      "difficulty": 2,
+      "events": [
+        "Decision: Product name is MindCompiler.",
+        "Decision: Product name is Aeonik Ingrain, not MindCompiler."
+      ],
+      "expected": [
+        "Product name is Aeonik Ingrain",
+        "not MindCompiler"
+      ],
+      "forbidden": [
+        "Product name is MindCompiler."
+      ],
+      "name": "product_rename_supersession",
+      "query": "what product name should be used in launch docs?",
+      "rationale": "The current decision must win over an older product-name decision."
+    },
+    {
+      "difficulty": 3,
+      "events": [
+        "Decision: Hermes owns active goals, missions, Kanban columns, scheduling, task lifecycle, and what the agent should do next.",
+        "Decision: Ingrain owns learned experience only: corrections, decisions, lessons, stale-plan warnings, completed outcomes, prior failures, and project rules learned from execution.",
+        "Correction: Do not let Ingrain create, move, close, schedule, or revive tasks by itself."
+      ],
+      "expected": [
+        "Hermes owns active goals",
+        "Ingrain owns learned experience",
+        "Do not let Ingrain create"
+      ],
+      "forbidden": [
+        "Ingrain owns active goals",
+        "Ingrain should schedule tasks"
+      ],
+      "name": "goals_missions_boundary",
+      "query": "continue the active launch mission and recall memory boundaries",
+      "rationale": "Memory must improve judgment without becoming a second task system."
+    },
+    {
+      "difficulty": 4,
+      "events": [
+        "Failed: dependency install failed because network access was restricted in the sandbox.",
+        "From now on: request sandbox escalation before dependency installs or network-backed package resolution."
+      ],
+      "expected": [
+        "request sandbox escalation",
+        "dependency installs",
+        "network-backed package resolution"
+      ],
+      "forbidden": [],
+      "name": "sandbox_recovery",
+      "query": "install dependencies and run verification",
+      "rationale": "A prior execution failure should alter the next attempt."
+    },
+    {
+      "difficulty": 5,
+      "events": [
+        "Assistant draft said Ingrain beats Hindsight and OpenViking.",
+        "Correction: Do not claim Ingrain is better than Hindsight or OpenViking. Say it is a narrow learned-experience layer that pairs with resource memory."
+      ],
+      "expected": [
+        "Do not claim Ingrain is better",
+        "narrow learned-experience layer",
+        "resource memory"
+      ],
+      "forbidden": [
+        "Ingrain beats Hindsight"
+      ],
+      "name": "launch_claim_safety",
+      "query": "write launch claims comparing Ingrain, Hindsight, and OpenViking",
+      "rationale": "Launch memory should prevent overclaiming against adjacent systems."
+    }
+  ]
+}

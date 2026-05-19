@@ -12,7 +12,7 @@ from pathlib import Path
 from aeonik_ingrain import PRODUCT_NAME, TAGLINE, __version__
 from aeonik_ingrain.compiler.hydrate import hydrate
 from aeonik_ingrain.compiler.pages import compile_store
-from aeonik_ingrain.db import IngrainStore
+from aeonik_ingrain.db import IngrainStore, MIND_EVENT_TYPES
 from aeonik_ingrain.demo import DEMO_EVENTS, run_demo
 from aeonik_ingrain.evals.comparison import format_comparison, run_comparison
 from aeonik_ingrain.evals.live_openviking import (
@@ -20,6 +20,7 @@ from aeonik_ingrain.evals.live_openviking import (
     format_live_openviking_comparison,
     run_live_openviking_comparison,
 )
+from aeonik_ingrain.evals.live_les import format_live_les, format_live_les_markdown, run_live_les
 from aeonik_ingrain.evals.runner import format_eval, run_eval
 from aeonik_ingrain.ingest.hermes import hermes_home, ingest_hermes
 from aeonik_ingrain.practice import write_practice_artifacts
@@ -39,6 +40,17 @@ def build_parser() -> argparse.ArgumentParser:
     remember = sub.add_parser("remember", help="Record a correction, decision, lesson, project fact, or outcome.")
     remember.add_argument("text", nargs="+", help="Text to remember.")
     remember.add_argument("--type", default="lesson", choices=["correction", "decision", "lesson", "project_fact", "track_record", "risk", "status"])
+
+    record = sub.add_parser("record", help=argparse.SUPPRESS)
+    record.add_argument("text", nargs="+", help="Raw event text.")
+    record.add_argument("--source", default="manual")
+    record.add_argument("--runner", default="generic")
+    record.add_argument("--event-type", default="observation", choices=sorted(MIND_EVENT_TYPES))
+    record.add_argument("--actor", default="user")
+    record.add_argument("--session-id")
+    record.add_argument("--project-id")
+    record.add_argument("--thread-id")
+    record.add_argument("--meta-json", default="{}")
 
     ingest = sub.add_parser("ingest", help="Ingest runner history.")
     ingest_sub = ingest.add_subparsers(dest="ingest_target")
@@ -83,6 +95,16 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("--openviking-user", default=os.environ.get("OPENVIKING_USER", "default"))
     compare.add_argument("--openviking-agent", default=os.environ.get("OPENVIKING_AGENT", "hermes"))
     compare.add_argument("--openviking-timeout", type=int, default=90)
+
+    live_eval = sub.add_parser("live-eval", help="Run live LES-100 provider eval against installed Hermes provider APIs.")
+    live_eval.add_argument("--json", action="store_true", help="Print JSON instead of text.")
+    live_eval.add_argument("--output-dir", default="docs/evidence/live-les-first-loop", help="Directory for raw outputs, command logs, JSON, CSV, and report.")
+    live_eval.add_argument("--report", default="docs/live-eval-report.md", help="Markdown report path to update.")
+    live_eval.add_argument("--provider", action="append", help="Provider to run. Repeat or comma-separate. Defaults to hermes-default, ingrain, hindsight, openviking.")
+    live_eval.add_argument("--hermes-root", help="Hermes source/runtime root. Defaults to ~/.hermes/hermes-agent.")
+    live_eval.add_argument("--hermes-python", help="Hermes venv Python. Defaults to <hermes-root>/venv/bin/python.")
+    live_eval.add_argument("--openviking-endpoint", default=os.environ.get("OPENVIKING_ENDPOINT"))
+    live_eval.add_argument("--timeout", type=int, default=90)
 
     demo = sub.add_parser("demo", help="Run a deterministic launch demo.")
     demo.add_argument("name", nargs="?", default="correction", choices=sorted(DEMO_EVENTS))
@@ -131,6 +153,27 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Recorded {args.type}: {ref.id}")
         if has_likely_secret(text):
             print("Warning: input looked like it may contain a secret; stored text was redacted.")
+        return 0
+
+    if args.command == "record":
+        store.initialize()
+        try:
+            meta = json.loads(args.meta_json or "{}")
+        except json.JSONDecodeError as exc:
+            print(f"Invalid --meta-json: {exc}", file=sys.stderr)
+            return 2
+        ref = store.add_event(
+            source=args.source,
+            runner=args.runner,
+            event_type=args.event_type,
+            actor=args.actor,
+            text=" ".join(args.text),
+            session_id=args.session_id,
+            project_id=args.project_id,
+            thread_id=args.thread_id,
+            meta=meta,
+        )
+        print(f"Recorded event: {ref.id}")
         return 0
 
     if args.command == "ingest":
@@ -210,6 +253,28 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(result, indent=2, sort_keys=True))
         else:
             print(formatter(result))
+        return 0
+
+    if args.command == "live-eval":
+        result = run_live_les(
+            output_dir=args.output_dir,
+            providers=args.provider,
+            hermes_root=args.hermes_root,
+            hermes_python=args.hermes_python,
+            openviking_endpoint=args.openviking_endpoint,
+            timeout=args.timeout,
+        )
+        report_text = format_live_les_markdown(result)
+        if args.report:
+            report_path = Path(args.report).expanduser()
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            report_path.write_text(report_text, encoding="utf-8")
+        if args.json:
+            print(json.dumps(result, indent=2, sort_keys=True))
+        else:
+            print(format_live_les(result))
+            if args.report:
+                print(f"\nWrote {args.report}")
         return 0
 
     if args.command == "demo":

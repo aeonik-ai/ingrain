@@ -1,0 +1,11 @@
+provider,status,score,max,universe,blocked_reason
+hermes-default,fail,16,20,launch_framing_correction,
+hermes-default,fail,16,20,product_rename_supersession,
+hermes-default,fail,20,20,goals_missions_boundary,
+hermes-default,fail,20,20,sandbox_recovery,
+hermes-default,fail,16,20,launch_claim_safety,
+ingrain,pass,20,20,launch_framing_correction,
+ingrain,pass,20,20,product_rename_supersession,
+ingrain,pass,20,20,goals_missions_boundary,
+ingrain,pass,20,20,sandbox_recovery,
+ingrain,pass,20,20,launch_claim_safety,

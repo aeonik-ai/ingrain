@@ -33,6 +33,24 @@ class CompileHydrateTests(unittest.TestCase):
             self.assertIn("Product name is Aeonik Ingrain", context)
             self.assertNotIn("The product name is MindCompiler", context)
 
+    def test_stale_plan_phrase_does_not_create_extra_plan_promotion(self):
+        with TemporaryDirectory() as tmp:
+            store = IngrainStore(Path(tmp) / ".ingrain")
+            store.add_event(
+                source="test",
+                runner="hermes",
+                event_type="interaction",
+                text=(
+                    "Decision: Ingrain owns learned experience only: corrections, decisions, "
+                    "lessons, stale-plan warnings, completed outcomes, prior failures, and "
+                    "project rules learned from execution."
+                ),
+            )
+            compile_store(store)
+            promotions = store.list_promotions()
+            self.assertEqual(len(promotions), 1)
+            self.assertIn("stale-plan warnings", promotions[0]["text"])
+
 
 if __name__ == "__main__":
     unittest.main()

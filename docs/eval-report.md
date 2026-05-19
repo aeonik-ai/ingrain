@@ -1,10 +1,13 @@
 # Aeonik Ingrain Eval Report
 
-Generated from deterministic local fixtures. No LLM, network, or hosted service required.
+Generated on 2026-05-19 from local fixtures and the installed Hermes runtime on this machine.
+
+## Deterministic LES-100
+
+No LLM, network, or hosted service required.
 
 ```text
-Aeonik Ingrain LES-100 Eval
-Learned Experience Score
+Aeonik Ingrain LES-100 Eval (Learned Experience Score)
 
 Cold-start project recall       20/20
 Correction carry-forward        20/20
@@ -19,57 +22,33 @@ PRACTICE.md generated                        pass
 Practice cards generated                     pass
 Brief hydration generated                    pass
 Evidence hydration includes confidence       pass
-
-Learned Experience Comparison
-
-Hermes default memory                   36/120
-Hermes + OpenViking-style retrieval     108/120
-Hermes + Ingrain                        120/120
-
-Scenario breakdown:
-- correction_after_failure: Hermes default memory=6/20; Hermes + OpenViking-style retrieval=16/20; Hermes + Ingrain=20/20
-- stale_product_name: Hermes default memory=6/20; Hermes + OpenViking-style retrieval=16/20; Hermes + Ingrain=20/20
-- approval_judgment: Hermes default memory=6/20; Hermes + OpenViking-style retrieval=16/20; Hermes + Ingrain=20/20
-- kanban_boundary: Hermes default memory=6/20; Hermes + OpenViking-style retrieval=20/20; Hermes + Ingrain=20/20
-- sandbox_recovery: Hermes default memory=6/20; Hermes + OpenViking-style retrieval=20/20; Hermes + Ingrain=20/20
-- track_record: Hermes default memory=6/20; Hermes + OpenViking-style retrieval=20/20; Hermes + Ingrain=20/20
-
-OpenViking mode is a deterministic raw-retrieval baseline, not a live OpenViking server benchmark.
 ```
 
-## Live OpenViking Check
+Interpretation: `100/100` means the deterministic launch fixtures pass. It is a regression gate for the compiler, hydration, and practice artifacts, not an external provider benchmark.
 
-OpenViking 0.3.17 was installed into an isolated temp virtualenv and run locally on `127.0.0.1:1933`. Hermes' bundled OpenViking provider initialized successfully against that server and exposed:
+## Live LES Provider Matrix
+
+Command:
+
+```bash
+PYTHONPATH=src python3 -m aeonik_ingrain.cli live-eval --output-dir docs/evidence/live-les-provider-matrix --report docs/live-eval-report.md
+```
+
+Result:
 
 ```text
-viking_search, viking_read, viking_browse, viking_remember, viking_add_resource
+Hermes default memory  88/100
+Hermes + Ingrain      100/100
+Hindsight             blocked
+OpenViking            blocked
 ```
 
-The live resource-retrieval benchmark produced:
+The live harness sends five preregistered universes through actual Hermes provider APIs and records raw outputs plus command logs under [docs/evidence/live-les-provider-matrix](evidence/live-les-provider-matrix/).
 
-```text
-Live OpenViking Resource Retrieval Comparison
+Why Hermes default lost points: default memory returned both the stale statement and the later correction in several universes. Ingrain compiled the later correction into current learned experience and suppressed the stale claim in hydration.
 
-Endpoint: http://127.0.0.1:1933
-Score: 96/120
+Why Hindsight/OpenViking are blocked here: Hindsight packages/API keys were not available in the Hermes runtime, and no healthy OpenViking server was reachable at `http://127.0.0.1:1933`. The harness does not simulate those providers.
 
-Scenario breakdown:
-- correction_after_failure: 14/20
-- stale_product_name: 14/20
-- approval_judgment: 14/20
-- kanban_boundary: 18/20
-- sandbox_recovery: 18/20
-- track_record: 18/20
-```
+## Claim Boundary
 
-Important caveat: this checked OpenViking's live resource upload, indexing, search, and read path. OpenViking's long-term memory extraction path failed in the isolated temp server because no `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` was configured. The repo therefore keeps the default comparison deterministic and offers the live check as `ingrain compare --live-openviking`.
-
-## Interpretation
-
-LES stands for **Learned Experience Score**. LES-100 measures the learned-experience substrate: project recall, correction carry-forward, stale-plan avoidance, track-record reporting, and compact hydration.
-
-`100/100` is the expected score for the committed v0 fixture suite. It means Ingrain passes its current launch scenarios. It is a regression gate for this repo's claimed behaviors, not an external benchmark or a claim of universal memory quality.
-
-The practice layer checks verify that the adoption path works as a local artifact flow: `PRACTICE.md`, source-linked practice cards, brief hydration, and evidence hydration.
-
-The comparison harness is intentionally deterministic. `Hermes + OpenViking-style retrieval` means raw semantic retrieval over the same fixture history, not a live OpenViking server benchmark and not a full evaluation of OpenViking. In these fixtures, retrieval can find relevant fragments, while Ingrain promotes current lessons and filters stale plans.
+This proves a narrow launch claim: Ingrain can improve learned-experience carry-forward for runner agents on these local universes. It does not prove Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or any other Hermes provider.

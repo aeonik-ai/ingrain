@@ -1,0 +1,6 @@
+══════════════════════════════════════════════
+MEMORY (your personal notes) [1% — 195/12,000 chars]
+══════════════════════════════════════════════
+Assistant draft: Aeonik Ingrain is a generic memory backend for Hermes.
+§
+No, that's wrong. Do not call Ingrain a generic memory backend. Call it a learned experience layer for autonomous agents.

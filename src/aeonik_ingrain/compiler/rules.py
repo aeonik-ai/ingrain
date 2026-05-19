@@ -36,12 +36,12 @@ DECISION_PATTERNS = [
 ]
 
 PLAN_PATTERNS = [
-    re.compile(r"\bplan\b[:,]?\s*(.+)", re.I),
+    re.compile(r"^\s*plan\b[:,]?\s*(.+)", re.I),
     re.compile(r"\bthe plan is\b\s*(.+)", re.I),
 ]
 
 PROJECT_PATTERNS = [
-    re.compile(r"\bproject\b[:,]?\s*(.+)", re.I),
+    re.compile(r"^\s*project\b[:,]?\s*(.+)", re.I),
     re.compile(r"\bactive project\b[:,]?\s*(.+)", re.I),
 ]
 
