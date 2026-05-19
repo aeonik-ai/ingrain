@@ -95,7 +95,11 @@ Learned experience layer for autonomous agents:
 Hermes owns intent. Ingrain owns experience.
 ```
 
-Suggested visual: `assets/ingrain-architecture.svg`.
+Suggested visuals:
+
+- Static repo image: `assets/ingrain-architecture.svg`
+- Animated launch explainer: `assets/ingrain-flow-animated.svg`
+- Visual plan and export notes: `docs/visual-demo.md`
 
 ## Demo Video
 
@@ -110,12 +114,13 @@ Arc:
 
 1. Show a cold-start miss.
 2. Correct Hermes once.
-3. Compile with Ingrain.
-4. Start a clean session.
-5. Show the correction carrying forward.
-6. Show LES-Core, the comparison harness, and the claim boundary.
-7. Show LES-Hard as the credible proof page: harder scenarios, raw artifacts, and misses we still need to improve.
-8. Explain why this is not RAG and not a vector database.
+3. Play the animated flow: run -> ledger -> promotions -> practice -> hydration -> better next run.
+4. Compile with Ingrain.
+5. Start a clean session.
+6. Show the correction carrying forward.
+7. Show LES-Core, the comparison harness, and the claim boundary.
+8. Show LES-Hard as the credible proof page: harder scenarios, raw artifacts, and misses we still need to improve.
+9. Explain why this is not RAG and not a vector database.
 
 ## Live Terminal Commands
 

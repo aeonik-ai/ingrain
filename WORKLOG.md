@@ -179,3 +179,11 @@ Next:
   - Hermes + Hindsight-style synthesis: `536/560`
   - Hermes + Ingrain: `545/560`
 - Updated README, eval standards, eval docs, learned-experience results, launch notes, and publishing notes with LES-Hard framing and claim boundaries.
+
+## 2026-05-19 06:10 PDT
+
+- Added `assets/ingrain-flow-animated.svg`, a self-contained animated SVG for the launch story:
+  - agent run -> ledger -> promotions -> practice -> hydration -> better next run
+  - no JavaScript, no build step, no Remotion dependency
+- Added `docs/visual-demo.md` with the intended story beats, usage surfaces, and export options for social/video.
+- Updated README and launch notes to link the animated visual and include it in the demo-video arc.

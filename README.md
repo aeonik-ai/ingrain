@@ -8,6 +8,8 @@ Ingrain turns live agent runs, corrections, decisions, and repeated work into be
 
 ![Aeonik Ingrain architecture](assets/ingrain-architecture.svg)
 
+Animated launch visual: [assets/ingrain-flow-animated.svg](assets/ingrain-flow-animated.svg)
+
 ```bash
 pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 ingrain attach --agent codex
@@ -255,6 +257,7 @@ See [docs/evals.md](docs/evals.md).
 Learned-experience results live in [docs/learned-experience-results.md](docs/learned-experience-results.md).
 CLI + Skill details live in [docs/cli-skill.md](docs/cli-skill.md).
 Launch copy and demo framing live in [docs/launch.md](docs/launch.md).
+Visual demo notes live in [docs/visual-demo.md](docs/visual-demo.md).
 Current Hermes compatibility is mapped in [docs/hermes-current-map.md](docs/hermes-current-map.md).
 Hermes memory-provider positioning lives in [docs/hermes-memory-provider-comparison.md](docs/hermes-memory-provider-comparison.md).
 

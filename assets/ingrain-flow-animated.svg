@@ -1,0 +1,124 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Aeonik Ingrain learned experience flow animation</title>
+  <desc id="desc">An animated diagram showing an agent run becoming ledger events, promotions, practice memory, hydration, and a better next run.</desc>
+  <style>
+    .label { font-family: Inter, Arial, sans-serif; fill: #F7FAFC; }
+    .muted { font-family: Inter, Arial, sans-serif; fill: #AEB8C5; }
+    .small { font-size: 20px; }
+    .node-title { font-size: 30px; font-weight: 760; }
+    .flow {
+      stroke-dasharray: 14 20;
+      animation: dash 1.4s linear infinite;
+    }
+    .pulse-a { animation: pulse 6s ease-in-out infinite; }
+    .pulse-b { animation: pulse 6s ease-in-out 1s infinite; }
+    .pulse-c { animation: pulse 6s ease-in-out 2s infinite; }
+    .pulse-d { animation: pulse 6s ease-in-out 3s infinite; }
+    .pulse-e { animation: pulse 6s ease-in-out 4s infinite; }
+    .pulse-f { animation: pulse 6s ease-in-out 5s infinite; }
+    .packet { animation: packet 6s linear infinite; transform-box: fill-box; transform-origin: center; }
+    .packet-two { animation-delay: 2s; }
+    .packet-three { animation-delay: 4s; }
+    @keyframes dash { to { stroke-dashoffset: -34; } }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.78; }
+      12%, 24% { opacity: 1; }
+      40% { opacity: 0.78; }
+    }
+    @keyframes packet {
+      0% { opacity: 0; transform: translate(0px, 0px) scale(0.9); }
+      8% { opacity: 1; transform: translate(140px, 0px) scale(1); }
+      22% { opacity: 1; transform: translate(380px, 0px) scale(1); }
+      36% { opacity: 1; transform: translate(620px, 0px) scale(1); }
+      50% { opacity: 1; transform: translate(860px, 0px) scale(1); }
+      64% { opacity: 1; transform: translate(1100px, 0px) scale(1); }
+      78% { opacity: 1; transform: translate(1100px, 260px) scale(1); }
+      92% { opacity: 1; transform: translate(0px, 260px) scale(1); }
+      100% { opacity: 0; transform: translate(0px, 0px) scale(0.9); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .flow, .pulse-a, .pulse-b, .pulse-c, .pulse-d, .pulse-e, .pulse-f, .packet {
+        animation: none;
+      }
+    }
+  </style>
+
+  <rect width="1600" height="900" fill="#0E1116"/>
+  <rect x="54" y="50" width="1492" height="800" rx="28" fill="#151A22" stroke="#2B3442" stroke-width="2"/>
+
+  <text x="104" y="126" class="label" font-size="56" font-weight="780">Aeonik Ingrain</text>
+  <text x="104" y="176" class="muted" font-size="29">Give your agents learned experience.</text>
+
+  <path class="flow" d="M288 328H1308V590H288V328Z" stroke="#74D3AE" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1290 309L1320 328L1290 347" stroke="#74D3AE" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M306 609L276 590L306 571" stroke="#74D3AE" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g class="packet">
+    <circle cx="248" cy="328" r="18" fill="#F3C969"/>
+    <circle cx="248" cy="328" r="7" fill="#151A22"/>
+  </g>
+  <g class="packet packet-two">
+    <circle cx="248" cy="328" r="18" fill="#8FD17B"/>
+    <circle cx="248" cy="328" r="7" fill="#151A22"/>
+  </g>
+  <g class="packet packet-three">
+    <circle cx="248" cy="328" r="18" fill="#83AFE8"/>
+    <circle cx="248" cy="328" r="7" fill="#151A22"/>
+  </g>
+
+  <g class="pulse-a">
+    <rect x="104" y="246" width="260" height="164" rx="16" fill="#202938" stroke="#4E7AB8" stroke-width="2"/>
+    <text x="132" y="302" class="label node-title">Agent run</text>
+    <text x="132" y="342" class="muted small">Hermes, Codex, Claude</text>
+    <text x="132" y="374" class="muted small">does real work</text>
+  </g>
+
+  <g class="pulse-b">
+    <rect x="384" y="246" width="260" height="164" rx="16" fill="#1B2B2A" stroke="#337969" stroke-width="2"/>
+    <text x="412" y="302" class="label node-title">Ledger</text>
+    <text x="412" y="342" class="muted small">events from the run</text>
+    <text x="412" y="374" class="muted small">source-linked locally</text>
+  </g>
+
+  <g class="pulse-c">
+    <rect x="664" y="246" width="260" height="164" rx="16" fill="#2A2636" stroke="#6D5FA8" stroke-width="2"/>
+    <text x="692" y="302" class="label node-title">Promotions</text>
+    <text x="692" y="342" class="muted small">corrections, decisions</text>
+    <text x="692" y="374" class="muted small">lessons, outcomes</text>
+  </g>
+
+  <g class="pulse-d">
+    <rect x="944" y="246" width="260" height="164" rx="16" fill="#312D1E" stroke="#A8862E" stroke-width="2"/>
+    <text x="972" y="302" class="label node-title">Practice</text>
+    <text x="972" y="342" class="muted small">PRACTICE.md</text>
+    <text x="972" y="374" class="muted small">cards + skill</text>
+  </g>
+
+  <g class="pulse-e">
+    <rect x="1224" y="246" width="260" height="164" rx="16" fill="#302727" stroke="#8F5C5C" stroke-width="2"/>
+    <text x="1252" y="302" class="label node-title">Hydration</text>
+    <text x="1252" y="342" class="muted small">small context</text>
+    <text x="1252" y="374" class="muted small">for this turn</text>
+  </g>
+
+  <g class="pulse-f">
+    <rect x="104" y="506" width="260" height="164" rx="16" fill="#1F293A" stroke="#83AFE8" stroke-width="2"/>
+    <text x="132" y="562" class="label node-title">Better run</text>
+    <text x="132" y="602" class="muted small">the correction</text>
+    <text x="132" y="634" class="muted small">changes behavior</text>
+  </g>
+
+  <rect x="444" y="506" width="472" height="164" rx="16" fill="#101820" stroke="#2B3442" stroke-width="2"/>
+  <text x="476" y="560" class="label" font-size="28" font-weight="760">Example learned experience</text>
+  <text x="476" y="606" class="muted" font-size="22">Correction: do not overclaim live providers.</text>
+  <text x="476" y="640" class="muted" font-size="22">Next run: mark blocked systems as blocked.</text>
+
+  <rect x="996" y="506" width="488" height="164" rx="16" fill="#101820" stroke="#2B3442" stroke-width="2"/>
+  <text x="1028" y="560" class="label" font-size="28" font-weight="760">Boundary</text>
+  <text x="1028" y="606" class="muted" font-size="22">Hermes owns goals, missions, Kanban.</text>
+  <text x="1028" y="640" class="muted" font-size="22">Ingrain owns experience, not active intent.</text>
+
+  <rect x="104" y="730" width="1380" height="72" rx="16" fill="#0E1116" stroke="#2B3442" stroke-width="2"/>
+  <text x="136" y="776" class="label" font-size="27" font-weight="760">Logs are what happened.</text>
+  <text x="456" y="776" class="muted" font-size="25">Learned experience is what should change next time.</text>
+</svg>
