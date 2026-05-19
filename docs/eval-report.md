@@ -26,6 +26,25 @@ Evidence hydration includes confidence       pass
 
 Interpretation: `100/100` means the deterministic launch fixtures pass. It is a regression gate for the compiler, hydration, and practice artifacts, not an external provider benchmark.
 
+## Deterministic Learned-Experience Comparison
+
+Command:
+
+```bash
+PYTHONPATH=src python3 -m aeonik_ingrain.cli compare --output-dir docs/evidence/deterministic-les-comparison
+```
+
+Result:
+
+```text
+Hermes default memory                  40/200
+Hermes + OpenViking-style retrieval   172/200
+Hermes + Hindsight-style synthesis    196/200
+Hermes + Ingrain                      200/200
+```
+
+The Hindsight-style row is a deterministic retain/recall/reflect-style synthesis baseline, not live Hindsight. See [learned-experience-results.md](learned-experience-results.md) and [evidence/deterministic-les-comparison/report.md](evidence/deterministic-les-comparison/report.md).
+
 ## Live LES Provider Matrix
 
 Command:

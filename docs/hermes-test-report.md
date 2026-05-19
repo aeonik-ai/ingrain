@@ -59,7 +59,7 @@ client=True
 tools=['viking_search', 'viking_read', 'viking_browse', 'viking_remember', 'viking_add_resource']
 ```
 
-The live resource-retrieval benchmark returned `96/120`. For context, Ingrain's deterministic compile/hydrate path is designed around these learned-experience fixtures and returns `120/120` on the same scenarios.
+The live resource-retrieval benchmark returned `96/120` during the first integration pass. The current deterministic learned-experience comparison has since expanded to ten universes and scores Ingrain at `200/200`.
 
 Limit: OpenViking long-term memory extraction requires model credentials. In the isolated temp server, `viking_remember` stored a session message, but commit-time extraction failed because no `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` was present. That is why the launch eval distinguishes:
 

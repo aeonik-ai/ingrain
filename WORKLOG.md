@@ -140,3 +140,22 @@ Next:
 - Added `docs/evidence/openviking-startup-recheck.md`.
 - Clarified public docs so the historical OpenViking smoke result is not confused with the current live provider matrix.
 - Softened evidence wording from "proves" to "supports" for public-facing scientific caution.
+
+## 2026-05-19 05:10 PDT
+
+- Expanded the deterministic learned-experience comparison from 6 to 10 universes.
+- Added explicit scoring components for expected lesson recall, stale/forbidden suppression, actionability, source evidence, and compactness.
+- Added a clearly labeled `Hermes + Hindsight-style synthesis` baseline:
+  - deterministic retain/recall/reflect-style behavior
+  - not live Hindsight
+  - not a general benchmark of Hindsight
+- Improved general compiler rules:
+  - `Correction:` phrases are promoted as corrections
+  - active-intent boundary memories supersede older plan memories
+  - completed track-record memories can supersede older matching plans
+- Current deterministic comparison:
+  - Hermes default memory: `40/200`
+  - Hermes + OpenViking-style retrieval: `172/200`
+  - Hermes + Hindsight-style synthesis: `196/200`
+  - Hermes + Ingrain: `200/200`
+- Added `docs/learned-experience-results.md` and deterministic artifacts under `docs/evidence/deterministic-les-comparison/`.

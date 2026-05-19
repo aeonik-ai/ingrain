@@ -14,6 +14,8 @@ class EvalTests(unittest.TestCase):
     def test_ingrain_scores_higher_on_learned_experience_fixtures(self):
         result = run_comparison()
         modes = result["modes"]
+        self.assertGreater(modes["Hermes + Ingrain"]["score"], modes["Hermes + Hindsight-style synthesis"]["score"])
+        self.assertGreater(modes["Hermes + Hindsight-style synthesis"]["score"], modes["Hermes + OpenViking-style retrieval"]["score"])
         self.assertGreater(modes["Hermes + Ingrain"]["score"], modes["Hermes + OpenViking-style retrieval"]["score"])
         self.assertGreater(modes["Hermes + OpenViking-style retrieval"]["score"], modes["Hermes default memory"]["score"])
 

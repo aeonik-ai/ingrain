@@ -239,6 +239,7 @@ ingrain compare --live-openviking --openviking-endpoint http://127.0.0.1:1933
 This uses real OpenViking upload, indexing, search, and read endpoints. It does not exercise OpenViking's LLM memory extraction unless your OpenViking server has model credentials configured.
 
 See [docs/evals.md](docs/evals.md).
+Learned-experience results live in [docs/learned-experience-results.md](docs/learned-experience-results.md).
 CLI + Skill details live in [docs/cli-skill.md](docs/cli-skill.md).
 Launch copy and demo framing live in [docs/launch.md](docs/launch.md).
 Current Hermes compatibility is mapped in [docs/hermes-current-map.md](docs/hermes-current-map.md).

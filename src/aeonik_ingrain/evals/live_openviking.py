@@ -67,11 +67,13 @@ def run_live_openviking_comparison(
                     )
                 )
             output = "\n".join(output_parts)
+            score = _score_output(output, scenario)
             scenarios.append(
                 {
                     "scenario": scenario.name,
-                    "score": _score_output(output, scenario),
+                    "score": score["score"],
                     "max": 20,
+                    "components": score["components"],
                     "read_uris": read_uris,
                     "output_chars": len(output),
                     "root_uri": _unwrap(add_result).get("root_uri", ""),

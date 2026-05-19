@@ -20,6 +20,7 @@ class PromotionCandidate:
 
 
 CORRECTION_PATTERNS = [
+    re.compile(r"\bcorrection\b[:,]?\s*(.+)", re.I),
     re.compile(r"\bremember\b[:,]?\s*(.+)", re.I),
     re.compile(r"\bdo not\b\s+(.+)", re.I),
     re.compile(r"\bdon't\b\s+(.+)", re.I),
@@ -193,7 +194,34 @@ def _mark_superseded(candidates: list[PromotionCandidate]) -> None:
                     previous.current_state = "superseded"
                     previous.meta["superseded_by"] = candidate.event_id
 
+        if _is_active_intent_boundary(lower):
+            for previous in candidates[:idx]:
+                prev_lower = previous.text.lower()
+                if previous.meta.get("kind") == "plan" or "next run" in prev_lower:
+                    previous.current_state = "superseded"
+                    previous.meta["superseded_by"] = candidate.event_id
+
+        if candidate.promoted_type == "track_record":
+            current_tokens = _tokens(lower)
+            for previous in candidates[:idx]:
+                if previous.meta.get("kind") != "plan":
+                    continue
+                previous_tokens = _tokens(previous.text)
+                if len(current_tokens & previous_tokens) >= 3:
+                    previous.current_state = "superseded"
+                    previous.meta["superseded_by"] = candidate.event_id
+
 
 def _names_product(text: str) -> bool:
     lower = text.lower()
     return "product name" in lower or "name is" in lower or "called" in lower
+
+
+def _is_active_intent_boundary(lower: str) -> bool:
+    has_intent = "active goal" in lower or "active intent" in lower or "kanban" in lower or "mission" in lower
+    has_boundary = "background context" in lower or "source of truth" in lower or "do not infer" in lower
+    return has_intent and has_boundary
+
+
+def _tokens(text: str) -> set[str]:
+    return {token for token in re.findall(r"[a-z0-9_]+", text.lower()) if len(token) > 2}

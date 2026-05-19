@@ -31,15 +31,16 @@ The eval also checks the CLI + Skill adoption surface:
 
 The comparison harness stress-tests the differentiator: learned experience and judgment.
 
-It compares three fixture substrates:
+It compares four fixture substrates:
 
 | Mode | Meaning |
 |---|---|
 | Hermes default memory | Bounded curated memory only. |
 | Hermes + OpenViking-style retrieval | Raw semantic retrieval baseline; finds fragments but does not resolve current truth. |
+| Hermes + Hindsight-style synthesis | Deterministic retain/recall/reflect-style synthesis; not live Hindsight. |
 | Hermes + Ingrain | Promotion, supersession, compilation, and compact hydration. |
 
-The OpenViking row is intentionally described as `OpenViking-style retrieval`: it is a deterministic local retrieval baseline, not a live OpenViking server benchmark and not a full evaluation of OpenViking. This keeps the eval runnable without services while showing the Ingrain-specific behavior distinction honestly.
+The OpenViking row is intentionally described as `OpenViking-style retrieval`: it is a deterministic local retrieval baseline, not a live OpenViking server benchmark and not a full evaluation of OpenViking. The Hindsight row is intentionally described as `Hindsight-style synthesis`: it is a deterministic local synthesis baseline, not live Hindsight and not a full evaluation of Hindsight.
 
 Run:
 
@@ -52,6 +53,23 @@ Run only the comparison table:
 ```bash
 ingrain compare
 ```
+
+Write machine-readable comparison artifacts:
+
+```bash
+ingrain compare --output-dir docs/evidence/deterministic-les-comparison
+```
+
+Current deterministic comparison result:
+
+| Mode | Score |
+|---|---:|
+| Hermes default memory | 40/200 |
+| Hermes + OpenViking-style retrieval | 172/200 |
+| Hermes + Hindsight-style synthesis | 196/200 |
+| Hermes + Ingrain | 200/200 |
+
+See [learned-experience-results.md](learned-experience-results.md) for the polished results page and claim boundary.
 
 ## Live LES Provider Eval
 
@@ -104,5 +122,9 @@ ingrain eval --json
 - Kanban boundary
 - sandbox recovery
 - track record
+- active-goal stale plan
+- completed outcome vs old todo
+- preference exception
+- source-linked actionability
 
 These are designed to catch cases where raw retrieval is not enough. The agent needs current, behavior-shaping context.

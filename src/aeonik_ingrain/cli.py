@@ -14,7 +14,7 @@ from aeonik_ingrain.compiler.hydrate import hydrate
 from aeonik_ingrain.compiler.pages import compile_store
 from aeonik_ingrain.db import IngrainStore, MIND_EVENT_TYPES
 from aeonik_ingrain.demo import DEMO_EVENTS, run_demo
-from aeonik_ingrain.evals.comparison import format_comparison, run_comparison
+from aeonik_ingrain.evals.comparison import format_comparison, run_comparison, write_comparison_artifacts
 from aeonik_ingrain.evals.live_openviking import (
     OpenVikingLiveError,
     format_live_openviking_comparison,
@@ -89,6 +89,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     compare = sub.add_parser("compare", help="Run learned-experience substrate comparison.")
     compare.add_argument("--json", action="store_true", help="Print JSON instead of text.")
+    compare.add_argument("--output-dir", help="Write JSON, CSV, and markdown artifacts for deterministic comparison.")
     compare.add_argument("--live-openviking", action="store_true", help="Run an optional live OpenViking resource-retrieval benchmark.")
     compare.add_argument("--openviking-endpoint", default=os.environ.get("OPENVIKING_ENDPOINT", "http://127.0.0.1:1933"))
     compare.add_argument("--openviking-account", default=os.environ.get("OPENVIKING_ACCOUNT", "default"))
@@ -249,6 +250,8 @@ def main(argv: list[str] | None = None) -> int:
         else:
             result = run_comparison()
             formatter = format_comparison
+            if args.output_dir:
+                write_comparison_artifacts(result, args.output_dir)
         if args.json:
             print(json.dumps(result, indent=2, sort_keys=True))
         else:
