@@ -1,0 +1,2 @@
+{"source":"eval_fixture","runner":"hermes","event_type":"interaction","actor":"user","text":"Remember: Do not announce unapproved investor-facing features as shipped. Offer approval-safe alternatives."}
+{"source":"eval_fixture","runner":"hermes","event_type":"interaction","actor":"assistant","text":"Understood. I will keep investor-facing launch claims approval-safe."}

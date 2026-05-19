@@ -1,0 +1,223 @@
+"""Command line interface for Aeonik Ingrain."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+from importlib import resources
+from pathlib import Path
+
+from aeonik_ingrain import PRODUCT_NAME, TAGLINE, __version__
+from aeonik_ingrain.compiler.hydrate import hydrate
+from aeonik_ingrain.compiler.pages import compile_store
+from aeonik_ingrain.db import IngrainStore
+from aeonik_ingrain.demo import DEMO_EVENTS, run_demo
+from aeonik_ingrain.evals.comparison import format_comparison, run_comparison
+from aeonik_ingrain.evals.live_openviking import (
+    OpenVikingLiveError,
+    format_live_openviking_comparison,
+    run_live_openviking_comparison,
+)
+from aeonik_ingrain.evals.runner import format_eval, run_eval
+from aeonik_ingrain.ingest.hermes import hermes_home, ingest_hermes
+from aeonik_ingrain.report import build_report
+from aeonik_ingrain.security import has_likely_secret
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="ingrain", description=f"{PRODUCT_NAME}: {TAGLINE}")
+    parser.add_argument("--home", help="Ingrain home directory. Defaults to ./.ingrain or INGRAIN_HOME.")
+    parser.add_argument("--version", action="store_true", help="Print version and exit.")
+    sub = parser.add_subparsers(dest="command")
+
+    sub.add_parser("init", help="Initialize local .ingrain storage.")
+
+    remember = sub.add_parser("remember", help="Record a correction, decision, lesson, project fact, or outcome.")
+    remember.add_argument("text", nargs="+", help="Text to remember.")
+    remember.add_argument("--type", default="lesson", choices=["correction", "decision", "lesson", "project_fact", "track_record", "risk", "status"])
+
+    ingest = sub.add_parser("ingest", help="Ingest runner history.")
+    ingest_sub = ingest.add_subparsers(dest="ingest_target")
+    hermes = ingest_sub.add_parser("hermes", help="Ingest Hermes state and built-in memory.")
+    hermes.add_argument("--hermes-home", help="Hermes home directory. Defaults to HERMES_HOME or ~/.hermes.")
+    hermes.add_argument("--limit", type=int, default=250, help="Max rows per candidate Hermes table.")
+
+    sub.add_parser("compile", help="Compile ledger events into learned experience.")
+
+    hyd = sub.add_parser("hydrate", help="Print compact learned-experience context.")
+    hyd.add_argument("--query", default="", help="What the agent is about to do.")
+    hyd.add_argument("--limit", type=int, default=12)
+    hyd.add_argument("--max-chars", type=int, default=6000)
+
+    eval_parser = sub.add_parser("eval", help="Run deterministic LES-100 eval.")
+    eval_parser.add_argument("--no-comparison", action="store_true", help="Skip substrate comparison table.")
+    eval_parser.add_argument("--json", action="store_true", help="Print JSON instead of text.")
+
+    compare = sub.add_parser("compare", help="Run learned-experience substrate comparison.")
+    compare.add_argument("--json", action="store_true", help="Print JSON instead of text.")
+    compare.add_argument("--live-openviking", action="store_true", help="Run an optional live OpenViking resource-retrieval benchmark.")
+    compare.add_argument("--openviking-endpoint", default=os.environ.get("OPENVIKING_ENDPOINT", "http://127.0.0.1:1933"))
+    compare.add_argument("--openviking-account", default=os.environ.get("OPENVIKING_ACCOUNT", "default"))
+    compare.add_argument("--openviking-user", default=os.environ.get("OPENVIKING_USER", "default"))
+    compare.add_argument("--openviking-agent", default=os.environ.get("OPENVIKING_AGENT", "hermes"))
+    compare.add_argument("--openviking-timeout", type=int, default=90)
+
+    demo = sub.add_parser("demo", help="Run a deterministic launch demo.")
+    demo.add_argument("name", nargs="?", default="correction", choices=sorted(DEMO_EVENTS))
+    demo.add_argument("--persist", action="store_true", help="Write demo events into --home instead of a temp store.")
+
+    sub.add_parser("report", help="Print learned-experience report.")
+    sub.add_parser("doctor", help="Check local setup.")
+
+    install = sub.add_parser("install", help="Install runner integrations.")
+    install_sub = install.add_subparsers(dest="install_target")
+    install_hermes = install_sub.add_parser("hermes", help="Install Hermes memory provider plugin.")
+    install_hermes.add_argument("--hermes-home", help="Hermes home directory. Defaults to HERMES_HOME or ~/.hermes.")
+
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    if args.version:
+        print(__version__)
+        return 0
+    if not args.command:
+        parser.print_help()
+        return 0
+
+    store = IngrainStore(args.home)
+
+    if args.command == "init":
+        store.initialize()
+        print(f"Initialized Aeonik Ingrain at {store.home}")
+        return 0
+
+    if args.command == "remember":
+        store.initialize()
+        text = " ".join(args.text)
+        event_type = "decision" if args.type == "decision" else "observation"
+        ref = store.add_event(
+            source="manual",
+            runner="generic",
+            event_type=event_type,
+            actor="user",
+            text=text,
+            meta={"remember_type": args.type},
+        )
+        print(f"Recorded {args.type}: {ref.id}")
+        if has_likely_secret(text):
+            print("Warning: input looked like it may contain a secret; stored text was redacted.")
+        return 0
+
+    if args.command == "ingest":
+        if args.ingest_target == "hermes":
+            result = ingest_hermes(store, hermes_home_path=args.hermes_home, limit=args.limit)
+            print(json.dumps(result, indent=2, sort_keys=True))
+            return 0
+        print("Specify an ingest target, e.g. `ingrain ingest hermes`", file=sys.stderr)
+        return 2
+
+    if args.command == "compile":
+        result = compile_store(store)
+        print(f"Compiled {result['promotions']} learned items from {result['events']} events into {store.compiled_dir}")
+        return 0
+
+    if args.command == "hydrate":
+        output = hydrate(store, query=args.query, limit=args.limit, max_chars=args.max_chars)
+        print(output or "No learned experience found. Run `ingrain remember ...` or `ingrain ingest hermes` first.")
+        return 0
+
+    if args.command == "eval":
+        result = run_eval(output_home=store.home, include_comparison=not args.no_comparison)
+        if args.json:
+            print(json.dumps(result, indent=2, sort_keys=True))
+        else:
+            print(format_eval(result))
+            print(f"\nWrote {store.evals_dir / 'latest.json'}")
+        return 0
+
+    if args.command == "compare":
+        if args.live_openviking:
+            try:
+                result = run_live_openviking_comparison(
+                    endpoint=args.openviking_endpoint,
+                    account=args.openviking_account,
+                    user=args.openviking_user,
+                    agent=args.openviking_agent,
+                    timeout=args.openviking_timeout,
+                )
+            except OpenVikingLiveError as exc:
+                print(f"OpenViking live comparison failed: {exc}", file=sys.stderr)
+                return 1
+            formatter = format_live_openviking_comparison
+        else:
+            result = run_comparison()
+            formatter = format_comparison
+        if args.json:
+            print(json.dumps(result, indent=2, sort_keys=True))
+        else:
+            print(formatter(result))
+        return 0
+
+    if args.command == "demo":
+        demo_home = store.home if args.persist else None
+        print(run_demo(args.name, home=demo_home))
+        return 0
+
+    if args.command == "report":
+        print(build_report(store))
+        return 0
+
+    if args.command == "doctor":
+        return _doctor(store)
+
+    if args.command == "install":
+        if args.install_target == "hermes":
+            target = install_hermes_provider(args.hermes_home)
+            print(f"Installed Hermes provider to {target}")
+            print("Enable with: hermes config set memory.provider ingrain")
+            print("Note: Hermes currently supports one external memory.provider at a time.")
+            return 0
+        print("Specify an install target, e.g. `ingrain install hermes`", file=sys.stderr)
+        return 2
+
+    parser.print_help()
+    return 0
+
+
+def _doctor(store: IngrainStore) -> int:
+    lines = ["Aeonik Ingrain Doctor", ""]
+    lines.append(f"Python: {sys.version.split()[0]}")
+    lines.append(f"Ingrain home: {store.home}")
+    lines.append(f"Database exists: {store.db_path.exists()}")
+    lines.append(f"Compiled dir exists: {store.compiled_dir.exists()}")
+    h_home = hermes_home(None)
+    lines.append(f"Hermes home: {h_home}")
+    lines.append(f"Hermes state.db exists: {(h_home / 'state.db').exists()}")
+    lines.append(f"Hermes plugins dir exists: {(h_home / 'plugins').exists()}")
+    print("\n".join(lines))
+    return 0
+
+
+def install_hermes_provider(hermes_home_arg: str | None = None) -> Path:
+    h_home = hermes_home(hermes_home_arg)
+    target_dir = h_home / "plugins" / "ingrain"
+    target_dir.mkdir(parents=True, exist_ok=True)
+    target = target_dir / "__init__.py"
+    source = resources.files("aeonik_ingrain").joinpath("hermes_provider.py")
+    target.write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
+    plugin_yaml = target_dir / "plugin.yaml"
+    plugin_yaml.write_text(
+        "name: ingrain\n"
+        "description: Aeonik Ingrain learned experience provider for Hermes.\n",
+        encoding="utf-8",
+    )
+    return target
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

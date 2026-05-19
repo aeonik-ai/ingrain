@@ -1,0 +1,2 @@
+{"source":"eval_fixture","runner":"hermes","event_type":"interaction","actor":"assistant","text":"Completed: Built the Hermes integration, sidecar mode docs, and LES-100 eval harness."}
+{"source":"eval_fixture","runner":"hermes","event_type":"interaction","actor":"assistant","text":"Tests passed: deterministic compiler and hydration checks succeeded."}

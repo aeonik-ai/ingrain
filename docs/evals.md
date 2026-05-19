@@ -1,0 +1,66 @@
+# Evals
+
+Aeonik Ingrain ships with deterministic, local evals. They do not require an LLM or network access.
+
+## LES-100
+
+`ingrain eval` scores five learned-experience dimensions:
+
+| Dimension | What it checks |
+|---|---|
+| Cold-start project recall | Current project facts survive a fresh run. |
+| Correction carry-forward | Corrections appear in future hydration. |
+| Stale-plan avoidance | Superseded decisions do not return as current truth. |
+| Track-record query | Completed outcomes can be reported. |
+| Context compactness | Hydration stays small and relevant. |
+
+## Comparison Harness
+
+The comparison harness stress-tests the differentiator: learned experience and judgment.
+
+It compares three substrates:
+
+| Mode | Meaning |
+|---|---|
+| Hermes default memory | Bounded curated memory only. |
+| Hermes + OpenViking-style retrieval | Raw semantic retrieval baseline; finds fragments but does not resolve current truth. |
+| Hermes + Ingrain | Promotion, supersession, compilation, and compact hydration. |
+
+The OpenViking row is intentionally described as `OpenViking-style retrieval`: it is a deterministic local baseline, not a live OpenViking server benchmark. This keeps the eval runnable without services while showing the product distinction honestly.
+
+Run:
+
+```bash
+ingrain eval
+```
+
+Run only the comparison table:
+
+```bash
+ingrain compare
+```
+
+Run an optional live OpenViking resource-retrieval benchmark:
+
+```bash
+ingrain compare --live-openviking --openviking-endpoint http://127.0.0.1:1933
+```
+
+The live OpenViking harness uploads the same scenario fixtures to OpenViking, waits for resource indexing, searches, reads returned file URIs, and scores the retrieved context. It is intentionally labeled as resource retrieval. OpenViking's long-term memory extraction path requires model credentials; without those credentials, `viking_remember` can record a session message but extraction fails at commit time.
+
+For machine-readable output:
+
+```bash
+ingrain eval --json
+```
+
+## Scenarios
+
+- correction after failure
+- stale product name
+- approval judgment
+- Kanban boundary
+- sandbox recovery
+- track record
+
+These are designed to catch cases where raw retrieval is not enough. The agent needs current, behavior-shaping context.

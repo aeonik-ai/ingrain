@@ -1,0 +1,2 @@
+{"source":"eval_fixture","runner":"hermes","event_type":"interaction","actor":"user","text":"Project: Aeonik Ingrain is a local-first learned experience layer for runner agents."}
+{"source":"eval_fixture","runner":"hermes","event_type":"interaction","actor":"user","text":"Decision: Product name is Aeonik Ingrain, not MindCompiler or Engram."}
