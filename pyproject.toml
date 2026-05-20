@@ -28,6 +28,10 @@ dev = ["pytest>=8"]
 ingrain = "aeonik_ingrain.cli:main"
 aeonik-ingrain = "aeonik_ingrain.cli:main"
 
+[project.entry-points."sandbox_universe.lanes"]
+ingrain = "aeonik_ingrain.integrations.sandbox_universe.lane:IngrainLane"
+ingrain-sidecar = "aeonik_ingrain.integrations.sandbox_universe.lane:IngrainSidecarLane"
+
 [project.urls]
 Homepage = "https://github.com/benlloydg/ingrain"
 Repository = "https://github.com/benlloydg/ingrain"
