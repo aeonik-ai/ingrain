@@ -108,3 +108,9 @@ ingrain eval --json
 - source-linked actionability
 
 These are designed to catch cases where raw retrieval is not enough. The agent needs current, behavior-shaping context.
+
+## Sandbox Universe Eval
+
+The next tier is specified in [sandbox-universe-eval-spec.md](sandbox-universe-eval-spec.md).
+
+It is intended to be harder than LES-Hard: multi-session, multi-thread, source-of-truth conflicts, repeated work, provider competition, trace graphs, and a Three.js visualization. The target difficulty is high enough that `60/100` should be considered strong for L3.

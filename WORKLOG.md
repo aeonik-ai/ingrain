@@ -192,3 +192,13 @@ Next:
   - `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m unittest discover -s tests -v`
   - `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m aeonik_ingrain.cli eval`
   - audit for non-real provider-baseline wording returned no matches
+
+## 2026-05-20 00:05 PDT
+
+- Added `docs/sandbox-universe-eval-spec.md`, the spec for a harder turn-by-turn benchmark tier:
+  - multi-session traces
+  - multi-thread project history
+  - source-of-truth conflicts
+  - provider competition across Hermes default, Ingrain, Hindsight, and OpenViking
+  - trace graphs, Mermaid output, and a Three.js visualization target
+- Linked the spec from README and `docs/evals.md`.

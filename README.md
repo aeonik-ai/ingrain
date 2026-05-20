@@ -235,6 +235,8 @@ The current live run is committed under `docs/evidence/live-les-provider-matrix/
 
 For the benchmark posture and external standards, see [docs/eval-standards.md](docs/eval-standards.md). The short version: LES-Core and LES-Hard are Ingrain self-evals; provider claims require real provider runs or external benchmarks such as LongMemEval, LoCoMo, BEAM, LongMemEval-V2, or EvoMemBench.
 
+The next benchmark tier is specified in [docs/sandbox-universe-eval-spec.md](docs/sandbox-universe-eval-spec.md). It is designed as a much harder, turn-by-turn universe eval where a `60/100` can be a strong result.
+
 For a harder local benchmark with room to improve, run:
 
 ```bash
