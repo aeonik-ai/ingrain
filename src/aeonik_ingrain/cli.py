@@ -64,7 +64,15 @@ def build_parser() -> argparse.ArgumentParser:
     hermes.add_argument("--hermes-home", help="Hermes home directory. Defaults to HERMES_HOME or ~/.hermes.")
     hermes.add_argument("--limit", type=int, default=250, help="Max rows per candidate Hermes table.")
 
-    sub.add_parser("compile", help="Compile ledger events into learned experience.")
+    sub.add_parser("compile", help="Compile ledger events into learned experience (deterministic regex).")
+
+    cons = sub.add_parser(
+        "consolidate",
+        help="Consolidate recent events into learned-experience cards using Hermes's model (no API key).",
+    )
+    cons.add_argument("--limit", type=int, default=50, help="Max recent events to consider.")
+    cons.add_argument("--dry-run", action="store_true", help="Run the LLM but do NOT write cards.")
+    cons.add_argument("--show-raw", action="store_true", help="Print the raw Hermes output (for forensics).")
 
     hyd = sub.add_parser("hydrate", help="Print compact learned-experience context.")
     hyd.add_argument("--query", default="", help="What the agent is about to do.")
@@ -209,6 +217,22 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "compile":
         result = compile_store(store)
         print(f"Compiled {result['promotions']} learned items from {result['events']} events into {store.compiled_dir}")
+        return 0
+
+    if args.command == "consolidate":
+        from aeonik_ingrain.integrations.hermes_consolidator import consolidate
+        result = consolidate(store, limit=args.limit, dry_run=args.dry_run)
+        if result.parse_error:
+            print(f"consolidate FAILED: {result.parse_error}")
+            if args.show_raw and result.raw_hermes_output:
+                print("--- raw Hermes output ---")
+                print(result.raw_hermes_output)
+            return 1
+        action = "would emit" if args.dry_run else "emitted"
+        print(f"Considered {result.events_considered} events; {action} {result.cards_emitted} cards.")
+        if args.show_raw and result.raw_hermes_output:
+            print("--- raw Hermes output ---")
+            print(result.raw_hermes_output)
         return 0
 
     if args.command == "hydrate":
