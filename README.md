@@ -237,6 +237,8 @@ For the benchmark posture and external standards, see [docs/eval-standards.md](d
 
 The next benchmark tier is specified in [docs/sandbox-universe-eval-spec.md](docs/sandbox-universe-eval-spec.md). It is designed as a much harder, turn-by-turn universe eval where a `60/100` can be a strong result.
 
+The first L3 Sandbox Universe run is intentionally humbling: Hermes default `275/500`, Ingrain `184/500`, Hindsight local `202/500`, and Hermes OpenViking `125/500`. The artifacts and graph live in [docs/evidence/sandbox-universe-v0/](docs/evidence/sandbox-universe-v0/), with a 3D viewer at [docs/visualizations/sandbox-universe-3d.html](docs/visualizations/sandbox-universe-3d.html).
+
 For a harder local benchmark with room to improve, run:
 
 ```bash

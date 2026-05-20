@@ -242,7 +242,7 @@ The 3D view should not be decorative. It should answer: where did each system lo
 9. Add `docs/visualizations/sandbox-universe-3d.html`.
 10. Update README, eval docs, launch docs, and learned-experience results with cautious wording.
 11. Run a public-facing audit:
-    - no styled/fake provider baselines
+    - no non-real provider baselines
     - no stale blocked-provider language
     - no secret leakage
     - no overclaiming against Hindsight/OpenViking

@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- turn=2 started_at=2026-05-19T22:05:00Z] Do not say that. Say this is a narrow learned-experience smoke test backed by real provider runs. [source: evt_84da95b99b0de7393cf5f746]
+
+Sources:
+- evt_84da95b99b0de7393cf5f746
+
+</aeonik_ingrain_context>

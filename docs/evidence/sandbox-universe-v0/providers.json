@@ -1,0 +1,569 @@
+{
+  "hermes-default": {
+    "failures": [],
+    "interpretation": "Useful partial learned experience, with visible trace failures.",
+    "max": 500,
+    "score": 275,
+    "status": "partial",
+    "universes": [
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 15,
+          "current_truth": 20,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 0,
+          "precedence_reasoning": 15,
+          "source_traceability": 10
+        },
+        "expected_hits": [
+          "narrow learned-experience smoke test",
+          "real provider runs",
+          "doc_eval_v2",
+          "session_launch_a.turn_2",
+          "launch-copy",
+          "doc_eval_v2",
+          "session_launch_a.turn_2"
+        ],
+        "forbidden_hits": [
+          "Ingrain beats Hindsight",
+          "Old launch draft says Ingrain beats"
+        ],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/launch_claims_conflict_l3.txt",
+        "score": 55,
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 10,
+          "compactness": 5,
+          "cross_session_continuity": 15,
+          "current_truth": 20,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 0,
+          "precedence_reasoning": 15,
+          "source_traceability": 10
+        },
+        "expected_hits": [
+          "OpenViking is now healthy",
+          "30/100",
+          "88/100",
+          "doc_openviking_current",
+          "stale",
+          "provider-setup",
+          "HINDSIGHT_BANK_ID",
+          "report the provider lane and direct resource lane separately",
+          "doc_openviking_current",
+          "session_provider_a.turn_2",
+          "doc_hindsight_env"
+        ],
+        "forbidden_hits": [
+          "OpenViking is blocked",
+          "no healthy server is reachable",
+          "local GGUF embedding path failed"
+        ],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/provider_setup_recovery_l3.txt",
+        "score": 55,
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 15,
+          "current_truth": 20,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 0,
+          "precedence_reasoning": 15,
+          "source_traceability": 10
+        },
+        "expected_hits": [
+          "Hermes owns active goals",
+          "Ingrain owns learned experience",
+          "background context only",
+          "doc_boundary",
+          "session_boundary_a.turn_1",
+          "hermes-integration",
+          "doc_boundary",
+          "session_boundary_a.turn_1",
+          "session_boundary_a.turn_2"
+        ],
+        "forbidden_hits": [
+          "Move Kanban card to Done",
+          "publish PyPI tonight"
+        ],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/goals_missions_kanban_l3.txt",
+        "score": 55,
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 10,
+          "compactness": 5,
+          "cross_session_continuity": 15,
+          "current_truth": 20,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 0,
+          "precedence_reasoning": 15,
+          "source_traceability": 10
+        },
+        "expected_hits": [
+          "Aeonik Ingrain",
+          "not MindCompiler",
+          "learned experience layer for autonomous agents",
+          "doc_ingrain_name",
+          "session_name_a.turn_2",
+          "naming",
+          "mind-v3",
+          "public repo",
+          "Ingrain",
+          "doc_ingrain_name",
+          "session_name_a.turn_2",
+          "session_name_b.turn_1"
+        ],
+        "forbidden_hits": [
+          "Aeonik MIND V3 is the event-sourced memory layer"
+        ],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/rename_namespace_collision_l3.txt",
+        "score": 55,
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 10,
+          "compactness": 5,
+          "cross_session_continuity": 15,
+          "current_truth": 20,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 0,
+          "precedence_reasoning": 15,
+          "source_traceability": 10
+        },
+        "expected_hits": [
+          "regression gate",
+          "not a benchmark headline",
+          "leave room to improve",
+          "doc_eval_standards",
+          "session_eval_a.turn_1",
+          "eval-standards",
+          "raw outputs",
+          "make the benchmark harder",
+          "doc_eval_standards",
+          "doc_live_matrix",
+          "session_eval_a.turn_1"
+        ],
+        "forbidden_hits": [
+          "proof of broad memory quality",
+          "SOTA memory",
+          "Ingrain scored 200/200",
+          "Earlier local comparison said Ingrain scored 200/200"
+        ],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/source_truth_vs_chat_l3.txt",
+        "score": 55,
+        "universe": "source_truth_vs_chat_l3"
+      }
+    ]
+  },
+  "hindsight": {
+    "failures": [],
+    "interpretation": "Useful partial learned experience, with visible trace failures.",
+    "max": 500,
+    "score": 202,
+    "status": "partial",
+    "universes": [
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 5,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 20,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 0,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [
+          "narrow learned-experience smoke test",
+          "real provider runs",
+          "safe launch claim"
+        ],
+        "forbidden_hits": [
+          "Ingrain beats Hindsight"
+        ],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/launch_claims_conflict_l3.txt",
+        "score": 35,
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 8,
+          "current_truth": 13,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 0,
+          "precedence_reasoning": 0,
+          "source_traceability": 3
+        },
+        "expected_hits": [
+          "30/100",
+          "88/100",
+          "HINDSIGHT_BANK_ID",
+          "session_provider_a.turn_2"
+        ],
+        "forbidden_hits": [
+          "OpenViking is blocked"
+        ],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/provider_setup_recovery_l3.txt",
+        "score": 39,
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 7,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 8,
+          "source_traceability": 3
+        },
+        "expected_hits": [
+          "background context only",
+          "doc_boundary",
+          "doc_boundary"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/goals_missions_kanban_l3.txt",
+        "score": 48,
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 10,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 13,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [
+          "Aeonik Ingrain",
+          "learned experience layer for autonomous agents",
+          "public repo",
+          "Ingrain"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/rename_namespace_collision_l3.txt",
+        "score": 48,
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 7,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [
+          "regression gate"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/source_truth_vs_chat_l3.txt",
+        "score": 32,
+        "universe": "source_truth_vs_chat_l3"
+      }
+    ]
+  },
+  "ingrain": {
+    "failures": [],
+    "interpretation": "Retrieval exists, but judgment over messy traces is weak.",
+    "max": 500,
+    "score": 184,
+    "status": "weak",
+    "universes": [
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 20,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [
+          "narrow learned-experience smoke test",
+          "real provider runs"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/launch_claims_conflict_l3.txt",
+        "score": 45,
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 10,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 7,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 0,
+          "precedence_reasoning": 8,
+          "source_traceability": 0
+        },
+        "expected_hits": [
+          "OpenViking is now healthy",
+          "stale",
+          "report the provider lane and direct resource lane separately"
+        ],
+        "forbidden_hits": [
+          "no healthy server is reachable"
+        ],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/provider_setup_recovery_l3.txt",
+        "score": 35,
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 0,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/goals_missions_kanban_l3.txt",
+        "score": 25,
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 5,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 7,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [
+          "learned experience layer for autonomous agents",
+          "Ingrain"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/rename_namespace_collision_l3.txt",
+        "score": 37,
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 10,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 7,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [
+          "leave room to improve",
+          "make the benchmark harder"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/source_truth_vs_chat_l3.txt",
+        "score": 42,
+        "universe": "source_truth_vs_chat_l3"
+      }
+    ]
+  },
+  "openviking": {
+    "failures": [],
+    "interpretation": "Retrieval exists, but judgment over messy traces is weak.",
+    "max": 500,
+    "score": 125,
+    "status": "weak",
+    "universes": [
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 0,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/launch_claims_conflict_l3.txt",
+        "score": 25,
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 0,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/provider_setup_recovery_l3.txt",
+        "score": 25,
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 0,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/goals_missions_kanban_l3.txt",
+        "score": 25,
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 0,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/rename_namespace_collision_l3.txt",
+        "score": 25,
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 0,
+          "diagram_data_completeness": 0,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 0
+        },
+        "expected_hits": [],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/source_truth_vs_chat_l3.txt",
+        "score": 25,
+        "universe": "source_truth_vs_chat_l3"
+      }
+    ]
+  }
+}

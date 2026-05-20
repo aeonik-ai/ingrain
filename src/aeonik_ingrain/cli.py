@@ -23,6 +23,11 @@ from aeonik_ingrain.evals.live_openviking import (
 )
 from aeonik_ingrain.evals.live_les import format_live_les, format_live_les_markdown, run_live_les
 from aeonik_ingrain.evals.runner import format_eval, run_eval
+from aeonik_ingrain.evals.sandbox_universe import (
+    format_sandbox_universe,
+    format_sandbox_universe_markdown,
+    run_sandbox_universe_eval,
+)
 from aeonik_ingrain.ingest.hermes import hermes_home, ingest_hermes
 from aeonik_ingrain.practice import write_practice_artifacts
 from aeonik_ingrain.report import build_report
@@ -110,6 +115,17 @@ def build_parser() -> argparse.ArgumentParser:
     live_eval.add_argument("--hermes-python", help="Hermes venv Python. Defaults to <hermes-root>/venv/bin/python.")
     live_eval.add_argument("--openviking-endpoint", default=os.environ.get("OPENVIKING_ENDPOINT"))
     live_eval.add_argument("--timeout", type=int, default=90)
+
+    universe_eval = sub.add_parser("universe-eval", help="Run Sandbox Universe hard trace eval against installed Hermes provider APIs.")
+    universe_eval.add_argument("--json", action="store_true", help="Print JSON instead of text.")
+    universe_eval.add_argument("--output-dir", default="docs/evidence/sandbox-universe-v0", help="Directory for raw outputs, graphs, JSON, CSV, and report.")
+    universe_eval.add_argument("--report", default="docs/sandbox-universe-report.md", help="Markdown report path to update.")
+    universe_eval.add_argument("--provider", action="append", help="Provider to run. Repeat or comma-separate. Defaults to hermes-default, ingrain, hindsight, openviking.")
+    universe_eval.add_argument("--level", type=int, default=3, help="Maximum universe level to run. L3 is the initial public target.")
+    universe_eval.add_argument("--hermes-root", help="Hermes source/runtime root. Defaults to ~/.hermes/hermes-agent.")
+    universe_eval.add_argument("--hermes-python", help="Hermes venv Python. Defaults to <hermes-root>/venv/bin/python.")
+    universe_eval.add_argument("--openviking-endpoint", default=os.environ.get("OPENVIKING_ENDPOINT"))
+    universe_eval.add_argument("--timeout", type=int, default=120)
 
     demo = sub.add_parser("demo", help="Run a deterministic launch demo.")
     demo.add_argument("name", nargs="?", default="correction", choices=sorted(DEMO_EVENTS))
@@ -295,6 +311,29 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(result, indent=2, sort_keys=True))
         else:
             print(format_live_les(result))
+            if args.report:
+                print(f"\nWrote {args.report}")
+        return 0
+
+    if args.command == "universe-eval":
+        result = run_sandbox_universe_eval(
+            output_dir=args.output_dir,
+            providers=args.provider,
+            level=args.level,
+            hermes_root=args.hermes_root,
+            hermes_python=args.hermes_python,
+            openviking_endpoint=args.openviking_endpoint,
+            timeout=args.timeout,
+        )
+        report_text = format_sandbox_universe_markdown(result)
+        if args.report:
+            report_path = Path(args.report).expanduser()
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            report_path.write_text(report_text, encoding="utf-8")
+        if args.json:
+            print(json.dumps(result, indent=2, sort_keys=True))
+        else:
+            print(format_sandbox_universe(result))
             if args.report:
                 print(f"\nWrote {args.report}")
         return 0

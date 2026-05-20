@@ -114,3 +114,18 @@ These are designed to catch cases where raw retrieval is not enough. The agent n
 The next tier is specified in [sandbox-universe-eval-spec.md](sandbox-universe-eval-spec.md).
 
 It is intended to be harder than LES-Hard: multi-session, multi-thread, source-of-truth conflicts, repeated work, provider competition, trace graphs, and a Three.js visualization. The target difficulty is high enough that `60/100` should be considered strong for L3.
+
+Current L3 v0 result:
+
+| Provider | Score | Interpretation |
+|---|---:|---|
+| Hermes default memory | 275/500 | Raw memory catches many facts but leaks stale trace context. |
+| Hermes + Ingrain | 184/500 | Current Ingrain hydration is too lossy on explicit trace/source IDs for this benchmark. |
+| Hindsight local embedded | 202/500 | Real local provider run; useful partial recall with trace misses. |
+| Hermes OpenViking provider | 125/500 | Real provider run; current lane is weak on hydrated learned-experience traces. |
+
+Artifacts:
+
+- [Sandbox Universe report](sandbox-universe-report.md)
+- [Sandbox Universe evidence](evidence/sandbox-universe-v0/report.md)
+- [3D viewer](visualizations/sandbox-universe-3d.html)

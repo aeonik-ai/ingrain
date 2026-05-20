@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sandbox Universe Eval 3D Viewer</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111414;
+      --panel: #191d1d;
+      --line: #2f3938;
+      --text: #e8ece9;
+      --muted: #a8b0ad;
+      --accent: #6ec6a4;
+      --warn: #f1b45b;
+      --bad: #e36d6d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      height: 100vh;
+    }
+    #scene {
+      min-width: 0;
+      min-height: 0;
+      position: relative;
+    }
+    aside {
+      border-left: 1px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      overflow: auto;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+    p {
+      color: var(--muted);
+      line-height: 1.45;
+      margin: 0 0 14px;
+      font-size: 13px;
+    }
+    label, button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      background: #202726;
+      color: var(--text);
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    input[type="file"] { display: none; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 12px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 7px 5px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    .score { font-variant-numeric: tabular-nums; }
+    .legend {
+      display: grid;
+      gap: 8px;
+      margin: 16px 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .key { display: flex; align-items: center; gap: 8px; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; }
+    #tooltip {
+      position: absolute;
+      display: none;
+      max-width: 320px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(17, 20, 20, 0.92);
+      color: var(--text);
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    #status {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(17, 20, 20, 0.82);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      main { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+      #scene { height: 58vh; }
+      aside { border-left: 0; border-top: 1px solid var(--line); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section id="scene" aria-label="3D provider score matrix">
+      <div id="tooltip"></div>
+      <div id="status">Loading graph.json...</div>
+    </section>
+    <aside>
+      <h1>Sandbox Universe Eval</h1>
+      <p>Providers are columns. Universes run in depth. Bar height and color show score. Select a bar to inspect the raw trace path.</p>
+      <label>
+        Load graph.json
+        <input id="file" type="file" accept="application/json">
+      </label>
+      <div class="legend">
+        <div class="key"><span class="swatch" style="background: var(--accent)"></span>60-79: strong for this hard eval</div>
+        <div class="key"><span class="swatch" style="background: var(--warn)"></span>40-59: partial learned experience</div>
+        <div class="key"><span class="swatch" style="background: var(--bad)"></span>0-39: weak or failed trace use</div>
+      </div>
+      <div id="details">
+        <p>Select a provider output bar.</p>
+      </div>
+      <div id="fallback"></div>
+    </aside>
+  </main>
+  <script type="module">
+    const graphUrl = "../evidence/sandbox-universe-v0/graph.json";
+    const sceneEl = document.getElementById("scene");
+    const statusEl = document.getElementById("status");
+    const tooltipEl = document.getElementById("tooltip");
+    const detailsEl = document.getElementById("details");
+    const fallbackEl = document.getElementById("fallback");
+    const fileEl = document.getElementById("file");
+
+    let THREE;
+    try {
+      THREE = await import("https://unpkg.com/three@0.164.1/build/three.module.js");
+    } catch (error) {
+      statusEl.textContent = "Three.js unavailable. Showing table fallback.";
+    }
+
+    async function loadGraph() {
+      try {
+        const response = await fetch(graphUrl, { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+      } catch (error) {
+        statusEl.textContent = "Could not fetch graph.json. Use the file picker.";
+        return null;
+      }
+    }
+
+    fileEl.addEventListener("change", async (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const graph = JSON.parse(await file.text());
+      render(graph);
+    });
+
+    const graph = await loadGraph();
+    if (graph) render(graph);
+
+    function providerOutputs(graph) {
+      return (graph.nodes || []).filter((node) => node.type === "output");
+    }
+
+    function render(graph) {
+      const outputs = providerOutputs(graph);
+      renderTable(outputs);
+      if (!THREE) return;
+      renderScene(outputs);
+    }
+
+    function renderTable(outputs) {
+      if (!outputs.length) {
+        fallbackEl.innerHTML = "<p>No provider output nodes found in graph.json.</p>";
+        return;
+      }
+      const rows = outputs.map((node) => `
+        <tr>
+          <td>${escapeHtml(node.provider || "")}</td>
+          <td>${escapeHtml(node.universe || "")}</td>
+          <td class="score">${Number(node.score || 0)}/100</td>
+          <td>${escapeHtml(node.raw_output || "")}</td>
+        </tr>
+      `).join("");
+      fallbackEl.innerHTML = `
+        <table>
+          <thead><tr><th>Provider</th><th>Universe</th><th>Score</th><th>Raw</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    function renderScene(outputs) {
+      sceneEl.querySelector("canvas")?.remove();
+      const width = sceneEl.clientWidth || 900;
+      const height = sceneEl.clientHeight || 700;
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      sceneEl.appendChild(renderer.domElement);
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x111414);
+      const camera = new THREE.PerspectiveCamera(52, width / height, 0.1, 1000);
+      camera.position.set(8, 8, 11);
+      camera.lookAt(0, 2, 0);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.72));
+      const key = new THREE.DirectionalLight(0xffffff, 0.8);
+      key.position.set(5, 10, 4);
+      scene.add(key);
+
+      const providers = [...new Set(outputs.map((node) => node.provider || "unknown"))];
+      const universes = [...new Set(outputs.map((node) => node.universe || "unknown"))];
+      const objects = [];
+
+      outputs.forEach((node) => {
+        const x = providers.indexOf(node.provider) * 2.4 - ((providers.length - 1) * 1.2);
+        const z = universes.indexOf(node.universe) * -2.0 + ((universes.length - 1) * 1.0);
+        const score = Number(node.score || 0);
+        const h = Math.max(0.12, score / 18);
+        const geometry = new THREE.BoxGeometry(1.1, h, 1.1);
+        const material = new THREE.MeshStandardMaterial({ color: scoreColor(score), roughness: 0.62 });
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(x, h / 2, z);
+        mesh.userData = node;
+        scene.add(mesh);
+        objects.push(mesh);
+      });
+
+      const grid = new THREE.GridHelper(Math.max(10, providers.length * 3, universes.length * 2), Math.max(6, universes.length));
+      grid.material.color.set(0x2f3938);
+      grid.material.opacity = 0.35;
+      grid.material.transparent = true;
+      scene.add(grid);
+
+      const raycaster = new THREE.Raycaster();
+      const pointer = new THREE.Vector2();
+      let selected = null;
+
+      renderer.domElement.addEventListener("pointermove", (event) => {
+        const rect = renderer.domElement.getBoundingClientRect();
+        pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        tooltipEl.style.left = `${event.clientX + 12}px`;
+        tooltipEl.style.top = `${event.clientY + 12}px`;
+      });
+
+      renderer.domElement.addEventListener("click", () => {
+        const hit = currentHit();
+        if (!hit) return;
+        selected = hit.object.userData;
+        detailsEl.innerHTML = detailHtml(selected);
+      });
+
+      function currentHit() {
+        raycaster.setFromCamera(pointer, camera);
+        const hits = raycaster.intersectObjects(objects);
+        return hits[0] || null;
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        scene.rotation.y += 0.0018;
+        const hit = currentHit();
+        if (hit) {
+          const node = hit.object.userData;
+          tooltipEl.style.display = "block";
+          tooltipEl.innerHTML = `<strong>${escapeHtml(node.provider)}</strong><br>${escapeHtml(node.universe)}<br>${Number(node.score || 0)}/100`;
+        } else {
+          tooltipEl.style.display = "none";
+        }
+        renderer.render(scene, camera);
+      }
+
+      statusEl.textContent = "Loaded graph.json";
+      animate();
+
+      window.addEventListener("resize", () => {
+        const w = sceneEl.clientWidth || 900;
+        const h = sceneEl.clientHeight || 700;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+    }
+
+    function scoreColor(score) {
+      if (score >= 60) return 0x6ec6a4;
+      if (score >= 40) return 0xf1b45b;
+      return 0xe36d6d;
+    }
+
+    function detailHtml(node) {
+      return `
+        <h1>${escapeHtml(node.provider || "provider")}</h1>
+        <p><strong>Universe:</strong> ${escapeHtml(node.universe || "")}</p>
+        <p><strong>Score:</strong> ${Number(node.score || 0)}/100</p>
+        <p><strong>Raw output:</strong><br>${escapeHtml(node.raw_output || "")}</p>
+      `;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+  </script>
+</body>
+</html>

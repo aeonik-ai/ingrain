@@ -1,0 +1,196 @@
+flowchart LR
+  n_launch_claims_conflict_l3["Launch Claims Conflict"]
+  n_doc_launch_v1["Old launch draft"]
+  n_doc_eval_v2["Eval claim boundary"]
+  n_session_launch_a["launch-copy"]
+  n_session_launch_a_turn_1["launch-copy turn 1"]
+  n_session_launch_a_turn_2["launch-copy turn 2"]
+  n_provider_setup_recovery_l3["Provider Setup Recovery"]
+  n_doc_openviking_old["Old OpenViking failure"]
+  n_doc_openviking_current["Current OpenViking result"]
+  n_doc_hindsight_env["Hindsight local constraints"]
+  n_session_provider_a["provider-setup"]
+  n_session_provider_a_turn_1["provider-setup turn 1"]
+  n_session_provider_a_turn_2["provider-setup turn 2"]
+  n_goals_missions_kanban_l3["Goals, Missions, And Kanban Boundary"]
+  n_doc_boundary["Boundary rule"]
+  n_doc_old_plan["Old launch plan"]
+  n_session_boundary_a["hermes-integration"]
+  n_session_boundary_a_turn_1["hermes-integration turn 1"]
+  n_session_boundary_a_turn_2["hermes-integration turn 2"]
+  n_rename_namespace_collision_l3["Rename Namespace Collision"]
+  n_doc_mind_v3["Aeonik MIND V3"]
+  n_doc_ingrain_name["Ingrain naming"]
+  n_session_name_a["naming"]
+  n_session_name_a_turn_1["naming turn 1"]
+  n_session_name_a_turn_2["naming turn 2"]
+  n_session_name_b["mind-v3"]
+  n_session_name_b_turn_1["mind-v3 turn 1"]
+  n_source_truth_vs_chat_l3["Source Truth Versus Chat"]
+  n_doc_eval_standards["Eval standards"]
+  n_doc_old_results["Old results"]
+  n_doc_live_matrix["Live matrix"]
+  n_session_eval_a["eval-standards"]
+  n_session_eval_a_turn_1["eval-standards turn 1"]
+  n_session_eval_a_turn_2["eval-standards turn 2"]
+  n_provider_hermes_default["hermes-default"]
+  n_provider_hermes_default_launch_claims_conflict_l3["hermes-default 55/100"]
+  n_provider_hermes_default_provider_setup_recovery_l3["hermes-default 55/100"]
+  n_provider_hermes_default_goals_missions_kanban_l3["hermes-default 55/100"]
+  n_provider_hermes_default_rename_namespace_collision_l3["hermes-default 55/100"]
+  n_provider_hermes_default_source_truth_vs_chat_l3["hermes-default 55/100"]
+  n_provider_ingrain["ingrain"]
+  n_provider_ingrain_launch_claims_conflict_l3["ingrain 45/100"]
+  n_provider_ingrain_provider_setup_recovery_l3["ingrain 35/100"]
+  n_provider_ingrain_goals_missions_kanban_l3["ingrain 25/100"]
+  n_provider_ingrain_rename_namespace_collision_l3["ingrain 37/100"]
+  n_provider_ingrain_source_truth_vs_chat_l3["ingrain 42/100"]
+  n_provider_hindsight["hindsight"]
+  n_provider_hindsight_launch_claims_conflict_l3["hindsight 35/100"]
+  n_provider_hindsight_provider_setup_recovery_l3["hindsight 39/100"]
+  n_provider_hindsight_goals_missions_kanban_l3["hindsight 48/100"]
+  n_provider_hindsight_rename_namespace_collision_l3["hindsight 48/100"]
+  n_provider_hindsight_source_truth_vs_chat_l3["hindsight 32/100"]
+  n_provider_openviking["openviking"]
+  n_provider_openviking_launch_claims_conflict_l3["openviking 25/100"]
+  n_provider_openviking_provider_setup_recovery_l3["openviking 25/100"]
+  n_provider_openviking_goals_missions_kanban_l3["openviking 25/100"]
+  n_provider_openviking_rename_namespace_collision_l3["openviking 25/100"]
+  n_provider_openviking_source_truth_vs_chat_l3["openviking 25/100"]
+  n_doc_launch_v1 -- belongs_to --> n_launch_claims_conflict_l3
+  n_doc_eval_v2 -- belongs_to --> n_launch_claims_conflict_l3
+  n_session_launch_a -- belongs_to --> n_launch_claims_conflict_l3
+  n_session_launch_a_turn_1 -- in_session --> n_session_launch_a
+  n_session_launch_a_turn_2 -- in_session --> n_session_launch_a
+  n_session_launch_a_turn_1 -- next_turn --> n_session_launch_a_turn_2
+  n_doc_launch_v1 -- superseded_by --> n_session_launch_a_turn_2
+  n_session_launch_a_turn_1 -- superseded_by --> n_session_launch_a_turn_2
+  n_doc_openviking_old -- belongs_to --> n_provider_setup_recovery_l3
+  n_doc_openviking_current -- belongs_to --> n_provider_setup_recovery_l3
+  n_doc_hindsight_env -- belongs_to --> n_provider_setup_recovery_l3
+  n_session_provider_a -- belongs_to --> n_provider_setup_recovery_l3
+  n_session_provider_a_turn_1 -- in_session --> n_session_provider_a
+  n_session_provider_a_turn_2 -- in_session --> n_session_provider_a
+  n_session_provider_a_turn_1 -- next_turn --> n_session_provider_a_turn_2
+  n_doc_openviking_old -- superseded_by --> n_doc_openviking_current
+  n_session_provider_a_turn_1 -- superseded_by --> n_session_provider_a_turn_2
+  n_doc_boundary -- belongs_to --> n_goals_missions_kanban_l3
+  n_doc_old_plan -- belongs_to --> n_goals_missions_kanban_l3
+  n_session_boundary_a -- belongs_to --> n_goals_missions_kanban_l3
+  n_session_boundary_a_turn_1 -- in_session --> n_session_boundary_a
+  n_session_boundary_a_turn_2 -- in_session --> n_session_boundary_a
+  n_session_boundary_a_turn_1 -- next_turn --> n_session_boundary_a_turn_2
+  n_doc_old_plan -- superseded_by --> n_doc_boundary
+  n_doc_mind_v3 -- belongs_to --> n_rename_namespace_collision_l3
+  n_doc_ingrain_name -- belongs_to --> n_rename_namespace_collision_l3
+  n_session_name_a -- belongs_to --> n_rename_namespace_collision_l3
+  n_session_name_a_turn_1 -- in_session --> n_session_name_a
+  n_session_name_a_turn_2 -- in_session --> n_session_name_a
+  n_session_name_a_turn_1 -- next_turn --> n_session_name_a_turn_2
+  n_session_name_b -- belongs_to --> n_rename_namespace_collision_l3
+  n_session_name_b_turn_1 -- in_session --> n_session_name_b
+  n_session_name_a_turn_1 -- superseded_by --> n_session_name_a_turn_2
+  n_doc_eval_standards -- belongs_to --> n_source_truth_vs_chat_l3
+  n_doc_old_results -- belongs_to --> n_source_truth_vs_chat_l3
+  n_doc_live_matrix -- belongs_to --> n_source_truth_vs_chat_l3
+  n_session_eval_a -- belongs_to --> n_source_truth_vs_chat_l3
+  n_session_eval_a_turn_1 -- in_session --> n_session_eval_a
+  n_session_eval_a_turn_2 -- in_session --> n_session_eval_a
+  n_session_eval_a_turn_1 -- next_turn --> n_session_eval_a_turn_2
+  n_doc_old_results -- superseded_by --> n_doc_eval_standards
+  n_provider_hermes_default -- emits --> n_provider_hermes_default_launch_claims_conflict_l3
+  n_launch_claims_conflict_l3 -- scored_on --> n_provider_hermes_default_launch_claims_conflict_l3
+  n_doc_eval_v2 -- expected_evidence --> n_provider_hermes_default_launch_claims_conflict_l3
+  n_session_launch_a_turn_2 -- expected_evidence --> n_provider_hermes_default_launch_claims_conflict_l3
+  n_provider_hermes_default -- emits --> n_provider_hermes_default_provider_setup_recovery_l3
+  n_provider_setup_recovery_l3 -- scored_on --> n_provider_hermes_default_provider_setup_recovery_l3
+  n_doc_openviking_current -- expected_evidence --> n_provider_hermes_default_provider_setup_recovery_l3
+  n_session_provider_a_turn_2 -- expected_evidence --> n_provider_hermes_default_provider_setup_recovery_l3
+  n_doc_hindsight_env -- expected_evidence --> n_provider_hermes_default_provider_setup_recovery_l3
+  n_provider_hermes_default -- emits --> n_provider_hermes_default_goals_missions_kanban_l3
+  n_goals_missions_kanban_l3 -- scored_on --> n_provider_hermes_default_goals_missions_kanban_l3
+  n_doc_boundary -- expected_evidence --> n_provider_hermes_default_goals_missions_kanban_l3
+  n_session_boundary_a_turn_1 -- expected_evidence --> n_provider_hermes_default_goals_missions_kanban_l3
+  n_session_boundary_a_turn_2 -- expected_evidence --> n_provider_hermes_default_goals_missions_kanban_l3
+  n_provider_hermes_default -- emits --> n_provider_hermes_default_rename_namespace_collision_l3
+  n_rename_namespace_collision_l3 -- scored_on --> n_provider_hermes_default_rename_namespace_collision_l3
+  n_doc_ingrain_name -- expected_evidence --> n_provider_hermes_default_rename_namespace_collision_l3
+  n_session_name_a_turn_2 -- expected_evidence --> n_provider_hermes_default_rename_namespace_collision_l3
+  n_session_name_b_turn_1 -- expected_evidence --> n_provider_hermes_default_rename_namespace_collision_l3
+  n_provider_hermes_default -- emits --> n_provider_hermes_default_source_truth_vs_chat_l3
+  n_source_truth_vs_chat_l3 -- scored_on --> n_provider_hermes_default_source_truth_vs_chat_l3
+  n_doc_eval_standards -- expected_evidence --> n_provider_hermes_default_source_truth_vs_chat_l3
+  n_doc_live_matrix -- expected_evidence --> n_provider_hermes_default_source_truth_vs_chat_l3
+  n_session_eval_a_turn_1 -- expected_evidence --> n_provider_hermes_default_source_truth_vs_chat_l3
+  n_provider_ingrain -- emits --> n_provider_ingrain_launch_claims_conflict_l3
+  n_launch_claims_conflict_l3 -- scored_on --> n_provider_ingrain_launch_claims_conflict_l3
+  n_doc_eval_v2 -- expected_evidence --> n_provider_ingrain_launch_claims_conflict_l3
+  n_session_launch_a_turn_2 -- expected_evidence --> n_provider_ingrain_launch_claims_conflict_l3
+  n_provider_ingrain -- emits --> n_provider_ingrain_provider_setup_recovery_l3
+  n_provider_setup_recovery_l3 -- scored_on --> n_provider_ingrain_provider_setup_recovery_l3
+  n_doc_openviking_current -- expected_evidence --> n_provider_ingrain_provider_setup_recovery_l3
+  n_session_provider_a_turn_2 -- expected_evidence --> n_provider_ingrain_provider_setup_recovery_l3
+  n_doc_hindsight_env -- expected_evidence --> n_provider_ingrain_provider_setup_recovery_l3
+  n_provider_ingrain -- emits --> n_provider_ingrain_goals_missions_kanban_l3
+  n_goals_missions_kanban_l3 -- scored_on --> n_provider_ingrain_goals_missions_kanban_l3
+  n_doc_boundary -- expected_evidence --> n_provider_ingrain_goals_missions_kanban_l3
+  n_session_boundary_a_turn_1 -- expected_evidence --> n_provider_ingrain_goals_missions_kanban_l3
+  n_session_boundary_a_turn_2 -- expected_evidence --> n_provider_ingrain_goals_missions_kanban_l3
+  n_provider_ingrain -- emits --> n_provider_ingrain_rename_namespace_collision_l3
+  n_rename_namespace_collision_l3 -- scored_on --> n_provider_ingrain_rename_namespace_collision_l3
+  n_doc_ingrain_name -- expected_evidence --> n_provider_ingrain_rename_namespace_collision_l3
+  n_session_name_a_turn_2 -- expected_evidence --> n_provider_ingrain_rename_namespace_collision_l3
+  n_session_name_b_turn_1 -- expected_evidence --> n_provider_ingrain_rename_namespace_collision_l3
+  n_provider_ingrain -- emits --> n_provider_ingrain_source_truth_vs_chat_l3
+  n_source_truth_vs_chat_l3 -- scored_on --> n_provider_ingrain_source_truth_vs_chat_l3
+  n_doc_eval_standards -- expected_evidence --> n_provider_ingrain_source_truth_vs_chat_l3
+  n_doc_live_matrix -- expected_evidence --> n_provider_ingrain_source_truth_vs_chat_l3
+  n_session_eval_a_turn_1 -- expected_evidence --> n_provider_ingrain_source_truth_vs_chat_l3
+  n_provider_hindsight -- emits --> n_provider_hindsight_launch_claims_conflict_l3
+  n_launch_claims_conflict_l3 -- scored_on --> n_provider_hindsight_launch_claims_conflict_l3
+  n_doc_eval_v2 -- expected_evidence --> n_provider_hindsight_launch_claims_conflict_l3
+  n_session_launch_a_turn_2 -- expected_evidence --> n_provider_hindsight_launch_claims_conflict_l3
+  n_provider_hindsight -- emits --> n_provider_hindsight_provider_setup_recovery_l3
+  n_provider_setup_recovery_l3 -- scored_on --> n_provider_hindsight_provider_setup_recovery_l3
+  n_doc_openviking_current -- expected_evidence --> n_provider_hindsight_provider_setup_recovery_l3
+  n_session_provider_a_turn_2 -- expected_evidence --> n_provider_hindsight_provider_setup_recovery_l3
+  n_doc_hindsight_env -- expected_evidence --> n_provider_hindsight_provider_setup_recovery_l3
+  n_provider_hindsight -- emits --> n_provider_hindsight_goals_missions_kanban_l3
+  n_goals_missions_kanban_l3 -- scored_on --> n_provider_hindsight_goals_missions_kanban_l3
+  n_doc_boundary -- expected_evidence --> n_provider_hindsight_goals_missions_kanban_l3
+  n_session_boundary_a_turn_1 -- expected_evidence --> n_provider_hindsight_goals_missions_kanban_l3
+  n_session_boundary_a_turn_2 -- expected_evidence --> n_provider_hindsight_goals_missions_kanban_l3
+  n_provider_hindsight -- emits --> n_provider_hindsight_rename_namespace_collision_l3
+  n_rename_namespace_collision_l3 -- scored_on --> n_provider_hindsight_rename_namespace_collision_l3
+  n_doc_ingrain_name -- expected_evidence --> n_provider_hindsight_rename_namespace_collision_l3
+  n_session_name_a_turn_2 -- expected_evidence --> n_provider_hindsight_rename_namespace_collision_l3
+  n_session_name_b_turn_1 -- expected_evidence --> n_provider_hindsight_rename_namespace_collision_l3
+  n_provider_hindsight -- emits --> n_provider_hindsight_source_truth_vs_chat_l3
+  n_source_truth_vs_chat_l3 -- scored_on --> n_provider_hindsight_source_truth_vs_chat_l3
+  n_doc_eval_standards -- expected_evidence --> n_provider_hindsight_source_truth_vs_chat_l3
+  n_doc_live_matrix -- expected_evidence --> n_provider_hindsight_source_truth_vs_chat_l3
+  n_session_eval_a_turn_1 -- expected_evidence --> n_provider_hindsight_source_truth_vs_chat_l3
+  n_provider_openviking -- emits --> n_provider_openviking_launch_claims_conflict_l3
+  n_launch_claims_conflict_l3 -- scored_on --> n_provider_openviking_launch_claims_conflict_l3
+  n_doc_eval_v2 -- expected_evidence --> n_provider_openviking_launch_claims_conflict_l3
+  n_session_launch_a_turn_2 -- expected_evidence --> n_provider_openviking_launch_claims_conflict_l3
+  n_provider_openviking -- emits --> n_provider_openviking_provider_setup_recovery_l3
+  n_provider_setup_recovery_l3 -- scored_on --> n_provider_openviking_provider_setup_recovery_l3
+  n_doc_openviking_current -- expected_evidence --> n_provider_openviking_provider_setup_recovery_l3
+  n_session_provider_a_turn_2 -- expected_evidence --> n_provider_openviking_provider_setup_recovery_l3
+  n_doc_hindsight_env -- expected_evidence --> n_provider_openviking_provider_setup_recovery_l3
+  n_provider_openviking -- emits --> n_provider_openviking_goals_missions_kanban_l3
+  n_goals_missions_kanban_l3 -- scored_on --> n_provider_openviking_goals_missions_kanban_l3
+  n_doc_boundary -- expected_evidence --> n_provider_openviking_goals_missions_kanban_l3
+  n_session_boundary_a_turn_1 -- expected_evidence --> n_provider_openviking_goals_missions_kanban_l3
+  n_session_boundary_a_turn_2 -- expected_evidence --> n_provider_openviking_goals_missions_kanban_l3
+  n_provider_openviking -- emits --> n_provider_openviking_rename_namespace_collision_l3
+  n_rename_namespace_collision_l3 -- scored_on --> n_provider_openviking_rename_namespace_collision_l3
+  n_doc_ingrain_name -- expected_evidence --> n_provider_openviking_rename_namespace_collision_l3
+  n_session_name_a_turn_2 -- expected_evidence --> n_provider_openviking_rename_namespace_collision_l3
+  n_session_name_b_turn_1 -- expected_evidence --> n_provider_openviking_rename_namespace_collision_l3
+  n_provider_openviking -- emits --> n_provider_openviking_source_truth_vs_chat_l3
+  n_source_truth_vs_chat_l3 -- scored_on --> n_provider_openviking_source_truth_vs_chat_l3
+  n_doc_eval_standards -- expected_evidence --> n_provider_openviking_source_truth_vs_chat_l3
+  n_doc_live_matrix -- expected_evidence --> n_provider_openviking_source_truth_vs_chat_l3
+  n_session_eval_a_turn_1 -- expected_evidence --> n_provider_openviking_source_truth_vs_chat_l3

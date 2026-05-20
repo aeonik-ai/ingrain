@@ -1,0 +1,1099 @@
+{
+  "edges": [
+    {
+      "from": "doc_launch_v1",
+      "to": "launch_claims_conflict_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "doc_eval_v2",
+      "to": "launch_claims_conflict_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_launch_a",
+      "to": "launch_claims_conflict_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_launch_a.turn_1",
+      "to": "session_launch_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_launch_a.turn_2",
+      "to": "session_launch_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_launch_a.turn_1",
+      "to": "session_launch_a.turn_2",
+      "type": "next_turn"
+    },
+    {
+      "from": "doc_launch_v1",
+      "to": "session_launch_a.turn_2",
+      "type": "superseded_by"
+    },
+    {
+      "from": "session_launch_a.turn_1",
+      "to": "session_launch_a.turn_2",
+      "type": "superseded_by"
+    },
+    {
+      "from": "doc_openviking_old",
+      "to": "provider_setup_recovery_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "doc_openviking_current",
+      "to": "provider_setup_recovery_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "doc_hindsight_env",
+      "to": "provider_setup_recovery_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_provider_a",
+      "to": "provider_setup_recovery_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_provider_a.turn_1",
+      "to": "session_provider_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_provider_a.turn_2",
+      "to": "session_provider_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_provider_a.turn_1",
+      "to": "session_provider_a.turn_2",
+      "type": "next_turn"
+    },
+    {
+      "from": "doc_openviking_old",
+      "to": "doc_openviking_current",
+      "type": "superseded_by"
+    },
+    {
+      "from": "session_provider_a.turn_1",
+      "to": "session_provider_a.turn_2",
+      "type": "superseded_by"
+    },
+    {
+      "from": "doc_boundary",
+      "to": "goals_missions_kanban_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "doc_old_plan",
+      "to": "goals_missions_kanban_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_boundary_a",
+      "to": "goals_missions_kanban_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_boundary_a.turn_1",
+      "to": "session_boundary_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_boundary_a.turn_2",
+      "to": "session_boundary_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_boundary_a.turn_1",
+      "to": "session_boundary_a.turn_2",
+      "type": "next_turn"
+    },
+    {
+      "from": "doc_old_plan",
+      "to": "doc_boundary",
+      "type": "superseded_by"
+    },
+    {
+      "from": "doc_mind_v3",
+      "to": "rename_namespace_collision_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "doc_ingrain_name",
+      "to": "rename_namespace_collision_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_name_a",
+      "to": "rename_namespace_collision_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_name_a.turn_1",
+      "to": "session_name_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_name_a.turn_2",
+      "to": "session_name_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_name_a.turn_1",
+      "to": "session_name_a.turn_2",
+      "type": "next_turn"
+    },
+    {
+      "from": "session_name_b",
+      "to": "rename_namespace_collision_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_name_b.turn_1",
+      "to": "session_name_b",
+      "type": "in_session"
+    },
+    {
+      "from": "session_name_a.turn_1",
+      "to": "session_name_a.turn_2",
+      "type": "superseded_by"
+    },
+    {
+      "from": "doc_eval_standards",
+      "to": "source_truth_vs_chat_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "doc_old_results",
+      "to": "source_truth_vs_chat_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "doc_live_matrix",
+      "to": "source_truth_vs_chat_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_eval_a",
+      "to": "source_truth_vs_chat_l3",
+      "type": "belongs_to"
+    },
+    {
+      "from": "session_eval_a.turn_1",
+      "to": "session_eval_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_eval_a.turn_2",
+      "to": "session_eval_a",
+      "type": "in_session"
+    },
+    {
+      "from": "session_eval_a.turn_1",
+      "to": "session_eval_a.turn_2",
+      "type": "next_turn"
+    },
+    {
+      "from": "doc_old_results",
+      "to": "doc_eval_standards",
+      "type": "superseded_by"
+    },
+    {
+      "from": "provider.hermes-default",
+      "to": "provider.hermes-default.launch_claims_conflict_l3",
+      "type": "emits"
+    },
+    {
+      "from": "launch_claims_conflict_l3",
+      "to": "provider.hermes-default.launch_claims_conflict_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_eval_v2",
+      "to": "provider.hermes-default.launch_claims_conflict_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_launch_a.turn_2",
+      "to": "provider.hermes-default.launch_claims_conflict_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.hermes-default",
+      "to": "provider.hermes-default.provider_setup_recovery_l3",
+      "type": "emits"
+    },
+    {
+      "from": "provider_setup_recovery_l3",
+      "to": "provider.hermes-default.provider_setup_recovery_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_openviking_current",
+      "to": "provider.hermes-default.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_provider_a.turn_2",
+      "to": "provider.hermes-default.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "doc_hindsight_env",
+      "to": "provider.hermes-default.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.hermes-default",
+      "to": "provider.hermes-default.goals_missions_kanban_l3",
+      "type": "emits"
+    },
+    {
+      "from": "goals_missions_kanban_l3",
+      "to": "provider.hermes-default.goals_missions_kanban_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_boundary",
+      "to": "provider.hermes-default.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_boundary_a.turn_1",
+      "to": "provider.hermes-default.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_boundary_a.turn_2",
+      "to": "provider.hermes-default.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.hermes-default",
+      "to": "provider.hermes-default.rename_namespace_collision_l3",
+      "type": "emits"
+    },
+    {
+      "from": "rename_namespace_collision_l3",
+      "to": "provider.hermes-default.rename_namespace_collision_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_ingrain_name",
+      "to": "provider.hermes-default.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_name_a.turn_2",
+      "to": "provider.hermes-default.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_name_b.turn_1",
+      "to": "provider.hermes-default.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.hermes-default",
+      "to": "provider.hermes-default.source_truth_vs_chat_l3",
+      "type": "emits"
+    },
+    {
+      "from": "source_truth_vs_chat_l3",
+      "to": "provider.hermes-default.source_truth_vs_chat_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_eval_standards",
+      "to": "provider.hermes-default.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "doc_live_matrix",
+      "to": "provider.hermes-default.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_eval_a.turn_1",
+      "to": "provider.hermes-default.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.ingrain",
+      "to": "provider.ingrain.launch_claims_conflict_l3",
+      "type": "emits"
+    },
+    {
+      "from": "launch_claims_conflict_l3",
+      "to": "provider.ingrain.launch_claims_conflict_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_eval_v2",
+      "to": "provider.ingrain.launch_claims_conflict_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_launch_a.turn_2",
+      "to": "provider.ingrain.launch_claims_conflict_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.ingrain",
+      "to": "provider.ingrain.provider_setup_recovery_l3",
+      "type": "emits"
+    },
+    {
+      "from": "provider_setup_recovery_l3",
+      "to": "provider.ingrain.provider_setup_recovery_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_openviking_current",
+      "to": "provider.ingrain.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_provider_a.turn_2",
+      "to": "provider.ingrain.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "doc_hindsight_env",
+      "to": "provider.ingrain.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.ingrain",
+      "to": "provider.ingrain.goals_missions_kanban_l3",
+      "type": "emits"
+    },
+    {
+      "from": "goals_missions_kanban_l3",
+      "to": "provider.ingrain.goals_missions_kanban_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_boundary",
+      "to": "provider.ingrain.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_boundary_a.turn_1",
+      "to": "provider.ingrain.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_boundary_a.turn_2",
+      "to": "provider.ingrain.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.ingrain",
+      "to": "provider.ingrain.rename_namespace_collision_l3",
+      "type": "emits"
+    },
+    {
+      "from": "rename_namespace_collision_l3",
+      "to": "provider.ingrain.rename_namespace_collision_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_ingrain_name",
+      "to": "provider.ingrain.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_name_a.turn_2",
+      "to": "provider.ingrain.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_name_b.turn_1",
+      "to": "provider.ingrain.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.ingrain",
+      "to": "provider.ingrain.source_truth_vs_chat_l3",
+      "type": "emits"
+    },
+    {
+      "from": "source_truth_vs_chat_l3",
+      "to": "provider.ingrain.source_truth_vs_chat_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_eval_standards",
+      "to": "provider.ingrain.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "doc_live_matrix",
+      "to": "provider.ingrain.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_eval_a.turn_1",
+      "to": "provider.ingrain.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.hindsight",
+      "to": "provider.hindsight.launch_claims_conflict_l3",
+      "type": "emits"
+    },
+    {
+      "from": "launch_claims_conflict_l3",
+      "to": "provider.hindsight.launch_claims_conflict_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_eval_v2",
+      "to": "provider.hindsight.launch_claims_conflict_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_launch_a.turn_2",
+      "to": "provider.hindsight.launch_claims_conflict_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.hindsight",
+      "to": "provider.hindsight.provider_setup_recovery_l3",
+      "type": "emits"
+    },
+    {
+      "from": "provider_setup_recovery_l3",
+      "to": "provider.hindsight.provider_setup_recovery_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_openviking_current",
+      "to": "provider.hindsight.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_provider_a.turn_2",
+      "to": "provider.hindsight.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "doc_hindsight_env",
+      "to": "provider.hindsight.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.hindsight",
+      "to": "provider.hindsight.goals_missions_kanban_l3",
+      "type": "emits"
+    },
+    {
+      "from": "goals_missions_kanban_l3",
+      "to": "provider.hindsight.goals_missions_kanban_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_boundary",
+      "to": "provider.hindsight.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_boundary_a.turn_1",
+      "to": "provider.hindsight.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_boundary_a.turn_2",
+      "to": "provider.hindsight.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.hindsight",
+      "to": "provider.hindsight.rename_namespace_collision_l3",
+      "type": "emits"
+    },
+    {
+      "from": "rename_namespace_collision_l3",
+      "to": "provider.hindsight.rename_namespace_collision_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_ingrain_name",
+      "to": "provider.hindsight.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_name_a.turn_2",
+      "to": "provider.hindsight.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_name_b.turn_1",
+      "to": "provider.hindsight.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.hindsight",
+      "to": "provider.hindsight.source_truth_vs_chat_l3",
+      "type": "emits"
+    },
+    {
+      "from": "source_truth_vs_chat_l3",
+      "to": "provider.hindsight.source_truth_vs_chat_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_eval_standards",
+      "to": "provider.hindsight.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "doc_live_matrix",
+      "to": "provider.hindsight.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_eval_a.turn_1",
+      "to": "provider.hindsight.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.openviking",
+      "to": "provider.openviking.launch_claims_conflict_l3",
+      "type": "emits"
+    },
+    {
+      "from": "launch_claims_conflict_l3",
+      "to": "provider.openviking.launch_claims_conflict_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_eval_v2",
+      "to": "provider.openviking.launch_claims_conflict_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_launch_a.turn_2",
+      "to": "provider.openviking.launch_claims_conflict_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.openviking",
+      "to": "provider.openviking.provider_setup_recovery_l3",
+      "type": "emits"
+    },
+    {
+      "from": "provider_setup_recovery_l3",
+      "to": "provider.openviking.provider_setup_recovery_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_openviking_current",
+      "to": "provider.openviking.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_provider_a.turn_2",
+      "to": "provider.openviking.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "doc_hindsight_env",
+      "to": "provider.openviking.provider_setup_recovery_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.openviking",
+      "to": "provider.openviking.goals_missions_kanban_l3",
+      "type": "emits"
+    },
+    {
+      "from": "goals_missions_kanban_l3",
+      "to": "provider.openviking.goals_missions_kanban_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_boundary",
+      "to": "provider.openviking.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_boundary_a.turn_1",
+      "to": "provider.openviking.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_boundary_a.turn_2",
+      "to": "provider.openviking.goals_missions_kanban_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.openviking",
+      "to": "provider.openviking.rename_namespace_collision_l3",
+      "type": "emits"
+    },
+    {
+      "from": "rename_namespace_collision_l3",
+      "to": "provider.openviking.rename_namespace_collision_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_ingrain_name",
+      "to": "provider.openviking.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_name_a.turn_2",
+      "to": "provider.openviking.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_name_b.turn_1",
+      "to": "provider.openviking.rename_namespace_collision_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "provider.openviking",
+      "to": "provider.openviking.source_truth_vs_chat_l3",
+      "type": "emits"
+    },
+    {
+      "from": "source_truth_vs_chat_l3",
+      "to": "provider.openviking.source_truth_vs_chat_l3",
+      "type": "scored_on"
+    },
+    {
+      "from": "doc_eval_standards",
+      "to": "provider.openviking.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "doc_live_matrix",
+      "to": "provider.openviking.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    },
+    {
+      "from": "session_eval_a.turn_1",
+      "to": "provider.openviking.source_truth_vs_chat_l3",
+      "type": "expected_evidence"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "launch_claims_conflict_l3",
+      "label": "Launch Claims Conflict",
+      "level": 3,
+      "type": "universe"
+    },
+    {
+      "id": "doc_launch_v1",
+      "label": "Old launch draft",
+      "type": "source_doc",
+      "universe": "launch_claims_conflict_l3"
+    },
+    {
+      "id": "doc_eval_v2",
+      "label": "Eval claim boundary",
+      "type": "source_doc",
+      "universe": "launch_claims_conflict_l3"
+    },
+    {
+      "id": "session_launch_a",
+      "label": "launch-copy",
+      "type": "session",
+      "universe": "launch_claims_conflict_l3"
+    },
+    {
+      "id": "session_launch_a.turn_1",
+      "label": "launch-copy turn 1",
+      "type": "draft",
+      "universe": "launch_claims_conflict_l3"
+    },
+    {
+      "id": "session_launch_a.turn_2",
+      "label": "launch-copy turn 2",
+      "type": "correction",
+      "universe": "launch_claims_conflict_l3"
+    },
+    {
+      "id": "provider_setup_recovery_l3",
+      "label": "Provider Setup Recovery",
+      "level": 3,
+      "type": "universe"
+    },
+    {
+      "id": "doc_openviking_old",
+      "label": "Old OpenViking failure",
+      "type": "source_doc",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "doc_openviking_current",
+      "label": "Current OpenViking result",
+      "type": "source_doc",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "doc_hindsight_env",
+      "label": "Hindsight local constraints",
+      "type": "source_doc",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "session_provider_a",
+      "label": "provider-setup",
+      "type": "session",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "session_provider_a.turn_1",
+      "label": "provider-setup turn 1",
+      "type": "failure",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "session_provider_a.turn_2",
+      "label": "provider-setup turn 2",
+      "type": "correction",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "goals_missions_kanban_l3",
+      "label": "Goals, Missions, And Kanban Boundary",
+      "level": 3,
+      "type": "universe"
+    },
+    {
+      "id": "doc_boundary",
+      "label": "Boundary rule",
+      "type": "source_doc",
+      "universe": "goals_missions_kanban_l3"
+    },
+    {
+      "id": "doc_old_plan",
+      "label": "Old launch plan",
+      "type": "source_doc",
+      "universe": "goals_missions_kanban_l3"
+    },
+    {
+      "id": "session_boundary_a",
+      "label": "hermes-integration",
+      "type": "session",
+      "universe": "goals_missions_kanban_l3"
+    },
+    {
+      "id": "session_boundary_a.turn_1",
+      "label": "hermes-integration turn 1",
+      "type": "decision",
+      "universe": "goals_missions_kanban_l3"
+    },
+    {
+      "id": "session_boundary_a.turn_2",
+      "label": "hermes-integration turn 2",
+      "type": "lesson",
+      "universe": "goals_missions_kanban_l3"
+    },
+    {
+      "id": "rename_namespace_collision_l3",
+      "label": "Rename Namespace Collision",
+      "level": 3,
+      "type": "universe"
+    },
+    {
+      "id": "doc_mind_v3",
+      "label": "Aeonik MIND V3",
+      "type": "source_doc",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "doc_ingrain_name",
+      "label": "Ingrain naming",
+      "type": "source_doc",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "session_name_a",
+      "label": "naming",
+      "type": "session",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "session_name_a.turn_1",
+      "label": "naming turn 1",
+      "type": "decision",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "session_name_a.turn_2",
+      "label": "naming turn 2",
+      "type": "decision",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "session_name_b",
+      "label": "mind-v3",
+      "type": "session",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "session_name_b.turn_1",
+      "label": "mind-v3 turn 1",
+      "type": "context",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "source_truth_vs_chat_l3",
+      "label": "Source Truth Versus Chat",
+      "level": 3,
+      "type": "universe"
+    },
+    {
+      "id": "doc_eval_standards",
+      "label": "Eval standards",
+      "type": "source_doc",
+      "universe": "source_truth_vs_chat_l3"
+    },
+    {
+      "id": "doc_old_results",
+      "label": "Old results",
+      "type": "source_doc",
+      "universe": "source_truth_vs_chat_l3"
+    },
+    {
+      "id": "doc_live_matrix",
+      "label": "Live matrix",
+      "type": "source_doc",
+      "universe": "source_truth_vs_chat_l3"
+    },
+    {
+      "id": "session_eval_a",
+      "label": "eval-standards",
+      "type": "session",
+      "universe": "source_truth_vs_chat_l3"
+    },
+    {
+      "id": "session_eval_a.turn_1",
+      "label": "eval-standards turn 1",
+      "type": "correction",
+      "universe": "source_truth_vs_chat_l3"
+    },
+    {
+      "id": "session_eval_a.turn_2",
+      "label": "eval-standards turn 2",
+      "type": "outcome",
+      "universe": "source_truth_vs_chat_l3"
+    },
+    {
+      "id": "provider.hermes-default",
+      "label": "hermes-default",
+      "score": 275,
+      "type": "provider"
+    },
+    {
+      "id": "provider.hermes-default.launch_claims_conflict_l3",
+      "label": "hermes-default 55/100",
+      "provider": "hermes-default",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/launch_claims_conflict_l3.txt",
+      "score": 55,
+      "type": "output",
+      "universe": "launch_claims_conflict_l3"
+    },
+    {
+      "id": "provider.hermes-default.provider_setup_recovery_l3",
+      "label": "hermes-default 55/100",
+      "provider": "hermes-default",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/provider_setup_recovery_l3.txt",
+      "score": 55,
+      "type": "output",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "provider.hermes-default.goals_missions_kanban_l3",
+      "label": "hermes-default 55/100",
+      "provider": "hermes-default",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/goals_missions_kanban_l3.txt",
+      "score": 55,
+      "type": "output",
+      "universe": "goals_missions_kanban_l3"
+    },
+    {
+      "id": "provider.hermes-default.rename_namespace_collision_l3",
+      "label": "hermes-default 55/100",
+      "provider": "hermes-default",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/rename_namespace_collision_l3.txt",
+      "score": 55,
+      "type": "output",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "provider.hermes-default.source_truth_vs_chat_l3",
+      "label": "hermes-default 55/100",
+      "provider": "hermes-default",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/source_truth_vs_chat_l3.txt",
+      "score": 55,
+      "type": "output",
+      "universe": "source_truth_vs_chat_l3"
+    },
+    {
+      "id": "provider.ingrain",
+      "label": "ingrain",
+      "score": 184,
+      "type": "provider"
+    },
+    {
+      "id": "provider.ingrain.launch_claims_conflict_l3",
+      "label": "ingrain 45/100",
+      "provider": "ingrain",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/launch_claims_conflict_l3.txt",
+      "score": 45,
+      "type": "output",
+      "universe": "launch_claims_conflict_l3"
+    },
+    {
+      "id": "provider.ingrain.provider_setup_recovery_l3",
+      "label": "ingrain 35/100",
+      "provider": "ingrain",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/provider_setup_recovery_l3.txt",
+      "score": 35,
+      "type": "output",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "provider.ingrain.goals_missions_kanban_l3",
+      "label": "ingrain 25/100",
+      "provider": "ingrain",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/goals_missions_kanban_l3.txt",
+      "score": 25,
+      "type": "output",
+      "universe": "goals_missions_kanban_l3"
+    },
+    {
+      "id": "provider.ingrain.rename_namespace_collision_l3",
+      "label": "ingrain 37/100",
+      "provider": "ingrain",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/rename_namespace_collision_l3.txt",
+      "score": 37,
+      "type": "output",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "provider.ingrain.source_truth_vs_chat_l3",
+      "label": "ingrain 42/100",
+      "provider": "ingrain",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/source_truth_vs_chat_l3.txt",
+      "score": 42,
+      "type": "output",
+      "universe": "source_truth_vs_chat_l3"
+    },
+    {
+      "id": "provider.hindsight",
+      "label": "hindsight",
+      "score": 202,
+      "type": "provider"
+    },
+    {
+      "id": "provider.hindsight.launch_claims_conflict_l3",
+      "label": "hindsight 35/100",
+      "provider": "hindsight",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/launch_claims_conflict_l3.txt",
+      "score": 35,
+      "type": "output",
+      "universe": "launch_claims_conflict_l3"
+    },
+    {
+      "id": "provider.hindsight.provider_setup_recovery_l3",
+      "label": "hindsight 39/100",
+      "provider": "hindsight",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/provider_setup_recovery_l3.txt",
+      "score": 39,
+      "type": "output",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "provider.hindsight.goals_missions_kanban_l3",
+      "label": "hindsight 48/100",
+      "provider": "hindsight",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/goals_missions_kanban_l3.txt",
+      "score": 48,
+      "type": "output",
+      "universe": "goals_missions_kanban_l3"
+    },
+    {
+      "id": "provider.hindsight.rename_namespace_collision_l3",
+      "label": "hindsight 48/100",
+      "provider": "hindsight",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/rename_namespace_collision_l3.txt",
+      "score": 48,
+      "type": "output",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "provider.hindsight.source_truth_vs_chat_l3",
+      "label": "hindsight 32/100",
+      "provider": "hindsight",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/source_truth_vs_chat_l3.txt",
+      "score": 32,
+      "type": "output",
+      "universe": "source_truth_vs_chat_l3"
+    },
+    {
+      "id": "provider.openviking",
+      "label": "openviking",
+      "score": 125,
+      "type": "provider"
+    },
+    {
+      "id": "provider.openviking.launch_claims_conflict_l3",
+      "label": "openviking 25/100",
+      "provider": "openviking",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/launch_claims_conflict_l3.txt",
+      "score": 25,
+      "type": "output",
+      "universe": "launch_claims_conflict_l3"
+    },
+    {
+      "id": "provider.openviking.provider_setup_recovery_l3",
+      "label": "openviking 25/100",
+      "provider": "openviking",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/provider_setup_recovery_l3.txt",
+      "score": 25,
+      "type": "output",
+      "universe": "provider_setup_recovery_l3"
+    },
+    {
+      "id": "provider.openviking.goals_missions_kanban_l3",
+      "label": "openviking 25/100",
+      "provider": "openviking",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/goals_missions_kanban_l3.txt",
+      "score": 25,
+      "type": "output",
+      "universe": "goals_missions_kanban_l3"
+    },
+    {
+      "id": "provider.openviking.rename_namespace_collision_l3",
+      "label": "openviking 25/100",
+      "provider": "openviking",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/rename_namespace_collision_l3.txt",
+      "score": 25,
+      "type": "output",
+      "universe": "rename_namespace_collision_l3"
+    },
+    {
+      "id": "provider.openviking.source_truth_vs_chat_l3",
+      "label": "openviking 25/100",
+      "provider": "openviking",
+      "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/source_truth_vs_chat_l3.txt",
+      "score": 25,
+      "type": "output",
+      "universe": "source_truth_vs_chat_l3"
+    }
+  ]
+}

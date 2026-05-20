@@ -5,6 +5,12 @@ from aeonik_ingrain.evals.les_hard import run_les_hard, score_hard_output
 from aeonik_ingrain.evals.live_les import UNIVERSES, format_live_les, score_live_output
 from aeonik_ingrain.evals.live_openviking import _candidate_read_uris, format_live_openviking_comparison
 from aeonik_ingrain.evals.runner import run_eval
+from aeonik_ingrain.evals.sandbox_universe import (
+    UNIVERSES as SANDBOX_UNIVERSES,
+    build_sandbox_graph,
+    format_sandbox_universe_markdown,
+    score_sandbox_output,
+)
 
 
 class EvalTests(unittest.TestCase):
@@ -99,6 +105,62 @@ class EvalTests(unittest.TestCase):
         )
         self.assertIn("hindsight: blocked", text)
         self.assertIn("no credentials", text)
+
+    def test_sandbox_universe_has_required_l3_complexity(self):
+        l3 = [universe for universe in SANDBOX_UNIVERSES if universe.level == 3]
+        self.assertGreaterEqual(len(l3), 5)
+        for universe in l3:
+            self.assertGreaterEqual(sum(len(session.turns) for session in universe.sessions), 1)
+            self.assertGreaterEqual(len(universe.source_of_truth), 2)
+            self.assertGreaterEqual(len(universe.expected_sources), 2)
+
+    def test_sandbox_score_rewards_traceable_current_truth(self):
+        universe = next(item for item in SANDBOX_UNIVERSES if item.name == "launch_claims_conflict_l3")
+        good = score_sandbox_output(
+            "Use a narrow learned-experience smoke test backed by real provider runs. "
+            "Do not claim Ingrain beat Hindsight or OpenViking. "
+            "Sources: doc_eval_v2 and session_launch_a.turn_2 from launch-copy. source_id=doc_eval_v2",
+            universe,
+        )
+        stale = score_sandbox_output(
+            "Ingrain beats Hindsight and Ingrain beats OpenViking. Source: doc_launch_v1.",
+            universe,
+        )
+        self.assertGreater(good["score"], stale["score"])
+        self.assertEqual(good["components"]["forbidden_suppression"], 15)
+        self.assertEqual(stale["components"]["forbidden_suppression"], 0)
+
+    def test_sandbox_graph_contains_supersession_edges(self):
+        result = {
+            "universes": [{"name": "launch_claims_conflict_l3"}],
+            "providers": {
+                "ingrain": {
+                    "score": 72,
+                    "universes": [
+                        {
+                            "universe": "launch_claims_conflict_l3",
+                            "score": 72,
+                            "raw_output": "raw/ingrain/launch_claims_conflict_l3.txt",
+                        }
+                    ],
+                }
+            },
+        }
+        graph = build_sandbox_graph(result)
+        self.assertTrue(any(edge["type"] == "superseded_by" for edge in graph["edges"]))
+        self.assertTrue(any(node["type"] == "output" and node["provider"] == "ingrain" for node in graph["nodes"]))
+
+    def test_sandbox_markdown_links_graph_artifacts(self):
+        text = format_sandbox_universe_markdown(
+            {
+                "claim": "test",
+                "scoring": {"current_truth": 20},
+                "universes": [{"name": "u", "level": 3, "difficulty_reason": "hard"}],
+                "providers": {},
+            }
+        )
+        self.assertIn("graph.json", text)
+        self.assertIn("Three.js", text)
 
 
 if __name__ == "__main__":

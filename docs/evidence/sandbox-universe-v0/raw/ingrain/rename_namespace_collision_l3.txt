@@ -1,0 +1,12 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current decisions:
+- turn=2 started_at=2026-05-19T09:05:00Z] Use Ingrain. Learned experience layer for autonomous agents. [source: evt_fcbef2a67a7c8ac377a390da]
+- turn=1 started_at=2026-05-19T09:05:00Z] MindCompiler has no identifiability for Aeonik. [source: evt_39c7d441f4b53653031d38be]
+
+Sources:
+- evt_39c7d441f4b53653031d38be
+- evt_fcbef2a67a7c8ac377a390da
+
+</aeonik_ingrain_context>

@@ -202,3 +202,18 @@ Next:
   - provider competition across Hermes default, Ingrain, Hindsight, and OpenViking
   - trace graphs, Mermaid output, and a Three.js visualization target
 - Linked the spec from README and `docs/evals.md`.
+
+## 2026-05-19 22:25 PDT
+
+- Implemented the first runnable Sandbox Universe Eval v0 harness:
+  - `ingrain universe-eval`
+  - five L3 universes and one L4 universe in `src/aeonik_ingrain/evals/sandbox_universe.py`
+  - deterministic 100-point component scoring per universe
+  - raw provider outputs, command logs, `results.json`, `results.csv`, `providers.json`, `graph.json`, and `graph.mmd`
+  - Three.js viewer at `docs/visualizations/sandbox-universe-3d.html`
+- Ran the first full real L3 provider matrix:
+  - Hermes default memory: `275/500`
+  - Ingrain Hermes provider: `184/500`
+  - Hindsight local embedded: `202/500`
+  - Hermes OpenViking provider: `125/500`
+- Key finding: the benchmark is now hard enough, and Ingrain's next improvement target is explicit trace/source-ID preservation in hydration.
