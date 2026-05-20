@@ -42,6 +42,16 @@ The Ingrain provider lane and Ingrain CLI/skill sidecar lane are intentionally s
 
 Direct OpenViking resource retrieval may be kept as a diagnostic lane, but it must be labeled as resource retrieval, not as the Hermes OpenViking provider score.
 
+### Experimental Aeonik MIND V3 Lane
+
+The next implementation loop adds an experimental sixth lane:
+
+| Lane | Meaning | Evidence requirement |
+|---|---|---|
+| Aeonik MIND V3 sidecar | Hermes default memory remains the runner baseline while Sandbox Universe traces are ingested into Aeonik MIND V3 as event-sourced memory. | Real local MIND API/MemoryAPI output plus command logs, or an explicit blocked result with command evidence. Mock storage may be used only for adapter tests and must not be presented as provider proof. |
+
+This lane is specified in [mind-v3-sandbox-universe-lane-spec.md](mind-v3-sandbox-universe-lane-spec.md). It should stay experimental until real local MIND artifacts exist.
+
 ## Benchmark Name
 
 Working CLI name:

@@ -12,6 +12,23 @@ The repo now has inspectable evidence, raw provider outputs, command logs, deter
 
 > Ingrain improves trace-level learned-experience behavior on this preregistered Sandbox Universe benchmark, especially source-of-truth promotion and stale-claim suppression. It still has visible misses on repeated-work and current-status synthesis.
 
+## Technical Evaluator Framing
+
+If this repo is read as a job-application or portfolio artifact, the strongest signal is not the score. The strongest signal is the work loop:
+
+- identify a concrete agent failure class
+- build a small system that addresses it
+- design a hard local eval around the failure
+- compare real provider lanes where available
+- publish raw artifacts and command logs
+- revise claims downward when the evidence is narrower than the ambition
+
+Suggested one-paragraph framing:
+
+> I built Ingrain, a learned-experience layer for autonomous coding agents, then built Sandbox Universe, a trace-level eval for stale-plan suppression, source-of-truth precedence, and cross-session judgment. The result is less a leaderboard than a failure microscope: it shows that raw memory can look strong while still leaking stale instructions, and it isolates where learned-experience systems need better synthesis.
+
+Avoid leading with virality, winning, or broad provider comparisons. Lead with careful agent-systems research and the remaining failure modes.
+
 ## Issues Found And Fixed
 
 | Issue | Risk | Fix |
@@ -42,6 +59,7 @@ Artifacts:
 - Graph JSON: [evidence/sandbox-universe-v0/graph.json](evidence/sandbox-universe-v0/graph.json)
 - Mermaid graph: [evidence/sandbox-universe-v0/graph.mmd](evidence/sandbox-universe-v0/graph.mmd)
 - 3D viewer: [visualizations/sandbox-universe-3d.html](visualizations/sandbox-universe-3d.html)
+- Scoring explanation: [sandbox-universe-scoring.md](sandbox-universe-scoring.md)
 
 ## Remaining Risks
 

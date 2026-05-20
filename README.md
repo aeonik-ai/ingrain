@@ -47,6 +47,29 @@ Ingrain is for the layer after recall:
 
 > Logs are what happened. Learned experience is what should change next time.
 
+## Research Posture
+
+This repo is an applied agent-systems artifact, not a claim of broad memory superiority.
+
+The question Ingrain studies is narrow:
+
+> Can an autonomous coding agent carry forward the right learned experience without reviving stale plans, leaking invalid claims, or confusing old work with current intent?
+
+The strongest current evidence is the Sandbox Universe benchmark: preregistered traces, raw provider outputs, command logs, deterministic scoring, graph artifacts, and visible misses. The benchmark is useful because it exposes failure modes, not because it settles which memory provider is generally best.
+
+### What This Claims
+
+- Ingrain can turn corrections, source-of-truth docs, decisions, stale-plan warnings, and completed outcomes into compact context for future agent runs.
+- On the current Sandbox Universe L5 run, Ingrain sidecar/provider lanes improve learned-experience behavior over raw Hermes default memory by suppressing stale/forbidden context while preserving source-linked evidence.
+- CLI + Skill sidecar mode is a practical adoption path because it can run alongside the agent's existing memory provider.
+
+### What This Does Not Claim
+
+- It does not prove Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or Hermes default memory.
+- It does not claim SOTA memory performance.
+- It does not replace active goals, missions, Kanban, scheduling, or task lifecycle.
+- It does not replace resource retrieval, document search, or vector databases.
+
 ## What Ingrain Learns From
 
 Ingrain records agent work into a local event ledger, promotes durable lessons, compiles readable markdown, and hydrates future turns with compact context.
@@ -237,9 +260,20 @@ For the benchmark posture and external standards, see [docs/eval-standards.md](d
 
 The next benchmark tier is specified in [docs/sandbox-universe-eval-spec.md](docs/sandbox-universe-eval-spec.md). It is designed as a much harder, turn-by-turn universe eval where a `60/100` can be a strong result.
 
+An experimental Aeonik MIND V3 lane is specified in [docs/mind-v3-sandbox-universe-lane-spec.md](docs/mind-v3-sandbox-universe-lane-spec.md). It should stay internal until real local MIND artifacts exist.
+
 The current Sandbox Universe L5 run is intentionally humbling: Hermes default `623/1000`, Hermes default + Ingrain CLI/skill sidecar `673/1000`, Ingrain as a Hermes provider `673/1000`, Hindsight local `405/1000`, and Hermes OpenViking `245/1000`. The artifacts and graph live in [docs/evidence/sandbox-universe-v0/](docs/evidence/sandbox-universe-v0/), with a 3D viewer at [docs/visualizations/sandbox-universe-3d.html](docs/visualizations/sandbox-universe-3d.html).
 
 Launch-readiness audit: [docs/launch-readiness-audit.md](docs/launch-readiness-audit.md).
+Scoring explanation: [docs/sandbox-universe-scoring.md](docs/sandbox-universe-scoring.md).
+
+Quick local reproduction:
+
+```bash
+ingrain universe-eval --provider ingrain-sidecar --level 3 --output-dir /tmp/ingrain-sandbox-l3
+```
+
+That path does not need Hindsight, OpenViking, or network access. Full provider comparison requires local Hermes, Hindsight local mode, and an OpenViking server.
 
 For a harder local benchmark with room to improve, run:
 

@@ -253,3 +253,14 @@ Next:
   - Hindsight local embedded: `405/1000`
   - Hermes OpenViking provider: `245/1000`
 - Key finding: source-of-truth promotion is a large general improvement for Ingrain, but repeated-work/status synthesis remains weak (`repeated_work_cross_thread_l4` is still `37/100`).
+
+## 2026-05-20 08:35 PDT
+
+- Added a top-of-page Sandbox Universe bar chart to `docs/evals.md` using the committed real `docs/evidence/sandbox-universe-v0/results.csv` scores.
+- Added `docs/mind-v3-sandbox-universe-lane-spec.md` for an experimental Aeonik MIND V3 sidecar lane:
+  - real-or-blocked evidence only
+  - canonical MIND V3 event type mapping
+  - Hermes goals/missions/Kanban boundary
+  - local MIND discovery path under `/Users/benlloyd/Desktop/REPO/aeonik/apps/server`
+  - acceptance criteria for L3/L5 Sandbox Universe integration
+- Linked the MIND V3 lane spec from README, `docs/evals.md`, and `docs/sandbox-universe-eval-spec.md`.
