@@ -264,3 +264,16 @@ Next:
   - local MIND discovery path under `/Users/benlloyd/Desktop/REPO/aeonik/apps/server`
   - acceptance criteria for L3/L5 Sandbox Universe integration
 - Linked the MIND V3 lane spec from README, `docs/evals.md`, and `docs/sandbox-universe-eval-spec.md`.
+
+## 2026-05-20 08:55 PDT
+
+- Implemented the optional `aeonik-mind-v3-sidecar` Sandbox Universe provider lane:
+  - aliases: `mind-v3`, `aeonik-mind`, `aeonik-mind-v3`, `mind-v3-sidecar`
+  - canonical MIND V3 event mapping for source docs, corrections, decisions, observations, outcomes, query turns, and supersession edges
+  - real-or-blocked execution path using `/Users/benlloyd/Desktop/REPO/aeonik/apps/server`
+  - command discovery logs with redacted env presence only
+- Ran the focused L3 MIND V3 lane:
+  - local MIND run path discovered successfully with `uv run python -m mind.serve --help`
+  - lane is blocked, not scored, because `MIND_V3_EVAL_MODE=live`, `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `MIND_V3_WORKSPACE_ID`, and `MIND_V3_AGENT_ID` are not present
+  - blocked evidence is under `docs/evidence/mind-v3-sandbox-lane/`
+- Added tests that verify MIND V3 mapping never emits removed event types (`doc`, `memory`, `state`, `synopsis`).

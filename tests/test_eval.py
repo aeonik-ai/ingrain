@@ -6,7 +6,10 @@ from aeonik_ingrain.evals.live_les import UNIVERSES, format_live_les, score_live
 from aeonik_ingrain.evals.live_openviking import _candidate_read_uris, format_live_openviking_comparison
 from aeonik_ingrain.evals.runner import run_eval
 from aeonik_ingrain.evals.sandbox_universe import (
+    CANONICAL_MIND_V3_EVENT_TYPES,
+    REMOVED_MIND_V3_EVENT_TYPES,
     UNIVERSES as SANDBOX_UNIVERSES,
+    _mind_v3_records_for_universe,
     _normalize_providers as normalize_sandbox_providers,
     build_sandbox_graph,
     format_sandbox_universe_markdown,
@@ -123,6 +126,23 @@ class EvalTests(unittest.TestCase):
             ["hermes-default", "ingrain-sidecar", "ingrain", "hindsight", "openviking"],
         )
         self.assertEqual(normalize_sandbox_providers(["sidecar"]), ["ingrain-sidecar"])
+        self.assertEqual(normalize_sandbox_providers(["mind-v3"]), ["aeonik-mind-v3-sidecar"])
+
+    def test_mind_v3_mapping_uses_only_canonical_event_types(self):
+        universe = next(item for item in SANDBOX_UNIVERSES if item.name == "launch_claims_conflict_l3")
+        records = _mind_v3_records_for_universe(universe)
+        event_types = {record["event_type"] for record in records}
+        self.assertTrue(event_types)
+        self.assertFalse(event_types & REMOVED_MIND_V3_EVENT_TYPES)
+        self.assertTrue(event_types <= CANONICAL_MIND_V3_EVENT_TYPES)
+        for record in records:
+            meta = record["meta"]
+            self.assertEqual(meta["source_system"], "ingrain_sandbox")
+            self.assertIn("source_id", meta)
+            if record["event_type"] in {"artifact", "interaction", "observation"}:
+                self.assertIn("source_type", meta)
+                self.assertIn("category", meta)
+                self.assertIn(f"{meta['source_type']}_metadata", meta)
 
     def test_sandbox_score_rewards_traceable_current_truth(self):
         universe = next(item for item in SANDBOX_UNIVERSES if item.name == "launch_claims_conflict_l3")

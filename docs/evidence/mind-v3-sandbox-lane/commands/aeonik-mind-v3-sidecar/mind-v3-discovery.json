@@ -1,0 +1,47 @@
+{
+  "commands": [
+    {
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "-m",
+        "mind.serve",
+        "--help"
+      ],
+      "cwd": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+      "name": "serve_help",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: serve.py [-h] [--mock] [--port PORT]\n\nMIND V3.1 Dev Server\n\noptions:\n  -h, --help   show this help message and exit\n  --mock       Run with mock backends (default)\n  --port PORT  Port to listen on (default: 8321)",
+      "timed_out": false
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "-c",
+        "import json, os; print(json.dumps({'SUPABASE_URL': bool(os.getenv('SUPABASE_URL')), 'SUPABASE_SERVICE_KEY': bool(os.getenv('SUPABASE_SERVICE_KEY')), 'MIND_V3_WORKSPACE_ID': bool(os.getenv('MIND_V3_WORKSPACE_ID')), 'MIND_V3_AGENT_ID': bool(os.getenv('MIND_V3_AGENT_ID'))}, sort_keys=True))"
+      ],
+      "cwd": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+      "name": "env_presence",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"MIND_V3_AGENT_ID\": false, \"MIND_V3_WORKSPACE_ID\": false, \"SUPABASE_SERVICE_KEY\": false, \"SUPABASE_URL\": false}",
+      "timed_out": false
+    }
+  ],
+  "env": {
+    "MIND_V3_AGENT_ID": false,
+    "MIND_V3_EVAL_MODE": false,
+    "MIND_V3_WORKSPACE_ID": false,
+    "SUPABASE_SERVICE_KEY": false,
+    "SUPABASE_URL": false
+  },
+  "pyproject_exists": true,
+  "root": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+  "root_exists": true,
+  "serve_exists": true,
+  "serve_help_ok": true
+}

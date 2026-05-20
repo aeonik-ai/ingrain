@@ -1,6 +1,6 @@
 # Aeonik MIND V3 Sandbox Universe Lane Spec
 
-Status: proposed implementation loop; heartbeat-owned
+Status: adapter v0 implemented; live scoring blocked pending MIND V3 live eval environment
 
 Owner: Aeonik Ingrain
 
@@ -176,9 +176,9 @@ If Hermes goals, missions, or Kanban say something is active, Hermes wins. If MI
 ## Acceptance Criteria
 
 - `docs/sandbox-universe-eval-spec.md` lists the MIND V3 lane as experimental.
-- `ingrain universe-eval --provider aeonik-mind-v3-sidecar --level 3` returns either a real scored run or a blocked result with command evidence.
-- Raw MIND outputs live under `docs/evidence/sandbox-universe-v0/raw/aeonik-mind-v3-sidecar/`.
-- MIND command logs live under `docs/evidence/sandbox-universe-v0/commands/aeonik-mind-v3-sidecar/`.
+- `ingrain universe-eval --provider aeonik-mind-v3-sidecar --level 3` returns either a real scored run or a blocked result with command evidence. Current status: blocked because the local MIND path is present, but live eval env variables are not configured.
+- Focused MIND-only runs live under `docs/evidence/mind-v3-sandbox-lane/`.
+- Full matrix MIND runs, once live env is configured, should live under `docs/evidence/sandbox-universe-v0/raw/aeonik-mind-v3-sidecar/` and `docs/evidence/sandbox-universe-v0/commands/aeonik-mind-v3-sidecar/`.
 - No public doc contains a mock MIND score as provider evidence.
 - Mapping tests verify that no removed MIND event types are emitted.
 - README and eval docs are updated only after real or blocked artifacts exist.

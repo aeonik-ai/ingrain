@@ -195,6 +195,8 @@ It is intended to be harder than LES-Hard: multi-session, multi-thread, source-o
 
 The experimental Aeonik MIND V3 lane is specified separately in [mind-v3-sandbox-universe-lane-spec.md](mind-v3-sandbox-universe-lane-spec.md). It should not be scored in public docs until real local MIND artifacts exist.
 
+Current MIND V3 lane status: local MIND discovery passes, but the live lane is intentionally blocked because `MIND_V3_EVAL_MODE=live`, `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `MIND_V3_WORKSPACE_ID`, and `MIND_V3_AGENT_ID` are not present in this eval environment. Blocked evidence is saved under [evidence/mind-v3-sandbox-lane/](evidence/mind-v3-sandbox-lane/). No mock MIND score is reported.
+
 ### How To Read The Scores
 
 Sandbox Universe is a failure microscope, not a provider leaderboard.
@@ -259,3 +261,4 @@ Artifacts:
 - [Launch-readiness audit](launch-readiness-audit.md)
 - [Scoring explanation](sandbox-universe-scoring.md)
 - [Experimental MIND V3 lane spec](mind-v3-sandbox-universe-lane-spec.md)
+- [Experimental MIND V3 blocked evidence](evidence/mind-v3-sandbox-lane/report.md)

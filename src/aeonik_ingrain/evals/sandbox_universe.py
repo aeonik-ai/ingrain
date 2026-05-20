@@ -52,7 +52,28 @@ PROVIDER_ALIASES = {
     "hindsight": "hindsight",
     "openviking": "openviking",
     "hermes-openviking": "openviking",
+    "mind-v3": "aeonik-mind-v3-sidecar",
+    "aeonik-mind": "aeonik-mind-v3-sidecar",
+    "aeonik-mind-v3": "aeonik-mind-v3-sidecar",
+    "aeonik-mind-v3-sidecar": "aeonik-mind-v3-sidecar",
+    "mind-v3-sidecar": "aeonik-mind-v3-sidecar",
 }
+
+DEFAULT_MIND_V3_ROOT = "../aeonik/apps/server"
+CANONICAL_MIND_V3_EVENT_TYPES = {
+    "artifact",
+    "interaction",
+    "observation",
+    "action",
+    "decision",
+    "plan",
+    "goal",
+    "reflection",
+    "metric",
+    "experiment",
+    "chunk",
+}
+REMOVED_MIND_V3_EVENT_TYPES = {"doc", "memory", "state", "synopsis"}
 
 
 INGRAIN_SIDECAR_SCRIPT = r'''
@@ -114,6 +135,92 @@ print("</hermes_default_memory_active>")
 print("<ingrain_cli_skill_sidecar>")
 print(hydrated)
 print("</ingrain_cli_skill_sidecar>")
+'''
+
+
+MIND_V3_PROVIDER_SCRIPT = r'''
+import asyncio
+import json
+import os
+import sys
+
+from mind.api import MemoryAPI
+from mind.models import EdgeOrigin, EdgeType, MemoryEventEdge
+
+payload = json.loads(open(sys.argv[1], encoding="utf-8").read())
+
+
+async def main():
+    workspace_id = os.environ["MIND_V3_WORKSPACE_ID"]
+    agent_id = os.environ["MIND_V3_AGENT_ID"]
+    run_label = os.environ["MIND_V3_RUN_LABEL"]
+    memory = MemoryAPI(workspace_id=workspace_id, agent_id=agent_id)
+    ids_by_source = {}
+    for record in payload["mind_v3_events"]:
+        labels = list(record.get("labels") or [])
+        if run_label not in labels:
+            labels.append(run_label)
+        event_id = await memory.add(
+            event_type=record["event_type"],
+            text=record["text"],
+            meta=record["meta"],
+            labels=labels,
+            fingerprint=f"ingrain-sandbox:{run_label}:{record['source_id']}",
+            auto_embed=False,
+            visibility="workspace",
+        )
+        ids_by_source[record["source_id"]] = event_id
+
+    edges = []
+    for old_source, new_source in payload.get("supersedes", []):
+        old_id = ids_by_source.get(old_source)
+        new_id = ids_by_source.get(new_source)
+        if old_id and new_id:
+            edges.append(
+                MemoryEventEdge(
+                    workspace_id=workspace_id,
+                    src_event_id=new_id,
+                    dst_event_id=old_id,
+                    edge_type=EdgeType.SUPERSEDES,
+                    confidence=1.0,
+                    properties={
+                        "source_system": "ingrain_sandbox",
+                        "universe_id": payload["name"],
+                        "old_source_id": old_source,
+                        "new_source_id": new_source,
+                    },
+                    origin=EdgeOrigin.DETERMINISTIC,
+                )
+            )
+    if edges:
+        await memory.add_edges(edges)
+
+    events = await memory.list(
+        source_system="ingrain_sandbox",
+        labels=[run_label],
+        limit=100,
+        order="asc",
+        current_only=True,
+    )
+    events = [event for event in events if event.meta.get("universe_id") == payload["name"]]
+
+    print("<aeonik_mind_v3_sidecar>")
+    print("MIND V3 live MemoryAPI path: events ingested and listed with current_only=True.")
+    print(f"universe={payload['name']} query={payload['query']!r} events={len(events)}")
+    print("Hermes intent boundary: active goals, missions, Kanban, scheduling, and task lifecycle still belong to Hermes.")
+    for event in events:
+        meta = event.meta or {}
+        event_type = getattr(event.event_type, "value", event.event_type)
+        source_id = meta.get("source_id") or meta.get("external", {}).get("id") or str(event.id)
+        thread = meta.get("thread_id") or meta.get("trace", {}).get("thread_id") or ""
+        print(
+            f"- source_id={source_id} event_type={event_type} thread={thread} "
+            f"trace_kind={meta.get('trace_kind', '')} text={event.text}"
+        )
+    print("</aeonik_mind_v3_sidecar>")
+
+
+asyncio.run(main())
 '''
 
 
@@ -516,6 +623,7 @@ def run_sandbox_universe_eval(
     hermes_root: str | Path | None = None,
     hermes_python: str | Path | None = None,
     openviking_endpoint: str | None = None,
+    mind_root: str | Path | None = None,
     timeout: int = 120,
 ) -> dict[str, Any]:
     selected = [u for u in UNIVERSES if u.level <= level]
@@ -527,6 +635,7 @@ def run_sandbox_universe_eval(
     command_dir.mkdir(parents=True, exist_ok=True)
     runtime = _resolve_hermes_runtime(hermes_root=hermes_root, hermes_python=hermes_python)
     endpoint = openviking_endpoint or os.environ.get("OPENVIKING_ENDPOINT") or "http://127.0.0.1:1933"
+    resolved_mind_root = _resolve_mind_v3_root(mind_root)
     result: dict[str, Any] = {
         "name": "Sandbox Universe Eval v0",
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -549,6 +658,8 @@ def run_sandbox_universe_eval(
             "hermes_python": str(runtime.python),
             "hermes_available": runtime.available,
             "openviking_endpoint": endpoint,
+            "mind_v3_root": str(resolved_mind_root),
+            "mind_v3_live_env_present": _mind_v3_live_env_present(),
         },
         "universes": [_universe_summary(u) for u in selected],
         "providers": {},
@@ -560,6 +671,7 @@ def run_sandbox_universe_eval(
         "ingrain": _run_ingrain_provider,
         "hindsight": _run_hindsight_provider,
         "openviking": _run_openviking_provider,
+        "aeonik-mind-v3-sidecar": _run_mind_v3_sidecar,
     }
     for provider in provider_names:
         result["providers"][provider] = runners[provider](
@@ -568,6 +680,7 @@ def run_sandbox_universe_eval(
             raw_dir=raw_dir / provider,
             command_dir=command_dir / provider,
             openviking_endpoint=endpoint,
+            mind_root=resolved_mind_root,
             timeout=timeout,
         )
     result["graph"] = build_sandbox_graph(result)
@@ -916,6 +1029,116 @@ def _run_openviking_provider(**kwargs: Any) -> dict[str, Any]:
     )
 
 
+def _run_mind_v3_sidecar(**kwargs: Any) -> dict[str, Any]:
+    mind_root: Path = kwargs["mind_root"]
+    command_dir: Path = kwargs["command_dir"]
+    timeout: int = kwargs["timeout"]
+    command_dir.mkdir(parents=True, exist_ok=True)
+    probe = _probe_mind_v3(mind_root, command_dir, timeout=min(timeout, 30))
+    if not probe.get("root_exists"):
+        return _blocked(f"Aeonik MIND V3 root not found at {mind_root}.", probe=probe)
+    if not probe.get("serve_help_ok"):
+        return _blocked("Aeonik MIND V3 local run path did not pass `uv run python -m mind.serve --help`.", probe=probe)
+
+    mode = os.environ.get("MIND_V3_EVAL_MODE", "").strip().lower()
+    missing = _missing_mind_v3_live_env()
+    if mode not in {"live", "1", "true", "yes"}:
+        return _blocked(
+            "Aeonik MIND V3 live eval is not enabled. Set MIND_V3_EVAL_MODE=live plus "
+            "SUPABASE_URL, SUPABASE_SERVICE_KEY, MIND_V3_WORKSPACE_ID, and MIND_V3_AGENT_ID. "
+            "The local mock dev server is available, but mock storage is not scored as real provider evidence.",
+            probe=probe,
+            missing_env=missing,
+        )
+    if missing:
+        return _blocked(
+            "Aeonik MIND V3 live eval is missing required environment: " + ", ".join(missing),
+            probe=probe,
+            missing_env=missing,
+        )
+
+    return _run_mind_v3_universes(
+        universes=kwargs["universes"],
+        mind_root=mind_root,
+        raw_dir=kwargs["raw_dir"],
+        command_dir=command_dir,
+        timeout=timeout,
+    )
+
+
+def _run_mind_v3_universes(
+    *,
+    universes: list[SandboxUniverse],
+    mind_root: Path,
+    raw_dir: Path,
+    command_dir: Path,
+    timeout: int,
+) -> dict[str, Any]:
+    rows = []
+    failures = []
+    total = 0
+    provider = "aeonik-mind-v3-sidecar"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    command_dir.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=f"ingrain-sandbox-universe-{provider}-") as tmp_name:
+        tmp = Path(tmp_name)
+        run_label = f"ingrain-sandbox-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-{os.getpid()}"
+        for universe in universes:
+            payload = _provider_payload(universe)
+            payload_path = tmp / f"{universe.name}.json"
+            payload_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+            env = os.environ.copy()
+            env["MIND_V3_RUN_LABEL"] = f"{run_label}-{universe.name}"
+            command = ["uv", "run", "python", "-c", MIND_V3_PROVIDER_SCRIPT, str(payload_path)]
+            run = _run_mind_command(command=command, cwd=mind_root, env=env, timeout=timeout)
+            returncode = run["returncode"]
+            output = str(run["stdout"]).strip()
+            stderr = str(run["stderr"]).strip()
+            timed_out = bool(run["timed_out"])
+            timeout_error = f"provider subprocess timed out after {timeout}s" if timed_out else ""
+            raw_path = raw_dir / f"{universe.name}.txt"
+            raw_path.write_text(output + ("\n" if output else ""), encoding="utf-8")
+            (command_dir / f"{universe.name}.json").write_text(
+                json.dumps(
+                    {
+                        "command": ["uv", "run", "python", "-c", "<script>", str(payload_path)],
+                        "cwd": str(mind_root),
+                        "returncode": returncode,
+                        "stdout_chars": len(output),
+                        "stderr": stderr,
+                        "timed_out": timed_out,
+                        "timeout_seconds": timeout if timed_out else None,
+                        "env": _mind_v3_env_booleans(),
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            score = score_sandbox_output(output, universe)
+            if timed_out:
+                score = {**score, "score": 0, "provider_error": timeout_error}
+                failures.append({"universe": universe.name, "returncode": returncode, "stderr": stderr, "error": timeout_error})
+            elif returncode != 0:
+                failures.append({"universe": universe.name, "returncode": returncode, "stderr": stderr})
+            if score.get("provider_error"):
+                failure = {"universe": universe.name, "returncode": returncode, "stderr": stderr, "error": score["provider_error"]}
+                if failure not in failures:
+                    failures.append(failure)
+            total += int(score["score"])
+            rows.append({"universe": universe.name, "level": universe.level, **score, "raw_output": str(raw_path)})
+    max_score = len(universes) * 100
+    return {
+        "status": _interpret_provider_score(total, max_score, failures),
+        "score": total,
+        "max": max_score,
+        "interpretation": _score_band(total, max_score),
+        "failures": failures,
+        "universes": rows,
+    }
+
+
 def _run_provider_universes(
     *,
     universes: list[SandboxUniverse],
@@ -928,6 +1151,7 @@ def _run_provider_universes(
     script: str,
     env_builder: Callable[[Path, SandboxUniverse, Path], dict[str, str]],
     before_run: Callable[[Path], Any] | None = None,
+    mind_root: Path | None = None,
 ) -> dict[str, Any]:
     rows = []
     failures = []
@@ -1038,6 +1262,104 @@ def _run_provider_command(*, command: list[str], cwd: Path, env: dict[str, str],
         return {"returncode": proc.returncode, "stdout": stdout, "stderr": stderr, "timed_out": True}
 
 
+def _run_mind_command(*, command: list[str], cwd: Path, env: dict[str, str], timeout: int) -> dict[str, Any]:
+    try:
+        return _run_provider_command(command=command, cwd=cwd, env=env, timeout=timeout)
+    except FileNotFoundError as exc:
+        return {"returncode": 127, "stdout": "", "stderr": str(exc), "timed_out": False}
+    except OSError as exc:
+        return {"returncode": 126, "stdout": "", "stderr": str(exc), "timed_out": False}
+
+
+def _resolve_mind_v3_root(mind_root: str | Path | None = None) -> Path:
+    configured = mind_root or os.environ.get("AEONIK_MIND_ROOT") or os.environ.get("MIND_V3_ROOT") or DEFAULT_MIND_V3_ROOT
+    if mind_root or os.environ.get("AEONIK_MIND_ROOT") or os.environ.get("MIND_V3_ROOT"):
+        return Path(configured).expanduser().resolve()
+    repo_sibling = Path(__file__).resolve().parents[4] / "aeonik" / "apps" / "server"
+    if repo_sibling.exists():
+        return repo_sibling.resolve()
+    cwd_sibling = Path.cwd().resolve().parent / "aeonik" / "apps" / "server"
+    if cwd_sibling.exists():
+        return cwd_sibling.resolve()
+    return Path(configured).expanduser().resolve()
+
+
+def _probe_mind_v3(mind_root: Path, command_dir: Path, timeout: int) -> dict[str, Any]:
+    env = os.environ.copy()
+    commands: list[dict[str, Any]] = []
+    probe: dict[str, Any] = {
+        "root": str(mind_root),
+        "root_exists": mind_root.exists(),
+        "pyproject_exists": (mind_root / "pyproject.toml").exists(),
+        "serve_exists": (mind_root / "mind" / "serve.py").exists(),
+        "commands": commands,
+        "env": _mind_v3_env_booleans(),
+    }
+    if not mind_root.exists():
+        _write_mind_v3_probe(command_dir, probe)
+        return probe
+
+    for name, command in (
+        ("serve_help", ["uv", "run", "python", "-m", "mind.serve", "--help"]),
+        (
+            "env_presence",
+            [
+                "uv",
+                "run",
+                "python",
+                "-c",
+                (
+                    "import json, os; print(json.dumps({"
+                    "'SUPABASE_URL': bool(os.getenv('SUPABASE_URL')), "
+                    "'SUPABASE_SERVICE_KEY': bool(os.getenv('SUPABASE_SERVICE_KEY')), "
+                    "'MIND_V3_WORKSPACE_ID': bool(os.getenv('MIND_V3_WORKSPACE_ID')), "
+                    "'MIND_V3_AGENT_ID': bool(os.getenv('MIND_V3_AGENT_ID'))"
+                    "}, sort_keys=True))"
+                ),
+            ],
+        ),
+    ):
+        run = _run_mind_command(command=command, cwd=mind_root, env=env, timeout=timeout)
+        commands.append(
+            {
+                "name": name,
+                "command": command,
+                "cwd": str(mind_root),
+                "returncode": run["returncode"],
+                "stdout": str(run["stdout"]).strip()[:4000],
+                "stderr": str(run["stderr"]).strip()[:4000],
+                "timed_out": bool(run["timed_out"]),
+            }
+        )
+    probe["serve_help_ok"] = any(item["name"] == "serve_help" and item["returncode"] == 0 for item in commands)
+    _write_mind_v3_probe(command_dir, probe)
+    return probe
+
+
+def _write_mind_v3_probe(command_dir: Path, probe: dict[str, Any]) -> None:
+    command_dir.mkdir(parents=True, exist_ok=True)
+    (command_dir / "mind-v3-discovery.json").write_text(json.dumps(probe, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _mind_v3_env_booleans() -> dict[str, bool]:
+    return {
+        "SUPABASE_URL": bool(os.environ.get("SUPABASE_URL")),
+        "SUPABASE_SERVICE_KEY": bool(os.environ.get("SUPABASE_SERVICE_KEY")),
+        "MIND_V3_WORKSPACE_ID": bool(os.environ.get("MIND_V3_WORKSPACE_ID")),
+        "MIND_V3_AGENT_ID": bool(os.environ.get("MIND_V3_AGENT_ID")),
+        "MIND_V3_EVAL_MODE": os.environ.get("MIND_V3_EVAL_MODE", "").strip().lower() in {"live", "1", "true", "yes"},
+    }
+
+
+def _missing_mind_v3_live_env() -> list[str]:
+    required = ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "MIND_V3_WORKSPACE_ID", "MIND_V3_AGENT_ID")
+    return [name for name in required if not os.environ.get(name)]
+
+
+def _mind_v3_live_env_present() -> bool:
+    return not _missing_mind_v3_live_env() and os.environ.get("MIND_V3_EVAL_MODE", "").strip().lower() in {"live", "1", "true", "yes"}
+
+
 def _cleanup_hindsight_eval_processes(universe: SandboxUniverse) -> None:
     profile_suffix = "".join(ch if ch.isalnum() or ch in {"-", "_"} else "-" for ch in universe.name)
     patterns = (
@@ -1056,10 +1378,140 @@ def _provider_payload(universe: SandboxUniverse) -> dict[str, Any]:
         "name": universe.name,
         "query": universe.query,
         "events": _flatten_universe_events(universe),
+        "mind_v3_events": _mind_v3_records_for_universe(universe),
         "source_of_truth": [asdict(doc) for doc in universe.source_of_truth],
         "sessions": [asdict(session) for session in universe.sessions],
         "supersedes": list(universe.supersedes),
     }
+
+
+def _mind_v3_records_for_universe(universe: SandboxUniverse) -> list[dict[str, Any]]:
+    labels = ["sandbox-universe", "aeonik-mind-v3-sidecar", universe.name, f"L{universe.level}"]
+    records: list[dict[str, Any]] = []
+    for doc in universe.source_of_truth:
+        records.append(
+            _mind_v3_record(
+                universe=universe,
+                source_id=doc.id,
+                event_type="artifact",
+                text=doc.text,
+                trace_kind=doc.kind,
+                source_type="document",
+                category="living",
+                typed_metadata={
+                    "title": doc.title,
+                    "kind": doc.kind,
+                    "created_at": doc.created_at,
+                },
+                labels=labels,
+            )
+        )
+    for session in universe.sessions:
+        for turn in session.turns:
+            event_type = _mind_v3_event_type_for_trace(turn.kind, actor=turn.actor)
+            records.append(
+                _mind_v3_record(
+                    universe=universe,
+                    source_id=turn.id,
+                    event_type=event_type,
+                    text=turn.text,
+                    trace_kind=turn.kind,
+                    source_type="message",
+                    category="event",
+                    typed_metadata={
+                        "session_id": session.id,
+                        "thread_id": session.thread,
+                        "actor": turn.actor,
+                        "turn": turn.turn,
+                        "started_at": session.started_at,
+                    },
+                    labels=labels,
+                    session_id=session.id,
+                    thread_id=session.thread,
+                    turn=turn.turn,
+                )
+            )
+    for old, new in universe.supersedes:
+        source_id = f"{universe.name}.edge.{old}.to.{new}"
+        records.append(
+            _mind_v3_record(
+                universe=universe,
+                source_id=source_id,
+                event_type="observation",
+                text=f"{old} is superseded_by {new}.",
+                trace_kind="supersession",
+                source_type="note",
+                category="event",
+                typed_metadata={"old_source_id": old, "new_source_id": new},
+                labels=labels,
+            )
+        )
+    return records
+
+
+def _mind_v3_record(
+    *,
+    universe: SandboxUniverse,
+    source_id: str,
+    event_type: str,
+    text: str,
+    trace_kind: str,
+    source_type: str,
+    category: str,
+    typed_metadata: dict[str, Any],
+    labels: list[str],
+    session_id: str | None = None,
+    thread_id: str | None = None,
+    turn: int | None = None,
+) -> dict[str, Any]:
+    if event_type in REMOVED_MIND_V3_EVENT_TYPES or event_type not in CANONICAL_MIND_V3_EVENT_TYPES:
+        raise ValueError(f"Invalid MIND V3 event type for Sandbox Universe: {event_type}")
+    typed_key = f"{source_type}_metadata"
+    meta: dict[str, Any] = {
+        "source_type": source_type,
+        "source_system": "ingrain_sandbox",
+        "category": category,
+        "external": {"id": source_id},
+        typed_key: typed_metadata,
+        "source_id": source_id,
+        "universe_id": universe.name,
+        "level": universe.level,
+        "trace_kind": trace_kind,
+    }
+    if session_id:
+        meta["session_id"] = session_id
+    if thread_id:
+        meta["thread_id"] = thread_id
+    if turn is not None:
+        meta["turn"] = turn
+    return {
+        "source_id": source_id,
+        "event_type": event_type,
+        "text": text,
+        "meta": meta,
+        "labels": list(labels),
+    }
+
+
+def _mind_v3_event_type_for_trace(kind: str, *, actor: str = "") -> str:
+    normalized = kind.strip().lower().replace("-", "_")
+    if normalized in {"correction", "lesson", "learning", "stale_plan_warning"}:
+        return "reflection"
+    if normalized in {"decision", "approval", "rejection"}:
+        return "decision"
+    if normalized in {"failure", "blocked", "observation", "warning", "status"}:
+        return "observation"
+    if normalized in {"outcome", "completed", "completion", "score", "metric"}:
+        return "metric"
+    if normalized in {"plan", "todo", "mission"}:
+        return "plan"
+    if normalized in {"goal", "objective"}:
+        return "goal"
+    if normalized in {"experiment", "test"}:
+        return "experiment"
+    if actor.strip().lower() == "assistant":
+        return "action"
+    return "interaction"
 
 
 def _flatten_universe_events(universe: SandboxUniverse) -> list[str]:

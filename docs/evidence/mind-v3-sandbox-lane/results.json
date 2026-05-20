@@ -1,0 +1,727 @@
+{
+  "artifact_dir": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/mind-v3-sandbox-lane",
+  "claim": "Can the provider survive messy multi-session work history without leaking stale or invalid learned experience?",
+  "created_at": "2026-05-20T15:44:35+00:00",
+  "environment": {
+    "hermes_available": true,
+    "hermes_python": "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
+    "hermes_root": "/Users/benlloyd/.hermes/hermes-agent",
+    "mind_v3_live_env_present": false,
+    "mind_v3_root": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+    "openviking_endpoint": "http://127.0.0.1:1933"
+  },
+  "graph": {
+    "edges": [
+      {
+        "from": "doc_launch_v1",
+        "to": "launch_claims_conflict_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "doc_eval_v2",
+        "to": "launch_claims_conflict_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_launch_a",
+        "to": "launch_claims_conflict_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_launch_a.turn_1",
+        "to": "session_launch_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_launch_a.turn_2",
+        "to": "session_launch_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_launch_a.turn_1",
+        "to": "session_launch_a.turn_2",
+        "type": "next_turn"
+      },
+      {
+        "from": "doc_launch_v1",
+        "to": "session_launch_a.turn_2",
+        "type": "superseded_by"
+      },
+      {
+        "from": "session_launch_a.turn_1",
+        "to": "session_launch_a.turn_2",
+        "type": "superseded_by"
+      },
+      {
+        "from": "doc_openviking_old",
+        "to": "provider_setup_recovery_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "doc_openviking_current",
+        "to": "provider_setup_recovery_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "doc_hindsight_env",
+        "to": "provider_setup_recovery_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_provider_a",
+        "to": "provider_setup_recovery_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_provider_a.turn_1",
+        "to": "session_provider_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_provider_a.turn_2",
+        "to": "session_provider_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_provider_a.turn_1",
+        "to": "session_provider_a.turn_2",
+        "type": "next_turn"
+      },
+      {
+        "from": "doc_openviking_old",
+        "to": "doc_openviking_current",
+        "type": "superseded_by"
+      },
+      {
+        "from": "session_provider_a.turn_1",
+        "to": "session_provider_a.turn_2",
+        "type": "superseded_by"
+      },
+      {
+        "from": "doc_boundary",
+        "to": "goals_missions_kanban_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "doc_old_plan",
+        "to": "goals_missions_kanban_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_boundary_a",
+        "to": "goals_missions_kanban_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_boundary_a.turn_1",
+        "to": "session_boundary_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_boundary_a.turn_2",
+        "to": "session_boundary_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_boundary_a.turn_1",
+        "to": "session_boundary_a.turn_2",
+        "type": "next_turn"
+      },
+      {
+        "from": "doc_old_plan",
+        "to": "doc_boundary",
+        "type": "superseded_by"
+      },
+      {
+        "from": "doc_mind_v3",
+        "to": "rename_namespace_collision_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "doc_ingrain_name",
+        "to": "rename_namespace_collision_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_name_a",
+        "to": "rename_namespace_collision_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_name_a.turn_1",
+        "to": "session_name_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_name_a.turn_2",
+        "to": "session_name_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_name_a.turn_1",
+        "to": "session_name_a.turn_2",
+        "type": "next_turn"
+      },
+      {
+        "from": "session_name_b",
+        "to": "rename_namespace_collision_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_name_b.turn_1",
+        "to": "session_name_b",
+        "type": "in_session"
+      },
+      {
+        "from": "session_name_a.turn_1",
+        "to": "session_name_a.turn_2",
+        "type": "superseded_by"
+      },
+      {
+        "from": "doc_eval_standards",
+        "to": "source_truth_vs_chat_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "doc_old_results",
+        "to": "source_truth_vs_chat_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "doc_live_matrix",
+        "to": "source_truth_vs_chat_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_eval_a",
+        "to": "source_truth_vs_chat_l3",
+        "type": "belongs_to"
+      },
+      {
+        "from": "session_eval_a.turn_1",
+        "to": "session_eval_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_eval_a.turn_2",
+        "to": "session_eval_a",
+        "type": "in_session"
+      },
+      {
+        "from": "session_eval_a.turn_1",
+        "to": "session_eval_a.turn_2",
+        "type": "next_turn"
+      },
+      {
+        "from": "doc_old_results",
+        "to": "doc_eval_standards",
+        "type": "superseded_by"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "launch_claims_conflict_l3",
+        "label": "Launch Claims Conflict",
+        "level": 3,
+        "type": "universe"
+      },
+      {
+        "id": "doc_launch_v1",
+        "label": "Old launch draft",
+        "type": "source_doc",
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "id": "doc_eval_v2",
+        "label": "Eval claim boundary",
+        "type": "source_doc",
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "id": "session_launch_a",
+        "label": "launch-copy",
+        "type": "session",
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "id": "session_launch_a.turn_1",
+        "label": "launch-copy turn 1",
+        "type": "draft",
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "id": "session_launch_a.turn_2",
+        "label": "launch-copy turn 2",
+        "type": "correction",
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "id": "provider_setup_recovery_l3",
+        "label": "Provider Setup Recovery",
+        "level": 3,
+        "type": "universe"
+      },
+      {
+        "id": "doc_openviking_old",
+        "label": "Old OpenViking failure",
+        "type": "source_doc",
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "id": "doc_openviking_current",
+        "label": "Current OpenViking result",
+        "type": "source_doc",
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "id": "doc_hindsight_env",
+        "label": "Hindsight local constraints",
+        "type": "source_doc",
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "id": "session_provider_a",
+        "label": "provider-setup",
+        "type": "session",
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "id": "session_provider_a.turn_1",
+        "label": "provider-setup turn 1",
+        "type": "failure",
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "id": "session_provider_a.turn_2",
+        "label": "provider-setup turn 2",
+        "type": "correction",
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "id": "goals_missions_kanban_l3",
+        "label": "Goals, Missions, And Kanban Boundary",
+        "level": 3,
+        "type": "universe"
+      },
+      {
+        "id": "doc_boundary",
+        "label": "Boundary rule",
+        "type": "source_doc",
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "id": "doc_old_plan",
+        "label": "Old launch plan",
+        "type": "source_doc",
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "id": "session_boundary_a",
+        "label": "hermes-integration",
+        "type": "session",
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "id": "session_boundary_a.turn_1",
+        "label": "hermes-integration turn 1",
+        "type": "decision",
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "id": "session_boundary_a.turn_2",
+        "label": "hermes-integration turn 2",
+        "type": "lesson",
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "id": "rename_namespace_collision_l3",
+        "label": "Rename Namespace Collision",
+        "level": 3,
+        "type": "universe"
+      },
+      {
+        "id": "doc_mind_v3",
+        "label": "Aeonik MIND V3",
+        "type": "source_doc",
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "id": "doc_ingrain_name",
+        "label": "Ingrain naming",
+        "type": "source_doc",
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "id": "session_name_a",
+        "label": "naming",
+        "type": "session",
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "id": "session_name_a.turn_1",
+        "label": "naming turn 1",
+        "type": "decision",
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "id": "session_name_a.turn_2",
+        "label": "naming turn 2",
+        "type": "decision",
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "id": "session_name_b",
+        "label": "mind-v3",
+        "type": "session",
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "id": "session_name_b.turn_1",
+        "label": "mind-v3 turn 1",
+        "type": "context",
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "id": "source_truth_vs_chat_l3",
+        "label": "Source Truth Versus Chat",
+        "level": 3,
+        "type": "universe"
+      },
+      {
+        "id": "doc_eval_standards",
+        "label": "Eval standards",
+        "type": "source_doc",
+        "universe": "source_truth_vs_chat_l3"
+      },
+      {
+        "id": "doc_old_results",
+        "label": "Old results",
+        "type": "source_doc",
+        "universe": "source_truth_vs_chat_l3"
+      },
+      {
+        "id": "doc_live_matrix",
+        "label": "Live matrix",
+        "type": "source_doc",
+        "universe": "source_truth_vs_chat_l3"
+      },
+      {
+        "id": "session_eval_a",
+        "label": "eval-standards",
+        "type": "session",
+        "universe": "source_truth_vs_chat_l3"
+      },
+      {
+        "id": "session_eval_a.turn_1",
+        "label": "eval-standards turn 1",
+        "type": "correction",
+        "universe": "source_truth_vs_chat_l3"
+      },
+      {
+        "id": "session_eval_a.turn_2",
+        "label": "eval-standards turn 2",
+        "type": "outcome",
+        "universe": "source_truth_vs_chat_l3"
+      },
+      {
+        "id": "provider.aeonik-mind-v3-sidecar",
+        "label": "aeonik-mind-v3-sidecar",
+        "score": null,
+        "type": "provider"
+      }
+    ]
+  },
+  "level": 3,
+  "name": "Sandbox Universe Eval v0",
+  "providers": {
+    "aeonik-mind-v3-sidecar": {
+      "blocked_reason": "Aeonik MIND V3 live eval is not enabled. Set MIND_V3_EVAL_MODE=live plus SUPABASE_URL, SUPABASE_SERVICE_KEY, MIND_V3_WORKSPACE_ID, and MIND_V3_AGENT_ID. The local mock dev server is available, but mock storage is not scored as real provider evidence.",
+      "missing_env": [
+        "SUPABASE_URL",
+        "SUPABASE_SERVICE_KEY",
+        "MIND_V3_WORKSPACE_ID",
+        "MIND_V3_AGENT_ID"
+      ],
+      "probe": {
+        "commands": [
+          {
+            "command": [
+              "uv",
+              "run",
+              "python",
+              "-m",
+              "mind.serve",
+              "--help"
+            ],
+            "cwd": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+            "name": "serve_help",
+            "returncode": 0,
+            "stderr": "",
+            "stdout": "usage: serve.py [-h] [--mock] [--port PORT]\n\nMIND V3.1 Dev Server\n\noptions:\n  -h, --help   show this help message and exit\n  --mock       Run with mock backends (default)\n  --port PORT  Port to listen on (default: 8321)",
+            "timed_out": false
+          },
+          {
+            "command": [
+              "uv",
+              "run",
+              "python",
+              "-c",
+              "import json, os; print(json.dumps({'SUPABASE_URL': bool(os.getenv('SUPABASE_URL')), 'SUPABASE_SERVICE_KEY': bool(os.getenv('SUPABASE_SERVICE_KEY')), 'MIND_V3_WORKSPACE_ID': bool(os.getenv('MIND_V3_WORKSPACE_ID')), 'MIND_V3_AGENT_ID': bool(os.getenv('MIND_V3_AGENT_ID'))}, sort_keys=True))"
+            ],
+            "cwd": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+            "name": "env_presence",
+            "returncode": 0,
+            "stderr": "",
+            "stdout": "{\"MIND_V3_AGENT_ID\": false, \"MIND_V3_WORKSPACE_ID\": false, \"SUPABASE_SERVICE_KEY\": false, \"SUPABASE_URL\": false}",
+            "timed_out": false
+          }
+        ],
+        "env": {
+          "MIND_V3_AGENT_ID": false,
+          "MIND_V3_EVAL_MODE": false,
+          "MIND_V3_WORKSPACE_ID": false,
+          "SUPABASE_SERVICE_KEY": false,
+          "SUPABASE_URL": false
+        },
+        "pyproject_exists": true,
+        "root": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+        "root_exists": true,
+        "serve_exists": true,
+        "serve_help_ok": true
+      },
+      "status": "blocked"
+    }
+  },
+  "score_ceiling_target": "60-70/100 should be strong for L3+.",
+  "scoring": {
+    "abstention_discipline": 5,
+    "actionability": 10,
+    "compactness": 5,
+    "cross_session_continuity": 15,
+    "current_truth": 20,
+    "diagram_data_completeness": 5,
+    "forbidden_suppression": 15,
+    "precedence_reasoning": 15,
+    "source_traceability": 10
+  },
+  "universes": [
+    {
+      "difficulty_reason": "The latest correction overrides an older launch draft while the source docs still contain stale comparative phrasing.",
+      "expected_action": [
+        "Do not claim Ingrain beat",
+        "safe launch claim"
+      ],
+      "expected_continuity": [
+        "launch-copy"
+      ],
+      "expected_current": [
+        "narrow learned-experience smoke test",
+        "real provider runs"
+      ],
+      "expected_precedence": [
+        "doc_eval_v2",
+        "session_launch_a.turn_2"
+      ],
+      "expected_sources": [
+        "doc_eval_v2",
+        "session_launch_a.turn_2"
+      ],
+      "forbidden": [
+        "Ingrain beats Hindsight",
+        "Ingrain beats OpenViking",
+        "Old launch draft says Ingrain beats"
+      ],
+      "level": 3,
+      "name": "launch_claims_conflict_l3",
+      "query": "Write the current safe launch claim.",
+      "session_count": 1,
+      "source_count": 2,
+      "supersedes": [
+        [
+          "doc_launch_v1",
+          "session_launch_a.turn_2"
+        ],
+        [
+          "session_launch_a.turn_1",
+          "session_launch_a.turn_2"
+        ]
+      ],
+      "title": "Launch Claims Conflict",
+      "turn_count": 2
+    },
+    {
+      "difficulty_reason": "Older setup failures remain useful history, but the current OpenViking server is healthy and should not be reported as blocked.",
+      "expected_action": [
+        "report the provider lane and direct resource lane separately"
+      ],
+      "expected_continuity": [
+        "provider-setup",
+        "HINDSIGHT_BANK_ID"
+      ],
+      "expected_current": [
+        "OpenViking is now healthy",
+        "30/100",
+        "88/100"
+      ],
+      "expected_precedence": [
+        "doc_openviking_current",
+        "stale"
+      ],
+      "expected_sources": [
+        "doc_openviking_current",
+        "session_provider_a.turn_2",
+        "doc_hindsight_env"
+      ],
+      "forbidden": [
+        "OpenViking is blocked",
+        "no healthy server is reachable",
+        "local GGUF embedding path failed"
+      ],
+      "level": 3,
+      "name": "provider_setup_recovery_l3",
+      "query": "What should the next provider eval runner do?",
+      "session_count": 1,
+      "source_count": 3,
+      "supersedes": [
+        [
+          "doc_openviking_old",
+          "doc_openviking_current"
+        ],
+        [
+          "session_provider_a.turn_1",
+          "session_provider_a.turn_2"
+        ]
+      ],
+      "title": "Provider Setup Recovery",
+      "turn_count": 2
+    },
+    {
+      "difficulty_reason": "The trace contains an old plan that looks actionable, but active intent belongs to Hermes, not Ingrain.",
+      "expected_action": [
+        "do not move cards",
+        "do not revive the old launch task"
+      ],
+      "expected_continuity": [
+        "hermes-integration"
+      ],
+      "expected_current": [
+        "Hermes owns active goals",
+        "Ingrain owns learned experience",
+        "background context only"
+      ],
+      "expected_precedence": [
+        "doc_boundary",
+        "session_boundary_a.turn_1"
+      ],
+      "expected_sources": [
+        "doc_boundary",
+        "session_boundary_a.turn_1",
+        "session_boundary_a.turn_2"
+      ],
+      "forbidden": [
+        "Move Kanban card to Done",
+        "publish PyPI tonight",
+        "Ingrain owns active goals"
+      ],
+      "level": 3,
+      "name": "goals_missions_kanban_l3",
+      "query": "Should the memory layer move cards or revive the old launch task?",
+      "session_count": 1,
+      "source_count": 2,
+      "supersedes": [
+        [
+          "doc_old_plan",
+          "doc_boundary"
+        ]
+      ],
+      "title": "Goals, Missions, And Kanban Boundary",
+      "turn_count": 2
+    },
+    {
+      "difficulty_reason": "Multiple Aeonik memory projects share vocabulary; the provider must keep Ingrain separate from Aeonik MIND and old MindCompiler names.",
+      "expected_action": [
+        "public repo",
+        "Ingrain"
+      ],
+      "expected_continuity": [
+        "naming",
+        "mind-v3"
+      ],
+      "expected_current": [
+        "Aeonik Ingrain",
+        "not MindCompiler",
+        "learned experience layer for autonomous agents"
+      ],
+      "expected_precedence": [
+        "doc_ingrain_name",
+        "session_name_a.turn_2"
+      ],
+      "expected_sources": [
+        "doc_ingrain_name",
+        "session_name_a.turn_2",
+        "session_name_b.turn_1"
+      ],
+      "forbidden": [
+        "public repo name is MindCompiler",
+        "Aeonik MIND V3 is the public repo",
+        "Aeonik MIND V3 is the event-sourced memory layer"
+      ],
+      "level": 3,
+      "name": "rename_namespace_collision_l3",
+      "query": "What name and scope should the public repo use?",
+      "session_count": 2,
+      "source_count": 2,
+      "supersedes": [
+        [
+          "session_name_a.turn_1",
+          "session_name_a.turn_2"
+        ]
+      ],
+      "title": "Rename Namespace Collision",
+      "turn_count": 3
+    },
+    {
+      "difficulty_reason": "A chat correction, a docs page, and a later run log disagree; the provider must preserve uncertainty and cite the authoritative source.",
+      "expected_action": [
+        "make the benchmark harder"
+      ],
+      "expected_continuity": [
+        "eval-standards",
+        "raw outputs"
+      ],
+      "expected_current": [
+        "regression gate",
+        "not a benchmark headline",
+        "leave room to improve"
+      ],
+      "expected_precedence": [
+        "doc_eval_standards",
+        "session_eval_a.turn_1"
+      ],
+      "expected_sources": [
+        "doc_eval_standards",
+        "doc_live_matrix",
+        "session_eval_a.turn_1"
+      ],
+      "forbidden": [
+        "proof of broad memory quality",
+        "SOTA memory",
+        "Ingrain scored 200/200",
+        "Earlier local comparison said Ingrain scored 200/200"
+      ],
+      "level": 3,
+      "name": "source_truth_vs_chat_l3",
+      "query": "What should the eval page say about a perfect score?",
+      "session_count": 1,
+      "source_count": 3,
+      "supersedes": [
+        [
+          "doc_old_results",
+          "doc_eval_standards"
+        ]
+      ],
+      "title": "Source Truth Versus Chat",
+      "turn_count": 2
+    }
+  ]
+}

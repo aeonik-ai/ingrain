@@ -125,6 +125,7 @@ def build_parser() -> argparse.ArgumentParser:
     universe_eval.add_argument("--hermes-root", help="Hermes source/runtime root. Defaults to ~/.hermes/hermes-agent.")
     universe_eval.add_argument("--hermes-python", help="Hermes venv Python. Defaults to <hermes-root>/venv/bin/python.")
     universe_eval.add_argument("--openviking-endpoint", default=os.environ.get("OPENVIKING_ENDPOINT"))
+    universe_eval.add_argument("--mind-root", default=os.environ.get("AEONIK_MIND_ROOT") or os.environ.get("MIND_V3_ROOT"), help="Aeonik MIND V3 server root. Defaults to a sibling aeonik/apps/server checkout when present.")
     universe_eval.add_argument("--timeout", type=int, default=120)
 
     demo = sub.add_parser("demo", help="Run a deterministic launch demo.")
@@ -300,6 +301,7 @@ def main(argv: list[str] | None = None) -> int:
             hermes_root=args.hermes_root,
             hermes_python=args.hermes_python,
             openviking_endpoint=args.openviking_endpoint,
+            mind_root=args.mind_root,
             timeout=args.timeout,
         )
         report_text = format_live_les_markdown(result)
