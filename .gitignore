@@ -14,3 +14,7 @@ build/
 .ingrain/
 data/
 .DS_Store
+
+# Local-only research / job artifacts — never committed
+docs/research_job_posting.md
+
