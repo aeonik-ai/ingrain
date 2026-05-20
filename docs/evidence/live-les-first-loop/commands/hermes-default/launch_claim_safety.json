@@ -1,11 +1,11 @@
 {
   "command": [
-    "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
+    "<redacted-local-path>/python",
     "-c",
     "<script>",
     "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hermes-default-hx_z23n0/launch_claim_safety.json"
   ],
-  "cwd": "/Users/benlloyd/.hermes/hermes-agent",
+  "cwd": "<redacted-local-path>",
   "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hermes-default-hx_z23n0/hermes/launch_claim_safety",
   "returncode": 0,
   "stderr": "",

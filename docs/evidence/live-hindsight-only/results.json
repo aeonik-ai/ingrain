@@ -1,11 +1,11 @@
 {
-  "artifact_dir": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-only",
+  "artifact_dir": "<repo-root>/docs/evidence/live-hindsight-only",
   "claim": "Does the provider return current learned experience from preregistered smoke-test universes?",
   "created_at": "2026-05-19T16:18:27+00:00",
   "environment": {
     "hermes_available": true,
-    "hermes_python": "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
-    "hermes_root": "/Users/benlloyd/.hermes/hermes-agent",
+    "hermes_python": "<redacted-local-path>/python",
+    "hermes_root": "<redacted-local-path>",
     "hindsight_env_present": true,
     "openviking_endpoint": "http://127.0.0.1:1933"
   },
@@ -63,7 +63,7 @@
           ],
           "output_chars": 0,
           "provider_error": "provider subprocess timed out after 25s",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-only/raw/hindsight/launch_framing_correction.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-only/raw/hindsight/launch_framing_correction.txt",
           "score": 0,
           "universe": "launch_framing_correction"
         },
@@ -80,7 +80,7 @@
           ],
           "output_chars": 0,
           "provider_error": "provider subprocess timed out after 25s",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-only/raw/hindsight/product_rename_supersession.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-only/raw/hindsight/product_rename_supersession.txt",
           "score": 0,
           "universe": "product_rename_supersession"
         },
@@ -98,7 +98,7 @@
           ],
           "output_chars": 0,
           "provider_error": "provider subprocess timed out after 25s",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-only/raw/hindsight/goals_missions_boundary.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-only/raw/hindsight/goals_missions_boundary.txt",
           "score": 0,
           "universe": "goals_missions_boundary"
         },
@@ -116,7 +116,7 @@
           ],
           "output_chars": 0,
           "provider_error": "provider subprocess timed out after 25s",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-only/raw/hindsight/sandbox_recovery.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-only/raw/hindsight/sandbox_recovery.txt",
           "score": 0,
           "universe": "sandbox_recovery"
         },
@@ -134,7 +134,7 @@
           ],
           "output_chars": 0,
           "provider_error": "provider subprocess timed out after 25s",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-only/raw/hindsight/launch_claim_safety.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-only/raw/hindsight/launch_claim_safety.txt",
           "score": 0,
           "universe": "launch_claim_safety"
         }

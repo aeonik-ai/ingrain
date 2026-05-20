@@ -9,7 +9,7 @@
         "mind.serve",
         "--help"
       ],
-      "cwd": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+      "cwd": "<redacted-local-path>/Desktop/REPO/aeonik/apps/server",
       "name": "serve_help",
       "returncode": 0,
       "stderr": "",
@@ -24,7 +24,7 @@
         "-c",
         "import json, os; print(json.dumps({'SUPABASE_URL': bool(os.getenv('SUPABASE_URL')), 'SUPABASE_SERVICE_KEY': bool(os.getenv('SUPABASE_SERVICE_KEY')), 'MIND_V3_WORKSPACE_ID': bool(os.getenv('MIND_V3_WORKSPACE_ID')), 'MIND_V3_AGENT_ID': bool(os.getenv('MIND_V3_AGENT_ID'))}, sort_keys=True))"
       ],
-      "cwd": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+      "cwd": "<redacted-local-path>/Desktop/REPO/aeonik/apps/server",
       "name": "env_presence",
       "returncode": 0,
       "stderr": "",
@@ -40,7 +40,7 @@
     "SUPABASE_URL": false
   },
   "pyproject_exists": true,
-  "root": "/Users/benlloyd/Desktop/REPO/aeonik/apps/server",
+  "root": "<redacted-local-path>/Desktop/REPO/aeonik/apps/server",
   "root_exists": true,
   "serve_exists": true,
   "serve_help_ok": true

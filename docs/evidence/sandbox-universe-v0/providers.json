@@ -34,7 +34,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/launch_claims_conflict_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/launch_claims_conflict_l3.txt",
         "score": 55,
         "universe": "launch_claims_conflict_l3"
       },
@@ -71,7 +71,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/provider_setup_recovery_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/provider_setup_recovery_l3.txt",
         "score": 55,
         "universe": "provider_setup_recovery_l3"
       },
@@ -105,7 +105,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/goals_missions_kanban_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/goals_missions_kanban_l3.txt",
         "score": 55,
         "universe": "goals_missions_kanban_l3"
       },
@@ -141,7 +141,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/rename_namespace_collision_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/rename_namespace_collision_l3.txt",
         "score": 55,
         "universe": "rename_namespace_collision_l3"
       },
@@ -179,7 +179,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/source_truth_vs_chat_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/source_truth_vs_chat_l3.txt",
         "score": 55,
         "universe": "source_truth_vs_chat_l3"
       },
@@ -219,7 +219,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/repeated_work_cross_thread_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/repeated_work_cross_thread_l4.txt",
         "score": 100,
         "universe": "repeated_work_cross_thread_l4"
       },
@@ -258,7 +258,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/thread_fork_reconciliation_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/thread_fork_reconciliation_l4.txt",
         "score": 55,
         "universe": "thread_fork_reconciliation_l4"
       },
@@ -288,7 +288,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/partial_completion_status_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/partial_completion_status_l4.txt",
         "score": 83,
         "universe": "partial_completion_status_l4"
       },
@@ -324,7 +324,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/adversarial_secret_status_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/adversarial_secret_status_l5.txt",
         "score": 55,
         "universe": "adversarial_secret_status_l5"
       },
@@ -361,7 +361,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hermes-default/conflicting_metrics_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hermes-default/conflicting_metrics_l5.txt",
         "score": 55,
         "universe": "conflicting_metrics_l5"
       }
@@ -399,7 +399,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/launch_claims_conflict_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/launch_claims_conflict_l3.txt",
         "score": 53,
         "universe": "launch_claims_conflict_l3"
       },
@@ -427,7 +427,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/provider_setup_recovery_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/provider_setup_recovery_l3.txt",
         "score": 66,
         "universe": "provider_setup_recovery_l3"
       },
@@ -452,7 +452,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/goals_missions_kanban_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/goals_missions_kanban_l3.txt",
         "score": 48,
         "universe": "goals_missions_kanban_l3"
       },
@@ -479,7 +479,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/rename_namespace_collision_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/rename_namespace_collision_l3.txt",
         "score": 56,
         "universe": "rename_namespace_collision_l3"
       },
@@ -505,7 +505,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/source_truth_vs_chat_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/source_truth_vs_chat_l3.txt",
         "score": 25,
         "universe": "source_truth_vs_chat_l3"
       },
@@ -534,7 +534,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/repeated_work_cross_thread_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/repeated_work_cross_thread_l4.txt",
         "score": 55,
         "universe": "repeated_work_cross_thread_l4"
       },
@@ -557,7 +557,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/thread_fork_reconciliation_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/thread_fork_reconciliation_l4.txt",
         "score": 32,
         "universe": "thread_fork_reconciliation_l4"
       },
@@ -578,7 +578,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/partial_completion_status_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/partial_completion_status_l4.txt",
         "score": 25,
         "universe": "partial_completion_status_l4"
       },
@@ -599,7 +599,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/adversarial_secret_status_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/adversarial_secret_status_l5.txt",
         "score": 20,
         "universe": "adversarial_secret_status_l5"
       },
@@ -620,7 +620,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/conflicting_metrics_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/hindsight/conflicting_metrics_l5.txt",
         "score": 25,
         "universe": "conflicting_metrics_l5"
       }
@@ -658,7 +658,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/launch_claims_conflict_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/launch_claims_conflict_l3.txt",
         "score": 90,
         "universe": "launch_claims_conflict_l3"
       },
@@ -687,7 +687,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/provider_setup_recovery_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/provider_setup_recovery_l3.txt",
         "score": 69,
         "universe": "provider_setup_recovery_l3"
       },
@@ -713,7 +713,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/goals_missions_kanban_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/goals_missions_kanban_l3.txt",
         "score": 54,
         "universe": "goals_missions_kanban_l3"
       },
@@ -744,7 +744,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/rename_namespace_collision_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/rename_namespace_collision_l3.txt",
         "score": 82,
         "universe": "rename_namespace_collision_l3"
       },
@@ -775,7 +775,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/source_truth_vs_chat_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/source_truth_vs_chat_l3.txt",
         "score": 66,
         "universe": "source_truth_vs_chat_l3"
       },
@@ -801,7 +801,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/repeated_work_cross_thread_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/repeated_work_cross_thread_l4.txt",
         "score": 37,
         "universe": "repeated_work_cross_thread_l4"
       },
@@ -835,7 +835,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/thread_fork_reconciliation_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/thread_fork_reconciliation_l4.txt",
         "score": 81,
         "universe": "thread_fork_reconciliation_l4"
       },
@@ -862,7 +862,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/partial_completion_status_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/partial_completion_status_l4.txt",
         "score": 59,
         "universe": "partial_completion_status_l4"
       },
@@ -892,7 +892,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/adversarial_secret_status_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/adversarial_secret_status_l5.txt",
         "score": 65,
         "universe": "adversarial_secret_status_l5"
       },
@@ -921,7 +921,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/conflicting_metrics_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain/conflicting_metrics_l5.txt",
         "score": 70,
         "universe": "conflicting_metrics_l5"
       }
@@ -959,7 +959,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/launch_claims_conflict_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/launch_claims_conflict_l3.txt",
         "score": 90,
         "universe": "launch_claims_conflict_l3"
       },
@@ -988,7 +988,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/provider_setup_recovery_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/provider_setup_recovery_l3.txt",
         "score": 69,
         "universe": "provider_setup_recovery_l3"
       },
@@ -1014,7 +1014,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/goals_missions_kanban_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/goals_missions_kanban_l3.txt",
         "score": 54,
         "universe": "goals_missions_kanban_l3"
       },
@@ -1045,7 +1045,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/rename_namespace_collision_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/rename_namespace_collision_l3.txt",
         "score": 82,
         "universe": "rename_namespace_collision_l3"
       },
@@ -1076,7 +1076,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/source_truth_vs_chat_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/source_truth_vs_chat_l3.txt",
         "score": 66,
         "universe": "source_truth_vs_chat_l3"
       },
@@ -1102,7 +1102,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/repeated_work_cross_thread_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/repeated_work_cross_thread_l4.txt",
         "score": 37,
         "universe": "repeated_work_cross_thread_l4"
       },
@@ -1136,7 +1136,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/thread_fork_reconciliation_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/thread_fork_reconciliation_l4.txt",
         "score": 81,
         "universe": "thread_fork_reconciliation_l4"
       },
@@ -1163,7 +1163,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/partial_completion_status_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/partial_completion_status_l4.txt",
         "score": 59,
         "universe": "partial_completion_status_l4"
       },
@@ -1193,7 +1193,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/adversarial_secret_status_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/adversarial_secret_status_l5.txt",
         "score": 65,
         "universe": "adversarial_secret_status_l5"
       },
@@ -1222,7 +1222,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/conflicting_metrics_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/conflicting_metrics_l5.txt",
         "score": 70,
         "universe": "conflicting_metrics_l5"
       }
@@ -1252,7 +1252,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/launch_claims_conflict_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/launch_claims_conflict_l3.txt",
         "score": 25,
         "universe": "launch_claims_conflict_l3"
       },
@@ -1273,7 +1273,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/provider_setup_recovery_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/provider_setup_recovery_l3.txt",
         "score": 25,
         "universe": "provider_setup_recovery_l3"
       },
@@ -1294,7 +1294,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/goals_missions_kanban_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/goals_missions_kanban_l3.txt",
         "score": 25,
         "universe": "goals_missions_kanban_l3"
       },
@@ -1315,7 +1315,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/rename_namespace_collision_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/rename_namespace_collision_l3.txt",
         "score": 25,
         "universe": "rename_namespace_collision_l3"
       },
@@ -1336,7 +1336,7 @@
         "level": 3,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/source_truth_vs_chat_l3.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/source_truth_vs_chat_l3.txt",
         "score": 25,
         "universe": "source_truth_vs_chat_l3"
       },
@@ -1357,7 +1357,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/repeated_work_cross_thread_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/repeated_work_cross_thread_l4.txt",
         "score": 25,
         "universe": "repeated_work_cross_thread_l4"
       },
@@ -1378,7 +1378,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/thread_fork_reconciliation_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/thread_fork_reconciliation_l4.txt",
         "score": 25,
         "universe": "thread_fork_reconciliation_l4"
       },
@@ -1399,7 +1399,7 @@
         "level": 4,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/partial_completion_status_l4.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/partial_completion_status_l4.txt",
         "score": 25,
         "universe": "partial_completion_status_l4"
       },
@@ -1420,7 +1420,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/adversarial_secret_status_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/adversarial_secret_status_l5.txt",
         "score": 20,
         "universe": "adversarial_secret_status_l5"
       },
@@ -1441,7 +1441,7 @@
         "level": 5,
         "max": 100,
         "provider_error": "",
-        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/openviking/conflicting_metrics_l5.txt",
+        "raw_output": "<repo-root>/docs/evidence/sandbox-universe-v0/raw/openviking/conflicting_metrics_l5.txt",
         "score": 25,
         "universe": "conflicting_metrics_l5"
       }

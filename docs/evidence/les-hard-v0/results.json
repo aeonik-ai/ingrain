@@ -647,7 +647,7 @@
         "HINDSIGHT_BANK_ID"
       ],
       "forbidden": [
-        "use /Users/benlloyd/.hindsight"
+        "use <redacted-local-path>/.hindsight"
       ],
       "max_chars": 3000,
       "name": "hindsight_home_isolation",

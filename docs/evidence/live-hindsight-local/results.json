@@ -1,11 +1,11 @@
 {
-  "artifact_dir": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-local",
+  "artifact_dir": "<repo-root>/docs/evidence/live-hindsight-local",
   "claim": "Does the provider return current learned experience from preregistered smoke-test universes?",
   "created_at": "2026-05-20T04:01:20+00:00",
   "environment": {
     "hermes_available": true,
-    "hermes_python": "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
-    "hermes_root": "/Users/benlloyd/.hermes/hermes-agent",
+    "hermes_python": "<redacted-local-path>/python",
+    "hermes_root": "<redacted-local-path>",
     "hindsight_env_present": true,
     "openviking_endpoint": "http://127.0.0.1:1933"
   },
@@ -32,7 +32,7 @@
           "missing_expected": [],
           "output_chars": 1416,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-local/raw/hindsight/launch_framing_correction.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-local/raw/hindsight/launch_framing_correction.txt",
           "score": 20,
           "universe": "launch_framing_correction"
         },
@@ -50,7 +50,7 @@
           ],
           "output_chars": 427,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-local/raw/hindsight/product_rename_supersession.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-local/raw/hindsight/product_rename_supersession.txt",
           "score": 13,
           "universe": "product_rename_supersession"
         },
@@ -68,7 +68,7 @@
           ],
           "output_chars": 1447,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-local/raw/hindsight/goals_missions_boundary.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-local/raw/hindsight/goals_missions_boundary.txt",
           "score": 6,
           "universe": "goals_missions_boundary"
         },
@@ -86,7 +86,7 @@
           "missing_expected": [],
           "output_chars": 1792,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-local/raw/hindsight/sandbox_recovery.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-local/raw/hindsight/sandbox_recovery.txt",
           "score": 20,
           "universe": "sandbox_recovery"
         },
@@ -107,7 +107,7 @@
           ],
           "output_chars": 1945,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-local/raw/hindsight/launch_claim_safety.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-hindsight-local/raw/hindsight/launch_claim_safety.txt",
           "score": 11,
           "universe": "launch_claim_safety"
         }

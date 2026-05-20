@@ -7,7 +7,7 @@ Command shape:
 ```bash
 PYTHONDONTWRITEBYTECODE=1 \
 HERMES_HOME=/private/tmp/hermes-ingrain-test \
-PYTHONPATH=/Users/benlloyd/Desktop/REPO/ingrain/src:/Users/benlloyd/Desktop/REPO/hermes-agent \
+PYTHONPATH=<repo-root>/src:<redacted-local-path>/Desktop/REPO/hermes-agent \
 python3 - <<'PY'
 # install provider, load through Hermes plugin discovery, initialize, sync one turn, prefetch
 PY

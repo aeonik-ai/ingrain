@@ -1,11 +1,11 @@
 {
   "command": [
-    "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
+    "<redacted-local-path>/python",
     "-c",
     "<script>",
     "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-hermes-default-0_rxur9i/rename_namespace_collision_l3.json"
   ],
-  "cwd": "/Users/benlloyd/.hermes/hermes-agent",
+  "cwd": "<redacted-local-path>",
   "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-hermes-default-0_rxur9i/hermes/rename_namespace_collision_l3",
   "returncode": 0,
   "stderr": "",

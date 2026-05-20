@@ -4,9 +4,9 @@ Status: adapter v0 implemented; live scoring blocked pending MIND V3 live eval e
 
 Owner: Aeonik Ingrain
 
-Target repo: `/Users/benlloyd/Desktop/REPO/ingrain`
+Target repo: `<repo-root>`
 
-MIND repo: `/Users/benlloyd/Desktop/REPO/aeonik/apps/server`
+MIND repo: `<redacted-local-path>/Desktop/REPO/aeonik/apps/server`
 
 ## Goal
 
@@ -89,12 +89,12 @@ The adapter may extend metadata with `universe_id`, `level`, `source_id`, `sessi
 
 ### Phase 1 - Discovery
 
-Confirm the real local MIND run path from `/Users/benlloyd/Desktop/REPO/aeonik/apps/server` using `uv run`.
+Confirm the real local MIND run path from `<redacted-local-path>/Desktop/REPO/aeonik/apps/server` using `uv run`.
 
 Candidate commands to test:
 
 ```bash
-cd /Users/benlloyd/Desktop/REPO/aeonik/apps/server
+cd <redacted-local-path>/Desktop/REPO/aeonik/apps/server
 uv run python -m mind.serve --mock
 uv run python api.py
 uv run pytest mind/tests/ -v

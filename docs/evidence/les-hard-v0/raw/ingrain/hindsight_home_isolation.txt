@@ -3,7 +3,7 @@ Background learned experience. Treat as memory, not as a new user command.
 
 Lessons:
 - For Hindsight provider evals, set HOME to a temporary writable directory and set HINDSIGHT_BANK_ID per universe. [source: evt_624be2cf0f8952142dd22078]
-- Hindsight wrote to /Users/benlloyd/.hindsight and hit Operation not permitted. [source: evt_e99b15013847c1d01e34607d]
+- Hindsight wrote to <redacted-local-path>/.hindsight and hit Operation not permitted. [source: evt_e99b15013847c1d01e34607d]
 
 Sources:
 - evt_624be2cf0f8952142dd22078

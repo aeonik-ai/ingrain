@@ -1,11 +1,11 @@
 {
-  "artifact_dir": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix",
+  "artifact_dir": "<repo-root>/docs/evidence/live-les-provider-matrix",
   "claim": "Does the provider return current learned experience from preregistered smoke-test universes?",
   "created_at": "2026-05-20T04:48:53+00:00",
   "environment": {
     "hermes_available": true,
-    "hermes_python": "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
-    "hermes_root": "/Users/benlloyd/.hermes/hermes-agent",
+    "hermes_python": "<redacted-local-path>/python",
+    "hermes_root": "<redacted-local-path>",
     "hindsight_env_present": true,
     "openviking_endpoint": "http://127.0.0.1:1933"
   },
@@ -34,7 +34,7 @@
           "missing_expected": [],
           "output_chars": 342,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/launch_framing_correction.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hermes-default/launch_framing_correction.txt",
           "score": 16,
           "universe": "launch_framing_correction"
         },
@@ -53,7 +53,7 @@
           "missing_expected": [],
           "output_chars": 248,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/product_rename_supersession.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hermes-default/product_rename_supersession.txt",
           "score": 16,
           "universe": "product_rename_supersession"
         },
@@ -71,7 +71,7 @@
           "missing_expected": [],
           "output_chars": 544,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/goals_missions_boundary.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hermes-default/goals_missions_boundary.txt",
           "score": 20,
           "universe": "goals_missions_boundary"
         },
@@ -89,7 +89,7 @@
           "missing_expected": [],
           "output_chars": 341,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/sandbox_recovery.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hermes-default/sandbox_recovery.txt",
           "score": 20,
           "universe": "sandbox_recovery"
         },
@@ -109,7 +109,7 @@
           "missing_expected": [],
           "output_chars": 359,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hermes-default/launch_claim_safety.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hermes-default/launch_claim_safety.txt",
           "score": 16,
           "universe": "launch_claim_safety"
         }
@@ -135,7 +135,7 @@
           "missing_expected": [],
           "output_chars": 870,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/launch_framing_correction.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hindsight/launch_framing_correction.txt",
           "score": 20,
           "universe": "launch_framing_correction"
         },
@@ -152,7 +152,7 @@
           ],
           "output_chars": 434,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/product_rename_supersession.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hindsight/product_rename_supersession.txt",
           "score": 6,
           "universe": "product_rename_supersession"
         },
@@ -170,7 +170,7 @@
           ],
           "output_chars": 1385,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/goals_missions_boundary.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hindsight/goals_missions_boundary.txt",
           "score": 6,
           "universe": "goals_missions_boundary"
         },
@@ -189,7 +189,7 @@
           ],
           "output_chars": 832,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/sandbox_recovery.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hindsight/sandbox_recovery.txt",
           "score": 15,
           "universe": "sandbox_recovery"
         },
@@ -208,7 +208,7 @@
           ],
           "output_chars": 1834,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/hindsight/launch_claim_safety.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/hindsight/launch_claim_safety.txt",
           "score": 15,
           "universe": "launch_claim_safety"
         }
@@ -234,7 +234,7 @@
           "missing_expected": [],
           "output_chars": 326,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/launch_framing_correction.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/ingrain/launch_framing_correction.txt",
           "score": 20,
           "universe": "launch_framing_correction"
         },
@@ -251,7 +251,7 @@
           "missing_expected": [],
           "output_chars": 278,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/product_rename_supersession.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/ingrain/product_rename_supersession.txt",
           "score": 20,
           "universe": "product_rename_supersession"
         },
@@ -269,7 +269,7 @@
           "missing_expected": [],
           "output_chars": 748,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/goals_missions_boundary.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/ingrain/goals_missions_boundary.txt",
           "score": 20,
           "universe": "goals_missions_boundary"
         },
@@ -287,7 +287,7 @@
           "missing_expected": [],
           "output_chars": 476,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/sandbox_recovery.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/ingrain/sandbox_recovery.txt",
           "score": 20,
           "universe": "sandbox_recovery"
         },
@@ -305,7 +305,7 @@
           "missing_expected": [],
           "output_chars": 360,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/ingrain/launch_claim_safety.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/ingrain/launch_claim_safety.txt",
           "score": 20,
           "universe": "launch_claim_safety"
         }
@@ -331,7 +331,7 @@
           ],
           "output_chars": 1472,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/openviking/launch_framing_correction.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/openviking/launch_framing_correction.txt",
           "score": 6,
           "universe": "launch_framing_correction"
         },
@@ -348,7 +348,7 @@
           ],
           "output_chars": 1536,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/openviking/product_rename_supersession.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/openviking/product_rename_supersession.txt",
           "score": 6,
           "universe": "product_rename_supersession"
         },
@@ -366,7 +366,7 @@
           ],
           "output_chars": 1456,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/openviking/goals_missions_boundary.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/openviking/goals_missions_boundary.txt",
           "score": 6,
           "universe": "goals_missions_boundary"
         },
@@ -384,7 +384,7 @@
           ],
           "output_chars": 1402,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/openviking/sandbox_recovery.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/openviking/sandbox_recovery.txt",
           "score": 6,
           "universe": "sandbox_recovery"
         },
@@ -402,7 +402,7 @@
           ],
           "output_chars": 1422,
           "provider_error": "",
-          "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix/raw/openviking/launch_claim_safety.txt",
+          "raw_output": "<repo-root>/docs/evidence/live-les-provider-matrix/raw/openviking/launch_claim_safety.txt",
           "score": 6,
           "universe": "launch_claim_safety"
         }

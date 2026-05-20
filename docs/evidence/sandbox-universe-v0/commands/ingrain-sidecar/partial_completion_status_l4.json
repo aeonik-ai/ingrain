@@ -1,11 +1,11 @@
 {
   "command": [
-    "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
+    "<redacted-local-path>/python",
     "-c",
     "<script>",
     "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-ingrain-sidecar-0gwsh6eb/partial_completion_status_l4.json"
   ],
-  "cwd": "/Users/benlloyd/.hermes/hermes-agent",
+  "cwd": "<redacted-local-path>",
   "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-ingrain-sidecar-0gwsh6eb/hermes/partial_completion_status_l4",
   "returncode": 0,
   "stderr": "",

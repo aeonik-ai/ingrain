@@ -9,7 +9,7 @@ commit: a0bd11d02 fix(tests): catch up 25 stale tests after recent merges (#2862
 fetched: 2026-05-19
 ```
 
-The local checkout at `/Users/benlloyd/Desktop/REPO/hermes-agent` was 22 commits behind before fetch, so this map is based on `origin/main`, not the stale local `HEAD`.
+The local checkout at `<redacted-local-path>/Desktop/REPO/hermes-agent` was 22 commits behind before fetch, so this map is based on `origin/main`, not the stale local `HEAD`.
 
 ## Memory Provider Surface
 

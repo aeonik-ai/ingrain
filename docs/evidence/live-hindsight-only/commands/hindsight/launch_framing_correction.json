@@ -1,11 +1,11 @@
 {
   "command": [
-    "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
+    "<redacted-local-path>/python",
     "-c",
     "<script>",
     "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hindsight-r74bj7tw/launch_framing_correction.json"
   ],
-  "cwd": "/Users/benlloyd/.hermes/hermes-agent",
+  "cwd": "<redacted-local-path>",
   "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hindsight-r74bj7tw/hermes/launch_framing_correction",
   "returncode": null,
   "stderr": "",

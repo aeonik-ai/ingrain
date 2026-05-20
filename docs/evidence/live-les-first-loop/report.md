@@ -19,8 +19,8 @@ A learned-experience layer should return the current lesson from prior runs, sup
 
 | Field | Value |
 |---|---|
-| Hermes root | `/Users/benlloyd/.hermes/hermes-agent` |
-| Hermes python | `/Users/benlloyd/.hermes/hermes-agent/venv/bin/python` |
+| Hermes root | `<redacted-local-path>` |
+| Hermes python | `<redacted-local-path>/python` |
 | Hermes available | `True` |
 | Hindsight env present | `False` |
 | OpenViking endpoint | `http://127.0.0.1:1933` |
@@ -52,7 +52,7 @@ On these preregistered local universes, this run supports the narrow claim that 
 
 ## Artifacts
 
-- Artifact directory: `/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-first-loop`
+- Artifact directory: `<repo-root>/docs/evidence/live-les-first-loop`
 - Machine-readable results: `results.json` and `results.csv`
 - Raw provider outputs: `raw/`
 - Command logs: `commands/`
