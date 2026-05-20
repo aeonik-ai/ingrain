@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not imply provider chaining is shipped. Say sidecar can coexist with OpenViking today. [source: evt_d1edae58eb4969e6ed29e372; source_id=session_chain_a.turn_2; thread=hermes-provider]
+
+Sources:
+- evt_d1edae58eb4969e6ed29e372
+
+</aeonik_ingrain_context>

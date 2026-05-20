@@ -217,3 +217,22 @@ Next:
   - Hindsight local embedded: `202/500`
   - Hermes OpenViking provider: `125/500`
 - Key finding: the benchmark is now hard enough, and Ingrain's next improvement target is explicit trace/source-ID preservation in hydration.
+
+## 2026-05-19 22:45 PDT
+
+- Added more Sandbox Universe complexity:
+  - `thread_fork_reconciliation_l4`
+  - `partial_completion_status_l4`
+  - `adversarial_secret_status_l5`
+  - `conflicting_metrics_l5`
+- Added level breakdown and failure taxonomy sections to the Sandbox Universe report.
+- Improved trace metadata handling:
+  - parses bracketed `source_id`, `thread`, `session`, `kind`, and turn metadata before promotion
+  - keeps trace source IDs in hydration and compiled pages
+  - fixes the prior malformed `turn=...` correction text in Ingrain output
+- Ran the full real L5 provider matrix:
+  - Hermes default memory: `623/1000`
+  - Ingrain Hermes provider: `410/1000`
+  - Hindsight local embedded: `377/1000`
+  - Hermes OpenViking provider: `245/1000`
+- Key finding: Ingrain now preserves source IDs on direct corrections, but needs better source-of-truth document promotion and multi-doc current-truth synthesis.

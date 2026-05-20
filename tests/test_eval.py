@@ -113,6 +113,8 @@ class EvalTests(unittest.TestCase):
             self.assertGreaterEqual(sum(len(session.turns) for session in universe.sessions), 1)
             self.assertGreaterEqual(len(universe.source_of_truth), 2)
             self.assertGreaterEqual(len(universe.expected_sources), 2)
+        self.assertGreaterEqual(len([universe for universe in SANDBOX_UNIVERSES if universe.level == 4]), 3)
+        self.assertGreaterEqual(len([universe for universe in SANDBOX_UNIVERSES if universe.level == 5]), 2)
 
     def test_sandbox_score_rewards_traceable_current_truth(self):
         universe = next(item for item in SANDBOX_UNIVERSES if item.name == "launch_claims_conflict_l3")
@@ -156,11 +158,21 @@ class EvalTests(unittest.TestCase):
                 "claim": "test",
                 "scoring": {"current_truth": 20},
                 "universes": [{"name": "u", "level": 3, "difficulty_reason": "hard"}],
-                "providers": {},
+                "providers": {
+                    "ingrain": {
+                        "status": "partial",
+                        "score": 40,
+                        "max": 100,
+                        "interpretation": "partial",
+                        "universes": [{"universe": "u", "level": 3, "score": 40, "max": 100, "components": {}}],
+                    }
+                },
             }
         )
         self.assertIn("graph.json", text)
         self.assertIn("Three.js", text)
+        self.assertIn("Level Breakdown", text)
+        self.assertIn("Failure Taxonomy", text)
 
 
 if __name__ == "__main__":

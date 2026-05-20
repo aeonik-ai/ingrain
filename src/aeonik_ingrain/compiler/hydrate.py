@@ -85,13 +85,14 @@ def hydrate(store: IngrainStore, *, query: str = "", limit: int = 12, max_chars:
         for item in items:
             text = sanitize_for_context(item["text"])
             source = item["event_id"]
+            trace = _trace_label(item)
             source_ids.append(source)
             if level == "evidence":
                 confidence = int(round(float(item.get("confidence") or 0) * 100))
                 reason = item.get("reason") or "unknown"
-                lines.append(f"- {text} [source: {source}; confidence: {confidence}%; reason: {reason}]")
+                lines.append(f"- {text} [source: {source}{trace}; confidence: {confidence}%; reason: {reason}]")
             else:
-                lines.append(f"- {text} [source: {source}]")
+                lines.append(f"- {text} [source: {source}{trace}]")
         lines.append("")
 
     if source_ids:
@@ -123,6 +124,20 @@ def _hydrate_brief(selected: list[dict[str, Any]], *, max_chars: int) -> str:
     if len(output) > max_chars:
         output = output[:max_chars].rstrip() + "\n[... truncated by Ingrain]\n</aeonik_ingrain_brief>"
     return output
+
+
+def _trace_label(item: dict[str, Any]) -> str:
+    meta = item.get("meta") if isinstance(item.get("meta"), dict) else {}
+    source_id = meta.get("trace_source_id")
+    thread = meta.get("trace_thread")
+    if not source_id and not thread:
+        return ""
+    parts = []
+    if source_id:
+        parts.append(f"source_id={source_id}")
+    if thread:
+        parts.append(f"thread={thread}")
+    return "; " + "; ".join(parts)
 
 
 def _score(promotion: dict[str, Any], query_tokens: set[str]) -> float:

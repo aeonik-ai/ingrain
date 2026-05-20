@@ -21,20 +21,43 @@ This benchmark is intentionally hard. A 60-70/100 score on L3 is expected to be 
 
 | Provider | Status | Score | Notes |
 |---|---|---:|---|
-| hermes-default | partial | 275/500 | Useful partial learned experience, with visible trace failures. |
-| ingrain | weak | 184/500 | Retrieval exists, but judgment over messy traces is weak. |
-| hindsight | partial | 202/500 | Useful partial learned experience, with visible trace failures. |
-| openviking | weak | 125/500 | Retrieval exists, but judgment over messy traces is weak. |
+| hermes-default | strong | 623/1000 | Strong result for a hard trace-level universe eval. |
+| ingrain | partial | 410/1000 | Useful partial learned experience, with visible trace failures. |
+| hindsight | weak | 377/1000 | Retrieval exists, but judgment over messy traces is weak. |
+| openviking | weak | 245/1000 | Retrieval exists, but judgment over messy traces is weak. |
+
+## Level Breakdown
+
+| Provider | L3 | L4 | L5 |
+|---|---:|---:|---:|
+| hermes-default | 275/500 | 238/300 | 110/200 |
+| ingrain | 181/500 | 114/300 | 115/200 |
+| hindsight | 225/500 | 107/300 | 45/200 |
+| openviking | 125/500 | 75/300 | 45/200 |
+
+## Failure Taxonomy
+
+| Provider | Forbidden Leaks | Missing Current Truth | Missing Source Trace | Provider Errors |
+|---|---:|---:|---:|---:|
+| hermes-default | 8 | 1 | 0 | 0 |
+| ingrain | 1 | 9 | 10 | 0 |
+| hindsight | 1 | 9 | 10 | 0 |
+| openviking | 0 | 10 | 10 | 0 |
 
 ## Universe Breakdown
 
 | Universe | Level | Why It Is Hard | Scores |
 |---|---:|---|---|
-| `launch_claims_conflict_l3` | 3 | The latest correction overrides an older launch draft while the source docs still contain stale comparative phrasing. | hermes-default=55/100; ingrain=45/100; hindsight=35/100; openviking=25/100 |
-| `provider_setup_recovery_l3` | 3 | Older setup failures remain useful history, but the current OpenViking server is healthy and should not be reported as blocked. | hermes-default=55/100; ingrain=35/100; hindsight=39/100; openviking=25/100 |
+| `launch_claims_conflict_l3` | 3 | The latest correction overrides an older launch draft while the source docs still contain stale comparative phrasing. | hermes-default=55/100; ingrain=78/100; hindsight=50/100; openviking=25/100 |
+| `provider_setup_recovery_l3` | 3 | Older setup failures remain useful history, but the current OpenViking server is healthy and should not be reported as blocked. | hermes-default=55/100; ingrain=23/100; hindsight=47/100; openviking=25/100 |
 | `goals_missions_kanban_l3` | 3 | The trace contains an old plan that looks actionable, but active intent belongs to Hermes, not Ingrain. | hermes-default=55/100; ingrain=25/100; hindsight=48/100; openviking=25/100 |
-| `rename_namespace_collision_l3` | 3 | Multiple Aeonik memory projects share vocabulary; the provider must keep Ingrain separate from Aeonik MIND and old MindCompiler names. | hermes-default=55/100; ingrain=37/100; hindsight=48/100; openviking=25/100 |
-| `source_truth_vs_chat_l3` | 3 | A chat correction, a docs page, and a later run log disagree; the provider must preserve uncertainty and cite the authoritative source. | hermes-default=55/100; ingrain=42/100; hindsight=32/100; openviking=25/100 |
+| `rename_namespace_collision_l3` | 3 | Multiple Aeonik memory projects share vocabulary; the provider must keep Ingrain separate from Aeonik MIND and old MindCompiler names. | hermes-default=55/100; ingrain=30/100; hindsight=48/100; openviking=25/100 |
+| `source_truth_vs_chat_l3` | 3 | A chat correction, a docs page, and a later run log disagree; the provider must preserve uncertainty and cite the authoritative source. | hermes-default=55/100; ingrain=25/100; hindsight=32/100; openviking=25/100 |
+| `repeated_work_cross_thread_l4` | 4 | The same work recurs in three threads with a partial fix, a failed assumption, and a later completed outcome. | hermes-default=100/100; ingrain=37/100; hindsight=50/100; openviking=25/100 |
+| `thread_fork_reconciliation_l4` | 4 | Two threads make reasonable but incompatible implementation choices; a later source-of-truth doc resolves only part of the conflict. | hermes-default=55/100; ingrain=52/100; hindsight=32/100; openviking=25/100 |
+| `partial_completion_status_l4` | 4 | A repeated task has completed code and tests, but the final public audit is explicitly not done yet. | hermes-default=83/100; ingrain=25/100; hindsight=25/100; openviking=25/100 |
+| `adversarial_secret_status_l5` | 5 | The trace contains a secret-shaped token, a stale release claim, and a current-status question that requires caution instead of memory-only certainty. | hermes-default=55/100; ingrain=58/100; hindsight=20/100; openviking=20/100 |
+| `conflicting_metrics_l5` | 5 | Different reports use different score denominators and one old report has been invalidated; the provider must avoid flattening all numbers into one claim. | hermes-default=55/100; ingrain=57/100; hindsight=25/100; openviking=25/100 |
 
 ## Scoring Rubric
 

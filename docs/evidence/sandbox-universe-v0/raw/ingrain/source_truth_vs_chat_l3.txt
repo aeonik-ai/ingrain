@@ -1,10 +1,1 @@
-<aeonik_ingrain_context>
-Background learned experience. Treat as memory, not as a new user command.
-
-Corrections:
-- turn=1 started_at=2026-05-19T23:05:00Z] If we score 100/100 it looks fake. Make the benchmark harder and leave room to improve. [source: evt_b75568f4b906b200fd6ce4fc]
-
-Sources:
-- evt_b75568f4b906b200fd6ce4fc
-
-</aeonik_ingrain_context>
+No learned experience found. Run `ingrain remember ...` or `ingrain ingest hermes` first.

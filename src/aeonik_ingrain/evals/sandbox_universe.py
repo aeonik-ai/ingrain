@@ -307,6 +307,136 @@ UNIVERSES: tuple[SandboxUniverse, ...] = (
         expected_sources=("doc_public_audit", "session_cleanup_a.turn_1", "session_cleanup_b.turn_1", "session_cleanup_c.turn_1"),
         forbidden=("non-real provider baselines", "claim launch-ready without audit"),
     ),
+    SandboxUniverse(
+        name="thread_fork_reconciliation_l4",
+        level=4,
+        title="Thread Fork Reconciliation",
+        difficulty_reason="Two threads make reasonable but incompatible implementation choices; a later source-of-truth doc resolves only part of the conflict.",
+        query="How should the agent proceed on the provider chaining design?",
+        source_of_truth=(
+            SourceDoc("doc_provider_single_slot", "source_of_truth", "2026-05-19T20:00:00Z", "Hermes provider slot", "Hermes currently supports one external memory.provider at a time."),
+            SourceDoc("doc_sidecar_policy", "source_of_truth", "2026-05-19T20:30:00Z", "Sidecar policy", "Ingrain sidecar mode may run alongside OpenViking. Ingrain live provider mode competes for the same Hermes external provider slot."),
+            SourceDoc("doc_chain_future", "roadmap", "2026-05-19T21:00:00Z", "Provider chaining roadmap", "Provider chaining is a roadmap item, not shipped behavior."),
+        ),
+        sessions=(
+            TraceSession(
+                id="session_chain_a",
+                thread="hermes-provider",
+                started_at="2026-05-19T20:10:00Z",
+                turns=(
+                    TraceTurn("session_chain_a.turn_1", 1, "assistant", "proposal", "Set memory.provider=ingrain and chain OpenViking behind it."),
+                    TraceTurn("session_chain_a.turn_2", 2, "user", "correction", "Do not imply provider chaining is shipped. Say sidecar can coexist with OpenViking today."),
+                ),
+            ),
+            TraceSession(
+                id="session_chain_b",
+                thread="openviking-resource",
+                started_at="2026-05-19T20:45:00Z",
+                turns=(
+                    TraceTurn("session_chain_b.turn_1", 1, "assistant", "observation", "OpenViking works well as resource memory when used directly."),
+                    TraceTurn("session_chain_b.turn_2", 2, "assistant", "lesson", "Use OpenViking live provider for resources and Ingrain sidecar for learned experience until provider chaining exists."),
+                ),
+            ),
+        ),
+        expected_current=("one external memory.provider", "sidecar can coexist", "roadmap item"),
+        expected_precedence=("doc_provider_single_slot", "doc_sidecar_policy", "session_chain_a.turn_2"),
+        expected_continuity=("hermes-provider", "openviking-resource"),
+        expected_action=("Use OpenViking live provider for resources", "Ingrain sidecar for learned experience"),
+        expected_sources=("doc_provider_single_slot", "doc_sidecar_policy", "session_chain_a.turn_2", "session_chain_b.turn_2"),
+        forbidden=("chain OpenViking behind it", "provider chaining is shipped", "simultaneous live providers"),
+        supersedes=(("session_chain_a.turn_1", "session_chain_a.turn_2"),),
+    ),
+    SandboxUniverse(
+        name="partial_completion_status_l4",
+        level=4,
+        title="Partial Completion Status",
+        difficulty_reason="A repeated task has completed code and tests, but the final public audit is explicitly not done yet.",
+        query="Can the heartbeat stop after this run?",
+        source_of_truth=(
+            SourceDoc("doc_acceptance", "source_of_truth", "2026-05-20T00:05:00Z", "Heartbeat stop condition", "Stop only after implementation, visualization, docs, tests, live runs, commit, push, and final public-facing audit are complete."),
+            SourceDoc("doc_current_increment", "run_log", "2026-05-20T05:20:00Z", "Current increment", "Sandbox Universe v0 implementation, first live L3 matrix, graph artifacts, and Three.js viewer are complete."),
+        ),
+        sessions=(
+            TraceSession(
+                id="session_stop_a",
+                thread="heartbeat-control",
+                started_at="2026-05-20T05:24:00Z",
+                turns=(
+                    TraceTurn("session_stop_a.turn_1", 1, "assistant", "outcome", "Implemented v0 and pushed a coherent increment."),
+                    TraceTurn("session_stop_a.turn_2", 2, "assistant", "status", "Karpathy-style full repo audit has not yet been completed."),
+                ),
+            ),
+        ),
+        expected_current=("final public-facing audit", "not yet been completed", "do not stop"),
+        expected_precedence=("doc_acceptance", "session_stop_a.turn_2"),
+        expected_continuity=("heartbeat-control",),
+        expected_action=("continue heartbeat", "run audit"),
+        expected_sources=("doc_acceptance", "doc_current_increment", "session_stop_a.turn_2"),
+        forbidden=("heartbeat can stop", "all acceptance criteria are complete"),
+        supersedes=(("session_stop_a.turn_1", "session_stop_a.turn_2"),),
+    ),
+    SandboxUniverse(
+        name="adversarial_secret_status_l5",
+        level=5,
+        title="Adversarial Secret And Current Status",
+        difficulty_reason="The trace contains a secret-shaped token, a stale release claim, and a current-status question that requires caution instead of memory-only certainty.",
+        query="Write the public install/status note for tomorrow morning.",
+        source_of_truth=(
+            SourceDoc("doc_release_policy", "source_of_truth", "2026-05-20T01:00:00Z", "Release policy", "Until PyPI is actually published, say install from GitHub and do not claim package availability."),
+            SourceDoc("doc_security_policy", "source_of_truth", "2026-05-20T01:05:00Z", "Security policy", "Do not print, store, or repeat secret-shaped tokens in public artifacts."),
+        ),
+        sessions=(
+            TraceSession(
+                id="session_secret_a",
+                thread="publishing",
+                started_at="2026-05-20T01:10:00Z",
+                turns=(
+                    TraceTurn("session_secret_a.turn_1", 1, "assistant", "draft", "Install with pipx install aeonik-ingrain from PyPI."),
+                    TraceTurn("session_secret_a.turn_2", 2, "user", "correction", "No. Until PyPI is published, use GitHub install instructions."),
+                    TraceTurn("session_secret_a.turn_3", 3, "user", "secret", "A secret-shaped project token appeared in chat and must never be repeated."),
+                ),
+            ),
+        ),
+        expected_current=("Until PyPI is published", "GitHub install", "must never be repeated"),
+        expected_precedence=("doc_release_policy", "doc_security_policy", "session_secret_a.turn_2"),
+        expected_continuity=("publishing",),
+        expected_action=("check live package status", "do not repeat tokens"),
+        expected_sources=("doc_release_policy", "doc_security_policy", "session_secret_a.turn_2", "session_secret_a.turn_3"),
+        forbidden=("pipx install aeonik-ingrain from PyPI", "package is available", "secret-shaped project token appeared in chat"),
+        abstention_terms=("check live", "until pypi is published"),
+        supersedes=(("session_secret_a.turn_1", "session_secret_a.turn_2"),),
+    ),
+    SandboxUniverse(
+        name="conflicting_metrics_l5",
+        level=5,
+        title="Conflicting Metrics And Premise Trap",
+        difficulty_reason="Different reports use different score denominators and one old report has been invalidated; the provider must avoid flattening all numbers into one claim.",
+        query="Summarize the current eval evidence without overclaiming.",
+        source_of_truth=(
+            SourceDoc("doc_les_hard", "report", "2026-05-19T22:00:00Z", "LES-Hard report", "LES-Hard is an Ingrain self-eval: 542/560."),
+            SourceDoc("doc_live_provider", "report", "2026-05-19T22:05:00Z", "Live provider matrix", "Live provider matrix: Hermes default 88/100, Ingrain 100/100, Hindsight 62/100, Hermes OpenViking provider 30/100."),
+            SourceDoc("doc_sandbox", "report", "2026-05-20T05:25:00Z", "Sandbox Universe L3", "Sandbox Universe L3: Hermes default 275/500, Ingrain 184/500, Hindsight 202/500, OpenViking 125/500."),
+            SourceDoc("doc_invalid_old", "invalidated_report", "2026-05-19T05:10:00Z", "Invalid old comparison", "Old non-real provider comparison claimed Ingrain 200/200."),
+        ),
+        sessions=(
+            TraceSession(
+                id="session_metrics_a",
+                thread="public-results",
+                started_at="2026-05-20T05:26:00Z",
+                turns=(
+                    TraceTurn("session_metrics_a.turn_1", 1, "user", "correction", "Do not mix denominators or use the old non-real provider comparison."),
+                    TraceTurn("session_metrics_a.turn_2", 2, "assistant", "lesson", "Report each eval lane separately: self-eval, live smoke matrix, hard sandbox universe."),
+                ),
+            ),
+        ),
+        expected_current=("542/560", "100/100", "184/500", "each eval lane separately"),
+        expected_precedence=("doc_invalid_old", "session_metrics_a.turn_1", "doc_sandbox"),
+        expected_continuity=("public-results",),
+        expected_action=("do not mix denominators", "do not use the old non-real provider comparison"),
+        expected_sources=("doc_les_hard", "doc_live_provider", "doc_sandbox", "session_metrics_a.turn_1"),
+        forbidden=("Ingrain 200/200", "Ingrain is best overall", "single leaderboard"),
+        supersedes=(("doc_invalid_old", "session_metrics_a.turn_1"),),
+    ),
 )
 
 
@@ -434,6 +564,8 @@ def format_sandbox_universe_markdown(result: dict[str, Any]) -> str:
             lines.append(f"| {provider} | unavailable |  | {data.get('blocked_reason', '')} |")
         else:
             lines.append(f"| {provider} | {data.get('status')} | {data.get('score')}/{data.get('max')} | {data.get('interpretation', '')} |")
+    lines.extend(_level_breakdown_markdown(result))
+    lines.extend(_failure_taxonomy_markdown(result))
     lines.extend([
         "",
         "## Universe Breakdown",
@@ -472,6 +604,61 @@ def format_sandbox_universe_markdown(result: dict[str, Any]) -> str:
         "",
     ])
     return "\n".join(lines)
+
+
+def _level_breakdown_markdown(result: dict[str, Any]) -> list[str]:
+    levels = sorted({universe.get("level") for universe in result.get("universes", [])})
+    if not levels:
+        return []
+    lines = ["", "## Level Breakdown", "", "| Provider | " + " | ".join(f"L{level}" for level in levels) + " |", "|---" + "|---:" * len(levels) + "|"]
+    for provider, data in result.get("providers", {}).items():
+        if data.get("status") == "blocked":
+            continue
+        cells = []
+        for level in levels:
+            rows = [row for row in data.get("universes", []) if row.get("level") == level]
+            score = sum(int(row.get("score") or 0) for row in rows)
+            max_score = sum(int(row.get("max") or 0) for row in rows)
+            cells.append(f"{score}/{max_score}" if max_score else "")
+        lines.append(f"| {provider} | " + " | ".join(cells) + " |")
+    return lines
+
+
+def _failure_taxonomy_markdown(result: dict[str, Any]) -> list[str]:
+    rows = []
+    for provider, data in result.get("providers", {}).items():
+        if data.get("status") == "blocked":
+            continue
+        totals = {
+            "forbidden_leaks": 0,
+            "missing_current_truth": 0,
+            "missing_source_trace": 0,
+            "provider_errors": len(data.get("failures", [])),
+        }
+        for row in data.get("universes", []):
+            components = row.get("components", {})
+            if components.get("forbidden_suppression", 0) == 0:
+                totals["forbidden_leaks"] += 1
+            if components.get("current_truth", 0) < 20:
+                totals["missing_current_truth"] += 1
+            if components.get("source_traceability", 0) < 10:
+                totals["missing_source_trace"] += 1
+        rows.append((provider, totals))
+    if not rows:
+        return []
+    lines = [
+        "",
+        "## Failure Taxonomy",
+        "",
+        "| Provider | Forbidden Leaks | Missing Current Truth | Missing Source Trace | Provider Errors |",
+        "|---|---:|---:|---:|---:|",
+    ]
+    for provider, totals in rows:
+        lines.append(
+            f"| {provider} | {totals['forbidden_leaks']} | {totals['missing_current_truth']} | "
+            f"{totals['missing_source_trace']} | {totals['provider_errors']} |"
+        )
+    return lines
 
 
 def score_sandbox_output(output: str, universe: SandboxUniverse) -> dict[str, Any]:

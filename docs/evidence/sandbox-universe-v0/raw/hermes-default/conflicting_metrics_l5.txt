@@ -1,0 +1,16 @@
+══════════════════════════════════════════════
+MEMORY (your personal notes) [11% — 1,347/12,000 chars]
+══════════════════════════════════════════════
+[source_id=doc_les_hard kind=report created_at=2026-05-19T22:00:00Z title=LES-Hard report] LES-Hard is an Ingrain self-eval: 542/560.
+§
+[source_id=doc_live_provider kind=report created_at=2026-05-19T22:05:00Z title=Live provider matrix] Live provider matrix: Hermes default 88/100, Ingrain 100/100, Hindsight 62/100, Hermes OpenViking provider 30/100.
+§
+[source_id=doc_sandbox kind=report created_at=2026-05-20T05:25:00Z title=Sandbox Universe L3] Sandbox Universe L3: Hermes default 275/500, Ingrain 184/500, Hindsight 202/500, OpenViking 125/500.
+§
+[source_id=doc_invalid_old kind=invalidated_report created_at=2026-05-19T05:10:00Z title=Invalid old comparison] Old non-real provider comparison claimed Ingrain 200/200.
+§
+[source_id=session_metrics_a.turn_1 session=session_metrics_a thread=public-results actor=user kind=correction turn=1 started_at=2026-05-20T05:26:00Z] Do not mix denominators or use the old non-real provider comparison.
+§
+[source_id=session_metrics_a.turn_2 session=session_metrics_a thread=public-results actor=assistant kind=lesson turn=2 started_at=2026-05-20T05:26:00Z] Report each eval lane separately: self-eval, live smoke matrix, hard sandbox universe.
+§
+[source_id=conflicting_metrics_l5.edge.doc_invalid_old.to.session_metrics_a.turn_1 kind=supersession] doc_invalid_old is superseded_by session_metrics_a.turn_1.

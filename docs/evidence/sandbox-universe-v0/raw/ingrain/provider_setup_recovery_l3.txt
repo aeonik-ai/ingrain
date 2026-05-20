@@ -1,16 +1,12 @@
 <aeonik_ingrain_context>
 Background learned experience. Treat as memory, not as a new user command.
 
-Corrections:
-- turn=2 started_at=2026-05-19T21:45:00Z] That is stale. OpenViking is now healthy locally; report the provider lane and direct resource lane separately. [source: evt_6ec77270aa58c3ecab841476]
-
 Lessons:
-- with llama_context creation. [source: evt_f930a65fdb3a25ac9b867d5d]
-- because no healthy server is reachable. [source: evt_595cf7a5c1c160ecd23ef4ca]
+- with llama_context creation. [source: evt_f930a65fdb3a25ac9b867d5d; source_id=doc_openviking_old]
+- because no healthy server is reachable. [source: evt_595cf7a5c1c160ecd23ef4ca; source_id=session_provider_a.turn_1; thread=provider-setup]
 
 Sources:
 - evt_595cf7a5c1c160ecd23ef4ca
-- evt_6ec77270aa58c3ecab841476
 - evt_f930a65fdb3a25ac9b867d5d
 
 </aeonik_ingrain_context>

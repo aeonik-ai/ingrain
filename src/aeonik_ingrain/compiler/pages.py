@@ -141,7 +141,20 @@ def _format_item(item: dict[str, Any]) -> str:
     state = item.get("current_state", "current")
     text = item.get("text", "").strip()
     source = item.get("event_id", "")
-    suffix = f" source={source}, confidence={confidence}%"
+    trace = _trace_suffix(item)
+    suffix = f" source={source}{trace}, confidence={confidence}%"
     if state != "current":
         suffix += f", state={state}"
     return f"- {text} ({suffix})"
+
+
+def _trace_suffix(item: dict[str, Any]) -> str:
+    meta = item.get("meta") if isinstance(item.get("meta"), dict) else {}
+    source_id = meta.get("trace_source_id")
+    thread = meta.get("trace_thread")
+    parts = []
+    if source_id:
+        parts.append(f"source_id={source_id}")
+    if thread:
+        parts.append(f"thread={thread}")
+    return "; " + "; ".join(parts) if parts else ""

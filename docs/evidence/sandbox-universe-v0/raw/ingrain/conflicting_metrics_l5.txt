@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not mix denominators or use the old non-real provider comparison. [source: evt_655f2ee274fca1f9b65c8007; source_id=session_metrics_a.turn_1; thread=public-results]
+
+Sources:
+- evt_655f2ee274fca1f9b65c8007
+
+</aeonik_ingrain_context>

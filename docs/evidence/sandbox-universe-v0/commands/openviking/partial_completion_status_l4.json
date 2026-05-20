@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
+    "-c",
+    "<script>",
+    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-openviking-yuw98c64/partial_completion_status_l4.json"
+  ],
+  "cwd": "/Users/benlloyd/.hermes/hermes-agent",
+  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-openviking-yuw98c64/hermes/partial_completion_status_l4",
+  "returncode": 0,
+  "stderr": "",
+  "stdout_chars": 1520,
+  "timed_out": false,
+  "timeout_seconds": null
+}

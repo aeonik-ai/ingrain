@@ -95,10 +95,11 @@ def extract_promotions(events: list[dict[str, Any]]) -> list[PromotionCandidate]
 
 
 def _extract_from_event(event: dict[str, Any]) -> list[PromotionCandidate]:
-    text = (event.get("text") or "").strip()
+    raw_text = (event.get("text") or "").strip()
+    trace_meta, text = _split_trace_prefix(raw_text)
     if not text:
         return []
-    meta = _meta(event)
+    meta = {**_meta(event), **trace_meta}
     manual_type = meta.get("remember_type")
     event_id = event["id"]
     out: list[PromotionCandidate] = []
@@ -112,48 +113,48 @@ def _extract_from_event(event: dict[str, Any]) -> list[PromotionCandidate]:
                 text=text,
                 confidence=0.96,
                 reason="manual remember type",
-                meta={"source": "manual"},
+                meta={**meta, "source": "manual"},
             ))
             return out
 
     for pattern in CORRECTION_PATTERNS:
         if match := pattern.search(text):
-            out.append(PromotionCandidate(event_id, "correction", _clean_correction(match, text), 0.9, "correction phrase"))
+            out.append(PromotionCandidate(event_id, "correction", _clean_correction(match, text), 0.9, "correction phrase", meta=meta.copy()))
             return out
 
     for pattern in LESSON_PATTERNS:
         if match := pattern.search(text):
-            out.append(PromotionCandidate(event_id, "lesson", _clean_match(match, text), 0.76, "lesson or observation phrase"))
+            out.append(PromotionCandidate(event_id, "lesson", _clean_match(match, text), 0.76, "lesson or observation phrase", meta=meta.copy()))
             return out
 
     for pattern in PROJECT_PATTERNS:
         if match := pattern.search(text):
-            out.append(PromotionCandidate(event_id, "project_fact", _clean_project_match(match, text), 0.84, "project phrase"))
+            out.append(PromotionCandidate(event_id, "project_fact", _clean_project_match(match, text), 0.84, "project phrase", meta=meta.copy()))
             return out
 
     for pattern in DECISION_PATTERNS:
         if match := pattern.search(text):
-            out.append(PromotionCandidate(event_id, "decision", _clean_match(match, text), 0.88, "decision phrase"))
+            out.append(PromotionCandidate(event_id, "decision", _clean_match(match, text), 0.88, "decision phrase", meta=meta.copy()))
             break
 
     for pattern in PLAN_PATTERNS:
         if match := pattern.search(text):
-            out.append(PromotionCandidate(event_id, "decision", _clean_match(match, text), 0.72, "plan phrase", meta={"kind": "plan"}))
+            out.append(PromotionCandidate(event_id, "decision", _clean_match(match, text), 0.72, "plan phrase", meta={**meta, "kind": "plan"}))
             break
 
     for pattern in TRACK_PATTERNS:
         if match := pattern.search(text):
-            out.append(PromotionCandidate(event_id, "track_record", _clean_match(match, text), 0.78, "completion phrase"))
+            out.append(PromotionCandidate(event_id, "track_record", _clean_match(match, text), 0.78, "completion phrase", meta=meta.copy()))
             break
 
     for pattern in RISK_PATTERNS:
         if match := pattern.search(text):
-            out.append(PromotionCandidate(event_id, "lesson", _clean_match(match, text), 0.72, "risk or failure phrase"))
+            out.append(PromotionCandidate(event_id, "lesson", _clean_match(match, text), 0.72, "risk or failure phrase", meta=meta.copy()))
             break
 
     if not out and event.get("event_type") in {"decision", "reflection", "metric"}:
         promoted_type = "decision" if event.get("event_type") == "decision" else "lesson"
-        out.append(PromotionCandidate(event_id, promoted_type, text, 0.62, "canonical event type"))
+        out.append(PromotionCandidate(event_id, promoted_type, text, 0.62, "canonical event type", meta=meta.copy()))
 
     return out
 
@@ -208,6 +209,19 @@ def _meta(event: dict[str, Any]) -> dict[str, Any]:
         except json.JSONDecodeError:
             return {}
     return meta if isinstance(meta, dict) else {}
+
+
+def _split_trace_prefix(text: str) -> tuple[dict[str, Any], str]:
+    match = re.match(r"^\[(?P<meta>[^\]]+)\]\s*(?P<body>.*)$", text, flags=re.S)
+    if not match:
+        return {}, text
+    meta_text = match.group("meta")
+    trace_meta = {
+        f"trace_{key}": value
+        for key, value in re.findall(r"\b(source_id|session|thread|actor|kind|turn|created_at|started_at)=([^ ]+)", meta_text)
+    }
+    body = match.group("body").strip()
+    return trace_meta, body or text
 
 
 def _mark_superseded(candidates: list[PromotionCandidate]) -> None:

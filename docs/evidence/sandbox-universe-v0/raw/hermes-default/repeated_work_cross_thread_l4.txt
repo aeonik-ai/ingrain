@@ -1,0 +1,14 @@
+══════════════════════════════════════════════
+MEMORY (your personal notes) [11% — 1,348/12,000 chars]
+══════════════════════════════════════════════
+[source_id=doc_public_audit kind=checklist created_at=2026-05-20T00:00:00Z title=Public audit checklist] Before launch: remove non-real provider claims, run tests, run secret scan, verify evidence links, and confirm raw artifacts match report scores.
+§
+[source_id=session_cleanup_a.turn_1 session=session_cleanup_a thread=fake-eval-cleanup actor=user kind=correction turn=1 started_at=2026-05-19T21:20:00Z] Do not keep non-real provider baselines. Remove anything that is not a real evaluation.
+§
+[source_id=session_cleanup_a.turn_2 session=session_cleanup_a thread=fake-eval-cleanup actor=assistant kind=outcome turn=2 started_at=2026-05-19T21:20:00Z] Deleted non-real provider comparison artifacts and pushed the cleanup.
+§
+[source_id=session_cleanup_b.turn_1 session=session_cleanup_b thread=secret-scan actor=assistant kind=verification turn=1 started_at=2026-05-19T21:55:00Z] Secret scan for project-token patterns returned no matches.
+§
+[source_id=session_cleanup_b.turn_2 session=session_cleanup_b thread=secret-scan actor=assistant kind=verification turn=2 started_at=2026-05-19T21:55:00Z] Unit tests passed: 21 tests.
+§
+[source_id=session_cleanup_c.turn_1 session=session_cleanup_c thread=visualization actor=user kind=request turn=1 started_at=2026-05-20T00:05:00Z] Add traceable diagrams and a Three.js viewer for the hard universe eval.

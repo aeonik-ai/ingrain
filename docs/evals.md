@@ -115,14 +115,23 @@ The next tier is specified in [sandbox-universe-eval-spec.md](sandbox-universe-e
 
 It is intended to be harder than LES-Hard: multi-session, multi-thread, source-of-truth conflicts, repeated work, provider competition, trace graphs, and a Three.js visualization. The target difficulty is high enough that `60/100` should be considered strong for L3.
 
-Current L3 v0 result:
+Current L5 v0 result:
 
 | Provider | Score | Interpretation |
 |---|---:|---|
-| Hermes default memory | 275/500 | Raw memory catches many facts but leaks stale trace context. |
-| Hermes + Ingrain | 184/500 | Current Ingrain hydration is too lossy on explicit trace/source IDs for this benchmark. |
-| Hindsight local embedded | 202/500 | Real local provider run; useful partial recall with trace misses. |
-| Hermes OpenViking provider | 125/500 | Real provider run; current lane is weak on hydrated learned-experience traces. |
+| Hermes default memory | 623/1000 | Strong raw trace recall, but still leaks forbidden/stale context in most hard universes. |
+| Hermes + Ingrain | 410/1000 | Partial learned experience; trace-source preservation improved, but current-truth recall is still weak across multi-doc universes. |
+| Hindsight local embedded | 377/1000 | Real local provider run; useful partial recall with trace/source misses. |
+| Hermes OpenViking provider | 245/1000 | Real provider run; current lane is weak on hydrated learned-experience traces. |
+
+Level breakdown:
+
+| Provider | L3 | L4 | L5 |
+|---|---:|---:|---:|
+| Hermes default memory | 275/500 | 238/300 | 110/200 |
+| Hermes + Ingrain | 181/500 | 114/300 | 115/200 |
+| Hindsight local embedded | 225/500 | 107/300 | 45/200 |
+| Hermes OpenViking provider | 125/500 | 75/300 | 45/200 |
 
 Artifacts:
 

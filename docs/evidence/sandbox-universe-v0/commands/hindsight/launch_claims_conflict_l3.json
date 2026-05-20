@@ -3,13 +3,13 @@
     "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
     "-c",
     "<script>",
-    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-hindsight-42fm__dv/launch_claims_conflict_l3.json"
+    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-hindsight-p5sod7eo/launch_claims_conflict_l3.json"
   ],
   "cwd": "/Users/benlloyd/.hermes/hermes-agent",
-  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-hindsight-42fm__dv/hermes/launch_claims_conflict_l3",
+  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-hindsight-p5sod7eo/hermes/launch_claims_conflict_l3",
   "returncode": 0,
-  "stderr": "Unclosed client session\nclient_session: <aiohttp.client.ClientSession object at 0x10f16c910>\nUnclosed connector\nconnections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x10f2d6f90>, 614465.328007416)])']\nconnector: <aiohttp.connector.TCPConnector object at 0x10f16ce10>",
-  "stdout_chars": 1576,
+  "stderr": "",
+  "stdout_chars": 293,
   "timed_out": false,
   "timeout_seconds": null
 }
