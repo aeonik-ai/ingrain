@@ -223,7 +223,17 @@ def _run_hermes(
     `--skills none` and `-t hermes-cli` keep the consolidator focused — no skill
     activations, minimal toolset. The consolidator's job is pure
     classification, no tool use.
+
+    We pop HERMES_HOME from the environment so the consolidator uses the user's
+    real ~/.hermes (and finds their auth). Some Ingrain lanes set a sandboxed
+    HERMES_HOME for the outer process; that sandbox must not propagate to the
+    inner `hermes -z` call.
     """
+    import os
+
+    env = os.environ.copy()
+    env.pop("HERMES_HOME", None)
+
     cmd = [
         binary,
         "-z",
@@ -232,7 +242,7 @@ def _run_hermes(
         skills,
         "-t",
         toolsets,
-        "--ignore-rules",  # ignore user-installed agent rules — we're a focused subprocess
+        "--ignore-rules",
     ]
     try:
         proc = subprocess.run(
@@ -240,6 +250,7 @@ def _run_hermes(
             capture_output=True,
             text=True,
             timeout=timeout,
+            env=env,
         )
     except subprocess.TimeoutExpired:
         return ""

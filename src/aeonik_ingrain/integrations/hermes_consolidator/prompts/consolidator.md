@@ -31,9 +31,21 @@ Return an empty array `[]` if no events warrant promotion.
 | `correction` | User explicitly tells the agent to change behavior | "Do not push without running tests." |
 | `decision` | A project-level choice that constrains future work | "We picked Postgres over SQLite for production." |
 | `lesson` | A learned approach or anti-pattern from outcomes | "Always run `make test` before `git push`." |
-| `project_fact` | A durable fact about the project/codebase/team | "The release branch is `release/*` not `main`." |
+| `project_fact` | A durable fact, including user/personal facts, that should persist | "The release branch is `release/*` not `main`." / "User's charity 5K personal best is 25:50." / "User prefers Sony headphones." / "User works at Acme as a backend engineer." |
 | `track_record` | A completed milestone or shipped outcome | "Shipped v0.3 with the new memory schema." |
 | `risk` | A known failure mode to avoid | "Hindsight local mode requires temp HOME isolation." |
+
+### Important: what counts as `project_fact`
+
+`project_fact` is broad. Promote it whenever the user states a **concrete, durable, queryable fact** that future sessions would benefit from. This includes:
+
+- Personal facts the user mentions: their name, role, employer, location, family, schedule, preferences, possessions, habits, goals, performance metrics.
+- Project facts: codebase structure, conventions, dependencies, deployment targets, env names, repo URLs.
+- Domain facts the user is teaching the agent: "Our Q3 target is X", "Customer A's renewal is on date Y", "The build pipeline lives at Z".
+
+A user saying "I just got my car serviced for the first time on March 15th" is a `project_fact` — a future agent should remember that. A user saying "thanks!" is not.
+
+If you find yourself wondering "but it's not really a 'project'..." — promote it anyway as `project_fact`. The taxonomy name is historical; the type is the general durable-fact bucket.
 
 ## Hard rules — read these before classifying anything
 

@@ -31,6 +31,7 @@ aeonik-ingrain = "aeonik_ingrain.cli:main"
 [project.entry-points."sandbox_universe.lanes"]
 ingrain = "aeonik_ingrain.integrations.sandbox_universe.lane:IngrainLane"
 ingrain-sidecar = "aeonik_ingrain.integrations.sandbox_universe.lane:IngrainSidecarLane"
+ingrain-llm-sidecar = "aeonik_ingrain.integrations.sandbox_universe.lane:IngrainLLMSidecarLane"
 
 [project.urls]
 Homepage = "https://github.com/benlloydg/ingrain"

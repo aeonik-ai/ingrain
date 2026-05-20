@@ -97,8 +97,20 @@ for event in payload["events"]:
         capture_output=True,
         text=True,
     )
-subprocess.run(base + ["compile"], check=True, capture_output=True, text=True)
-subprocess.run(base + ["practice", "--output", os.path.join(ingrain_home, "PRACTICE.md")], check=True, capture_output=True, text=True)
+use_llm = os.environ.get("INGRAIN_USE_LLM_CONSOLIDATOR") == "1"
+practice_args = ["practice", "--output", os.path.join(ingrain_home, "PRACTICE.md")]
+if use_llm:
+    cons = subprocess.run(base + ["consolidate", "--limit", "200"], capture_output=True, text=True)
+    if cons.returncode != 0:
+        print(f"[ingrain-llm-sidecar] consolidate failed (rc={cons.returncode}): {cons.stdout[:300]}", file=sys.stderr)
+        subprocess.run(base + ["compile"], check=True, capture_output=True, text=True)
+    else:
+        # Consolidator wrote the cards. Practice must NOT re-run the regex
+        # compiler (which would wipe them).
+        practice_args.append("--no-compile")
+else:
+    subprocess.run(base + ["compile"], check=True, capture_output=True, text=True)
+subprocess.run(base + practice_args, check=True, capture_output=True, text=True)
 hydrated = subprocess.run(
     base + ["hydrate", "--level", "evidence", "--query", payload["query"], "--limit", "12", "--max-chars", "9000"],
     check=True,
@@ -109,9 +121,10 @@ hydrated = subprocess.run(
 print("<hermes_default_memory_active>")
 print(f"events={len(payload['events'])}; prompt_chars={len(default_context)}; scored_default_lane=hermes-default")
 print("</hermes_default_memory_active>")
-print("<ingrain_cli_skill_sidecar>")
+tag = "ingrain_llm_sidecar" if use_llm else "ingrain_cli_skill_sidecar"
+print(f"<{tag}>")
 print(hydrated)
-print("</ingrain_cli_skill_sidecar>")
+print(f"</{tag}>")
 '''
 
 
@@ -330,9 +343,14 @@ class IngrainLane:
 
 
 class IngrainSidecarLane:
-    """LaneAdapter for Hermes default memory + Ingrain CLI as a sidecar context layer."""
+    """LaneAdapter for Hermes default memory + Ingrain CLI as a sidecar context layer.
+
+    Uses the deterministic regex compiler (`ingrain compile`). Kept for v0
+    parity and as the baseline for the LLM consolidator comparison.
+    """
 
     name = "ingrain-sidecar"
+    _use_llm = False
 
     def __init__(self, *, timeout: int = 240) -> None:
         self._timeout = timeout
@@ -351,15 +369,21 @@ class IngrainSidecarLane:
             "installed": True,
             "hermes_root": str(self._hermes_root),
             "hermes_python": str(self._hermes_python),
+            "use_llm_consolidator": self._use_llm,
         }
 
     def run(self, universe: Any, workdir: Path):
+        use_llm = self._use_llm
+
         def env_builder(tmp, u, hermes_home):
             bin_dir = _make_ingrain_cli_shim(tmp)
-            return {
+            env = {
                 "PATH": f"{bin_dir}{os.pathsep}{os.environ.get('PATH', '')}",
                 "INGRAIN_HOME": str(hermes_home / "ingrain-sidecar" / u.name),
             }
+            if use_llm:
+                env["INGRAIN_USE_LLM_CONSOLIDATOR"] = "1"
+            return env
 
         return _run_via_hermes(
             universe=universe,
@@ -368,6 +392,18 @@ class IngrainSidecarLane:
             env_builder=env_builder,
             timeout=self._timeout,
         )
+
+
+class IngrainLLMSidecarLane(IngrainSidecarLane):
+    """Hermes default + Ingrain CLI using the LLM consolidator (no API key).
+
+    Same shape as `ingrain-sidecar`, but `ingrain compile` is replaced by
+    `ingrain consolidate`, which uses `hermes -z` to classify events. Whatever
+    model Hermes is configured against is the consolidator.
+    """
+
+    name = "ingrain-llm-sidecar"
+    _use_llm = True
 
 
 __all__ = [

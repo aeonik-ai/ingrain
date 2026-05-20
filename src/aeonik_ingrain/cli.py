@@ -82,6 +82,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     practice = sub.add_parser("practice", help="Write PRACTICE.md and source-linked practice cards.")
     practice.add_argument("--output", help="Output path. Defaults to ./PRACTICE.md.")
+    practice.add_argument(
+        "--no-compile",
+        action="store_true",
+        help="Do NOT run the deterministic compile_store first. Use this when promotions were already written by `ingrain consolidate`.",
+    )
 
     skill = sub.add_parser("skill", help="Install or print agent skill instructions.")
     skill_sub = skill.add_subparsers(dest="skill_command")
@@ -241,7 +246,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "practice":
-        compile_store(store)
+        if not args.no_compile:
+            compile_store(store)
         result = write_practice_artifacts(store, output_path=args.output)
         print(f"Wrote {result['practice_path']}")
         print(f"Wrote {result['card_count']} practice cards into {store.practice_cards_dir}")

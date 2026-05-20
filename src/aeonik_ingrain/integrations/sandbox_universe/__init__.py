@@ -11,7 +11,8 @@ from __future__ import annotations
 
 from aeonik_ingrain.integrations.sandbox_universe.lane import (
     IngrainLane,
+    IngrainLLMSidecarLane,
     IngrainSidecarLane,
 )
 
-__all__ = ["IngrainLane", "IngrainSidecarLane"]
+__all__ = ["IngrainLane", "IngrainLLMSidecarLane", "IngrainSidecarLane"]
