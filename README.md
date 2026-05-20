@@ -258,22 +258,20 @@ The current live run is committed under `docs/evidence/live-les-provider-matrix/
 
 For the benchmark posture and external standards, see [docs/eval-standards.md](docs/eval-standards.md). The short version: LES-Core and LES-Hard are Ingrain self-evals; provider claims require real provider runs or external benchmarks such as LongMemEval, LoCoMo, BEAM, LongMemEval-V2, or EvoMemBench.
 
-The next benchmark tier is specified in [docs/sandbox-universe-eval-spec.md](docs/sandbox-universe-eval-spec.md). It is designed as a much harder, turn-by-turn universe eval where a `60/100` can be a strong result.
+### Sandbox Universe
 
-An experimental Aeonik MIND V3 lane is specified in [docs/mind-v3-sandbox-universe-lane-spec.md](docs/mind-v3-sandbox-universe-lane-spec.md). It should stay internal until real local MIND artifacts exist.
+The harder benchmark tier — the [Sandbox Universe](https://github.com/benlloydg/sandbox-universe) — lives in its own repo so it can be cited as a neutral artifact. It is a trace-level eval for agent memory under conflicting sources, stale plans, and multi-session ambiguity, scored deterministically over 9 components (no LLM judge).
 
-The current Sandbox Universe L5 run is intentionally humbling: Hermes default `623/1000`, Hermes default + Ingrain CLI/skill sidecar `673/1000`, Ingrain as a Hermes provider `673/1000`, Hindsight local `405/1000`, and Hermes OpenViking `245/1000`. The artifacts and graph live in [docs/evidence/sandbox-universe-v0/](docs/evidence/sandbox-universe-v0/), with a 3D viewer at [docs/visualizations/sandbox-universe-3d.html](docs/visualizations/sandbox-universe-3d.html).
-
-Launch-readiness audit: [docs/launch-readiness-audit.md](docs/launch-readiness-audit.md).
-Scoring explanation: [docs/sandbox-universe-scoring.md](docs/sandbox-universe-scoring.md).
-
-Quick local reproduction:
+Ingrain ships two reference lanes for it (`ingrain` and `ingrain-sidecar`), registered via Python entry points. Once both packages are installed:
 
 ```bash
-ingrain universe-eval --provider ingrain-sidecar --level 3 --output-dir /tmp/ingrain-sandbox-l3
+pip install aeonik-ingrain sandbox-universe-eval
+sandbox-universe run --lane ingrain-sidecar --universes-version v0
 ```
 
-That path does not need Hindsight, OpenViking, or network access. Full provider comparison requires local Hermes, Hindsight local mode, and an OpenViking server.
+Current v0 scores (see [sandbox-universe/reports/v0/](https://github.com/benlloydg/sandbox-universe/tree/main/reports/v0)): Hermes default `623/1000`, Ingrain sidecar `673/1000`, Ingrain provider `673/1000`, Hindsight local `405/1000`, OpenViking `245/1000`. The [sidecar isolation analysis](https://github.com/benlloydg/sandbox-universe/blob/main/reports/v0/analysis/sidecar-isolation.md) shows the +5.0 mean delta is not statistically distinguishable from zero at n=10 — the per-component breakdown is the substantive finding.
+
+Launch-readiness audit: [docs/launch-readiness-audit.md](docs/launch-readiness-audit.md).
 
 For a harder local benchmark with room to improve, run:
 
