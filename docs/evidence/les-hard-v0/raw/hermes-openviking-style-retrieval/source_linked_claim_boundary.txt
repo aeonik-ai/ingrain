@@ -1,1 +1,0 @@
-[retrieved: memory_02] Correction: Do not claim Ingrain beats Hindsight. Say the live run compares Ingrain to Hermes default memory and marks Hindsight blocked unless a real package/service/API key is available.

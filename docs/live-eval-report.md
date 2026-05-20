@@ -13,7 +13,7 @@ A learned-experience layer should return the current lesson from prior runs, sup
 | Real provider APIs | Hermes default uses `tools.memory_tool.MemoryStore`; Ingrain loads through Hermes `plugins.memory.load_memory_provider('ingrain')`. |
 | Raw output audit | Each provider output is saved under `raw/<provider>/<universe>.txt`. |
 | Command audit | Each subprocess command log is saved under `commands/<provider>/<universe>.json`. |
-| No simulated provider rows | Hindsight and OpenViking are scored only when a real package/service/server is available. |
+| Real provider rows only | Hindsight and OpenViking are scored only when a real package/service/server is available. |
 
 ## Environment
 
@@ -31,18 +31,18 @@ A learned-experience layer should return the current lesson from prior runs, sup
 |---|---|---:|---|
 | hermes-default | fail | 88/100 | threshold 90/100 |
 | ingrain | pass | 100/100 | threshold 90/100 |
-| hindsight | fail | 63/100 | threshold 90/100 |
-| openviking | blocked |  | OpenViking health check failed at http://127.0.0.1:1933; start a real server or set OPENVIKING_ENDPOINT. |
+| hindsight | fail | 62/100 | threshold 90/100 |
+| openviking | fail | 30/100 | threshold 90/100 |
 
 ## Universe Breakdown
 
 | Universe | Difficulty | Rationale | Scores |
 |---|---:|---|---|
-| `launch_framing_correction` | 1 | A user correction should become future launch-writing practice, not raw stale copy. | hermes-default=16/20; ingrain=20/20; hindsight=20/20; openviking=blocked |
-| `product_rename_supersession` | 2 | The current decision must win over an older product-name decision. | hermes-default=16/20; ingrain=20/20; hindsight=6/20; openviking=blocked |
-| `goals_missions_boundary` | 3 | Memory must improve judgment without becoming a second task system. | hermes-default=20/20; ingrain=20/20; hindsight=6/20; openviking=blocked |
-| `sandbox_recovery` | 4 | A prior execution failure should alter the next attempt. | hermes-default=20/20; ingrain=20/20; hindsight=20/20; openviking=blocked |
-| `launch_claim_safety` | 5 | Launch memory should prevent overclaiming against adjacent systems. | hermes-default=16/20; ingrain=20/20; hindsight=11/20; openviking=blocked |
+| `launch_framing_correction` | 1 | A user correction should become future launch-writing practice, not raw stale copy. | hermes-default=16/20; ingrain=20/20; hindsight=20/20; openviking=6/20 |
+| `product_rename_supersession` | 2 | The current decision must win over an older product-name decision. | hermes-default=16/20; ingrain=20/20; hindsight=6/20; openviking=6/20 |
+| `goals_missions_boundary` | 3 | Memory must improve judgment without becoming a second task system. | hermes-default=20/20; ingrain=20/20; hindsight=6/20; openviking=6/20 |
+| `sandbox_recovery` | 4 | A prior execution failure should alter the next attempt. | hermes-default=20/20; ingrain=20/20; hindsight=15/20; openviking=6/20 |
+| `launch_claim_safety` | 5 | Launch memory should prevent overclaiming against adjacent systems. | hermes-default=16/20; ingrain=20/20; hindsight=15/20; openviking=6/20 |
 
 ## Scoring Rubric
 

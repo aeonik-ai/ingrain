@@ -211,7 +211,7 @@ Provider chaining is on the roadmap so Ingrain can handle learned experience whi
 
 `ingrain eval` runs a deterministic local smoke eval called **LES-Core**.
 
-LES stands for **Learned Experience Score**. The default CLI still reports a 100-point local fixture score for compatibility, but the public interpretation is now stricter: this is a regression gate, not a benchmark headline.
+LES stands for **Learned Experience Score**. The default CLI still reports a 100-point local regression score for compatibility, but the public interpretation is now stricter: this is a regression gate, not a benchmark headline.
 
 It checks whether Ingrain can:
 
@@ -223,9 +223,7 @@ It checks whether Ingrain can:
 
 The v0 eval requires no API key and no LLM.
 
-The default `100/100` is expected for the committed v0 fixture suite. It means the current compiler and hydration rules pass the launch scenarios in this repo: project recall, correction carry-forward, stale-plan avoidance, track-record recall, and compactness. It is a regression gate for the repo's launch behaviors, not an external benchmark, provider leaderboard, or claim that Ingrain has solved all agent memory problems.
-
-The same command also prints a deterministic fixture comparison. Treat that comparison as a local regression check, not evidence against live providers.
+The default `100/100` is expected for the committed v0 local suite. It means the current compiler and hydration rules pass the launch scenarios in this repo: project recall, correction carry-forward, stale-plan avoidance, track-record recall, and compactness. It is a regression gate for the repo's launch behaviors, not an external benchmark, provider leaderboard, or claim that Ingrain has solved all agent memory problems.
 
 For live evidence against the installed Hermes provider API, run the live LES provider eval:
 
@@ -233,9 +231,9 @@ For live evidence against the installed Hermes provider API, run the live LES pr
 ingrain live-eval
 ```
 
-The current live run is committed under `docs/evidence/live-les-provider-matrix/`. It sends the same preregistered universes through Hermes default memory, the Ingrain Hermes provider, and real Hindsight local embedded mode when configured. OpenViking is only scored when a healthy server is available; otherwise the report marks it blocked with the exact reason. The current OpenViking startup recheck is documented in [docs/evidence/openviking-startup-recheck.md](docs/evidence/openviking-startup-recheck.md).
+The current live run is committed under `docs/evidence/live-les-provider-matrix/`. It sends the same preregistered universes through Hermes default memory, the Ingrain Hermes provider, real Hindsight local embedded mode, and the real Hermes OpenViking provider against a healthy local OpenViking server. Current scores: Hermes default `88/100`, Ingrain `100/100`, Hindsight `62/100`, Hermes OpenViking provider `30/100`.
 
-For the benchmark posture and external standards, see [docs/eval-standards.md](docs/eval-standards.md). The short version: LES-Core is a smoke test, deterministic comparison is an engineering harness, and broad comparative claims require live providers or external benchmarks such as LongMemEval, LoCoMo, BEAM, LongMemEval-V2, or EvoMemBench.
+For the benchmark posture and external standards, see [docs/eval-standards.md](docs/eval-standards.md). The short version: LES-Core and LES-Hard are Ingrain self-evals; provider claims require real provider runs or external benchmarks such as LongMemEval, LoCoMo, BEAM, LongMemEval-V2, or EvoMemBench.
 
 For a harder local benchmark with room to improve, run:
 
@@ -243,15 +241,15 @@ For a harder local benchmark with room to improve, run:
 ingrain les-hard
 ```
 
-The current LES-Hard v0 result is committed under `docs/evidence/les-hard-v0/`: Ingrain scores `545/560` across 28 preregistered scenarios, versus `536/560` for a deterministic Hindsight-style synthesis baseline, `501/560` for OpenViking-style retrieval, and `194/560` for default Hermes-style memory. This is still a deterministic benchmark, not a live Hindsight/OpenViking claim.
+The current LES-Hard v0 result is committed under `docs/evidence/les-hard-v0/`: Ingrain scores `542/560` across 28 preregistered scenarios. It is an Ingrain self-eval, not a provider comparison.
 
 For a live OpenViking resource-retrieval check, run a local OpenViking server and then:
 
 ```bash
-ingrain compare --live-openviking --openviking-endpoint http://127.0.0.1:1933
+ingrain compare --openviking-endpoint http://127.0.0.1:1933
 ```
 
-This uses real OpenViking upload, indexing, search, and read endpoints. It does not exercise OpenViking's LLM memory extraction unless your OpenViking server has model credentials configured.
+This uses real OpenViking upload, indexing, search, and read endpoints. The current direct resource-retrieval result is `88/100` and is committed under `docs/evidence/live-openviking-resource/`. It does not claim to exercise OpenViking's LLM memory extraction path.
 
 See [docs/evals.md](docs/evals.md).
 Learned-experience results live in [docs/learned-experience-results.md](docs/learned-experience-results.md).
@@ -336,7 +334,7 @@ ingrain demo banana
 ingrain compare
 ingrain les-hard
 ingrain live-eval
-ingrain compare --live-openviking --openviking-endpoint http://127.0.0.1:1933
+ingrain compare --openviking-endpoint http://127.0.0.1:1933
 ingrain ingest hermes
 ingrain compile
 ingrain practice
@@ -358,7 +356,7 @@ If the correction carries forward without replaying the transcript, learned expe
 
 ## Roadmap
 
-- provider chaining with OpenViking-style retrieval providers
+- provider chaining with OpenViking retrieval providers
 - Claude Code and Codex transcript adapters
 - optional LLM-assisted promotion
 - hosted Aeonik MIND backend

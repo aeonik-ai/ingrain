@@ -1,7 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- From now on: do not infer active goals from Ingrain memory; use Hermes goals, missions, and Kanban as the source of truth. [evidence: memory_03]
-- Hermes owns active goals and scheduling. Ingrain memories about old plans are background context only. [evidence: memory_02]
-Action guidance:
-- Preserve: use Hermes goals.
-- Preserve: source of truth.

@@ -1,2 +1,0 @@
-[retrieved: memory_02] Decision: Product name is Aeonik Ingrain, not MindCompiler.
-[retrieved: memory_01] Decision: Product name is MindCompiler.

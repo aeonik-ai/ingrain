@@ -29,7 +29,7 @@ Sources:
 
 Use this language:
 
-> Ingrain ships with local regression evals for learned-experience carry-forward, plus a live Hermes provider harness that records raw provider outputs and blockers.
+> Ingrain ships with local regression evals for learned-experience carry-forward, plus a live Hermes provider harness that records raw provider outputs, command logs, and setup state.
 
 Do not use this language:
 
@@ -40,16 +40,15 @@ Do not use this language:
 | Tier | Name | Purpose | Public interpretation |
 |---|---|---|---|
 | 0 | LES-Core | Small deterministic smoke test for the compiler, hydration, practice cards, and source evidence. | A 100/100 means the local regression gate passed. It is not a benchmark headline. |
-| 1 | Deterministic learned-experience comparison | Local comparison across Hermes default, OpenViking-style retrieval, Hindsight-style synthesis, and Ingrain on preregistered universes. | Useful for engineering iteration. It is not evidence against live Hindsight or live OpenViking. |
-| 2 | LES-Hard | Harder deterministic benchmark modeled after LongMemEval-V2/EvoMemBench themes: environment gotchas, premise awareness, stale intent, abstention, and execution-oriented memory. | Better public engineering evidence than LES-Core, but still not a live provider benchmark. |
-| 3 | Live Hermes provider matrix | Real installed Hermes providers only; blocked providers are recorded as blocked with command logs. | Valid evidence about this machine and this configuration. |
-| 4 | External memory benchmarks | LongMemEval, BEAM, LoCoMo, LongMemEval-V2, or EvoMemBench adapters where licensing and runtime allow. | The only tier suitable for broad comparative claims. |
+| 1 | LES-Hard | Harder Ingrain self-eval modeled after LongMemEval-V2/EvoMemBench themes: environment gotchas, premise awareness, stale intent, abstention, and execution-oriented memory. | Better public engineering evidence than LES-Core, but still not a provider benchmark. |
+| 2 | Live Hermes provider matrix | Real installed Hermes providers only; unavailable providers are omitted or recorded with command logs. | Valid evidence about this machine and this configuration. |
+| 3 | External memory benchmarks | LongMemEval, BEAM, LoCoMo, LongMemEval-V2, or EvoMemBench adapters where licensing and runtime allow. | The only tier suitable for broad comparative claims. |
 
 ## What A Karpathy-Safe Eval Should Look Like
 
 - Preregister the universes before running providers.
 - Keep raw traces, command logs, stderr, environment, and exact versions.
-- Separate deterministic baselines from live provider runs.
+- Keep provider comparisons limited to live provider runs.
 - Treat provider errors and timeouts as failures, not as scored text.
 - Include baselines that can win.
 - Include abstention and stale-plan traps.
@@ -71,4 +70,4 @@ The best public-facing deterministic benchmark is **LES-Hard**, modeled after Lo
 - compact evidence gathering under a token budget
 - latency and cost alongside quality
 
-LES-Hard now has enough scenarios that Ingrain lands below perfect. Current v0 result: `545/560` for Ingrain versus `536/560` for the deterministic Hindsight-style baseline. Treat this as engineering evidence with raw artifacts, not as proof that Ingrain beats live Hindsight.
+LES-Hard now has enough scenarios that Ingrain lands below perfect. Current v0 result: `542/560` for Ingrain. Treat this as self-eval engineering evidence with raw artifacts, not as proof that Ingrain beats live Hindsight or OpenViking.

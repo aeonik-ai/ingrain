@@ -2,38 +2,40 @@
 
 Date: 2026-05-19
 
-Purpose: verify whether OpenViking could be scored in the live LES provider matrix instead of being marked blocked.
+Purpose: verify whether OpenViking could be scored with real local infrastructure instead of being omitted from the live LES provider matrix.
 
 ## Result
 
-OpenViking remains blocked for the committed live LES provider matrix because no healthy OpenViking server was reachable at `http://127.0.0.1:1933`.
+OpenViking is now installed and healthy locally.
 
-This is not scored as a failed OpenViking result. It is an environment/runtime blocker.
+```text
+openviking==0.3.17
+health: {"status":"ok","healthy":true,"version":"0.3.17","auth_mode":"dev"}
+```
+
+The working launch setup uses API-backed OpenAI embedding and VLM configuration. The API key is stored outside this repo.
 
 ## Attempts
 
 | Attempt | Outcome |
 |---|---|
-| Existing temp install `/private/tmp/openviking-venv` with OpenViking 0.3.17 | CLI was present, but `openviking health` could not reach `http://localhost:1933/health`. |
-| Existing cached local embedder model | Direct `llama_cpp.Llama(model_path=..., embedding=True, ...)` initialization failed with `ValueError: Failed to create llama_context`. |
-| Clean Python 3.11 venv `/private/tmp/openviking-uv311` | `uv pip install --python /private/tmp/openviking-uv311/bin/python 'openviking[local-embed]==0.3.17'` completed. |
-| Clean Python 3.11 direct embedder check | The same GGUF initialization failed with `ValueError: Failed to create llama_context`. |
-| Fresh OpenViking home `/private/tmp/openviking-fresh-home` | Server startup reached the StreamableHTTP session-manager log line, but `/health` remained unreachable and the server process was stopped. |
-| Fresh OpenViking doctor with default config | Embedding passed, but VLM failed because no model provider was configured. |
-| Fresh OpenViking doctor with `openai-codex` VLM and `CODEX_HOME=/Users/benlloyd/.codex` | All doctor checks passed: config, Python, native engine, AGFS, local embedding file, VLM via Codex OAuth, disk. |
-| Fresh OpenViking server with passing doctor config | Startup still failed before health because `llama_cpp.Llama(..., embedding=True)` raised `ValueError: Failed to create llama_context` while loading `/private/tmp/openviking-fresh-home/.cache/openviking/models/bge-small-zh-v1.5-f16.gguf`. |
-| Direct llama-cpp parameter probes | Explicit `n_ctx`, `n_batch`, `n_gpu_layers`, and `pooling_type` variants still failed with `Failed to create llama_context`. |
+| Earlier local GGUF embedding path | Failed with `ValueError: Failed to create llama_context`; not used for launch evidence. |
+| `uv tool install openviking` | Installed OpenViking 0.3.17 with `openviking`, `openviking-server`, `ov`, and `vikingbot` executables. |
+| First API-backed config | Doctor rejected `embedding.dense.encoding_format` as an unknown config field. |
+| Corrected API-backed config | Doctor passed config, Python, native engine, AGFS, `openai/text-embedding-3-small`, `openai/gpt-4o-mini`, and disk checks. |
+| `openviking-server --host 127.0.0.1 --port 1933` | Server started and `/health` returned healthy. |
+| `ingrain compare --openviking-endpoint http://127.0.0.1:1933` | Direct OpenViking resource retrieval scored `88/100`; artifacts are in `docs/evidence/live-openviking-resource/`. |
+| `ingrain live-eval --provider openviking --openviking-endpoint http://127.0.0.1:1933` | Hermes OpenViking provider scored `30/100` in the full provider matrix; artifacts are in `docs/evidence/live-les-provider-matrix/`. |
 
-## Launch Interpretation
+## Interpretation
 
-The public result should remain:
+OpenViking is no longer blocked on this machine.
 
-```text
-OpenViking: blocked
-```
+There are two different real results:
 
-The repo should not claim a current live OpenViking LES score until the server passes health and the live harness can upload, index, search, and read scenario resources in that runtime.
+| Lane | Score | Meaning |
+|---|---:|---|
+| Direct OpenViking resource retrieval | 88/100 | OpenViking can upload, index, search, read, and return useful resource context for the preregistered universes. |
+| Hermes OpenViking provider | 30/100 | The current Hermes provider lane returns mostly search metadata and abstracts, which is not enough hydrated lesson text for the learned-experience smoke test. |
 
-The current blocker is narrower than before: OpenViking can see a valid VLM path through Codex OAuth, but its official local GGUF embedding runtime fails during context creation on this machine. A deterministic embedding shim could make the HTTP server start, but that would not be a clean real OpenViking provider result and should not be used for launch evidence.
-
-The older OpenViking smoke test in `docs/hermes-test-report.md` remains useful compatibility history, but it is not the current provider-matrix evidence.
+Do not merge these into one claim. The resource lane validates OpenViking as a useful resource-memory substrate. The Hermes provider lane shows that the current Hermes integration needs better hydration before it is strong on this specific learned-experience task.

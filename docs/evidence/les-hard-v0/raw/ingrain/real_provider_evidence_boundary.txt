@@ -1,0 +1,14 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Provider claims require real provider evidence; never present a local regression suite as proof that an external provider worked. [source: evt_f60f0d3a78fd1004fe759568]
+
+Current decisions:
+- Only real provider runs belong in public provider evals. [source: evt_77e011453512b7eaeae23170]
+
+Sources:
+- evt_77e011453512b7eaeae23170
+- evt_f60f0d3a78fd1004fe759568
+
+</aeonik_ingrain_context>

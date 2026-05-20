@@ -26,25 +26,6 @@ Evidence hydration includes confidence       pass
 
 Interpretation: `100/100` means the deterministic launch fixtures pass. It is a regression gate for the compiler, hydration, and practice artifacts, not an external provider benchmark.
 
-## Deterministic Learned-Experience Comparison
-
-Command:
-
-```bash
-PYTHONPATH=src python3 -m aeonik_ingrain.cli compare --output-dir docs/evidence/deterministic-les-comparison
-```
-
-Result:
-
-```text
-Hermes default memory                  40/200
-Hermes + OpenViking-style retrieval   172/200
-Hermes + Hindsight-style synthesis    196/200
-Hermes + Ingrain                      200/200
-```
-
-The Hindsight-style row is a deterministic retain/recall/reflect-style synthesis baseline, not live Hindsight. See [learned-experience-results.md](learned-experience-results.md) and [evidence/deterministic-les-comparison/report.md](evidence/deterministic-les-comparison/report.md).
-
 ## Live LES Provider Matrix
 
 Command:
@@ -58,15 +39,16 @@ Result:
 ```text
 Hermes default memory  88/100
 Hermes + Ingrain      100/100
-Hindsight local        63/100
-OpenViking            blocked
+Hindsight local        62/100
+Hermes OpenViking      30/100
+OpenViking resource    88/100
 ```
 
 The live harness sends five preregistered universes through actual Hermes provider APIs and records raw outputs plus command logs under [docs/evidence/live-les-provider-matrix](evidence/live-les-provider-matrix/).
 
 Why Hermes default lost points: default memory returned both the stale statement and the later correction in several universes. Ingrain compiled the later correction into current learned experience and suppressed the stale claim in hydration.
 
-Why Hindsight/OpenViking did not pass here: Hindsight now runs in local embedded mode through the real Hermes provider and an OpenAI-backed local Hindsight daemon, but its reflect output missed exact correction polarity in several universes and repeated a forbidden comparative claim in the launch-safety universe. OpenViking remains blocked because no healthy server was reachable at `http://127.0.0.1:1933`; the latest recheck fixed VLM configuration through Codex OAuth, but startup still fails in the official local GGUF embedding path with `ValueError: Failed to create llama_context`. See [OpenViking startup recheck](evidence/openviking-startup-recheck.md). The harness does not simulate those providers.
+Why Hindsight/OpenViking did not pass here: Hindsight runs in local embedded mode through the real Hermes provider and an OpenAI-backed local Hindsight daemon, but its reflect output missed exact correction polarity in several universes. The Hermes OpenViking provider now runs against a healthy local OpenViking server, but its provider output is mostly search metadata and abstracts, not hydrated lesson text. Direct OpenViking resource retrieval scores `88/100` when the harness uploads, indexes, searches, and reads the same scenario resources through the OpenViking HTTP API.
 
 ## Claim Boundary
 

@@ -1,2 +1,0 @@
-[retrieved: memory_02] Decision: The demo backend should run on Railway because it needs long-lived jobs.
-[retrieved: memory_01] Decision: The demo backend should run on Vercel functions.

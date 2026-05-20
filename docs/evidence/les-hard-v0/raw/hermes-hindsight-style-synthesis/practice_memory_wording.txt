@@ -1,5 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- Do not say 'practice memory for agents' as the headline; it sounds useless. Say 'give your agents learned experience' or 'put agents into practice'. [evidence: memory_01]
-Action guidance:
-- Preserve: learned experience.

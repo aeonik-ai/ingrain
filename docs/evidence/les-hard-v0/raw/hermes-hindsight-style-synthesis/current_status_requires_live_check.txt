@@ -1,6 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- Until PyPI is published, say current install is pipx from GitHub. [evidence: memory_02]
-- Drafted PyPI install instructions for after release. [evidence: memory_01]
-Action guidance:
-- Preserve: GitHub.

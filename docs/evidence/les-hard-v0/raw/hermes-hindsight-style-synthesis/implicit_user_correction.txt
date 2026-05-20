@@ -1,6 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- That makes it sound useless. Use learned experience layer for autonomous agents instead. [evidence: memory_02]
-- Assistant draft: Ingrain is practice memory for agents. [evidence: memory_01]
-Action guidance:
-- Preserve: learned experience.

@@ -14,12 +14,12 @@ from aeonik_ingrain.compiler.hydrate import hydrate
 from aeonik_ingrain.compiler.pages import compile_store
 from aeonik_ingrain.db import IngrainStore, MIND_EVENT_TYPES
 from aeonik_ingrain.demo import DEMO_EVENTS, run_demo
-from aeonik_ingrain.evals.comparison import format_comparison, run_comparison, write_comparison_artifacts
 from aeonik_ingrain.evals.les_hard import format_les_hard, run_les_hard, write_les_hard_artifacts
 from aeonik_ingrain.evals.live_openviking import (
     OpenVikingLiveError,
     format_live_openviking_comparison,
     run_live_openviking_comparison,
+    write_live_openviking_artifacts,
 )
 from aeonik_ingrain.evals.live_les import format_live_les, format_live_les_markdown, run_live_les
 from aeonik_ingrain.evals.runner import format_eval, run_eval
@@ -85,20 +85,18 @@ def build_parser() -> argparse.ArgumentParser:
     attach.add_argument("--no-skill", action="store_true", help="Only initialize and write PRACTICE.md.")
 
     eval_parser = sub.add_parser("eval", help="Run deterministic LES-Core (Learned Experience Score) smoke eval.")
-    eval_parser.add_argument("--no-comparison", action="store_true", help="Skip substrate comparison table.")
     eval_parser.add_argument("--json", action="store_true", help="Print JSON instead of text.")
 
-    compare = sub.add_parser("compare", help="Run learned-experience substrate comparison.")
+    compare = sub.add_parser("compare", help="Run a real live OpenViking resource-retrieval eval.")
     compare.add_argument("--json", action="store_true", help="Print JSON instead of text.")
-    compare.add_argument("--output-dir", help="Write JSON, CSV, and markdown artifacts for deterministic comparison.")
-    compare.add_argument("--live-openviking", action="store_true", help="Run an optional live OpenViking resource-retrieval benchmark.")
     compare.add_argument("--openviking-endpoint", default=os.environ.get("OPENVIKING_ENDPOINT", "http://127.0.0.1:1933"))
     compare.add_argument("--openviking-account", default=os.environ.get("OPENVIKING_ACCOUNT", "default"))
     compare.add_argument("--openviking-user", default=os.environ.get("OPENVIKING_USER", "default"))
     compare.add_argument("--openviking-agent", default=os.environ.get("OPENVIKING_AGENT", "hermes"))
     compare.add_argument("--openviking-timeout", type=int, default=90)
+    compare.add_argument("--output-dir", help="Directory for real OpenViking raw output, JSON, CSV, and report.")
 
-    les_hard = sub.add_parser("les-hard", help="Run LES-Hard v0 deterministic learned-experience benchmark.")
+    les_hard = sub.add_parser("les-hard", help="Run LES-Hard v0 Ingrain self-eval.")
     les_hard.add_argument("--json", action="store_true", help="Print JSON instead of text.")
     les_hard.add_argument("--output-dir", default="docs/evidence/les-hard-v0", help="Directory for raw outputs, JSON, CSV, and report.")
     les_hard.add_argument("--report", default="docs/les-hard-report.md", help="Markdown report path to update.")
@@ -231,7 +229,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "eval":
-        result = run_eval(output_home=store.home, include_comparison=not args.no_comparison)
+        result = run_eval(output_home=store.home)
         if args.json:
             print(json.dumps(result, indent=2, sort_keys=True))
         else:
@@ -240,28 +238,27 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "compare":
-        if args.live_openviking:
-            try:
-                result = run_live_openviking_comparison(
-                    endpoint=args.openviking_endpoint,
-                    account=args.openviking_account,
-                    user=args.openviking_user,
-                    agent=args.openviking_agent,
-                    timeout=args.openviking_timeout,
-                )
-            except OpenVikingLiveError as exc:
-                print(f"OpenViking live comparison failed: {exc}", file=sys.stderr)
-                return 1
-            formatter = format_live_openviking_comparison
-        else:
-            result = run_comparison()
-            formatter = format_comparison
-            if args.output_dir:
-                write_comparison_artifacts(result, args.output_dir)
+        try:
+            result = run_live_openviking_comparison(
+                endpoint=args.openviking_endpoint,
+                account=args.openviking_account,
+                user=args.openviking_user,
+                agent=args.openviking_agent,
+                timeout=args.openviking_timeout,
+            )
+        except OpenVikingLiveError as exc:
+            print(f"OpenViking live comparison failed: {exc}", file=sys.stderr)
+            return 1
+        formatter = format_live_openviking_comparison
         if args.json:
             print(json.dumps(result, indent=2, sort_keys=True))
         else:
             print(formatter(result))
+            if args.output_dir:
+                artifacts = write_live_openviking_artifacts(result, args.output_dir)
+                print(f"\nWrote {artifacts['report']}")
+        if args.json and args.output_dir:
+            write_live_openviking_artifacts(result, args.output_dir)
         return 0
 
     if args.command == "les-hard":

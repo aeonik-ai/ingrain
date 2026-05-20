@@ -118,7 +118,7 @@ Arc:
 4. Compile with Ingrain.
 5. Start a clean session.
 6. Show the correction carrying forward.
-7. Show LES-Core, the comparison harness, and the claim boundary.
+7. Show LES-Core, the live provider matrix, and the claim boundary.
 8. Show LES-Hard as the credible proof page: harder scenarios, raw artifacts, and misses we still need to improve.
 9. Explain why this is not RAG and not a vector database.
 
@@ -144,4 +144,4 @@ ingrain eval
 - live OpenViking benchmark unless a real server was configured and tested
 - "better than Hindsight" or "SOTA memory"
 - universal memory benchmark claims
-- provider leaderboard claims from the deterministic fixture eval
+- provider leaderboard claims without real provider runs

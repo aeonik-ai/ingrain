@@ -1,7 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- Do not store chain-of-thought. Store concise outcomes and evidence instead. [evidence: memory_02]
-- Store corrections, decisions, lessons, completed outcomes, and source event IDs. [evidence: memory_01]
-Action guidance:
-- Preserve: Store corrections.
-- Preserve: Do not store.

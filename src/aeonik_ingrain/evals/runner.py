@@ -11,7 +11,6 @@ from typing import Any
 from aeonik_ingrain.compiler.hydrate import hydrate
 from aeonik_ingrain.compiler.pages import compile_store
 from aeonik_ingrain.db import IngrainStore, utc_now
-from aeonik_ingrain.evals.comparison import format_comparison, run_comparison
 from aeonik_ingrain.ingest.generic_jsonl import ingest_jsonl
 from aeonik_ingrain.practice import write_practice_artifacts
 
@@ -23,7 +22,7 @@ FIXTURES = [
 ]
 
 
-def run_eval(*, output_home: str | Path | None = None, include_comparison: bool = True) -> dict[str, Any]:
+def run_eval(*, output_home: str | Path | None = None) -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix="ingrain-eval-") as tmp:
         store = IngrainStore(Path(tmp) / ".ingrain")
         store.initialize()
@@ -62,9 +61,6 @@ def run_eval(*, output_home: str | Path | None = None, include_comparison: bool 
             },
         }
 
-    if include_comparison:
-        result["comparison"] = run_comparison()
-
     if output_home:
         out_store = IngrainStore(output_home)
         out_store.initialize()
@@ -82,8 +78,6 @@ def format_eval(result: dict[str, Any]) -> str:
         for key, value in result["practice_checks"].items():
             status = "pass" if value else "fail"
             lines.append(f"{key:<44} {status}")
-    if result.get("comparison"):
-        lines.extend(["", format_comparison(result["comparison"])])
     return "\n".join(lines)
 
 

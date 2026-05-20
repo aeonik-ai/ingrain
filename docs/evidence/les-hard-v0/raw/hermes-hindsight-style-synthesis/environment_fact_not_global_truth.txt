@@ -1,6 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- Do not claim this proves Hindsight is bad. It only proves this local configuration did not complete the smoke eval. [evidence: memory_02]
-- Live local Hindsight provider calls timed out in this environment. [evidence: memory_01]
-Action guidance:
-- Preserve: local configuration.

@@ -1,0 +1,10 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Report these as narrow smoke-test results; do not claim Ingrain beat them. [source: evt_c52fbb4cd0478c654007b715]
+
+Sources:
+- evt_c52fbb4cd0478c654007b715
+
+</aeonik_ingrain_context>

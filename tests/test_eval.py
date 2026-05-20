@@ -1,6 +1,5 @@
 import unittest
 
-from aeonik_ingrain.evals.comparison import run_comparison
 from aeonik_ingrain.evals.les_hard import SCENARIOS as HARD_SCENARIOS
 from aeonik_ingrain.evals.les_hard import run_les_hard, score_hard_output
 from aeonik_ingrain.evals.live_les import UNIVERSES, format_live_les, score_live_output
@@ -10,24 +9,15 @@ from aeonik_ingrain.evals.runner import run_eval
 
 class EvalTests(unittest.TestCase):
     def test_les_eval_scores_full(self):
-        result = run_eval(include_comparison=False)
+        result = run_eval()
         self.assertEqual(result["total"], 100)
-
-    def test_ingrain_scores_higher_on_learned_experience_fixtures(self):
-        result = run_comparison()
-        modes = result["modes"]
-        self.assertGreater(modes["Hermes + Ingrain"]["score"], modes["Hermes + Hindsight-style synthesis"]["score"])
-        self.assertGreater(modes["Hermes + Hindsight-style synthesis"]["score"], modes["Hermes + OpenViking-style retrieval"]["score"])
-        self.assertGreater(modes["Hermes + Ingrain"]["score"], modes["Hermes + OpenViking-style retrieval"]["score"])
-        self.assertGreater(modes["Hermes + OpenViking-style retrieval"]["score"], modes["Hermes default memory"]["score"])
 
     def test_les_hard_has_room_to_improve(self):
         result = run_les_hard()
         modes = result["modes"]
-        ingrain = modes["Hermes + Ingrain"]["score"]
+        ingrain = modes["Ingrain"]["score"]
         self.assertGreaterEqual(result["scenario_count"], 20)
-        self.assertGreater(ingrain, modes["Hermes default memory"]["score"])
-        self.assertLess(ingrain, modes["Hermes + Ingrain"]["max"])
+        self.assertLess(ingrain, modes["Ingrain"]["max"])
 
     def test_les_hard_abstention_rewards_caution(self):
         scenario = next(item for item in HARD_SCENARIOS if item.name == "missing_evidence_abstention")

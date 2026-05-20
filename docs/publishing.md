@@ -39,7 +39,7 @@ Use a clean environment:
 python3 -m venv /tmp/ingrain-publish-smoke
 /tmp/ingrain-publish-smoke/bin/python -m pip install aeonik-ingrain
 /tmp/ingrain-publish-smoke/bin/ingrain --version
-/tmp/ingrain-publish-smoke/bin/ingrain eval --no-comparison
+/tmp/ingrain-publish-smoke/bin/ingrain eval
 /tmp/ingrain-publish-smoke/bin/ingrain les-hard --output-dir /tmp/ingrain-les-hard
 /tmp/ingrain-publish-smoke/bin/ingrain skill show codex
 ```
@@ -57,11 +57,10 @@ Only use this as a local regression-gate screenshot. Do not frame it as an exter
 For a stronger launch artifact, use LES-Hard:
 
 ```text
-Hermes + Ingrain                545/560
-Hermes + Hindsight-style        536/560
+Ingrain                         542/560
 ```
 
-Label it exactly as deterministic LES-Hard v0. Do not call the Hindsight-style row live Hindsight.
+Label it exactly as LES-Hard v0, an Ingrain self-eval. Do not present it as a provider comparison.
 
 ## GitHub Release Checklist
 

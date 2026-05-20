@@ -1,2 +1,0 @@
-[retrieved: memory_01] Decision: No hosted backend is required for launch.
-[retrieved: memory_02] Decision: A polished visual architecture graphic helps adoption but is not required for LES-Hard evidence.

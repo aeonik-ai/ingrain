@@ -1,1 +1,0 @@
-[retrieved: memory_01] Decision: LES-Hard should borrow from LongMemEval-V2 and EvoMemBench: workflow knowledge, environment gotchas, premise awareness, and execution-oriented cross-episode memory.

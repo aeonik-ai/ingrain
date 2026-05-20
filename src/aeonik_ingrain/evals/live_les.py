@@ -245,7 +245,7 @@ def format_live_les_markdown(result: dict[str, Any]) -> str:
         "| Real provider APIs | Hermes default uses `tools.memory_tool.MemoryStore`; Ingrain loads through Hermes `plugins.memory.load_memory_provider('ingrain')`. |",
         "| Raw output audit | Each provider output is saved under `raw/<provider>/<universe>.txt`. |",
         "| Command audit | Each subprocess command log is saved under `commands/<provider>/<universe>.json`. |",
-        "| No simulated provider rows | Hindsight and OpenViking are scored only when a real package/service/server is available. |",
+        "| Real provider rows only | Hindsight and OpenViking are scored only when a real package/service/server is available. |",
         "",
         "## Environment",
         "",

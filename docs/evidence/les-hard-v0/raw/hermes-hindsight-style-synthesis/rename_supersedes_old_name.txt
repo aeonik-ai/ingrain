@@ -1,5 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- Product name is Aeonik Ingrain, not MindCompiler. [evidence: memory_02]
-Action guidance:
-- Preserve: Aeonik Ingrain.

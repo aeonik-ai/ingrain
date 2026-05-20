@@ -1,6 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- No, that's wrong. Do not call Ingrain a generic memory backend. Call it a learned experience layer for autonomous agents. [evidence: memory_02]
-Action guidance:
-- Preserve: Call it.
-- Preserve: learned experience.

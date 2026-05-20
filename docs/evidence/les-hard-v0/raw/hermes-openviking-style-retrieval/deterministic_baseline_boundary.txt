@@ -1,2 +1,0 @@
-[retrieved: memory_01] Decision: Hindsight-style synthesis is a deterministic baseline, not live Hindsight.
-[retrieved: memory_02] Correction: Never present a simulation, style baseline, mock provider, or fixture as proof that the real provider worked.

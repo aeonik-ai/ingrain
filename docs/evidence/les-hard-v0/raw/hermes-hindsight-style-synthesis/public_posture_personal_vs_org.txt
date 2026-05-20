@@ -1,5 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- Post first from Ben's personal page for reach, then amplify from aeonik-ai organization. [evidence: memory_01]
-Action guidance:
-- Preserve: personal page.

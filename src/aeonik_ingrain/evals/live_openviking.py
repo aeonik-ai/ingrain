@@ -1,22 +1,24 @@
-"""Optional live OpenViking comparison harness.
+"""Live OpenViking resource-retrieval eval harness.
 
-The default eval is deterministic and dependency-free. This module is for
-optional launch-time validation: point it at a running OpenViking server and
-compare the same learned-experience scenarios against live resource retrieval.
+Point this module at a running OpenViking server to upload the same
+learned-experience universes, search them, read returned resources, and score
+the retrieved context.
 """
 
 from __future__ import annotations
 
+import csv
 import json
 import tempfile
 import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-from aeonik_ingrain.evals.comparison import SCENARIOS, _score_output
+from aeonik_ingrain.evals.live_les import UNIVERSES, score_live_output
 
 
 class OpenVikingLiveError(RuntimeError):
@@ -37,7 +39,7 @@ def run_live_openviking_comparison(
 
     with tempfile.TemporaryDirectory(prefix="ingrain-openviking-live-") as tmp:
         tmp_dir = Path(tmp)
-        for scenario in SCENARIOS:
+        for scenario in UNIVERSES:
             fixture = tmp_dir / f"{scenario.name}.md"
             fixture.write_text(_scenario_markdown(scenario), encoding="utf-8")
             add_result = _add_resource(
@@ -67,15 +69,23 @@ def run_live_openviking_comparison(
                     )
                 )
             output = "\n".join(output_parts)
-            score = _score_output(output, scenario)
+            score = score_live_output(output, scenario)
             scenarios.append(
                 {
                     "scenario": scenario.name,
+                    "query": scenario.query,
                     "score": score["score"],
                     "max": 20,
-                    "components": score["components"],
+                    "components": {
+                        "expected_score": score["expected_score"],
+                        "forbidden_score": score["forbidden_score"],
+                        "compact_score": score["compact_score"],
+                    },
+                    "expected": list(scenario.expected),
+                    "forbidden": list(scenario.forbidden),
                     "read_uris": read_uris,
                     "output_chars": len(output),
+                    "raw_output": output,
                     "root_uri": _unwrap(add_result).get("root_uri", ""),
                 }
             )
@@ -94,6 +104,112 @@ def run_live_openviking_comparison(
             "configured with model credentials."
         ),
     }
+
+
+def write_live_openviking_artifacts(result: dict[str, Any], output_dir: str | Path) -> dict[str, str]:
+    out = Path(output_dir).expanduser()
+    raw_dir = out / "raw"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+
+    for item in result.get("scenarios", []):
+        raw_path = raw_dir / f"{item['scenario']}.txt"
+        raw_path.write_text(str(item.get("raw_output", "")), encoding="utf-8")
+
+    json_path = out / "results.json"
+    json_path.write_text(json.dumps(result, indent=2, sort_keys=True), encoding="utf-8")
+
+    csv_path = out / "results.csv"
+    with csv_path.open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.DictWriter(
+            fh,
+            fieldnames=[
+                "scenario",
+                "score",
+                "max",
+                "expected_score",
+                "forbidden_score",
+                "compact_score",
+                "output_chars",
+                "read_uris",
+                "root_uri",
+            ],
+        )
+        writer.writeheader()
+        for item in result.get("scenarios", []):
+            components = item.get("components", {})
+            writer.writerow(
+                {
+                    "scenario": item.get("scenario", ""),
+                    "score": item.get("score", 0),
+                    "max": item.get("max", 0),
+                    "expected_score": components.get("expected_score", 0),
+                    "forbidden_score": components.get("forbidden_score", 0),
+                    "compact_score": components.get("compact_score", 0),
+                    "output_chars": item.get("output_chars", 0),
+                    "read_uris": " ".join(item.get("read_uris", [])),
+                    "root_uri": item.get("root_uri", ""),
+                }
+            )
+
+    report_path = out / "report.md"
+    report_path.write_text(format_live_openviking_markdown(result, raw_dir=raw_dir), encoding="utf-8")
+    return {
+        "dir": str(out),
+        "report": str(report_path),
+        "json": str(json_path),
+        "csv": str(csv_path),
+        "raw": str(raw_dir),
+    }
+
+
+def format_live_openviking_markdown(result: dict[str, Any], *, raw_dir: Path | None = None) -> str:
+    generated = datetime.now(timezone.utc).isoformat()
+    raw_note = str(raw_dir) if raw_dir else "not written"
+    lines = [
+        "# Live OpenViking Resource Retrieval Eval",
+        "",
+        f"Generated: `{generated}`",
+        "",
+        "## Method",
+        "",
+        "This is a real OpenViking server run. The harness uploads each preregistered LES-Core universe as a markdown resource, waits for indexing, searches with the universe query, reads returned resource URIs, and scores the retrieved text.",
+        "",
+        "It is intentionally labeled as resource retrieval. It does not claim to exercise OpenViking's long-term memory extraction behavior.",
+        "",
+        "## Environment",
+        "",
+        "| Field | Value |",
+        "|---|---|",
+        f"| Endpoint | `{result.get('endpoint', '')}` |",
+        f"| Health | `{json.dumps(result.get('health', {}), sort_keys=True)}` |",
+        f"| Raw output | `{raw_note}` |",
+        "",
+        "## Results",
+        "",
+        f"Score: `{result.get('score', 0)}/{result.get('max', 0)}`",
+        "",
+        "| Scenario | Score | Expected | Forbidden | Read URIs |",
+        "|---|---:|---|---|---|",
+    ]
+    for item in result.get("scenarios", []):
+        expected = ", ".join(item.get("expected", []))
+        forbidden = ", ".join(item.get("forbidden", [])) or "none"
+        uris = "<br>".join(item.get("read_uris", [])[:3]) or "none"
+        lines.append(
+            f"| {item.get('scenario', '')} | {item.get('score', 0)}/{item.get('max', 0)} | {expected} | {forbidden} | {uris} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Interpretation",
+            "",
+            str(result.get("note", "")),
+            "",
+            "This result is useful for validating OpenViking as a resource-memory substrate. It should not be described as a head-to-head learned-experience benchmark unless OpenViking's memory extraction path is separately configured and tested.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
 
 
 def format_live_openviking_comparison(result: dict[str, Any]) -> str:

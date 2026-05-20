@@ -1,7 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- README should say cloud-first after hosted backend launches. [evidence: memory_02]
-- README should say local-first. [evidence: memory_01]
-Action guidance:
-- Preserve: ask.
-- Preserve: clarify.

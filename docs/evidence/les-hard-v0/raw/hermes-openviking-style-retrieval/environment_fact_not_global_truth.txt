@@ -1,2 +1,0 @@
-[retrieved: memory_02] Correction: Do not claim this proves Hindsight is bad. It only proves this local configuration did not complete the smoke eval.
-[retrieved: memory_01] Live local Hindsight provider calls timed out in this environment.

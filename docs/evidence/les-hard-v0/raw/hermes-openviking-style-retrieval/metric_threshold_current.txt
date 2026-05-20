@@ -1,2 +1,0 @@
-[retrieved: memory_02] Decision: Passing threshold is 90/100 for provider smoke evals, and provider subprocess failures fail the run.
-[retrieved: memory_01] Decision: Passing threshold is 80/100 for provider smoke evals.

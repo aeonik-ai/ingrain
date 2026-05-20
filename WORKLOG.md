@@ -14,10 +14,7 @@
 - Ran initial `ingrain eval`; stale-plan score failed, which exposed a real supersession bug.
 - Fixed event ordering and product-name supersession behavior.
 - Fixed correction misclassification where a correction containing "shipped" could become track record.
-- Added deterministic comparison harness for learned experience substrates:
-  - Hermes default memory
-  - Hermes + OpenViking-style raw retrieval baseline
-  - Hermes + Ingrain promotion/compile/hydrate
+- Added the first local LES-Core regression checks for Ingrain behavior.
 
 Next:
 
@@ -43,7 +40,7 @@ Next:
 - Verified local wheel build and install:
   - `python3 -m pip install --no-build-isolation --target /private/tmp/ingrain-install-target /Users/benlloyd/Desktop/REPO/ingrain` succeeded in the base environment.
   - Created `/private/tmp/ingrain-venv`, ran build-isolated venv install, and verified the installed `ingrain` console script.
-  - `/private/tmp/ingrain-venv/bin/ingrain --home /private/tmp/ingrain-venv-eval eval --no-comparison` passed with LES-100 100/100.
+  - `/private/tmp/ingrain-venv/bin/ingrain --home /private/tmp/ingrain-venv-eval eval` passed with LES-100 100/100.
 
 ## 2026-05-19 01:15 PDT
 
@@ -57,7 +54,7 @@ Next:
 - Re-ran verification after security hardening:
   - `python3 -m compileall src tests` passed.
   - `PYTHONPATH=src python3 -m unittest discover -s tests -v` passed: 6 tests.
-  - `ingrain eval` passed: LES-100 100/100 and comparison Ingrain 120/120 vs OpenViking-style retrieval 108/120 vs default Hermes 36/120.
+  - `ingrain eval` passed: LES-100 100/100.
 
 ## 2026-05-19 01:35 PDT
 
@@ -65,9 +62,8 @@ Next:
 - Built and installed `llama-cpp-python` for OpenViking local embeddings.
 - Started a local OpenViking server on `127.0.0.1:1933`; health check passed.
 - Verified Hermes' bundled OpenViking provider can initialize against the server and exposes `viking_search`, `viking_read`, `viking_browse`, `viking_remember`, and `viking_add_resource`.
-- Added `ingrain compare --live-openviking` to run a real OpenViking resource upload/index/search/read benchmark.
-- Live OpenViking resource-retrieval result: `96/120` on the learned-experience comparison scenarios.
-- OpenViking long-term memory extraction was not fully benchmarked because the isolated server had no `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY`; commit-time extraction logged a missing-credentials error.
+- Added `ingrain compare` to run a real OpenViking resource upload/index/search/read benchmark.
+- Recorded this as compatibility history only; the current OpenViking evidence is the later `88/100` direct resource-retrieval run under `docs/evidence/live-openviking-resource/`.
 
 ## 2026-05-19 01:50 PDT
 
@@ -112,7 +108,7 @@ Next:
 
 ## 2026-05-19 04:10 PDT
 
-- Removed the modeled Hindsight-style universe comparison before committing it as evidence.
+- Removed a modeled provider-comparison prototype before treating it as evidence.
 - Added `ingrain live-eval`, a live-only LES provider matrix:
   - calls Hermes default memory through the installed Hermes `tools.memory_tool` API
   - calls Ingrain through Hermes' installed memory-provider plugin loader
@@ -125,7 +121,7 @@ Next:
   - Hermes default memory: `88/100`
   - Hermes + Ingrain: `100/100`
   - Hindsight: blocked, no Hindsight package/service/API key detected
-  - OpenViking: blocked, no healthy server at `http://127.0.0.1:1933`
+  - OpenViking: not scored in that early run because the server was not running
 - Saved raw outputs and command logs under `docs/evidence/live-les-provider-matrix/`.
 - Tightened loose `plan` and `project` promotion regexes after raw output showed harmless but noisy over-promotion in the goals/missions boundary universe.
 
@@ -143,27 +139,17 @@ Next:
 
 ## 2026-05-19 05:10 PDT
 
-- Expanded the deterministic learned-experience comparison from 6 to 10 universes.
-- Added explicit scoring components for expected lesson recall, stale/forbidden suppression, actionability, source evidence, and compactness.
-- Added a clearly labeled `Hermes + Hindsight-style synthesis` baseline:
-  - deterministic retain/recall/reflect-style behavior
-  - not live Hindsight
-  - not a general benchmark of Hindsight
-- Improved general compiler rules:
+- Explored a deterministic provider-comparison prototype and then removed it from the launch evidence path.
+- Kept the useful compiler improvements from that exploration:
   - `Correction:` phrases are promoted as corrections
   - active-intent boundary memories supersede older plan memories
   - completed track-record memories can supersede older matching plans
-- Current deterministic comparison:
-  - Hermes default memory: `40/200`
-  - Hermes + OpenViking-style retrieval: `172/200`
-  - Hermes + Hindsight-style synthesis: `196/200`
-  - Hermes + Ingrain: `200/200`
-- Added `docs/learned-experience-results.md` and deterministic artifacts under `docs/evidence/deterministic-les-comparison/`.
+- Updated `docs/learned-experience-results.md` to separate Ingrain self-evals from real provider runs.
 
 ## 2026-05-19 05:55 PDT
 
 - Created the 10-minute heartbeat `continue-ingrain-les-hard-build` for continued autonomous work.
-- Added `ingrain les-hard`, a harder deterministic benchmark with 28 preregistered scenarios covering supersession, active-intent boundaries, blocked-provider claim safety, sandbox gotchas, secret redaction, project namespace collisions, abstention, premise awareness, implicit corrections, and unresolved conflicts.
+- Added `ingrain les-hard`, a harder Ingrain self-eval with 28 preregistered scenarios covering supersession, active-intent boundaries, provider claim safety, sandbox gotchas, secret redaction, project namespace collisions, abstention, premise awareness, implicit corrections, and unresolved conflicts.
 - Saved LES-Hard raw outputs, CSV, JSON, and markdown report under `docs/evidence/les-hard-v0/` and mirrored the public report to `docs/les-hard-report.md`.
 - Improved general compiler/hydration behavior surfaced by LES-Hard:
   - promote explicit `Lesson:` and `Observation:` lines
@@ -174,10 +160,7 @@ Next:
   - filter specific hydration queries away from unrelated project namespaces
   - treat empty specific-query hydration as a valid abstention signal in LES-Hard
 - Current LES-Hard v0 result:
-  - Hermes default memory: `194/560`
-  - Hermes + OpenViking-style retrieval: `501/560`
-  - Hermes + Hindsight-style synthesis: `536/560`
-  - Hermes + Ingrain: `545/560`
+  - Ingrain: `542/560`
 - Updated README, eval standards, eval docs, learned-experience results, launch notes, and publishing notes with LES-Hard framing and claim boundaries.
 
 ## 2026-05-19 06:10 PDT
@@ -187,3 +170,25 @@ Next:
   - no JavaScript, no build step, no Remotion dependency
 - Added `docs/visual-demo.md` with the intended story beats, usage surfaces, and export options for social/video.
 - Updated README and launch notes to link the animated visual and include it in the demo-video arc.
+
+## 2026-05-19 21:55 PDT
+
+- Removed non-real provider comparison artifacts and code:
+  - deleted `src/aeonik_ingrain/evals/comparison.py`
+  - deleted `docs/evidence/deterministic-les-comparison/`
+  - removed provider comparison output from `ingrain eval`
+  - made `ingrain les-hard` an Ingrain-only self-eval
+- Installed and configured real OpenViking 0.3.17 locally with API-backed embedding/VLM settings outside the repo.
+- Verified OpenViking health at `http://127.0.0.1:1933`.
+- Added auditable direct OpenViking resource-retrieval artifacts under `docs/evidence/live-openviking-resource/`.
+- Reran the full live provider matrix with real providers:
+  - Hermes default memory: `88/100`
+  - Ingrain Hermes provider: `100/100`
+  - Hindsight local embedded: `62/100`
+  - Hermes OpenViking provider: `30/100`
+  - Direct OpenViking resource retrieval: `88/100`
+- Updated README, eval docs, live reports, Hermes report, and OpenViking setup notes to remove stale blocked-provider language and separate resource retrieval from learned-experience provider behavior.
+- Verification:
+  - `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m unittest discover -s tests -v`
+  - `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m aeonik_ingrain.cli eval`
+  - audit for non-real provider-baseline wording returned no matches

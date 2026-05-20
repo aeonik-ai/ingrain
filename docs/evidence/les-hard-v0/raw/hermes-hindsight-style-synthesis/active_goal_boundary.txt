@@ -1,8 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- Do not let Ingrain create, move, close, schedule, or revive tasks by itself. [evidence: memory_03]
-- Ingrain owns learned experience only: corrections, decisions, lessons, stale-plan warnings, completed outcomes, prior failures, and project rules learned from execution. [evidence: memory_02]
-- Hermes owns active goals, missions, Kanban columns, scheduling, task lifecycle, and what the agent should do next. [evidence: memory_01]
-Action guidance:
-- Preserve: Hermes owns.
-- Preserve: background.

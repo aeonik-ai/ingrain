@@ -20,9 +20,6 @@ from aeonik_ingrain.compiler.hydrate import hydrate
 from aeonik_ingrain.compiler.pages import compile_store
 from aeonik_ingrain.db import IngrainStore, utc_now
 
-WORD_RE = re.compile(r"[A-Za-z0-9_]+")
-
-
 @dataclass(frozen=True)
 class HardScenario:
     name: str
@@ -36,7 +33,6 @@ class HardScenario:
     action_terms: tuple[str, ...] = ()
     premise_terms: tuple[str, ...] = ()
     abstention_terms: tuple[str, ...] = ()
-    default_memory: tuple[str, ...] = ()
     max_chars: int = 3000
 
 
@@ -132,30 +128,31 @@ SCENARIOS: tuple[HardScenario, ...] = (
         name="blocked_provider_not_failure_claim",
         category="claim-safety",
         difficulty=4,
-        rationale="Blocked providers should not be turned into leaderboard wins.",
+        rationale="Weak or narrow provider results should not be turned into leaderboard wins.",
         query="write the current provider comparison claim",
         events=(
-            "Hindsight is installed and importable, but live local embedded calls timed out.",
-            "OpenViking doctor passed VLM through Codex OAuth, but server startup is blocked by local GGUF embedding context creation.",
-            "Correction: Mark blocked providers as blocked with evidence; do not claim Ingrain beat them.",
+            "Hindsight local embedded scored 62/100 in the real live provider matrix.",
+            "Hermes OpenViking provider scored 30/100 in the real live provider matrix.",
+            "Direct OpenViking resource retrieval scored 88/100 in the real resource-retrieval harness.",
+            "Correction: Report these as narrow smoke-test results; do not claim Ingrain beat them.",
         ),
-        expected=("timed out", "blocked", "do not claim Ingrain beat"),
+        expected=("62/100", "30/100", "88/100", "do not claim Ingrain beat"),
         forbidden=("Ingrain beat Hindsight", "Ingrain beat OpenViking"),
-        action_terms=("blocked with evidence",),
+        action_terms=("narrow smoke-test results",),
     ),
     HardScenario(
-        name="deterministic_baseline_boundary",
+        name="real_provider_evidence_boundary",
         category="claim-safety",
         difficulty=4,
-        rationale="Style baselines must not be used as proof about real systems.",
-        query="describe Hindsight-style results",
+        rationale="Provider claims must be based on real provider runs.",
+        query="describe provider eval evidence",
         events=(
-            "Decision: Hindsight-style synthesis is a deterministic baseline, not live Hindsight.",
-            "Correction: Never present a simulation, style baseline, mock provider, or fixture as proof that the real provider worked.",
+            "Decision: Only real provider runs belong in public provider evals.",
+            "Correction: Provider claims require real provider evidence; never present a local regression suite as proof that an external provider worked.",
         ),
-        expected=("deterministic baseline", "not live Hindsight", "Never present a simulation"),
-        forbidden=("real Hindsight worked",),
-        action_terms=("not live", "proof"),
+        expected=("Only real provider runs", "Provider claims require real provider evidence", "local regression suite"),
+        forbidden=("unverified provider result", "regression suite proves the provider worked"),
+        action_terms=("real provider runs", "proof"),
     ),
     HardScenario(
         name="sandbox_dependency_recovery",
@@ -264,12 +261,12 @@ SCENARIOS: tuple[HardScenario, ...] = (
         query="prepare the final public claim boundary",
         events=(
             "Assistant draft said: Ingrain beats Hindsight as a general memory backend.",
-            "Correction: Do not claim Ingrain beats Hindsight. Say the live run compares Ingrain to Hermes default memory and marks Hindsight blocked unless a real package/service/API key is available.",
-            "Decision: Use Hindsight-style only as a labeled deterministic baseline when live Hindsight cannot run.",
+            "Correction: Do not claim Ingrain beats Hindsight. Say the live run compares Ingrain to real configured providers on a narrow learned-experience smoke test.",
+            "Decision: The current public matrix includes real Hermes default, Ingrain, and Hindsight local embedded results; OpenViking remains unscored until a healthy server runs.",
         ),
-        expected=("Hindsight blocked", "Hermes default memory", "Hindsight-style", "deterministic baseline"),
+        expected=("real configured providers", "Hindsight local embedded", "OpenViking remains unscored"),
         forbidden=("Ingrain beats Hindsight as a general memory backend",),
-        action_terms=("do not claim", "labeled deterministic baseline"),
+        action_terms=("do not claim", "real configured providers"),
     ),
     HardScenario(
         name="raw_transcript_not_lesson",
@@ -439,19 +436,13 @@ SCENARIOS: tuple[HardScenario, ...] = (
 
 
 MODE_NOTES = {
-    "Hermes default memory": "Bounded curated memory only.",
-    "Hermes + OpenViking-style retrieval": "Deterministic raw semantic retrieval baseline, not a live OpenViking result.",
-    "Hermes + Hindsight-style synthesis": "Deterministic retain/recall/reflect-style synthesis, not live Hindsight.",
-    "Hermes + Ingrain": "Actual Ingrain compiler and hydration path.",
+    "Ingrain": "Actual Ingrain compiler and hydration path.",
 }
 
 
 def run_les_hard() -> dict[str, Any]:
     modes: dict[str, Callable[[HardScenario], str]] = {
-        "Hermes default memory": _run_default_mode,
-        "Hermes + OpenViking-style retrieval": _run_openviking_style_mode,
-        "Hermes + Hindsight-style synthesis": _run_hindsight_style_mode,
-        "Hermes + Ingrain": _run_ingrain_mode,
+        "Ingrain": _run_ingrain_mode,
     }
     result: dict[str, Any] = {
         "name": "LES-Hard v0",
@@ -469,8 +460,7 @@ def run_les_hard() -> dict[str, Any]:
         "scenarios": [_scenario_summary(s) for s in SCENARIOS],
         "modes": {},
         "notes": [
-            "LES-Hard is deterministic and model-free; it is not a live provider benchmark.",
-            "OpenViking-style and Hindsight-style rows are labeled baselines, not evidence about the live systems.",
+            "LES-Hard is an Ingrain self-eval over preregistered local scenarios; it is not a provider benchmark.",
             "Live provider evidence remains in docs/evidence/live-les-provider-matrix/.",
         ],
     }
@@ -533,10 +523,9 @@ def format_les_hard_markdown(result: dict[str, Any]) -> str:
         "| Control | Implementation |",
         "|---|---|",
         f"| Preregistered scenarios | {result['scenario_count']} deterministic scenarios in `src/aeonik_ingrain/evals/les_hard.py`. |",
-        "| Same input per mode | Each mode receives the same event list and query. |",
+        "| Same input per scenario | Ingrain receives each scenario event list and query. |",
         "| No model calls | The run is dependency-free and repeatable. |",
-        "| Raw output audit | Every mode/scenario output is saved under `raw/<mode>/<scenario>.txt`. |",
-        "| Baseline labeling | Hindsight-style and OpenViking-style rows are deterministic approximations, not live provider evidence. |",
+        "| Raw output audit | Every scenario output is saved under `raw/ingrain/<scenario>.txt`. |",
         "",
         "## Results",
         "",
@@ -581,7 +570,7 @@ def format_les_hard_markdown(result: dict[str, Any]) -> str:
         "",
         "LES-Hard is intentionally harder than LES-Core. A non-perfect score is expected and useful: it creates room to improve without pretending a small fixture suite is an industry benchmark.",
         "",
-        "This report supports engineering iteration on learned-experience behavior. It does not prove Ingrain is better than live Hindsight, OpenViking, or any other provider.",
+        "This report supports engineering iteration on Ingrain learned-experience behavior. Provider comparisons belong only in live provider reports.",
         "",
         "## Artifacts",
         "",
@@ -678,56 +667,6 @@ def score_hard_output(output: str, scenario: HardScenario) -> dict[str, Any]:
     return {"score": sum(components.values()), "components": components}
 
 
-def _run_default_mode(scenario: HardScenario) -> str:
-    return "\n".join(f"[MEMORY.md] {item}" for item in scenario.default_memory)
-
-
-def _run_openviking_style_mode(scenario: HardScenario) -> str:
-    query_tokens = _tokens(scenario.query)
-    ranked = sorted(
-        enumerate(scenario.events, start=1),
-        key=lambda item: (len(_tokens(item[1]) & query_tokens), item[0]),
-        reverse=True,
-    )
-    selected = [item for item in ranked if _tokens(item[1]) & query_tokens][:5]
-    if not selected:
-        selected = ranked[:2]
-    return "\n".join(f"[retrieved: memory_{idx:02d}] {text}" for idx, text in selected)
-
-
-def _run_hindsight_style_mode(scenario: HardScenario) -> str:
-    query_tokens = _tokens(scenario.query)
-    indexed = list(enumerate(scenario.events, start=1))
-    ranked = sorted(
-        indexed,
-        key=lambda item: (
-            _lesson_weight(item[1]),
-            len(_tokens(item[1]) & query_tokens),
-            item[0],
-        ),
-        reverse=True,
-    )
-    selected = [item for item in ranked if _lesson_weight(item[1]) > 0 or _tokens(item[1]) & query_tokens][:5]
-    if scenario.abstention_terms and not any(_tokens(text) & query_tokens for _, text in selected):
-        return "Hindsight-style synthesis baseline (deterministic; not live Hindsight).\nNo sufficient retained evidence for this query."
-    if not selected:
-        selected = ranked[:3]
-
-    lines = [
-        "Hindsight-style synthesis baseline (deterministic; not live Hindsight).",
-        "Current reflection:",
-    ]
-    for idx, text in sorted(selected, key=lambda item: item[0], reverse=True):
-        if _is_obviously_stale_raw(text, selected):
-            continue
-        lines.append(f"- {_clean_memory_text(text)} [evidence: memory_{idx:02d}]")
-    if scenario.action_terms:
-        lines.append("Action guidance:")
-        for term in scenario.action_terms:
-            lines.append(f"- Preserve: {term}.")
-    return "\n".join(lines)
-
-
 def _run_ingrain_mode(scenario: HardScenario) -> str:
     with tempfile.TemporaryDirectory(prefix="ingrain-les-hard-") as tmp:
         store = IngrainStore(Path(tmp) / ".ingrain")
@@ -817,52 +756,6 @@ def _is_negated_mention(lower: str, index: int) -> bool:
         "do not say",
     )
     return any(marker in window for marker in negation_markers)
-
-
-def _tokens(text: str) -> set[str]:
-    return {m.group(0).lower() for m in WORD_RE.finditer(text or "") if len(m.group(0)) > 2}
-
-
-def _lesson_weight(text: str) -> int:
-    lower = text.lower()
-    weight = 0
-    for marker in ("correction", "from now on", "do not", "don't", "never", "always", "lesson"):
-        if marker in lower:
-            weight += 5
-    for marker in ("decision", "completed", "tests passed", "failed", "blocked", "observation"):
-        if marker in lower:
-            weight += 4
-    for marker in ("background context", "source of truth", "not proof", "local configuration", "deterministic baseline"):
-        if marker in lower:
-            weight += 3
-    return weight
-
-
-def _clean_memory_text(text: str) -> str:
-    return re.sub(
-        r"^(Decision|Correction|Plan|Completed|Failed|Tests passed|Preference|Observation|Lesson):\s*",
-        "",
-        text.strip(),
-        flags=re.I,
-    )
-
-
-def _is_obviously_stale_raw(text: str, selected: list[tuple[int, str]]) -> bool:
-    lower = text.lower()
-    later_text = "\n".join(other.lower() for _, other in selected)
-    if "plan:" in lower and ("background context" in later_text or "do not infer active goals" in later_text):
-        return True
-    if "preference:" in lower and "correction:" in later_text:
-        return True
-    if "product name is mindcompiler" in lower and "not mindcompiler" in later_text:
-        return True
-    if "vercel functions" in lower and "railway" in later_text:
-        return True
-    if "passing threshold is 80/100" in lower and "90/100" in later_text:
-        return True
-    if "ingrain beats hindsight" in lower and "do not claim" in later_text:
-        return True
-    return False
 
 
 def _has_source_evidence(output: str) -> bool:

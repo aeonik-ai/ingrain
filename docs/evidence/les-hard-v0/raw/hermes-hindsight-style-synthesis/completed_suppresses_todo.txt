@@ -1,7 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- unit suite, deterministic LES, and live Hermes provider matrix. [evidence: memory_03]
-- Built the Hermes provider, CLI attach flow, and eval report. [evidence: memory_02]
-Action guidance:
-- Preserve: Built.
-- Preserve: Tests passed.

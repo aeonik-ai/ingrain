@@ -1,5 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- The demo backend should run on Railway because it needs long-lived jobs. [evidence: memory_02]
-Action guidance:
-- Preserve: Railway.

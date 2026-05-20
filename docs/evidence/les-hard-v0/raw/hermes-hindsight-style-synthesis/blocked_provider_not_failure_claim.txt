@@ -1,6 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- Mark blocked providers as blocked with evidence; do not claim Ingrain beat them. [evidence: memory_03]
-- OpenViking doctor passed VLM through Codex OAuth, but server startup is blocked by local GGUF embedding context creation. [evidence: memory_02]
-Action guidance:
-- Preserve: blocked with evidence.

@@ -1,6 +1,0 @@
-Hindsight-style synthesis baseline (deterministic; not live Hindsight).
-Current reflection:
-- A polished visual architecture graphic helps adoption but is not required for LES-Hard evidence. [evidence: memory_02]
-- No hosted backend is required for launch. [evidence: memory_01]
-Action guidance:
-- Preserve: not required.

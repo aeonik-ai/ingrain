@@ -3,13 +3,13 @@
     "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
     "-c",
     "<script>",
-    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hindsight-tqk4sgls/goals_missions_boundary.json"
+    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hindsight-0gt72wu8/goals_missions_boundary.json"
   ],
   "cwd": "/Users/benlloyd/.hermes/hermes-agent",
-  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hindsight-tqk4sgls/hermes/goals_missions_boundary",
+  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-hindsight-0gt72wu8/hermes/goals_missions_boundary",
   "returncode": 0,
   "stderr": "Daemon for profile 'ingrain-live-les' is no longer responsive, restarting...",
-  "stdout_chars": 1182,
+  "stdout_chars": 1385,
   "timed_out": false,
   "timeout_seconds": null
 }

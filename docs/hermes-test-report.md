@@ -59,25 +59,29 @@ client=True
 tools=['viking_search', 'viking_read', 'viking_browse', 'viking_remember', 'viking_add_resource']
 ```
 
-The live resource-retrieval benchmark returned `96/120` during the first integration pass. The current deterministic learned-experience comparison has since expanded to ten universes and scores Ingrain at `200/200`.
+The live resource-retrieval benchmark returned `96/120` during the first integration pass.
 
-Limit: OpenViking long-term memory extraction requires model credentials. In the isolated temp server, `viking_remember` stored a session message, but commit-time extraction failed because no `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` was present. That is why the launch eval distinguishes:
+Limit: OpenViking long-term memory extraction requires model credentials. In the isolated temp server, `viking_remember` stored a session message, but commit-time extraction failed because no `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` was present.
 
-- `Hermes + OpenViking-style retrieval`: deterministic local raw-retrieval baseline.
-- `ingrain compare --live-openviking`: real OpenViking resource upload/index/search/read path.
+The current live OpenViking path is:
 
-This report should not be read as a general OpenViking benchmark. It checks whether the Ingrain launch scenarios are more naturally handled as learned experience than as raw resource retrieval.
+```bash
+ingrain compare --openviking-endpoint http://127.0.0.1:1933
+```
+
+This report should not be read as a general OpenViking benchmark. Current provider comparison evidence belongs in the live provider matrix only.
 
 ## Current OpenViking Recheck
 
-The later live provider matrix did not score OpenViking because no healthy OpenViking server was reachable at `http://127.0.0.1:1933`.
+The later live provider matrix now scores OpenViking against a healthy local OpenViking server at `http://127.0.0.1:1933`.
 
 This was rechecked on 2026-05-19 before launch cleanup:
 
 | Attempt | Result |
 |---|---|
-| Existing `/private/tmp/openviking-venv` with OpenViking 0.3.17 | `openviking health` failed because no server was reachable. Direct `llama_cpp.Llama(...)` initialization against the cached GGUF embedder raised `ValueError: Failed to create llama_context`. |
-| Clean Python 3.11 venv at `/private/tmp/openviking-uv311` with `openviking[local-embed]==0.3.17` | Installation completed, but direct GGUF initialization still raised `ValueError: Failed to create llama_context`. |
-| Fresh OpenViking home at `/private/tmp/openviking-fresh-home` | Server startup reached the StreamableHTTP session-manager log line, but `/health` remained unreachable and the process had to be stopped. |
+| Earlier local GGUF embedding path | Failed with `ValueError: Failed to create llama_context`; not used for launch evidence. |
+| `uv tool install openviking` | Installed OpenViking 0.3.17. |
+| API-backed OpenViking config | Doctor passes for config, Python, native engine, AGFS, OpenAI embedding, OpenAI VLM, and disk. |
+| Local server `127.0.0.1:1933` | `/health` returns healthy. |
 
-Current interpretation: OpenViking remains a real integration target, but it is not part of the committed live LES provider score until a healthy server is available. The repo should keep saying `blocked`, not `0`, for OpenViking in the provider matrix.
+Current interpretation: OpenViking is no longer blocked. The Hermes OpenViking provider scores `30/100` on the learned-experience smoke matrix because it returns search metadata without enough hydrated lesson text. Direct OpenViking resource retrieval scores `88/100`; that result lives in `docs/evidence/live-openviking-resource/`.

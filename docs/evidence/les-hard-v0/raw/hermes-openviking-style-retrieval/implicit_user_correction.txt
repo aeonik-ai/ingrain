@@ -1,2 +1,0 @@
-[retrieved: memory_02] That makes it sound useless. Use learned experience layer for autonomous agents instead.
-[retrieved: memory_01] Assistant draft: Ingrain is practice memory for agents.

@@ -1,0 +1,14 @@
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not claim Ingrain beats Hindsight. Say the live run compares Ingrain to real configured providers on a narrow learned-experience smoke test. [source: evt_e563a72d9c44e4711b9185af]
+
+Current decisions:
+- The current public matrix includes real Hermes default, Ingrain, and Hindsight local embedded results; OpenViking remains unscored until a healthy server runs. [source: evt_eda09eabea8bb468250a932f]
+
+Sources:
+- evt_e563a72d9c44e4711b9185af
+- evt_eda09eabea8bb468250a932f
+
+</aeonik_ingrain_context>
