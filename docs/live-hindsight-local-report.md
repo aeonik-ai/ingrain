@@ -29,20 +29,17 @@ A learned-experience layer should return the current lesson from prior runs, sup
 
 | Provider | Status | Score | Notes |
 |---|---|---:|---|
-| hermes-default | fail | 88/100 | threshold 90/100 |
-| ingrain | pass | 100/100 | threshold 90/100 |
-| hindsight | fail | 63/100 | threshold 90/100 |
-| openviking | blocked |  | OpenViking health check failed at http://127.0.0.1:1933; start a real server or set OPENVIKING_ENDPOINT. |
+| hindsight | fail | 70/100 | threshold 90/100 |
 
 ## Universe Breakdown
 
 | Universe | Difficulty | Rationale | Scores |
 |---|---:|---|---|
-| `launch_framing_correction` | 1 | A user correction should become future launch-writing practice, not raw stale copy. | hermes-default=16/20; ingrain=20/20; hindsight=20/20; openviking=blocked |
-| `product_rename_supersession` | 2 | The current decision must win over an older product-name decision. | hermes-default=16/20; ingrain=20/20; hindsight=6/20; openviking=blocked |
-| `goals_missions_boundary` | 3 | Memory must improve judgment without becoming a second task system. | hermes-default=20/20; ingrain=20/20; hindsight=6/20; openviking=blocked |
-| `sandbox_recovery` | 4 | A prior execution failure should alter the next attempt. | hermes-default=20/20; ingrain=20/20; hindsight=20/20; openviking=blocked |
-| `launch_claim_safety` | 5 | Launch memory should prevent overclaiming against adjacent systems. | hermes-default=16/20; ingrain=20/20; hindsight=11/20; openviking=blocked |
+| `launch_framing_correction` | 1 | A user correction should become future launch-writing practice, not raw stale copy. | hindsight=20/20 |
+| `product_rename_supersession` | 2 | The current decision must win over an older product-name decision. | hindsight=13/20 |
+| `goals_missions_boundary` | 3 | Memory must improve judgment without becoming a second task system. | hindsight=6/20 |
+| `sandbox_recovery` | 4 | A prior execution failure should alter the next attempt. | hindsight=20/20 |
+| `launch_claim_safety` | 5 | Launch memory should prevent overclaiming against adjacent systems. | hindsight=11/20 |
 
 ## Scoring Rubric
 
@@ -54,7 +51,7 @@ On these preregistered local smoke-test universes, this run can support only the
 
 ## Artifacts
 
-- Artifact directory: `/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-les-provider-matrix`
+- Artifact directory: `/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/live-hindsight-local`
 - Machine-readable results: `results.json` and `results.csv`
 - Raw provider outputs: `raw/`
 - Command logs: `commands/`

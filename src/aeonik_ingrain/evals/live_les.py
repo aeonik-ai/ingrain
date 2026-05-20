@@ -366,7 +366,7 @@ def _run_hermes_default(
         command_dir=command_dir,
         timeout=timeout,
         script=HERMES_DEFAULT_SCRIPT,
-        env_builder=lambda _tmp, _universe: {},
+        env_builder=lambda _tmp, _universe, _hermes_home: {},
     )
 
 
@@ -387,7 +387,7 @@ def _run_ingrain_provider(
         command_dir=command_dir,
         timeout=timeout,
         script=INGRAIN_PROVIDER_SCRIPT,
-        env_builder=lambda tmp, _universe: {"PATH": f"{_make_ingrain_cli_shim(tmp)}{os.pathsep}{os.environ.get('PATH', '')}"},
+        env_builder=lambda tmp, _universe, _hermes_home: {"PATH": f"{_make_ingrain_cli_shim(tmp)}{os.pathsep}{os.environ.get('PATH', '')}"},
         before_run=_install_hermes_provider,
     )
 
@@ -402,7 +402,7 @@ def _run_hindsight_provider(
 ) -> dict[str, Any]:
     if not runtime.available:
         return _blocked("Hermes runtime not found; cannot load bundled Hindsight provider.")
-    available = _probe_provider(runtime, "hindsight", command_dir, timeout=timeout)
+    available = _probe_provider(runtime, "hindsight", command_dir, timeout=timeout, env_builder=_hindsight_probe_env)
     if not available.get("available"):
         reason = available.get("reason") or "Hindsight provider is not available."
         return _blocked(reason, probe=available)
@@ -437,7 +437,7 @@ def _run_openviking_provider(
         command_dir=command_dir,
         timeout=timeout,
         script=OPENVIKING_PROVIDER_SCRIPT,
-        env_builder=lambda _tmp, _universe: {"OPENVIKING_ENDPOINT": endpoint},
+        env_builder=lambda _tmp, _universe, _hermes_home: {"OPENVIKING_ENDPOINT": endpoint},
     )
 
 
@@ -449,7 +449,7 @@ def _run_provider_universes(
     command_dir: Path,
     timeout: int,
     script: str,
-    env_builder: Callable[[Path, LiveUniverse], dict[str, str]],
+    env_builder: Callable[[Path, LiveUniverse, Path], dict[str, str]],
     before_run: Callable[[Path], Any] | None = None,
 ) -> dict[str, Any]:
     rows = []
@@ -467,7 +467,7 @@ def _run_provider_universes(
             env = os.environ.copy()
             env.pop("PYTHONPATH", None)
             env["HERMES_HOME"] = str(hermes_home)
-            env.update(env_builder(tmp, universe))
+            env.update(env_builder(tmp, universe, hermes_home))
             command = [str(runtime.python), "-c", script, str(payload_path)]
             timed_out = False
             timeout_error = ""
@@ -538,11 +538,21 @@ def _run_provider_universes(
     }
 
 
-def _probe_provider(runtime: HermesRuntime, provider: str, command_dir: Path, *, timeout: int) -> dict[str, Any]:
+def _probe_provider(
+    runtime: HermesRuntime,
+    provider: str,
+    command_dir: Path,
+    *,
+    timeout: int,
+    env_builder: Callable[[Path, Path], dict[str, str]] | None = None,
+) -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix=f"ingrain-live-les-probe-{provider}-") as tmp_name:
         tmp = Path(tmp_name)
+        hermes_home = tmp / "hermes"
         env = os.environ.copy()
-        env["HERMES_HOME"] = str(tmp / "hermes")
+        env["HERMES_HOME"] = str(hermes_home)
+        if env_builder:
+            env.update(env_builder(tmp, hermes_home))
         proc = subprocess.run(
             [str(runtime.python), "-c", PROVIDER_PROBE_SCRIPT, provider],
             cwd=str(runtime.root),
@@ -647,13 +657,71 @@ def _make_ingrain_cli_shim(tmp: Path) -> Path:
     return bin_dir
 
 
-def _hindsight_env(tmp: Path, universe: LiveUniverse) -> dict[str, str]:
+def _hindsight_env(tmp: Path, universe: LiveUniverse, hermes_home: Path) -> dict[str, str]:
     home = tmp / "hindsight-home"
     home.mkdir(parents=True, exist_ok=True)
-    return {
+    hermes_env = _load_simple_env(Path.home() / ".hermes" / ".env")
+    merged_env = {**hermes_env, **os.environ}
+    mode = merged_env.get("HINDSIGHT_MODE") or "local_embedded"
+    if mode in ("local", "local_embedded"):
+        _write_hindsight_local_config(hermes_home, universe)
+    env = {
         "HOME": str(home),
         "HINDSIGHT_BANK_ID": f"ingrain-les-{universe.name}",
+        "HINDSIGHT_MODE": mode,
     }
+    for key in (
+        "HINDSIGHT_LLM_API_KEY",
+        "HINDSIGHT_API_KEY",
+        "HINDSIGHT_API_URL",
+        "HINDSIGHT_TIMEOUT",
+        "HINDSIGHT_IDLE_TIMEOUT",
+        "HINDSIGHT_API_LLM_BASE_URL",
+    ):
+        if merged_env.get(key):
+            env[key] = merged_env[key]
+    env.setdefault("HINDSIGHT_TIMEOUT", "240")
+    env.setdefault("HINDSIGHT_IDLE_TIMEOUT", "300")
+    return env
+
+
+def _hindsight_probe_env(tmp: Path, hermes_home: Path) -> dict[str, str]:
+    return _hindsight_env(tmp, UNIVERSES[0], hermes_home)
+
+
+def _load_simple_env(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    values: dict[str, str] = {}
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        values[key.strip()] = value.strip().strip("\"'")
+    return values
+
+
+def _write_hindsight_local_config(hermes_home: Path, universe: LiveUniverse) -> None:
+    config_dir = hermes_home / "hindsight"
+    config_dir.mkdir(parents=True, exist_ok=True)
+    config = {
+        "mode": "local_embedded",
+        "profile": "ingrain-live-les",
+        "bank_id": f"ingrain-les-{universe.name}",
+        "memory_mode": "tools",
+        "recall_budget": "high",
+        "recall_prefetch_method": "reflect",
+        "auto_retain": False,
+        "retain_async": False,
+        "retain_context": "Aeonik Ingrain live learned-experience eval",
+        "retain_tags": ["ingrain-live-les", universe.name],
+        "llm_provider": "openai",
+        "llm_model": "gpt-4o-mini",
+        "timeout": 240,
+        "idle_timeout": 300,
+    }
+    (config_dir / "config.json").write_text(json.dumps(config, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def _decode_timeout_stream(value: Any) -> str:
@@ -679,16 +747,18 @@ def _install_hermes_provider(hermes_home: Path) -> Path:
 
 
 def _hindsight_env_present() -> bool:
+    hermes_env = _load_simple_env(Path.home() / ".hermes" / ".env")
     keys = (
         "HINDSIGHT_API_KEY",
         "HINDSIGHT_API_URL",
+        "HINDSIGHT_LLM_API_KEY",
         "HINDSIGHT_MODE",
         "OPENAI_API_KEY",
         "ANTHROPIC_API_KEY",
         "GEMINI_API_KEY",
         "OPENROUTER_API_KEY",
     )
-    return any(bool(os.environ.get(key)) for key in keys)
+    return any(bool(os.environ.get(key) or hermes_env.get(key)) for key in keys)
 
 
 def _openviking_healthy(endpoint: str) -> bool:

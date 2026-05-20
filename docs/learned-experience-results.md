@@ -91,10 +91,10 @@ The live Hermes provider matrix is separate:
 |---|---:|
 | Hermes default memory | 88/100 |
 | Hermes + Ingrain | 100/100 |
-| Hindsight | 0/100 in current local embedded run |
+| Hindsight local embedded | 63/100 in current full matrix run |
 | OpenViking | blocked |
 
-Hindsight is now installed in the Hermes runtime and the provider probe succeeds, but local embedded retain/reflect calls timed out in this environment without a usable local LLM/service configuration. OpenViking is blocked because no healthy server was reachable at `http://127.0.0.1:1933`; the latest recheck fixed VLM configuration through Codex OAuth, but startup still fails in the official local GGUF embedding path.
+Hindsight now runs through the real Hermes provider in local embedded mode with an OpenAI-backed local Hindsight daemon. It passes the simple correction and sandbox-recovery universes, but misses exact correction polarity in product-name and goals/mission-boundary cases and repeats a forbidden comparative claim in the launch-safety case. OpenViking is blocked because no healthy server was reachable at `http://127.0.0.1:1933`; the latest recheck fixed VLM configuration through Codex OAuth, but startup still fails in the official local GGUF embedding path.
 
 Artifacts:
 

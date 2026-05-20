@@ -1,0 +1,21 @@
+{
+  "available": true,
+  "env": {
+    "ANTHROPIC_API_KEY": false,
+    "GEMINI_API_KEY": false,
+    "HINDSIGHT_API_KEY": false,
+    "HINDSIGHT_API_URL": false,
+    "HINDSIGHT_MODE": true,
+    "OPENAI_API_KEY": false,
+    "OPENROUTER_API_KEY": false
+  },
+  "imports": {
+    "hindsight": true,
+    "hindsight_client": true,
+    "hindsight_embed": true
+  },
+  "provider": "hindsight",
+  "reason": "",
+  "returncode": 0,
+  "stderr": ""
+}

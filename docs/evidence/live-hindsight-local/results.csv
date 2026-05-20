@@ -1,0 +1,6 @@
+provider,status,score,max,universe,blocked_reason
+hindsight,fail,20,20,launch_framing_correction,
+hindsight,fail,13,20,product_rename_supersession,
+hindsight,fail,6,20,goals_missions_boundary,
+hindsight,fail,20,20,sandbox_recovery,
+hindsight,fail,11,20,launch_claim_safety,

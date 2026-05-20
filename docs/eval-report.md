@@ -58,7 +58,7 @@ Result:
 ```text
 Hermes default memory  88/100
 Hermes + Ingrain      100/100
-Hindsight             fail: local embedded timeout
+Hindsight local        63/100
 OpenViking            blocked
 ```
 
@@ -66,7 +66,7 @@ The live harness sends five preregistered universes through actual Hermes provid
 
 Why Hermes default lost points: default memory returned both the stale statement and the later correction in several universes. Ingrain compiled the later correction into current learned experience and suppressed the stale claim in hydration.
 
-Why Hindsight/OpenViking did not produce positive scores here: Hindsight is now installed in the Hermes runtime and the provider probe succeeds, but local embedded retain/reflect calls time out without a usable local LLM/service configuration. OpenViking doctor passes after configuring VLM through Codex OAuth, but server startup still fails in the official local GGUF embedding path with `ValueError: Failed to create llama_context`. See [OpenViking startup recheck](evidence/openviking-startup-recheck.md). The harness does not simulate those providers.
+Why Hindsight/OpenViking did not pass here: Hindsight now runs in local embedded mode through the real Hermes provider and an OpenAI-backed local Hindsight daemon, but its reflect output missed exact correction polarity in several universes and repeated a forbidden comparative claim in the launch-safety universe. OpenViking remains blocked because no healthy server was reachable at `http://127.0.0.1:1933`; the latest recheck fixed VLM configuration through Codex OAuth, but startup still fails in the official local GGUF embedding path with `ValueError: Failed to create llama_context`. See [OpenViking startup recheck](evidence/openviking-startup-recheck.md). The harness does not simulate those providers.
 
 ## Claim Boundary
 

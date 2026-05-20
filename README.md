@@ -233,7 +233,7 @@ For live evidence against the installed Hermes provider API, run the live LES pr
 ingrain live-eval
 ```
 
-The current live run is committed under `docs/evidence/live-les-provider-matrix/`. It sends the same preregistered universes through Hermes default memory and the Ingrain Hermes provider. Hindsight and OpenViking are only scored when a real Hindsight service/package or OpenViking server is available; otherwise the report marks them blocked with the exact reason. The current OpenViking startup recheck is documented in [docs/evidence/openviking-startup-recheck.md](docs/evidence/openviking-startup-recheck.md).
+The current live run is committed under `docs/evidence/live-les-provider-matrix/`. It sends the same preregistered universes through Hermes default memory, the Ingrain Hermes provider, and real Hindsight local embedded mode when configured. OpenViking is only scored when a healthy server is available; otherwise the report marks it blocked with the exact reason. The current OpenViking startup recheck is documented in [docs/evidence/openviking-startup-recheck.md](docs/evidence/openviking-startup-recheck.md).
 
 For the benchmark posture and external standards, see [docs/eval-standards.md](docs/eval-standards.md). The short version: LES-Core is a smoke test, deterministic comparison is an engineering harness, and broad comparative claims require live providers or external benchmarks such as LongMemEval, LoCoMo, BEAM, LongMemEval-V2, or EvoMemBench.
 

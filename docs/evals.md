@@ -122,7 +122,7 @@ Current committed live result:
 |---|---:|---|
 | Hermes default memory | 88/100 | Fails the 90 threshold because raw memory carries stale launch/product claims alongside the correction. |
 | Hermes + Ingrain | 100/100 | Passes this small smoke test by promoting the current lesson and suppressing stale claims in hydration. |
-| Hindsight | fail in current local embedded run | Hermes found real Hindsight packages, but local embedded calls timed out without a usable local LLM/service configuration. |
+| Hindsight local embedded | 63/100 | Real Hermes Hindsight provider with OpenAI-backed local embedded mode; misses exact correction polarity in several universes and repeats one forbidden comparative claim. |
 | OpenViking | blocked | Doctor passes after configuring Codex OAuth for VLM, but server startup still fails in the official local GGUF embedding path; see [OpenViking startup recheck](evidence/openviking-startup-recheck.md). |
 
 On these preregistered local smoke-test universes, this run supports only a narrow claim: Ingrain's Hermes provider can pass the current learned-experience carry-forward gate. It does not show that Ingrain is a better general-purpose memory system than Hindsight, OpenViking, or any other provider.

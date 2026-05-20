@@ -3,10 +3,10 @@
     "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
     "-c",
     "<script>",
-    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-ingrain-saawmu_a/sandbox_recovery.json"
+    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-ingrain-v4u874kz/sandbox_recovery.json"
   ],
   "cwd": "/Users/benlloyd/.hermes/hermes-agent",
-  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-ingrain-saawmu_a/hermes/sandbox_recovery",
+  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-live-les-ingrain-v4u874kz/hermes/sandbox_recovery",
   "returncode": 0,
   "stderr": "",
   "stdout_chars": 476,
