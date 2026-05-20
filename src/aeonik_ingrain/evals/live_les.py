@@ -705,9 +705,10 @@ def _load_simple_env(path: Path) -> dict[str, str]:
 def _write_hindsight_local_config(hermes_home: Path, universe: LiveUniverse) -> None:
     config_dir = hermes_home / "hindsight"
     config_dir.mkdir(parents=True, exist_ok=True)
+    profile_suffix = "".join(ch if ch.isalnum() or ch in {"-", "_"} else "-" for ch in universe.name)
     config = {
         "mode": "local_embedded",
-        "profile": "ingrain-live-les",
+        "profile": f"ingrain-live-les-{profile_suffix}",
         "bank_id": f"ingrain-les-{universe.name}",
         "memory_mode": "tools",
         "recall_budget": "high",
@@ -719,7 +720,7 @@ def _write_hindsight_local_config(hermes_home: Path, universe: LiveUniverse) -> 
         "llm_provider": "openai",
         "llm_model": "gpt-4o-mini",
         "timeout": 240,
-        "idle_timeout": 300,
+        "idle_timeout": 10,
     }
     (config_dir / "config.json").write_text(json.dumps(config, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 

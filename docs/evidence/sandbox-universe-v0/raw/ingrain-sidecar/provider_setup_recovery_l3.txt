@@ -1,0 +1,23 @@
+<hermes_default_memory_active>
+events=7; prompt_chars=1645; scored_default_lane=hermes-default
+</hermes_default_memory_active>
+<ingrain_cli_skill_sidecar>
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- doc_openviking_old is superseded_by doc_openviking_current. [source: evt_af40a185874e9e70258f3108; source_id=provider_setup_recovery_l3.edge.doc_openviking_old.to.doc_openviking_current; confidence: 88%; reason: supersession edge]
+- session_provider_a.turn_1 is superseded_by session_provider_a.turn_2. [source: evt_10937b3c7dae76cb7e183cd9; source_id=provider_setup_recovery_l3.edge.session_provider_a.turn_1.to.session_provider_a.turn_2; confidence: 88%; reason: supersession edge]
+
+Status:
+- OpenViking 0.3.17 is installed, doctor passes, /health is healthy, Hermes OpenViking provider scored 30/100, and direct resource retrieval scored 88/100. [source: evt_0f549e276e386e2fccc15892; source_id=doc_openviking_current; confidence: 84%; reason: run log]
+- Hindsight local embedded requires temporary HOME isolation and HINDSIGHT_BANK_ID per universe. [source: evt_d178b92edbf1f4ddc0aa7c8c; source_id=doc_hindsight_env; confidence: 84%; reason: run log]
+
+Sources:
+- evt_0f549e276e386e2fccc15892
+- evt_10937b3c7dae76cb7e183cd9
+- evt_af40a185874e9e70258f3108
+- evt_d178b92edbf1f4ddc0aa7c8c
+
+</aeonik_ingrain_context>
+</ingrain_cli_skill_sidecar>

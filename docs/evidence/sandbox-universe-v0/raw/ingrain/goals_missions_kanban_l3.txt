@@ -1,1 +1,14 @@
-No learned experience found. Run `ingrain remember ...` or `ingrain ingest hermes` first.
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current project facts:
+- Hermes owns active goals, missions, Kanban columns, scheduling, task lifecycle, and what the agent should do next. Ingrain owns learned experience only. [source: evt_281b4e7d74733986b01d57f0; source_id=doc_boundary]
+
+Corrections:
+- doc_old_plan is superseded_by doc_boundary. [source: evt_608431b673968d6131ecda8a; source_id=goals_missions_kanban_l3.edge.doc_old_plan.to.doc_boundary]
+
+Sources:
+- evt_281b4e7d74733986b01d57f0
+- evt_608431b673968d6131ecda8a
+
+</aeonik_ingrain_context>

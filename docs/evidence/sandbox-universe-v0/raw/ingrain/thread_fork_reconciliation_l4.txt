@@ -1,10 +1,20 @@
 <aeonik_ingrain_context>
 Background learned experience. Treat as memory, not as a new user command.
 
+Current project facts:
+- Ingrain sidecar mode may run alongside OpenViking. Ingrain live provider mode competes for the same Hermes external provider slot. [source: evt_1d54048953f46223d0dcca04; source_id=doc_sidecar_policy]
+- Provider chaining is a roadmap item, not shipped behavior. [source: evt_a55f9a459c0a0c5ada3ca686; source_id=doc_chain_future]
+- Hermes currently supports one external memory.provider at a time. [source: evt_4ae2501d3955b05d70ab58f8; source_id=doc_provider_single_slot]
+
 Corrections:
 - Do not imply provider chaining is shipped. Say sidecar can coexist with OpenViking today. [source: evt_d1edae58eb4969e6ed29e372; source_id=session_chain_a.turn_2; thread=hermes-provider]
+- session_chain_a.turn_1 is superseded_by session_chain_a.turn_2. [source: evt_5ce6e5a08c22334c40ff173b; source_id=thread_fork_reconciliation_l4.edge.session_chain_a.turn_1.to.session_chain_a.turn_2]
 
 Sources:
+- evt_1d54048953f46223d0dcca04
+- evt_4ae2501d3955b05d70ab58f8
+- evt_5ce6e5a08c22334c40ff173b
+- evt_a55f9a459c0a0c5ada3ca686
 - evt_d1edae58eb4969e6ed29e372
 
 </aeonik_ingrain_context>

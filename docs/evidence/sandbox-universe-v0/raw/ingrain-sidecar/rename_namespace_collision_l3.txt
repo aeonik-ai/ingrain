@@ -1,0 +1,19 @@
+<hermes_default_memory_active>
+events=6; prompt_chars=1341; scored_default_lane=hermes-default
+</hermes_default_memory_active>
+<ingrain_cli_skill_sidecar>
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current project facts:
+- The public repo name is Aeonik Ingrain, not MindCompiler, and the tagline is learned experience layer for autonomous agents. [source: evt_f70459c9b9a93b4b5ffc169f; source_id=doc_ingrain_name; confidence: 94%; reason: source-of-truth document]
+
+Corrections:
+- session_name_a.turn_1 is superseded_by session_name_a.turn_2. [source: evt_f1670b7a396067b2d1157acb; source_id=rename_namespace_collision_l3.edge.session_name_a.turn_1.to.session_name_a.turn_2; confidence: 88%; reason: supersession edge]
+
+Sources:
+- evt_f1670b7a396067b2d1157acb
+- evt_f70459c9b9a93b4b5ffc169f
+
+</aeonik_ingrain_context>
+</ingrain_cli_skill_sidecar>

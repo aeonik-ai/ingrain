@@ -3,13 +3,13 @@
     "/Users/benlloyd/.hermes/hermes-agent/venv/bin/python",
     "-c",
     "<script>",
-    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-ingrain-e68dtmxy/rename_namespace_collision_l3.json"
+    "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-ingrain-5h4suy45/rename_namespace_collision_l3.json"
   ],
   "cwd": "/Users/benlloyd/.hermes/hermes-agent",
-  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-ingrain-e68dtmxy/hermes/rename_namespace_collision_l3",
+  "hermes_home": "/var/folders/3k/579zp8mx5fg7bly8cjm3gxyw0000gn/T/ingrain-sandbox-universe-ingrain-5h4suy45/hermes/rename_namespace_collision_l3",
   "returncode": 0,
   "stderr": "",
-  "stdout_chars": 89,
+  "stdout_chars": 626,
   "timed_out": false,
   "timeout_seconds": null
 }

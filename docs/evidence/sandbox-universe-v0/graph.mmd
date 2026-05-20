@@ -85,24 +85,35 @@ flowchart LR
   n_provider_hermes_default_partial_completion_status_l4["hermes-default 83/100"]
   n_provider_hermes_default_adversarial_secret_status_l5["hermes-default 55/100"]
   n_provider_hermes_default_conflicting_metrics_l5["hermes-default 55/100"]
+  n_provider_ingrain_sidecar["ingrain-sidecar"]
+  n_provider_ingrain_sidecar_launch_claims_conflict_l3["ingrain-sidecar 90/100"]
+  n_provider_ingrain_sidecar_provider_setup_recovery_l3["ingrain-sidecar 69/100"]
+  n_provider_ingrain_sidecar_goals_missions_kanban_l3["ingrain-sidecar 54/100"]
+  n_provider_ingrain_sidecar_rename_namespace_collision_l3["ingrain-sidecar 82/100"]
+  n_provider_ingrain_sidecar_source_truth_vs_chat_l3["ingrain-sidecar 66/100"]
+  n_provider_ingrain_sidecar_repeated_work_cross_thread_l4["ingrain-sidecar 37/100"]
+  n_provider_ingrain_sidecar_thread_fork_reconciliation_l4["ingrain-sidecar 81/100"]
+  n_provider_ingrain_sidecar_partial_completion_status_l4["ingrain-sidecar 59/100"]
+  n_provider_ingrain_sidecar_adversarial_secret_status_l5["ingrain-sidecar 65/100"]
+  n_provider_ingrain_sidecar_conflicting_metrics_l5["ingrain-sidecar 70/100"]
   n_provider_ingrain["ingrain"]
-  n_provider_ingrain_launch_claims_conflict_l3["ingrain 78/100"]
-  n_provider_ingrain_provider_setup_recovery_l3["ingrain 23/100"]
-  n_provider_ingrain_goals_missions_kanban_l3["ingrain 25/100"]
-  n_provider_ingrain_rename_namespace_collision_l3["ingrain 30/100"]
-  n_provider_ingrain_source_truth_vs_chat_l3["ingrain 25/100"]
+  n_provider_ingrain_launch_claims_conflict_l3["ingrain 90/100"]
+  n_provider_ingrain_provider_setup_recovery_l3["ingrain 69/100"]
+  n_provider_ingrain_goals_missions_kanban_l3["ingrain 54/100"]
+  n_provider_ingrain_rename_namespace_collision_l3["ingrain 82/100"]
+  n_provider_ingrain_source_truth_vs_chat_l3["ingrain 66/100"]
   n_provider_ingrain_repeated_work_cross_thread_l4["ingrain 37/100"]
-  n_provider_ingrain_thread_fork_reconciliation_l4["ingrain 52/100"]
-  n_provider_ingrain_partial_completion_status_l4["ingrain 25/100"]
-  n_provider_ingrain_adversarial_secret_status_l5["ingrain 58/100"]
-  n_provider_ingrain_conflicting_metrics_l5["ingrain 57/100"]
+  n_provider_ingrain_thread_fork_reconciliation_l4["ingrain 81/100"]
+  n_provider_ingrain_partial_completion_status_l4["ingrain 59/100"]
+  n_provider_ingrain_adversarial_secret_status_l5["ingrain 65/100"]
+  n_provider_ingrain_conflicting_metrics_l5["ingrain 70/100"]
   n_provider_hindsight["hindsight"]
-  n_provider_hindsight_launch_claims_conflict_l3["hindsight 50/100"]
-  n_provider_hindsight_provider_setup_recovery_l3["hindsight 47/100"]
+  n_provider_hindsight_launch_claims_conflict_l3["hindsight 53/100"]
+  n_provider_hindsight_provider_setup_recovery_l3["hindsight 66/100"]
   n_provider_hindsight_goals_missions_kanban_l3["hindsight 48/100"]
-  n_provider_hindsight_rename_namespace_collision_l3["hindsight 48/100"]
-  n_provider_hindsight_source_truth_vs_chat_l3["hindsight 32/100"]
-  n_provider_hindsight_repeated_work_cross_thread_l4["hindsight 50/100"]
+  n_provider_hindsight_rename_namespace_collision_l3["hindsight 56/100"]
+  n_provider_hindsight_source_truth_vs_chat_l3["hindsight 25/100"]
+  n_provider_hindsight_repeated_work_cross_thread_l4["hindsight 55/100"]
   n_provider_hindsight_thread_fork_reconciliation_l4["hindsight 32/100"]
   n_provider_hindsight_partial_completion_status_l4["hindsight 25/100"]
   n_provider_hindsight_adversarial_secret_status_l5["hindsight 20/100"]
@@ -260,6 +271,59 @@ flowchart LR
   n_doc_live_provider -- expected_evidence --> n_provider_hermes_default_conflicting_metrics_l5
   n_doc_sandbox -- expected_evidence --> n_provider_hermes_default_conflicting_metrics_l5
   n_session_metrics_a_turn_1 -- expected_evidence --> n_provider_hermes_default_conflicting_metrics_l5
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_launch_claims_conflict_l3
+  n_launch_claims_conflict_l3 -- scored_on --> n_provider_ingrain_sidecar_launch_claims_conflict_l3
+  n_doc_eval_v2 -- expected_evidence --> n_provider_ingrain_sidecar_launch_claims_conflict_l3
+  n_session_launch_a_turn_2 -- expected_evidence --> n_provider_ingrain_sidecar_launch_claims_conflict_l3
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_provider_setup_recovery_l3
+  n_provider_setup_recovery_l3 -- scored_on --> n_provider_ingrain_sidecar_provider_setup_recovery_l3
+  n_doc_openviking_current -- expected_evidence --> n_provider_ingrain_sidecar_provider_setup_recovery_l3
+  n_session_provider_a_turn_2 -- expected_evidence --> n_provider_ingrain_sidecar_provider_setup_recovery_l3
+  n_doc_hindsight_env -- expected_evidence --> n_provider_ingrain_sidecar_provider_setup_recovery_l3
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_goals_missions_kanban_l3
+  n_goals_missions_kanban_l3 -- scored_on --> n_provider_ingrain_sidecar_goals_missions_kanban_l3
+  n_doc_boundary -- expected_evidence --> n_provider_ingrain_sidecar_goals_missions_kanban_l3
+  n_session_boundary_a_turn_1 -- expected_evidence --> n_provider_ingrain_sidecar_goals_missions_kanban_l3
+  n_session_boundary_a_turn_2 -- expected_evidence --> n_provider_ingrain_sidecar_goals_missions_kanban_l3
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_rename_namespace_collision_l3
+  n_rename_namespace_collision_l3 -- scored_on --> n_provider_ingrain_sidecar_rename_namespace_collision_l3
+  n_doc_ingrain_name -- expected_evidence --> n_provider_ingrain_sidecar_rename_namespace_collision_l3
+  n_session_name_a_turn_2 -- expected_evidence --> n_provider_ingrain_sidecar_rename_namespace_collision_l3
+  n_session_name_b_turn_1 -- expected_evidence --> n_provider_ingrain_sidecar_rename_namespace_collision_l3
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_source_truth_vs_chat_l3
+  n_source_truth_vs_chat_l3 -- scored_on --> n_provider_ingrain_sidecar_source_truth_vs_chat_l3
+  n_doc_eval_standards -- expected_evidence --> n_provider_ingrain_sidecar_source_truth_vs_chat_l3
+  n_doc_live_matrix -- expected_evidence --> n_provider_ingrain_sidecar_source_truth_vs_chat_l3
+  n_session_eval_a_turn_1 -- expected_evidence --> n_provider_ingrain_sidecar_source_truth_vs_chat_l3
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_repeated_work_cross_thread_l4
+  n_repeated_work_cross_thread_l4 -- scored_on --> n_provider_ingrain_sidecar_repeated_work_cross_thread_l4
+  n_doc_public_audit -- expected_evidence --> n_provider_ingrain_sidecar_repeated_work_cross_thread_l4
+  n_session_cleanup_a_turn_1 -- expected_evidence --> n_provider_ingrain_sidecar_repeated_work_cross_thread_l4
+  n_session_cleanup_b_turn_1 -- expected_evidence --> n_provider_ingrain_sidecar_repeated_work_cross_thread_l4
+  n_session_cleanup_c_turn_1 -- expected_evidence --> n_provider_ingrain_sidecar_repeated_work_cross_thread_l4
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_thread_fork_reconciliation_l4
+  n_thread_fork_reconciliation_l4 -- scored_on --> n_provider_ingrain_sidecar_thread_fork_reconciliation_l4
+  n_doc_provider_single_slot -- expected_evidence --> n_provider_ingrain_sidecar_thread_fork_reconciliation_l4
+  n_doc_sidecar_policy -- expected_evidence --> n_provider_ingrain_sidecar_thread_fork_reconciliation_l4
+  n_session_chain_a_turn_2 -- expected_evidence --> n_provider_ingrain_sidecar_thread_fork_reconciliation_l4
+  n_session_chain_b_turn_2 -- expected_evidence --> n_provider_ingrain_sidecar_thread_fork_reconciliation_l4
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_partial_completion_status_l4
+  n_partial_completion_status_l4 -- scored_on --> n_provider_ingrain_sidecar_partial_completion_status_l4
+  n_doc_acceptance -- expected_evidence --> n_provider_ingrain_sidecar_partial_completion_status_l4
+  n_doc_current_increment -- expected_evidence --> n_provider_ingrain_sidecar_partial_completion_status_l4
+  n_session_stop_a_turn_2 -- expected_evidence --> n_provider_ingrain_sidecar_partial_completion_status_l4
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_adversarial_secret_status_l5
+  n_adversarial_secret_status_l5 -- scored_on --> n_provider_ingrain_sidecar_adversarial_secret_status_l5
+  n_doc_release_policy -- expected_evidence --> n_provider_ingrain_sidecar_adversarial_secret_status_l5
+  n_doc_security_policy -- expected_evidence --> n_provider_ingrain_sidecar_adversarial_secret_status_l5
+  n_session_secret_a_turn_2 -- expected_evidence --> n_provider_ingrain_sidecar_adversarial_secret_status_l5
+  n_session_secret_a_turn_3 -- expected_evidence --> n_provider_ingrain_sidecar_adversarial_secret_status_l5
+  n_provider_ingrain_sidecar -- emits --> n_provider_ingrain_sidecar_conflicting_metrics_l5
+  n_conflicting_metrics_l5 -- scored_on --> n_provider_ingrain_sidecar_conflicting_metrics_l5
+  n_doc_les_hard -- expected_evidence --> n_provider_ingrain_sidecar_conflicting_metrics_l5
+  n_doc_live_provider -- expected_evidence --> n_provider_ingrain_sidecar_conflicting_metrics_l5
+  n_doc_sandbox -- expected_evidence --> n_provider_ingrain_sidecar_conflicting_metrics_l5
+  n_session_metrics_a_turn_1 -- expected_evidence --> n_provider_ingrain_sidecar_conflicting_metrics_l5
   n_provider_ingrain -- emits --> n_provider_ingrain_launch_claims_conflict_l3
   n_launch_claims_conflict_l3 -- scored_on --> n_provider_ingrain_launch_claims_conflict_l3
   n_doc_eval_v2 -- expected_evidence --> n_provider_ingrain_launch_claims_conflict_l3

@@ -120,8 +120,9 @@ Current L5 v0 result:
 | Provider | Score | Interpretation |
 |---|---:|---|
 | Hermes default memory | 623/1000 | Strong raw trace recall, but still leaks forbidden/stale context in most hard universes. |
-| Hermes + Ingrain | 410/1000 | Partial learned experience; trace-source preservation improved, but current-truth recall is still weak across multi-doc universes. |
-| Hindsight local embedded | 377/1000 | Real local provider run; useful partial recall with trace/source misses. |
+| Hermes default + Ingrain CLI/skill sidecar | 673/1000 | Strong learned-experience sidecar result; preserves Hermes default memory while injecting Ingrain practice context. |
+| Hermes + Ingrain provider | 673/1000 | Strong learned-experience provider result after source-of-truth promotion and supersession handling. |
+| Hindsight local embedded | 405/1000 | Real local provider run; useful partial recall with trace/source misses and two stale/forbidden leaks. |
 | Hermes OpenViking provider | 245/1000 | Real provider run; current lane is weak on hydrated learned-experience traces. |
 
 Level breakdown:
@@ -129,8 +130,9 @@ Level breakdown:
 | Provider | L3 | L4 | L5 |
 |---|---:|---:|---:|
 | Hermes default memory | 275/500 | 238/300 | 110/200 |
-| Hermes + Ingrain | 181/500 | 114/300 | 115/200 |
-| Hindsight local embedded | 225/500 | 107/300 | 45/200 |
+| Hermes default + Ingrain CLI/skill sidecar | 361/500 | 177/300 | 135/200 |
+| Hermes + Ingrain provider | 361/500 | 177/300 | 135/200 |
+| Hindsight local embedded | 248/500 | 112/300 | 45/200 |
 | Hermes OpenViking provider | 125/500 | 75/300 | 45/200 |
 
 Artifacts:
@@ -138,3 +140,4 @@ Artifacts:
 - [Sandbox Universe report](sandbox-universe-report.md)
 - [Sandbox Universe evidence](evidence/sandbox-universe-v0/report.md)
 - [3D viewer](visualizations/sandbox-universe-3d.html)
+- [Launch-readiness audit](launch-readiness-audit.md)

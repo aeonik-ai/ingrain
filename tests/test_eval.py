@@ -7,6 +7,7 @@ from aeonik_ingrain.evals.live_openviking import _candidate_read_uris, format_li
 from aeonik_ingrain.evals.runner import run_eval
 from aeonik_ingrain.evals.sandbox_universe import (
     UNIVERSES as SANDBOX_UNIVERSES,
+    _normalize_providers as normalize_sandbox_providers,
     build_sandbox_graph,
     format_sandbox_universe_markdown,
     score_sandbox_output,
@@ -115,6 +116,13 @@ class EvalTests(unittest.TestCase):
             self.assertGreaterEqual(len(universe.expected_sources), 2)
         self.assertGreaterEqual(len([universe for universe in SANDBOX_UNIVERSES if universe.level == 4]), 3)
         self.assertGreaterEqual(len([universe for universe in SANDBOX_UNIVERSES if universe.level == 5]), 2)
+
+    def test_sandbox_default_provider_set_includes_sidecar_lane(self):
+        self.assertEqual(
+            normalize_sandbox_providers(None),
+            ["hermes-default", "ingrain-sidecar", "ingrain", "hindsight", "openviking"],
+        )
+        self.assertEqual(normalize_sandbox_providers(["sidecar"]), ["ingrain-sidecar"])
 
     def test_sandbox_score_rewards_traceable_current_truth(self):
         universe = next(item for item in SANDBOX_UNIVERSES if item.name == "launch_claims_conflict_l3")

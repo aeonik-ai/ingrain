@@ -1,0 +1,19 @@
+<hermes_default_memory_active>
+events=5; prompt_chars=1120; scored_default_lane=hermes-default
+</hermes_default_memory_active>
+<ingrain_cli_skill_sidecar>
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current project facts:
+- Hermes owns active goals, missions, Kanban columns, scheduling, task lifecycle, and what the agent should do next. Ingrain owns learned experience only. [source: evt_88eec1f7a14b5beb8c0cc92b; source_id=doc_boundary; confidence: 94%; reason: source-of-truth document]
+
+Corrections:
+- doc_old_plan is superseded_by doc_boundary. [source: evt_c81278a8fcb144235663982e; source_id=goals_missions_kanban_l3.edge.doc_old_plan.to.doc_boundary; confidence: 88%; reason: supersession edge]
+
+Sources:
+- evt_88eec1f7a14b5beb8c0cc92b
+- evt_c81278a8fcb144235663982e
+
+</aeonik_ingrain_context>
+</ingrain_cli_skill_sidecar>

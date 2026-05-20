@@ -1,6 +1,6 @@
 # Sandbox Universe Eval Spec
 
-Status: draft for implementation
+Status: implemented v0; future work should extend hard universes rather than inflate claims
 
 Owner: Aeonik Ingrain
 
@@ -28,14 +28,17 @@ The expected score should be low. A strong v0 system may land around `60/100`. A
 
 ## Systems Under Test
 
-The first implementation compares four real lanes:
+The first implementation compares five real lanes:
 
 | Lane | Meaning | Evidence requirement |
 |---|---|---|
 | Hermes default memory | Installed Hermes built-in memory APIs. | Raw provider output plus command log. |
-| Hermes + Ingrain | Hermes loads Ingrain through `plugins.memory.load_memory_provider("ingrain")`. | Raw provider output, command log, compiled Ingrain evidence, source refs. |
+| Hermes + Ingrain provider | Hermes loads Ingrain through `plugins.memory.load_memory_provider("ingrain")`. | Raw provider output, command log, compiled Ingrain evidence, source refs. |
+| Hermes default + Ingrain CLI/skill sidecar | Hermes default memory remains active while Ingrain is used as an external practice/skill context layer through CLI hydration. | Raw output, command log, compiled Ingrain evidence, skill/CLI invocation evidence, source refs. |
 | Hermes + Hindsight local | Hermes loads real Hindsight provider in local embedded mode. | Raw provider output, command log, probe output, temp HOME/bank isolation. |
 | Hermes + OpenViking provider | Hermes loads real OpenViking provider against a healthy local OpenViking server. | Raw provider output, command log, OpenViking health record. |
+
+The Ingrain provider lane and Ingrain CLI/skill sidecar lane are intentionally separate. The provider lane tests whether Ingrain can occupy Hermes' memory-provider slot. The sidecar lane tests the likely launch posture: keep Hermes default memory behavior and add Ingrain learned-experience context as practice before work.
 
 Direct OpenViking resource retrieval may be kept as a diagnostic lane, but it must be labeled as resource retrieval, not as the Hermes OpenViking provider score.
 
@@ -230,18 +233,23 @@ The 3D view should not be decorative. It should answer: where did each system lo
    - `--report`
    - `--timeout`
    - `--openviking-endpoint`
-5. Implement scorer components as inspectable functions, not opaque LLM judging.
-6. Generate `results.json`, `results.csv`, `graph.json`, `graph.mmd`, and raw provider outputs.
-7. Add tests for:
+5. Add the `ingrain-sidecar` lane:
+   - ingest the same trace into Ingrain through the local ledger/CLI path
+   - hydrate the same query as practice context
+   - combine Hermes default memory output with the Ingrain practice context without replacing Hermes memory
+   - save the command log and compiled evidence so the lane is auditable
+6. Implement scorer components as inspectable functions, not opaque LLM judging.
+7. Generate `results.json`, `results.csv`, `graph.json`, `graph.mmd`, and raw provider outputs.
+8. Add tests for:
    - universe loading
    - scoring component math
    - graph generation
    - report generation
    - CLI smoke path without live providers
-8. Run live provider matrix when dependencies are available.
-9. Add `docs/visualizations/sandbox-universe-3d.html`.
-10. Update README, eval docs, launch docs, and learned-experience results with cautious wording.
-11. Run a public-facing audit:
+9. Run live provider matrix when dependencies are available.
+10. Add `docs/visualizations/sandbox-universe-3d.html`.
+11. Update README, eval docs, launch docs, and learned-experience results with cautious wording.
+12. Run a public-facing audit:
     - no non-real provider baselines
     - no stale blocked-provider language
     - no secret leakage
@@ -254,7 +262,7 @@ The 3D view should not be decorative. It should answer: where did each system lo
 The heartbeat should continue until all are true:
 
 - `ingrain universe-eval --level 3` runs and writes artifacts.
-- At least four real provider lanes are supported.
+- At least five real lanes are supported, including the Ingrain provider lane and the Ingrain CLI/skill sidecar lane.
 - If a provider cannot run, the report labels it unavailable with command evidence rather than inventing a score.
 - L3 contains at least five complex turn-by-turn universes.
 - The best score on L3 is below `80/100`, or the benchmark has been made harder.

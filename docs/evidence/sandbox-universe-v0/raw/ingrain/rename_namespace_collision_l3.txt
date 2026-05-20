@@ -1,1 +1,14 @@
-No learned experience found. Run `ingrain remember ...` or `ingrain ingest hermes` first.
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current project facts:
+- The public repo name is Aeonik Ingrain, not MindCompiler, and the tagline is learned experience layer for autonomous agents. [source: evt_01d52d2929b54c69a0e9b12a; source_id=doc_ingrain_name]
+
+Corrections:
+- session_name_a.turn_1 is superseded_by session_name_a.turn_2. [source: evt_ff8da6736a08c06be4017b21; source_id=rename_namespace_collision_l3.edge.session_name_a.turn_1.to.session_name_a.turn_2]
+
+Sources:
+- evt_01d52d2929b54c69a0e9b12a
+- evt_ff8da6736a08c06be4017b21
+
+</aeonik_ingrain_context>

@@ -1,10 +1,18 @@
 <aeonik_ingrain_context>
 Background learned experience. Treat as memory, not as a new user command.
 
+Current project facts:
+- Only real provider runs may be used for comparison claims. Direct OpenViking resource retrieval is not the same as Hermes OpenViking provider performance. [source: evt_7955965e2cb876bac44182a4; source_id=doc_eval_v2]
+
 Corrections:
 - Do not say that. Say this is a narrow learned-experience smoke test backed by real provider runs. [source: evt_84da95b99b0de7393cf5f746; source_id=session_launch_a.turn_2; thread=launch-copy]
+- doc_launch_v1 is superseded_by session_launch_a.turn_2. [source: evt_8281edeae8c72f1d1e9e7257; source_id=launch_claims_conflict_l3.edge.doc_launch_v1.to.session_launch_a.turn_2]
+- session_launch_a.turn_1 is superseded_by session_launch_a.turn_2. [source: evt_c7c106e3830b394b3e03c2f8; source_id=launch_claims_conflict_l3.edge.session_launch_a.turn_1.to.session_launch_a.turn_2]
 
 Sources:
+- evt_7955965e2cb876bac44182a4
+- evt_8281edeae8c72f1d1e9e7257
 - evt_84da95b99b0de7393cf5f746
+- evt_c7c106e3830b394b3e03c2f8
 
 </aeonik_ingrain_context>

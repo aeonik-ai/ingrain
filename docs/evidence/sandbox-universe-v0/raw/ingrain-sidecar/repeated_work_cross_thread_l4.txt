@@ -1,0 +1,15 @@
+<hermes_default_memory_active>
+events=6; prompt_chars=1498; scored_default_lane=hermes-default
+</hermes_default_memory_active>
+<ingrain_cli_skill_sidecar>
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not keep non-real provider baselines. Remove anything that is not a real evaluation. [source: evt_fc5071d048f8d6b448284634; source_id=session_cleanup_a.turn_1; thread=fake-eval-cleanup; confidence: 90%; reason: correction phrase]
+
+Sources:
+- evt_fc5071d048f8d6b448284634
+
+</aeonik_ingrain_context>
+</ingrain_cli_skill_sidecar>

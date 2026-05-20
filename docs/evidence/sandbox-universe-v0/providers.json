@@ -369,10 +369,10 @@
   },
   "hindsight": {
     "failures": [],
-    "interpretation": "Retrieval exists, but judgment over messy traces is weak.",
+    "interpretation": "Useful partial learned experience, with visible trace failures.",
     "max": 1000,
-    "score": 377,
-    "status": "weak",
+    "score": 405,
+    "status": "partial",
     "universes": [
       {
         "components": {
@@ -381,22 +381,26 @@
           "compactness": 5,
           "cross_session_continuity": 0,
           "current_truth": 20,
-          "diagram_data_completeness": 0,
-          "forbidden_suppression": 15,
-          "precedence_reasoning": 0,
-          "source_traceability": 0
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 0,
+          "precedence_reasoning": 8,
+          "source_traceability": 5
         },
         "expected_hits": [
           "narrow learned-experience smoke test",
           "real provider runs",
-          "safe launch claim"
+          "session_launch_a.turn_2",
+          "safe launch claim",
+          "session_launch_a.turn_2"
         ],
-        "forbidden_hits": [],
+        "forbidden_hits": [
+          "Ingrain beats Hindsight"
+        ],
         "level": 3,
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/launch_claims_conflict_l3.txt",
-        "score": 50,
+        "score": 53,
         "universe": "launch_claims_conflict_l3"
       },
       {
@@ -407,25 +411,24 @@
           "cross_session_continuity": 8,
           "current_truth": 13,
           "diagram_data_completeness": 5,
-          "forbidden_suppression": 0,
+          "forbidden_suppression": 15,
           "precedence_reasoning": 8,
-          "source_traceability": 3
+          "source_traceability": 7
         },
         "expected_hits": [
           "30/100",
           "88/100",
           "doc_openviking_current",
           "HINDSIGHT_BANK_ID",
-          "doc_openviking_current"
+          "doc_openviking_current",
+          "session_provider_a.turn_2"
         ],
-        "forbidden_hits": [
-          "local GGUF embedding path failed"
-        ],
+        "forbidden_hits": [],
         "level": 3,
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/provider_setup_recovery_l3.txt",
-        "score": 47,
+        "score": 66,
         "universe": "provider_setup_recovery_l3"
       },
       {
@@ -458,7 +461,7 @@
           "abstention_discipline": 5,
           "actionability": 10,
           "compactness": 5,
-          "cross_session_continuity": 0,
+          "cross_session_continuity": 8,
           "current_truth": 13,
           "diagram_data_completeness": 0,
           "forbidden_suppression": 15,
@@ -468,6 +471,7 @@
         "expected_hits": [
           "Aeonik Ingrain",
           "learned experience layer for autonomous agents",
+          "naming",
           "public repo",
           "Ingrain"
         ],
@@ -476,7 +480,7 @@
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/rename_namespace_collision_l3.txt",
-        "score": 48,
+        "score": 56,
         "universe": "rename_namespace_collision_l3"
       },
       {
@@ -484,22 +488,25 @@
           "abstention_discipline": 5,
           "actionability": 0,
           "compactness": 5,
-          "cross_session_continuity": 0,
+          "cross_session_continuity": 8,
           "current_truth": 7,
           "diagram_data_completeness": 0,
-          "forbidden_suppression": 15,
+          "forbidden_suppression": 0,
           "precedence_reasoning": 0,
           "source_traceability": 0
         },
         "expected_hits": [
-          "regression gate"
+          "regression gate",
+          "raw outputs"
         ],
-        "forbidden_hits": [],
+        "forbidden_hits": [
+          "proof of broad memory quality"
+        ],
         "level": 3,
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/source_truth_vs_chat_l3.txt",
-        "score": 32,
+        "score": 25,
         "universe": "source_truth_vs_chat_l3"
       },
       {
@@ -508,7 +515,7 @@
           "actionability": 10,
           "compactness": 5,
           "cross_session_continuity": 0,
-          "current_truth": 15,
+          "current_truth": 20,
           "diagram_data_completeness": 0,
           "forbidden_suppression": 15,
           "precedence_reasoning": 0,
@@ -518,6 +525,7 @@
           "remove non-real provider claims",
           "secret scan",
           "raw artifacts match report scores",
+          "Three.js viewer",
           "run tests",
           "verify evidence links",
           "confirm raw artifacts"
@@ -527,7 +535,7 @@
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/hindsight/repeated_work_cross_thread_l4.txt",
-        "score": 50,
+        "score": 55,
         "universe": "repeated_work_cross_thread_l4"
       },
       {
@@ -620,10 +628,10 @@
   },
   "ingrain": {
     "failures": [],
-    "interpretation": "Useful partial learned experience, with visible trace failures.",
+    "interpretation": "Strong result for a hard trace-level universe eval.",
     "max": 1000,
-    "score": 410,
-    "status": "partial",
+    "score": 673,
+    "status": "strong",
     "universes": [
       {
         "components": {
@@ -634,14 +642,16 @@
           "current_truth": 20,
           "diagram_data_completeness": 5,
           "forbidden_suppression": 15,
-          "precedence_reasoning": 8,
-          "source_traceability": 5
+          "precedence_reasoning": 15,
+          "source_traceability": 10
         },
         "expected_hits": [
           "narrow learned-experience smoke test",
           "real provider runs",
+          "doc_eval_v2",
           "session_launch_a.turn_2",
           "launch-copy",
+          "doc_eval_v2",
           "session_launch_a.turn_2"
         ],
         "forbidden_hits": [],
@@ -649,7 +659,7 @@
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/launch_claims_conflict_l3.txt",
-        "score": 78,
+        "score": 90,
         "universe": "launch_claims_conflict_l3"
       },
       {
@@ -658,23 +668,27 @@
           "actionability": 0,
           "compactness": 5,
           "cross_session_continuity": 8,
-          "current_truth": 0,
+          "current_truth": 13,
           "diagram_data_completeness": 5,
-          "forbidden_suppression": 0,
-          "precedence_reasoning": 0,
-          "source_traceability": 0
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 8,
+          "source_traceability": 10
         },
         "expected_hits": [
-          "provider-setup"
+          "30/100",
+          "88/100",
+          "doc_openviking_current",
+          "HINDSIGHT_BANK_ID",
+          "doc_openviking_current",
+          "session_provider_a.turn_2",
+          "doc_hindsight_env"
         ],
-        "forbidden_hits": [
-          "no healthy server is reachable"
-        ],
+        "forbidden_hits": [],
         "level": 3,
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/provider_setup_recovery_l3.txt",
-        "score": 23,
+        "score": 69,
         "universe": "provider_setup_recovery_l3"
       },
       {
@@ -683,42 +697,55 @@
           "actionability": 0,
           "compactness": 5,
           "cross_session_continuity": 0,
-          "current_truth": 0,
-          "diagram_data_completeness": 0,
+          "current_truth": 13,
+          "diagram_data_completeness": 5,
           "forbidden_suppression": 15,
-          "precedence_reasoning": 0,
-          "source_traceability": 0
+          "precedence_reasoning": 8,
+          "source_traceability": 3
         },
-        "expected_hits": [],
+        "expected_hits": [
+          "Hermes owns active goals",
+          "Ingrain owns learned experience",
+          "doc_boundary",
+          "doc_boundary"
+        ],
         "forbidden_hits": [],
         "level": 3,
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/goals_missions_kanban_l3.txt",
-        "score": 25,
+        "score": 54,
         "universe": "goals_missions_kanban_l3"
       },
       {
         "components": {
           "abstention_discipline": 5,
-          "actionability": 5,
+          "actionability": 10,
           "compactness": 5,
           "cross_session_continuity": 0,
-          "current_truth": 0,
-          "diagram_data_completeness": 0,
+          "current_truth": 20,
+          "diagram_data_completeness": 5,
           "forbidden_suppression": 15,
-          "precedence_reasoning": 0,
-          "source_traceability": 0
+          "precedence_reasoning": 15,
+          "source_traceability": 7
         },
         "expected_hits": [
-          "Ingrain"
+          "Aeonik Ingrain",
+          "not MindCompiler",
+          "learned experience layer for autonomous agents",
+          "doc_ingrain_name",
+          "session_name_a.turn_2",
+          "public repo",
+          "Ingrain",
+          "doc_ingrain_name",
+          "session_name_a.turn_2"
         ],
         "forbidden_hits": [],
         "level": 3,
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/rename_namespace_collision_l3.txt",
-        "score": 30,
+        "score": 82,
         "universe": "rename_namespace_collision_l3"
       },
       {
@@ -726,20 +753,30 @@
           "abstention_discipline": 5,
           "actionability": 0,
           "compactness": 5,
-          "cross_session_continuity": 0,
-          "current_truth": 0,
-          "diagram_data_completeness": 0,
+          "cross_session_continuity": 8,
+          "current_truth": 13,
+          "diagram_data_completeness": 5,
           "forbidden_suppression": 15,
-          "precedence_reasoning": 0,
-          "source_traceability": 0
+          "precedence_reasoning": 8,
+          "source_traceability": 7
         },
-        "expected_hits": [],
-        "forbidden_hits": [],
+        "expected_hits": [
+          "regression gate",
+          "not a benchmark headline",
+          "doc_eval_standards",
+          "raw outputs",
+          "doc_eval_standards",
+          "doc_live_matrix"
+        ],
+        "forbidden_hits": [
+          "proof of broad memory quality",
+          "SOTA memory"
+        ],
         "level": 3,
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/source_truth_vs_chat_l3.txt",
-        "score": 25,
+        "score": 66,
         "universe": "source_truth_vs_chat_l3"
       },
       {
@@ -774,16 +811,22 @@
           "actionability": 0,
           "compactness": 5,
           "cross_session_continuity": 8,
-          "current_truth": 7,
+          "current_truth": 20,
           "diagram_data_completeness": 5,
           "forbidden_suppression": 15,
-          "precedence_reasoning": 5,
-          "source_traceability": 2
+          "precedence_reasoning": 15,
+          "source_traceability": 8
         },
         "expected_hits": [
+          "one external memory.provider",
           "sidecar can coexist",
+          "roadmap item",
+          "doc_provider_single_slot",
+          "doc_sidecar_policy",
           "session_chain_a.turn_2",
           "hermes-provider",
+          "doc_provider_single_slot",
+          "doc_sidecar_policy",
           "session_chain_a.turn_2"
         ],
         "forbidden_hits": [
@@ -793,7 +836,7 @@
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/thread_fork_reconciliation_l4.txt",
-        "score": 52,
+        "score": 81,
         "universe": "thread_fork_reconciliation_l4"
       },
       {
@@ -802,19 +845,25 @@
           "actionability": 0,
           "compactness": 5,
           "cross_session_continuity": 0,
-          "current_truth": 0,
-          "diagram_data_completeness": 0,
+          "current_truth": 7,
+          "diagram_data_completeness": 5,
           "forbidden_suppression": 15,
-          "precedence_reasoning": 0,
-          "source_traceability": 0
+          "precedence_reasoning": 15,
+          "source_traceability": 7
         },
-        "expected_hits": [],
+        "expected_hits": [
+          "final public-facing audit",
+          "doc_acceptance",
+          "session_stop_a.turn_2",
+          "doc_acceptance",
+          "session_stop_a.turn_2"
+        ],
         "forbidden_hits": [],
         "level": 4,
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/partial_completion_status_l4.txt",
-        "score": 25,
+        "score": 59,
         "universe": "partial_completion_status_l4"
       },
       {
@@ -826,15 +875,17 @@
           "current_truth": 0,
           "diagram_data_completeness": 5,
           "forbidden_suppression": 15,
-          "precedence_reasoning": 10,
-          "source_traceability": 8
+          "precedence_reasoning": 15,
+          "source_traceability": 10
         },
         "expected_hits": [
           "doc_release_policy",
           "doc_security_policy",
+          "session_secret_a.turn_2",
           "publishing",
           "doc_release_policy",
           "doc_security_policy",
+          "session_secret_a.turn_2",
           "session_secret_a.turn_3"
         ],
         "forbidden_hits": [],
@@ -842,7 +893,7 @@
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/adversarial_secret_status_l5.txt",
-        "score": 58,
+        "score": 65,
         "universe": "adversarial_secret_status_l5"
       },
       {
@@ -851,16 +902,19 @@
           "actionability": 5,
           "compactness": 5,
           "cross_session_continuity": 15,
-          "current_truth": 0,
+          "current_truth": 5,
           "diagram_data_completeness": 5,
           "forbidden_suppression": 15,
-          "precedence_reasoning": 5,
-          "source_traceability": 2
+          "precedence_reasoning": 10,
+          "source_traceability": 5
         },
         "expected_hits": [
+          "542/560",
+          "doc_invalid_old",
           "session_metrics_a.turn_1",
           "public-results",
           "do not mix denominators",
+          "doc_les_hard",
           "session_metrics_a.turn_1"
         ],
         "forbidden_hits": [],
@@ -868,7 +922,308 @@
         "max": 100,
         "provider_error": "",
         "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain/conflicting_metrics_l5.txt",
-        "score": 57,
+        "score": 70,
+        "universe": "conflicting_metrics_l5"
+      }
+    ]
+  },
+  "ingrain-sidecar": {
+    "failures": [],
+    "interpretation": "Strong result for a hard trace-level universe eval.",
+    "max": 1000,
+    "score": 673,
+    "status": "strong",
+    "universes": [
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 15,
+          "current_truth": 20,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 15,
+          "source_traceability": 10
+        },
+        "expected_hits": [
+          "narrow learned-experience smoke test",
+          "real provider runs",
+          "doc_eval_v2",
+          "session_launch_a.turn_2",
+          "launch-copy",
+          "doc_eval_v2",
+          "session_launch_a.turn_2"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/launch_claims_conflict_l3.txt",
+        "score": 90,
+        "universe": "launch_claims_conflict_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 8,
+          "current_truth": 13,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 8,
+          "source_traceability": 10
+        },
+        "expected_hits": [
+          "30/100",
+          "88/100",
+          "doc_openviking_current",
+          "HINDSIGHT_BANK_ID",
+          "doc_openviking_current",
+          "session_provider_a.turn_2",
+          "doc_hindsight_env"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/provider_setup_recovery_l3.txt",
+        "score": 69,
+        "universe": "provider_setup_recovery_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 13,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 8,
+          "source_traceability": 3
+        },
+        "expected_hits": [
+          "Hermes owns active goals",
+          "Ingrain owns learned experience",
+          "doc_boundary",
+          "doc_boundary"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/goals_missions_kanban_l3.txt",
+        "score": 54,
+        "universe": "goals_missions_kanban_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 10,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 20,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 15,
+          "source_traceability": 7
+        },
+        "expected_hits": [
+          "Aeonik Ingrain",
+          "not MindCompiler",
+          "learned experience layer for autonomous agents",
+          "doc_ingrain_name",
+          "session_name_a.turn_2",
+          "public repo",
+          "Ingrain",
+          "doc_ingrain_name",
+          "session_name_a.turn_2"
+        ],
+        "forbidden_hits": [],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/rename_namespace_collision_l3.txt",
+        "score": 82,
+        "universe": "rename_namespace_collision_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 8,
+          "current_truth": 13,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 8,
+          "source_traceability": 7
+        },
+        "expected_hits": [
+          "regression gate",
+          "not a benchmark headline",
+          "doc_eval_standards",
+          "raw outputs",
+          "doc_eval_standards",
+          "doc_live_matrix"
+        ],
+        "forbidden_hits": [
+          "proof of broad memory quality",
+          "SOTA memory"
+        ],
+        "level": 3,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/source_truth_vs_chat_l3.txt",
+        "score": 66,
+        "universe": "source_truth_vs_chat_l3"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 5,
+          "current_truth": 0,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 0,
+          "source_traceability": 2
+        },
+        "expected_hits": [
+          "fake-eval-cleanup",
+          "session_cleanup_a.turn_1"
+        ],
+        "forbidden_hits": [
+          "non-real provider baselines"
+        ],
+        "level": 4,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/repeated_work_cross_thread_l4.txt",
+        "score": 37,
+        "universe": "repeated_work_cross_thread_l4"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 8,
+          "current_truth": 20,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 15,
+          "source_traceability": 8
+        },
+        "expected_hits": [
+          "one external memory.provider",
+          "sidecar can coexist",
+          "roadmap item",
+          "doc_provider_single_slot",
+          "doc_sidecar_policy",
+          "session_chain_a.turn_2",
+          "hermes-provider",
+          "doc_provider_single_slot",
+          "doc_sidecar_policy",
+          "session_chain_a.turn_2"
+        ],
+        "forbidden_hits": [
+          "provider chaining is shipped"
+        ],
+        "level": 4,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/thread_fork_reconciliation_l4.txt",
+        "score": 81,
+        "universe": "thread_fork_reconciliation_l4"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 0,
+          "current_truth": 7,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 15,
+          "source_traceability": 7
+        },
+        "expected_hits": [
+          "final public-facing audit",
+          "doc_acceptance",
+          "session_stop_a.turn_2",
+          "doc_acceptance",
+          "session_stop_a.turn_2"
+        ],
+        "forbidden_hits": [],
+        "level": 4,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/partial_completion_status_l4.txt",
+        "score": 59,
+        "universe": "partial_completion_status_l4"
+      },
+      {
+        "components": {
+          "abstention_discipline": 0,
+          "actionability": 0,
+          "compactness": 5,
+          "cross_session_continuity": 15,
+          "current_truth": 0,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 15,
+          "source_traceability": 10
+        },
+        "expected_hits": [
+          "doc_release_policy",
+          "doc_security_policy",
+          "session_secret_a.turn_2",
+          "publishing",
+          "doc_release_policy",
+          "doc_security_policy",
+          "session_secret_a.turn_2",
+          "session_secret_a.turn_3"
+        ],
+        "forbidden_hits": [],
+        "level": 5,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/adversarial_secret_status_l5.txt",
+        "score": 65,
+        "universe": "adversarial_secret_status_l5"
+      },
+      {
+        "components": {
+          "abstention_discipline": 5,
+          "actionability": 5,
+          "compactness": 5,
+          "cross_session_continuity": 15,
+          "current_truth": 5,
+          "diagram_data_completeness": 5,
+          "forbidden_suppression": 15,
+          "precedence_reasoning": 10,
+          "source_traceability": 5
+        },
+        "expected_hits": [
+          "542/560",
+          "doc_invalid_old",
+          "session_metrics_a.turn_1",
+          "public-results",
+          "do not mix denominators",
+          "doc_les_hard",
+          "session_metrics_a.turn_1"
+        ],
+        "forbidden_hits": [],
+        "level": 5,
+        "max": 100,
+        "provider_error": "",
+        "raw_output": "/Users/benlloyd/Desktop/REPO/ingrain/docs/evidence/sandbox-universe-v0/raw/ingrain-sidecar/conflicting_metrics_l5.txt",
+        "score": 70,
         "universe": "conflicting_metrics_l5"
       }
     ]

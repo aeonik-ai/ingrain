@@ -1,1 +1,14 @@
-No learned experience found. Run `ingrain remember ...` or `ingrain ingest hermes` first.
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Current project facts:
+- Stop only after implementation, visualization, docs, tests, live runs, commit, push, and final public-facing audit are complete. [source: evt_9e64111a6e2f98030127e8c3; source_id=doc_acceptance]
+
+Corrections:
+- session_stop_a.turn_1 is superseded_by session_stop_a.turn_2. [source: evt_6413a1e7979452e64e24ee9c; source_id=partial_completion_status_l4.edge.session_stop_a.turn_1.to.session_stop_a.turn_2]
+
+Sources:
+- evt_6413a1e7979452e64e24ee9c
+- evt_9e64111a6e2f98030127e8c3
+
+</aeonik_ingrain_context>

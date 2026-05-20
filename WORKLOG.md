@@ -230,9 +230,26 @@ Next:
   - parses bracketed `source_id`, `thread`, `session`, `kind`, and turn metadata before promotion
   - keeps trace source IDs in hydration and compiled pages
   - fixes the prior malformed `turn=...` correction text in Ingrain output
-- Ran the full real L5 provider matrix:
-  - Hermes default memory: `623/1000`
-  - Ingrain Hermes provider: `410/1000`
-  - Hindsight local embedded: `377/1000`
-  - Hermes OpenViking provider: `245/1000`
+- Ran a full real L5 provider matrix later superseded by the 2026-05-20 five-lane run.
 - Key finding: Ingrain now preserves source IDs on direct corrections, but needs better source-of-truth document promotion and multi-doc current-truth synthesis.
+
+## 2026-05-20 03:58 PDT
+
+- Added the fifth Sandbox Universe lane:
+  - `ingrain-sidecar` = Hermes default memory remains active while Ingrain is used through CLI/practice hydration.
+  - This is separate from `ingrain`, where Ingrain occupies the Hermes memory-provider slot.
+- Improved Ingrain compiler behavior:
+  - source-of-truth docs, reports, run logs, and roadmap docs can promote without magic `Decision:` wording
+  - stale drafts, external-project docs, invalidated reports, and old plans are not promoted by default
+  - supersession edges can retire stale trace documents by source ID
+- Hardened the provider harness:
+  - subprocesses run in process groups and are killed on timeout
+  - Hindsight local embedded evals use per-universe profiles and shorter idle timeout
+  - the harness cleans Hindsight eval daemons after each Hindsight universe
+- Ran the full real L5 provider matrix with localhost/network access for real OpenViking and Hindsight:
+  - Hermes default memory: `623/1000`
+  - Hermes default + Ingrain CLI/skill sidecar: `673/1000`
+  - Ingrain Hermes provider: `673/1000`
+  - Hindsight local embedded: `405/1000`
+  - Hermes OpenViking provider: `245/1000`
+- Key finding: source-of-truth promotion is a large general improvement for Ingrain, but repeated-work/status synthesis remains weak (`repeated_work_cross_thread_l4` is still `37/100`).

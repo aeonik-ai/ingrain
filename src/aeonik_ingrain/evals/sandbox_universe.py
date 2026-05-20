@@ -10,6 +10,7 @@ from __future__ import annotations
 import csv
 import json
 import os
+import signal
 import subprocess
 import tempfile
 from dataclasses import asdict, dataclass
@@ -41,12 +42,79 @@ PROVIDER_ALIASES = {
     "default": "hermes-default",
     "hermes": "hermes-default",
     "hermes-default": "hermes-default",
+    "sidecar": "ingrain-sidecar",
+    "ingrain-cli": "ingrain-sidecar",
+    "ingrain-skill": "ingrain-sidecar",
+    "ingrain-sidecar": "ingrain-sidecar",
+    "hermes-ingrain-sidecar": "ingrain-sidecar",
     "ingrain": "ingrain",
     "hermes-ingrain": "ingrain",
     "hindsight": "hindsight",
     "openviking": "openviking",
     "hermes-openviking": "openviking",
 }
+
+
+INGRAIN_SIDECAR_SCRIPT = r'''
+import json
+import os
+import subprocess
+import sys
+
+from tools.memory_tool import MemoryStore, memory_tool
+
+payload = json.loads(open(sys.argv[1], encoding="utf-8").read())
+
+store = MemoryStore(memory_char_limit=12000)
+store.load_from_disk()
+for event in payload["events"]:
+    result = json.loads(memory_tool("add", target="memory", content=event, store=store))
+    if not result.get("success"):
+        print(json.dumps(result), file=sys.stderr)
+
+fresh = MemoryStore(memory_char_limit=12000)
+fresh.load_from_disk()
+default_context = fresh.format_for_system_prompt("memory") or ""
+
+ingrain_home = os.environ["INGRAIN_HOME"]
+base = ["ingrain", "--home", ingrain_home]
+for event in payload["events"]:
+    subprocess.run(
+        base
+        + [
+            "record",
+            "--source",
+            "sandbox_universe_sidecar",
+            "--runner",
+            "hermes-default-plus-ingrain-sidecar",
+            "--event-type",
+            "interaction",
+            "--actor",
+            "user",
+            "--session-id",
+            payload["name"],
+            event,
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+subprocess.run(base + ["compile"], check=True, capture_output=True, text=True)
+subprocess.run(base + ["practice", "--output", os.path.join(ingrain_home, "PRACTICE.md")], check=True, capture_output=True, text=True)
+hydrated = subprocess.run(
+    base + ["hydrate", "--level", "evidence", "--query", payload["query"], "--limit", "12", "--max-chars", "9000"],
+    check=True,
+    capture_output=True,
+    text=True,
+).stdout.strip()
+
+print("<hermes_default_memory_active>")
+print(f"events={len(payload['events'])}; prompt_chars={len(default_context)}; scored_default_lane=hermes-default")
+print("</hermes_default_memory_active>")
+print("<ingrain_cli_skill_sidecar>")
+print(hydrated)
+print("</ingrain_cli_skill_sidecar>")
+'''
 
 
 @dataclass(frozen=True)
@@ -488,6 +556,7 @@ def run_sandbox_universe_eval(
     }
     runners: dict[str, Callable[..., dict[str, Any]]] = {
         "hermes-default": _run_hermes_default,
+        "ingrain-sidecar": _run_ingrain_sidecar,
         "ingrain": _run_ingrain_provider,
         "hindsight": _run_hindsight_provider,
         "openviking": _run_openviking_provider,
@@ -804,6 +873,21 @@ def _run_ingrain_provider(**kwargs: Any) -> dict[str, Any]:
     )
 
 
+def _run_ingrain_sidecar(**kwargs: Any) -> dict[str, Any]:
+    runtime: HermesRuntime = kwargs["runtime"]
+    if not runtime.available:
+        return _blocked("Hermes runtime not found; cannot run default memory plus Ingrain CLI/skill sidecar.")
+    return _run_provider_universes(
+        provider="ingrain-sidecar",
+        script=INGRAIN_SIDECAR_SCRIPT,
+        env_builder=lambda tmp, universe, hermes_home: {
+            "PATH": f"{_make_ingrain_cli_shim(tmp)}{os.pathsep}{os.environ.get('PATH', '')}",
+            "INGRAIN_HOME": str(hermes_home / "ingrain-sidecar" / universe.name),
+        },
+        **kwargs,
+    )
+
+
 def _run_hindsight_provider(**kwargs: Any) -> dict[str, Any]:
     runtime: HermesRuntime = kwargs["runtime"]
     command_dir: Path = kwargs["command_dir"]
@@ -865,26 +949,12 @@ def _run_provider_universes(
             env["HERMES_HOME"] = str(hermes_home)
             env.update(env_builder(tmp, universe, hermes_home))
             command = [str(runtime.python), "-c", script, str(payload_path)]
-            try:
-                proc = subprocess.run(
-                    command,
-                    cwd=str(runtime.root),
-                    env=env,
-                    capture_output=True,
-                    text=True,
-                    timeout=timeout,
-                )
-                returncode = proc.returncode
-                output = proc.stdout.strip()
-                stderr = proc.stderr.strip()
-                timed_out = False
-                timeout_error = ""
-            except subprocess.TimeoutExpired as exc:
-                returncode = None
-                output = _decode_timeout_stream(exc.stdout).strip()
-                stderr = _decode_timeout_stream(exc.stderr).strip()
-                timed_out = True
-                timeout_error = f"provider subprocess timed out after {timeout}s"
+            run = _run_provider_command(command=command, cwd=runtime.root, env=env, timeout=timeout)
+            returncode = run["returncode"]
+            output = str(run["stdout"]).strip()
+            stderr = str(run["stderr"]).strip()
+            timed_out = bool(run["timed_out"])
+            timeout_error = f"provider subprocess timed out after {timeout}s" if timed_out else ""
             raw_path = raw_dir / f"{universe.name}.txt"
             raw_path.write_text(output + ("\n" if output else ""), encoding="utf-8")
             (command_dir / f"{universe.name}.json").write_text(
@@ -924,6 +994,8 @@ def _run_provider_universes(
                     "raw_output": str(raw_path),
                 }
             )
+            if provider == "hindsight":
+                _cleanup_hindsight_eval_processes(universe)
     max_score = len(universes) * 100
     return {
         "status": _interpret_provider_score(total, max_score, failures),
@@ -933,6 +1005,50 @@ def _run_provider_universes(
         "failures": failures,
         "universes": rows,
     }
+
+
+def _run_provider_command(*, command: list[str], cwd: Path, env: dict[str, str], timeout: int) -> dict[str, Any]:
+    proc = subprocess.Popen(
+        command,
+        cwd=str(cwd),
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        start_new_session=True,
+    )
+    try:
+        stdout, stderr = proc.communicate(timeout=timeout)
+        return {"returncode": proc.returncode, "stdout": stdout or "", "stderr": stderr or "", "timed_out": False}
+    except subprocess.TimeoutExpired as exc:
+        stdout = _decode_timeout_stream(exc.stdout)
+        stderr = _decode_timeout_stream(exc.stderr)
+        try:
+            os.killpg(proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        except OSError:
+            proc.kill()
+        try:
+            extra_stdout, extra_stderr = proc.communicate(timeout=5)
+            stdout += extra_stdout or ""
+            stderr += extra_stderr or ""
+        except subprocess.TimeoutExpired:
+            proc.kill()
+        return {"returncode": proc.returncode, "stdout": stdout, "stderr": stderr, "timed_out": True}
+
+
+def _cleanup_hindsight_eval_processes(universe: SandboxUniverse) -> None:
+    profile_suffix = "".join(ch if ch.isalnum() or ch in {"-", "_"} else "-" for ch in universe.name)
+    patterns = (
+        f"pg0 start --name hindsight-embed-ingrain-live-les-{profile_suffix}",
+        "hindsight-api --daemon --idle-timeout 10 --port 9530",
+    )
+    for pattern in patterns:
+        try:
+            subprocess.run(["pkill", "-f", pattern], capture_output=True, text=True, timeout=5, check=False)
+        except Exception:
+            pass
 
 
 def _provider_payload(universe: SandboxUniverse) -> dict[str, Any]:
@@ -963,7 +1079,7 @@ def _flatten_universe_events(universe: SandboxUniverse) -> list[str]:
 
 
 def _normalize_providers(providers: list[str] | None) -> list[str]:
-    requested = providers or ["hermes-default", "ingrain", "hindsight", "openviking"]
+    requested = providers or ["hermes-default", "ingrain-sidecar", "ingrain", "hindsight", "openviking"]
     normalized: list[str] = []
     for item in requested:
         for part in str(item).split(","):

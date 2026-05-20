@@ -85,6 +85,20 @@ STOPWORDS = {
     "project",
 }
 
+TRACE_KIND_PROMOTIONS = {
+    "source_of_truth": ("project_fact", 0.94, "source-of-truth document"),
+    "roadmap": ("project_fact", 0.82, "roadmap document"),
+    "run_log": ("status", 0.84, "run log"),
+    "report": ("status", 0.82, "report document"),
+}
+
+STALE_TRACE_KINDS = {
+    "draft",
+    "external_project",
+    "invalidated_report",
+    "plan",
+}
+
 
 def extract_promotions(events: list[dict[str, Any]]) -> list[PromotionCandidate]:
     candidates: list[PromotionCandidate] = []
@@ -101,6 +115,7 @@ def _extract_from_event(event: dict[str, Any]) -> list[PromotionCandidate]:
         return []
     meta = {**_meta(event), **trace_meta}
     manual_type = meta.get("remember_type")
+    trace_kind = str(meta.get("trace_kind") or meta.get("kind") or "").strip().lower()
     event_id = event["id"]
     out: list[PromotionCandidate] = []
 
@@ -116,6 +131,10 @@ def _extract_from_event(event: dict[str, Any]) -> list[PromotionCandidate]:
                 meta={**meta, "source": "manual"},
             ))
             return out
+
+    if trace_kind == "supersession":
+        out.append(PromotionCandidate(event_id, "correction", _clean_match_from_text(text), 0.88, "supersession edge", meta=meta.copy()))
+        return out
 
     for pattern in CORRECTION_PATTERNS:
         if match := pattern.search(text):
@@ -155,6 +174,13 @@ def _extract_from_event(event: dict[str, Any]) -> list[PromotionCandidate]:
     if not out and event.get("event_type") in {"decision", "reflection", "metric"}:
         promoted_type = "decision" if event.get("event_type") == "decision" else "lesson"
         out.append(PromotionCandidate(event_id, promoted_type, text, 0.62, "canonical event type", meta=meta.copy()))
+
+    if not out and trace_kind in TRACE_KIND_PROMOTIONS:
+        promoted_type, confidence, reason = TRACE_KIND_PROMOTIONS[trace_kind]
+        out.append(PromotionCandidate(event_id, promoted_type, _clean_match_from_text(text), confidence, reason, meta=meta.copy()))
+
+    if not out and trace_kind in STALE_TRACE_KINDS:
+        return []
 
     return out
 
@@ -201,6 +227,11 @@ def _clean_project_match(match: re.Match[str], fallback: str) -> str:
     return value.rstrip(" .") + "."
 
 
+def _clean_match_from_text(text: str) -> str:
+    value = text.strip()
+    return value.rstrip(" .") + "."
+
+
 def _meta(event: dict[str, Any]) -> dict[str, Any]:
     meta = event.get("meta") or event.get("meta_json") or {}
     if isinstance(meta, str):
@@ -225,6 +256,8 @@ def _split_trace_prefix(text: str) -> tuple[dict[str, Any], str]:
 
 
 def _mark_superseded(candidates: list[PromotionCandidate]) -> None:
+    _apply_trace_supersession_edges(candidates)
+
     product_name_decisions = [
         c for c in candidates
         if c.promoted_type in {"decision", "project_fact"} and _names_product(c.text)
@@ -277,6 +310,30 @@ def _mark_superseded(candidates: list[PromotionCandidate]) -> None:
                 if _should_supersede_decision(previous.text, candidate.text):
                     previous.current_state = "superseded"
                     previous.meta["superseded_by"] = candidate.event_id
+
+
+def _apply_trace_supersession_edges(candidates: list[PromotionCandidate]) -> None:
+    by_trace_source: dict[str, list[PromotionCandidate]] = {}
+    for candidate in candidates:
+        source_id = str(candidate.meta.get("trace_source_id") or "")
+        if source_id:
+            by_trace_source.setdefault(source_id, []).append(candidate)
+
+    for candidate in candidates:
+        trace_kind = str(candidate.meta.get("trace_kind") or candidate.meta.get("kind") or "").lower()
+        if trace_kind != "supersession":
+            continue
+        match = re.search(r"(?P<old>\S+)\s+is\s+superseded_by\s+(?P<new>\S+)", candidate.text)
+        if not match:
+            continue
+        old_source = match.group("old").rstrip(".")
+        new_source = match.group("new").rstrip(".")
+        candidate.meta["supersedes_trace_source_id"] = old_source
+        candidate.meta["superseded_by_trace_source_id"] = new_source
+        for previous in by_trace_source.get(old_source, []):
+            previous.current_state = "superseded"
+            previous.meta["superseded_by_trace_source_id"] = new_source
+            previous.meta["superseded_by"] = candidate.event_id
 
 
 def _names_product(text: str) -> bool:

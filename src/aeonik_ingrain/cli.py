@@ -120,7 +120,7 @@ def build_parser() -> argparse.ArgumentParser:
     universe_eval.add_argument("--json", action="store_true", help="Print JSON instead of text.")
     universe_eval.add_argument("--output-dir", default="docs/evidence/sandbox-universe-v0", help="Directory for raw outputs, graphs, JSON, CSV, and report.")
     universe_eval.add_argument("--report", default="docs/sandbox-universe-report.md", help="Markdown report path to update.")
-    universe_eval.add_argument("--provider", action="append", help="Provider to run. Repeat or comma-separate. Defaults to hermes-default, ingrain, hindsight, openviking.")
+    universe_eval.add_argument("--provider", action="append", help="Provider to run. Repeat or comma-separate. Defaults to hermes-default, ingrain-sidecar, ingrain, hindsight, openviking.")
     universe_eval.add_argument("--level", type=int, default=3, help="Maximum universe level to run. L3 is the initial public target.")
     universe_eval.add_argument("--hermes-root", help="Hermes source/runtime root. Defaults to ~/.hermes/hermes-agent.")
     universe_eval.add_argument("--hermes-python", help="Hermes venv Python. Defaults to <hermes-root>/venv/bin/python.")

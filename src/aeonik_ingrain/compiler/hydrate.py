@@ -44,6 +44,11 @@ GENERIC_QUERY_TOKENS = {
     "work",
 }
 
+ALWAYS_RECALL_TRACE_KINDS = {
+    "source_of_truth",
+    "supersession",
+}
+
 
 def hydrate(store: IngrainStore, *, query: str = "", limit: int = 12, max_chars: int = 6000, level: str = "cards") -> str:
     store.initialize()
@@ -150,6 +155,9 @@ def _score(promotion: dict[str, Any], query_tokens: set[str]) -> float:
 
 def _include_for_query(promotion: dict[str, Any], query_tokens: set[str], query: str) -> bool:
     if not query_tokens or _is_generic_query(query_tokens):
+        return True
+    meta = promotion.get("meta") if isinstance(promotion.get("meta"), dict) else {}
+    if str(meta.get("trace_kind") or "").lower() in ALWAYS_RECALL_TRACE_KINDS:
         return True
     text = promotion.get("text", "")
     text_tokens = _tokens(text)

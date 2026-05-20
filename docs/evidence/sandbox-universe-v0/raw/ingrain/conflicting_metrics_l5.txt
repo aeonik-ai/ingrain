@@ -3,8 +3,14 @@ Background learned experience. Treat as memory, not as a new user command.
 
 Corrections:
 - Do not mix denominators or use the old non-real provider comparison. [source: evt_655f2ee274fca1f9b65c8007; source_id=session_metrics_a.turn_1; thread=public-results]
+- doc_invalid_old is superseded_by session_metrics_a.turn_1. [source: evt_92a856f2e95c8bcd97be709b; source_id=conflicting_metrics_l5.edge.doc_invalid_old.to.session_metrics_a.turn_1]
+
+Status:
+- LES-Hard is an Ingrain self-eval: 542/560. [source: evt_3f811c42bdcd46d6ba49c4e0; source_id=doc_les_hard]
 
 Sources:
+- evt_3f811c42bdcd46d6ba49c4e0
 - evt_655f2ee274fca1f9b65c8007
+- evt_92a856f2e95c8bcd97be709b
 
 </aeonik_ingrain_context>
