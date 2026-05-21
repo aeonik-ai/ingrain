@@ -182,6 +182,11 @@ def build_parser() -> argparse.ArgumentParser:
     install_sub = install.add_subparsers(dest="install_target")
     install_hermes = install_sub.add_parser("hermes", help="Install Hermes memory provider plugin.")
     install_hermes.add_argument("--hermes-home", help="Hermes home directory. Defaults to HERMES_HOME or ~/.hermes.")
+    install_plugin = install_sub.add_parser(
+        "hermes-plugin",
+        help="Install Hermes auto-consolidate plugin (post_tool_call + on_session_end).",
+    )
+    install_plugin.add_argument("--hermes-home", help="Hermes home directory. Defaults to HERMES_HOME or ~/.hermes.")
 
     return parser
 
@@ -524,7 +529,13 @@ def main(argv: list[str] | None = None) -> int:
             print("Enable with: hermes config set memory.provider ingrain")
             print("Note: Hermes currently supports one external memory.provider at a time.")
             return 0
-        print("Specify an install target, e.g. `ingrain install hermes`", file=sys.stderr)
+        if args.install_target == "hermes-plugin":
+            target = install_hermes_plugin(args.hermes_home)
+            print(f"Installed Hermes auto-consolidate plugin to {target}")
+            print("Restart Hermes to activate. Then every tool call will be recorded")
+            print("and `ingrain consolidate` will run automatically at session end.")
+            return 0
+        print("Specify an install target, e.g. `ingrain install hermes-plugin`", file=sys.stderr)
         return 2
 
     parser.print_help()
@@ -560,6 +571,27 @@ def install_hermes_provider(hermes_home_arg: str | None = None) -> Path:
         encoding="utf-8",
     )
     return target
+
+
+def install_hermes_plugin(hermes_home_arg: str | None = None) -> Path:
+    """Copy the auto-consolidate plugin into ~/.hermes/plugins/ingrain-auto/.
+
+    Triggers on every post_tool_call (records the call) and on_session_end
+    (runs consolidate). Restart Hermes to load.
+    """
+    h_home = hermes_home(hermes_home_arg)
+    target_dir = h_home / "plugins" / "ingrain-auto"
+    target_dir.mkdir(parents=True, exist_ok=True)
+    source_pkg = resources.files("aeonik_ingrain.integrations.hermes_plugin")
+    (target_dir / "__init__.py").write_text(
+        source_pkg.joinpath("__init__.py").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (target_dir / "plugin.yaml").write_text(
+        source_pkg.joinpath("plugin.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    return target_dir
 
 
 if __name__ == "__main__":

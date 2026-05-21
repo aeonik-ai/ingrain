@@ -42,4 +42,9 @@ Issues = "https://github.com/benlloydg/ingrain/issues"
 where = ["src"]
 
 [tool.setuptools.package-data]
-aeonik_ingrain = ["schema.sql", "evals/fixtures/*.jsonl"]
+aeonik_ingrain = [
+    "schema.sql",
+    "evals/fixtures/*.jsonl",
+    "integrations/hermes_plugin/*.yaml",
+    "integrations/hermes_consolidator/prompts/*.md",
+]
