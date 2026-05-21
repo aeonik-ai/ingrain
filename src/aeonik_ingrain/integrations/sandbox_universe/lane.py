@@ -118,9 +118,9 @@ hydrated = subprocess.run(
     text=True,
 ).stdout.strip()
 
-print("<hermes_default_memory_active>")
-print(f"events={len(payload['events'])}; prompt_chars={len(default_context)}; scored_default_lane=hermes-default")
-print("</hermes_default_memory_active>")
+print("<hermes_default_memory>")
+print(default_context)
+print("</hermes_default_memory>")
 tag = "ingrain_llm_sidecar" if use_llm else "ingrain_cli_skill_sidecar"
 print(f"<{tag}>")
 print(hydrated)
