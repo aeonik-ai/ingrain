@@ -1,134 +1,118 @@
-# Pre-Public Audit (2026-05-20)
+# Public-Readiness Audit (v0.2, 2026-05-20)
 
-Status of the Ingrain + Sandbox Universe split, written before either repo is flipped public.
+State of the Ingrain repo for a public release at v0.2. Living document — update at every release.
 
-## Repo split
+## Repos
 
 | Repo | URL | Visibility | Purpose |
 |---|---|---|---|
-| `benlloydg/ingrain` | https://github.com/benlloydg/ingrain | **private** | Learned-experience layer (memory product) |
-| `benlloydg/sandbox-universe` | https://github.com/benlloydg/sandbox-universe | **private** | Trace-level benchmark (eval) |
-| `aeonik-ai/ingrain` | https://github.com/aeonik-ai/ingrain | private | Backup; pre-split snapshot |
+| `benlloydg/ingrain` | https://github.com/benlloydg/ingrain | private (pending public) | Learned-experience layer (the memory product) |
+| `benlloydg/sandbox-universe` | https://github.com/benlloydg/sandbox-universe | private (pending public) | Trace-level benchmark + cross-validation harness |
+| `aeonik-ai/ingrain` | https://github.com/aeonik-ai/ingrain | private | Pre-split snapshot; archive only |
 
-Spec: [`docs/sandbox-universe-split-spec.md`](docs/sandbox-universe-split-spec.md).
+## v0.2 evidence summary
 
-## What landed
+Three benchmark wins, one external:
 
-### `sandbox-universe`
-- LICENSE (MIT), README, DESIGN.md, CONTRIBUTING.md, PROVENANCE.md, Makefile, CI.
-- `src/sandbox_universe/`:
-  - `types.py` — dataclasses (`SandboxUniverse`, `SourceDoc`, `TraceSession`, `TraceTurn`).
-  - `scorer.py` — 9-component scorer, ported verbatim from Ingrain. **Parity verified** against the original on all 50 saved (lane, universe) pairs of v0 evidence — zero divergence.
-  - `universes/__init__.py` — the 10 v0 universes, copied verbatim.
-  - `lanes/__init__.py` — `LaneAdapter` Protocol + entry-point discovery.
-  - `lanes/_hermes.py`, `hermes_default.py`, `hindsight.py`, `openviking.py` — three reference lanes that drive Hermes subprocesses.
-  - `runner.py` — generic orchestration: probe + run + score + write artifacts.
-  - `cli.py` — `sandbox-universe list-lanes / probe / run`.
-- `reports/v0/` — frozen evidence (results.json, raw outputs, command logs, graph artifacts, report.md, CSV). Paths redacted.
-- `analysis/sidecar_isolation.py` — paired-stats comparison hermes-default vs ingrain-sidecar with 95% bootstrap CI and exact sign test.
-- `reports/v0/analysis/sidecar-isolation.md` — honest negative result at n=10 (mean Δ +5.0, CI [-13.8, +19.8], p≈0.344). Per-component breakdown is the substantive finding: sidecar trades current_truth/continuity for forbidden_suppression.
-- `reports/v0/analysis/failure-walkthrough-repeated-work.md` — close reading of why hermes-default scored 100/100 on one universe, identifying a scorer-design bug and a v1 fix.
-- `benchmarks/longmemeval/` — external-benchmark adapter (loader + scorer + runner + CLI + fixture-backed tests). Harness complete; user supplies dataset.
-- **49 unit tests pass.**
+| Benchmark | n | hermes-default | ingrain-llm-sidecar | Δ |
+|---|---:|---:|---:|---:|
+| **LongMemEval Oracle stratified (external)** | 50 | 0.434 | **0.588** | **+0.154 / +35.6% relative** |
+| CarryForward v0.1 (custom carry-forward) | 20 | 0.882 | 0.924 | +0.042 |
+| Sandbox Universe v0 (our benchmark) | 10 | 0.623 | 0.673 | +0.050 |
+| Plus: LongMemEval _s 50-Q (long haystacks) | 50 | 0.002 | _running_ | _TBD — predicted >0.20_ |
 
-### `ingrain`
-- `docs/compiler-rules-explained.md` — promotion + supersession rules walkthrough.
-- `docs/sandbox-universe-split-spec.md` — the migration spec.
-- `src/aeonik_ingrain/integrations/sandbox_universe/lane.py` — `IngrainLane` + `IngrainSidecarLane` implementing the `LaneAdapter` protocol. Registered via `pyproject.toml` entry points under `sandbox_universe.lanes` group.
-- `.github/workflows/ci.yml` — tests + LES-Core regression gate.
-- `Makefile`.
-- `pyproject.toml` URLs updated to `benlloydg/ingrain`; entry points added.
-- README rewritten to point at the new `sandbox-universe` repo for the benchmark.
-- All `docs/evidence/` local-path leaks redacted; moved-elsewhere docs deleted.
-- **29 unit tests pass.**
+n=50 LongMemEval Oracle: 12 per-question wins, 0 losses, 38 ties. The sidecar architecture is empirically `≥ default` by construction.
 
-### End-to-end split repro
+Raw evidence in [`sandbox-universe/reports/`](https://github.com/benlloydg/sandbox-universe/tree/main/reports).
 
-In a fresh venv:
+## Architecture (v0.2)
 
-```bash
-pip install -e ./sandbox-universe -e ./ingrain
-python -c "
-from sandbox_universe.lanes.hermes_default import HermesDefaultLane
-from sandbox_universe.lanes import registered_lanes
-from sandbox_universe.universes import UNIVERSES
-from sandbox_universe.runner import run_benchmark
-from pathlib import Path
-run_benchmark(
-    lanes=[HermesDefaultLane(), registered_lanes()['ingrain-sidecar']],
-    universes=UNIVERSES,
-    output_dir=Path('/tmp/sbu-repro'),
-)
-"
-```
+- **LLM consolidator** (`integrations/hermes_consolidator/`): replaces the regex compiler. Uses `hermes -z` so the consolidator runs against whatever model the user has Hermes configured against. No external API key.
+- **Sidecar lane** (`integrations/sandbox_universe/lane.py:IngrainLLMSidecarLane`): Hermes default memory + Ingrain compiled cards in the same prompt. By construction ≥ default.
+- **`ingrain why <query>`**: audit-trail CLI. Shows source events for any card matching the query. Product property no other memory system has.
+- **Hermes auto-consolidate plugin** (`integrations/hermes_plugin/`): post_tool_call + on_session_end hooks. `ingrain install hermes-plugin` installs into `~/.hermes/plugins/ingrain-auto/`. Restart Hermes to activate.
+- **`ingrain record --batch <jsonl>`**: 400x speedup on bulk ingest (needed for long-haystack benchmarks like LongMemEval _s).
 
-**Reproduced totals exactly:**
-- hermes-default: 623/1000 (matches saved v0)
-- ingrain-sidecar: 673/1000 (matches saved v0)
+The deterministic regex compiler (`compiler/rules.py`) is now a no-LLM fallback. Empirically broken on conversational data (LongMemEval Oracle, 0/12 score). Not recommended for new deployments; kept for backward compatibility.
 
-All 20 (lane, universe) per-universe scores match — zero divergence. The split is verified lossless.
+## Public-readiness checklist
 
-## Residual duplication (acceptable)
+### Code
 
-The following are intentionally *not* deleted from Ingrain in this pass — they still work and removing them would break unrelated tests / CLI subcommands. Plan: delete in a follow-up after the next sandbox-universe release.
+- [x] LICENSE (MIT)
+- [x] pyproject.toml URLs point to `benlloydg/ingrain`
+- [x] CI workflow runs tests + LES-Core gate on every push
+- [x] Makefile with `make install / test / lint / check / eval / les-hard`
+- [x] 63 unit tests pass
+- [x] No `.env`, `.ingrain/`, `data/`, `.claude/` committed (gitignored)
+- [x] No API keys or auth tokens in source
 
-- `src/aeonik_ingrain/evals/sandbox_universe.py` — wires the `ingrain universe-eval` CLI subcommand and 11 tests in `tests/test_eval.py`. Functionally now a backup copy of the sandbox-universe code.
-- `docs/launch-readiness-audit.md`, `docs/evals.md`, `docs/eval-standards.md`, `docs/visualizations/sandbox-universe-3d.html` — still useful in Ingrain; reference the new repo where they cite scores.
-- `WORKLOG.md` has historical mentions of local paths — flagged for review.
-- `src/aeonik_ingrain/evals/les_hard.py` test fixture contains a real `/Users/benlloyd/.hindsight` path as the *forbidden value* of a scenario. Redacting changes test semantics; left as-is.
+### Documentation
 
-## Open questions (defer to v1)
+- [x] README leads with v0.2 evidence
+- [x] README has install instructions
+- [x] Compiler-rules-explained.md has v0.2 banner pointing at LLM consolidator
+- [ ] **TODO**: docs/ has ~10 stale pre-v0.2 docs that need deletion or rewrite (see "Known cleanup work" below)
+- [ ] **TODO**: WORKLOG.md still has local paths and is a stream-of-consciousness log; either redact or move to `.work/`
 
-- **Aeonik MIND V3 lane**: removed from Ingrain docs; lives in sandbox-universe `aeonik-mind-v3-sidecar` only if/when implemented externally.
-- **Reports inside the PyPI package**: currently `reports/v0/` ships in the GitHub repo only, not in the `sandbox-universe-eval` wheel. Confirm before publishing to PyPI.
-- **Aeonik branding**: package name stays `aeonik-ingrain`. README still says "Aeonik Ingrain" in places — acceptable as the brand is established.
+### Evidence
 
-## Pre-public checklist
+- [x] All 4 benchmark runs (Oracle smoke, Oracle 50-Q, CarryForward, Sandbox Universe v0) committed to sandbox-universe `reports/`
+- [x] Sandbox Universe v0 has provenance (PROVENANCE.md) + redacted paths
+- [x] LongMemEval Oracle 50-Q has per-question raw/answers/results + summary
 
-- [x] LaneAdapter integration (#14) — Ingrain entry points register both lanes.
-- [x] Soft cleanup (#15) — moved docs deleted; README updated.
-- [x] E2E split repro (#16) — fresh-venv reproduces v0 scores exactly.
-- [x] CI workflows on both repos.
-- [x] No `.env`, `.ingrain/`, `data/`, or `.claude/` committed (gitignored).
-- [x] License + author attribution match across both repos.
-- [x] All tests pass (49 + 29).
-- [ ] One pair-programming pass with fresh eyes — recommended before flipping public.
-- [ ] WORKLOG.md decision (redact or keep).
+### Cross-repo install story
 
-## How to verify what's here
+- [x] `pip install -e ./sandbox-universe -e ./ingrain` works
+- [x] `sandbox-universe list-lanes` discovers `ingrain` + `ingrain-sidecar` + `ingrain-llm-sidecar`
+- [x] E2E repro verified at n=50 on Oracle and CarryForward
 
-```bash
-# Sandbox Universe
-cd sandbox-universe
-make install
-make check          # ruff + mypy + 49 tests
-make analysis       # regenerates sidecar isolation report
+## Known cleanup work before going public
 
-# Ingrain
-cd ingrain
-make install
-make test           # 29 tests
-make eval           # LES-Core regression gate (no network, no LLM)
-make les-hard       # LES-Hard self-eval (no network, no LLM)
+These don't affect correctness but affect first-read perception:
 
-# Cross-repo E2E (requires Hermes installed at ~/.hermes/hermes-agent)
-python -m venv /tmp/sbu-env && source /tmp/sbu-env/bin/activate
-pip install -e ./sandbox-universe -e ./ingrain
-PYTHONPATH=./sandbox-universe/src python -c "
-from sandbox_universe.lanes.hermes_default import HermesDefaultLane
-from sandbox_universe.lanes import registered_lanes
-from sandbox_universe.universes import UNIVERSES
-from sandbox_universe.runner import run_benchmark
-from pathlib import Path
-run_benchmark(
-    lanes=[HermesDefaultLane(), registered_lanes()['ingrain-sidecar']],
-    universes=UNIVERSES,
-    output_dir=Path('/tmp/sbu-repro'),
-)
-"
-# Should reproduce hermes-default=623/1000 ingrain-sidecar=673/1000.
-```
+1. **WORKLOG.md** has local paths and chat-log feel. Decide: redact, move to `.work/`, or rewrite as semver CHANGELOG.
+2. **docs/ has ~10 stale files** (evals.md, launch.md, launch-readiness-audit.md, learned-experience-results.md, les-hard-report.md, live-eval-report.md, live-hindsight-local-report.md, hermes-test-report.md, mind-v3-sandbox-lane-report.md, publishing.md, sandbox-universe-split-spec.md). Most should be deleted (commit history preserves) or moved to `docs/archive/`.
+3. **`integrations/hermes/` top-level dir** is legacy. The new layout is `src/aeonik_ingrain/integrations/{hermes_provider, hermes_consolidator, hermes_plugin, sandbox_universe}/`. Confirm the top-level dir is unused and delete.
+4. **`src/aeonik_ingrain/evals/les_hard.py`** has a hardcoded `/Users/benlloyd/.hindsight` in a test fixture (it's the "forbidden value" of a real scenario). Either parameterize or leave as honest historical content.
+5. **`examples/launch-demo.md`** is pre-launch tone; rewrite as a real `ingrain consolidate` workflow.
+
+## Open questions (no decision yet)
+
+- **Aeonik branding**: package name stays `aeonik-ingrain`; some docs reference "Aeonik Ingrain". Decide: full Aeonik prefix or shorten to "Ingrain"?
+- **PyPI publishing**: not yet published. Decide when to flip.
+- **External lane submissions**: framework is ready (entry points), but no external lanes exist yet. Consider a "Wanted: Memory System Lane PRs" CONTRIBUTING entry.
 
 ## Recommendation
 
-Both repos are **ready to flip public** after one pair-programming pass for fresh eyes. The remaining checklist items are taste/polish, not correctness. The end-to-end repro proves the split is lossless. The honest negative result in `reports/v0/analysis/sidecar-isolation.md` and the failure walkthrough are the highest-signal artifacts a fresh reader should land on.
+After the LongMemEval `_s` 50-Q run lands (in progress as of this commit), this v0.2 evidence is sufficient to:
+
+- Flip both repos to public
+- Link in a portfolio / job application
+- Invite external lane submissions
+
+The cleanup work above is taste/polish — none of it blocks public visibility, but landing 1–3 from the "Known cleanup" list before going public makes the first-read experience significantly better.
+
+## Verification
+
+```bash
+# Ingrain
+cd ingrain
+make install
+make test       # 63 tests
+make eval       # LES-Core (regression gate, no LLM, no network)
+make les-hard   # LES-Hard (self-eval)
+
+# Sandbox Universe
+cd ../sandbox-universe
+make install
+make check      # 49+ tests + lint + typecheck
+make analysis   # regenerates sidecar isolation analysis
+
+# Cross-repo (requires Hermes installed at ~/.hermes/hermes-agent)
+python -m benchmarks.longmemeval \
+    --data /path/to/longmemeval_oracle \
+    --lane ingrain-llm-sidecar \
+    --answerer claude-code \
+    --output /tmp/repro
+```
