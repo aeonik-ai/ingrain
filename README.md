@@ -162,30 +162,24 @@ ingrain hydrate --level evidence --query "audit source-linked context"
 
 ## Hermes Setup
 
-Ingrain has two Hermes modes.
-
-### Sidecar Mode
-
-Sidecar mode keeps your current Hermes memory provider, including OpenViking:
+The recommended path is the **sidecar plugin**. One command installs auto-consolidation: every tool call gets recorded into the Ingrain ledger; `ingrain consolidate` runs automatically at session end using Hermes's own model (no API key, no SDK pinning):
 
 ```bash
-ingrain ingest hermes
-ingrain compile
+ingrain install hermes-plugin
+# Restart Hermes once. Done.
+```
+
+Now Hermes default memory keeps working, and Ingrain runs alongside it as a learned-experience sidecar. Cards become available to future sessions through `ingrain hydrate` and the agent skill.
+
+For manual / one-shot workflows you can also drive Ingrain directly:
+
+```bash
+ingrain ingest hermes      # one-shot import of Hermes state
+ingrain consolidate        # run the LLM consolidator now (uses hermes -z)
 ingrain hydrate --query "what should I know before continuing this project?"
 ```
 
-Use this when you want Ingrain's compiled context without changing Hermes config.
-
-### Live Provider Mode
-
-Live provider mode uses Hermes' current external memory-provider slot:
-
-```bash
-ingrain install hermes
-hermes config set memory.provider ingrain
-```
-
-Live provider mode gives Ingrain turn-by-turn sync. Hermes currently allows one external `memory.provider` at a time, so this may replace OpenViking until Hermes supports provider chaining.
+There is also a memory-provider mode (`ingrain install hermes`) that swaps Ingrain into Hermes's `memory.provider` slot, replacing default memory. The sidecar is strictly safer (default memory keeps working) and our benchmarks compare the sidecar — provider mode is for users who want to retire default memory entirely.
 
 ## Goals, Missions, And Kanban Boundary
 
@@ -262,30 +256,25 @@ The v0 eval requires no API key and no LLM.
 
 The default `100/100` is expected for the committed v0 local suite. It means the current compiler and hydration rules pass the launch scenarios in this repo: project recall, correction carry-forward, stale-plan avoidance, track-record recall, and compactness. It is a regression gate for the repo's launch behaviors, not an external benchmark, provider leaderboard, or claim that Ingrain has solved all agent memory problems.
 
-For live evidence against the installed Hermes provider API, run the live LES provider eval:
+For the benchmark posture and external standards, see [docs/eval-standards.md](docs/eval-standards.md). The short version: LES-Core and LES-Hard are Ingrain self-evals; the v0.2 external evidence is at the top of this README.
 
-```bash
-ingrain live-eval
-```
+### Cross-validation: LongMemEval + Sandbox Universe
 
-The current live run is committed under `docs/evidence/live-les-provider-matrix/`. It sends the same preregistered universes through Hermes default memory, the Ingrain Hermes provider, real Hindsight local embedded mode, and the real Hermes OpenViking provider against a healthy local OpenViking server. Current scores: Hermes default `88/100`, Ingrain `100/100`, Hindsight `62/100`, Hermes OpenViking provider `30/100`.
-
-For the benchmark posture and external standards, see [docs/eval-standards.md](docs/eval-standards.md). The short version: LES-Core and LES-Hard are Ingrain self-evals; provider claims require real provider runs or external benchmarks such as LongMemEval, LoCoMo, BEAM, LongMemEval-V2, or EvoMemBench.
-
-### Sandbox Universe
-
-The harder benchmark tier — the [Sandbox Universe](https://github.com/benlloydg/sandbox-universe) — lives in its own repo so it can be cited as a neutral artifact. It is a trace-level eval for agent memory under conflicting sources, stale plans, and multi-session ambiguity, scored deterministically over 9 components (no LLM judge).
-
-Ingrain ships two reference lanes for it (`ingrain` and `ingrain-sidecar`), registered via Python entry points. Once both packages are installed:
+External and custom benchmarks live in [`benlloydg/sandbox-universe`](https://github.com/benlloydg/sandbox-universe). Ingrain ships three reference lanes registered via Python entry points (`ingrain`, `ingrain-sidecar`, `ingrain-llm-sidecar`):
 
 ```bash
 pip install aeonik-ingrain sandbox-universe-eval
-sandbox-universe run --lane ingrain-sidecar --universes-version v0
+sandbox-universe run --lane ingrain-llm-sidecar --universes-version v0
+
+# Or against LongMemEval Oracle (download dataset first):
+python -m benchmarks.longmemeval --data /path/to/longmemeval_oracle \
+    --lane ingrain-llm-sidecar --answerer claude-code \
+    --output /tmp/lme-run
 ```
 
-Current v0 scores (see [sandbox-universe/reports/v0/](https://github.com/benlloydg/sandbox-universe/tree/main/reports/v0)): Hermes default `623/1000`, Ingrain sidecar `673/1000`, Ingrain provider `673/1000`, Hindsight local `405/1000`, OpenViking `245/1000`. The [sidecar isolation analysis](https://github.com/benlloydg/sandbox-universe/blob/main/reports/v0/analysis/sidecar-isolation.md) shows the +5.0 mean delta is not statistically distinguishable from zero at n=10 — the per-component breakdown is the substantive finding.
+The [`reports/` index](https://github.com/benlloydg/sandbox-universe/blob/main/reports/INDEX.md) lists every committed run with per-question raw outputs, generated answers, and summary JSON. The v0.2 evidence table is at the top of this README.
 
-Launch-readiness audit: [docs/launch-readiness-audit.md](docs/launch-readiness-audit.md).
+See [AUDIT.md](AUDIT.md) for the public-readiness checklist.
 
 For a harder local benchmark with room to improve, run:
 
