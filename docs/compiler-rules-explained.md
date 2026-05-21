@@ -4,6 +4,8 @@ How Ingrain decides which events from a trace become *learned experience*.
 
 This is a short tour of `src/aeonik_ingrain/compiler/rules.py` for people who want to understand or extend the promotion logic without reading 380 lines of regex. If you've used Ingrain and wondered "why didn't it remember that?", this is the doc.
 
+> **As of v0.2, the regex compiler is no longer the recommended path.** The default is `ingrain consolidate`, which uses Hermes's own model to classify events. The regex compiler stays as a no-LLM fallback and for backwards compatibility, but it has known false-positive problems on conversational data (it matches "the key is", "always", "do not" as imperative corrections — see `reports/longmemeval-oracle-smoke12/ingrain-sidecar/` for evidence). See [`src/aeonik_ingrain/integrations/hermes_consolidator/`](../src/aeonik_ingrain/integrations/hermes_consolidator/) for the consolidator. This doc remains accurate for understanding the regex fallback and the supersession rules — both still apply.
+
 ## What "compiling" means
 
 Ingrain ingests an event stream — chat messages, run logs, source documents — and writes each event into a SQLite ledger. *Compiling* is the step that reads the ledger and promotes a subset of those events into typed "practice cards" that get re-hydrated into future agent turns.
