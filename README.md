@@ -1,6 +1,6 @@
 # Aeonik Ingrain
 
-> **Memory for AI agents.** Tell your agent something once. It actually remembers.
+> **The learned-experience layer for AI agents.** Tell your agent something once. It actually carries forward.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -11,19 +11,22 @@
 
 ## Explain it to me like I'm 10
 
-**AI agents are like a friend with amnesia.** They're sharp in the moment, but when you start a new conversation they've forgotten the most important things you taught them.
+There's a difference between *memory* and *learned experience*:
 
-Ingrain is **a notebook the AI keeps for itself**. Three things go in:
+- **Memory** is "what did we talk about last Tuesday?" — recall. Most AI memory systems (MemGPT, Mem0, Letta, Zep) do this.
+- **Learned experience** is "what should the agent *do differently* because of last Tuesday?" — behavior. Almost nobody does this.
 
-| You say... | Ingrain writes... | Next session it... |
+Ingrain is for the second one. It's the notebook your AI keeps about how it should behave:
+
+| You say... | Ingrain writes... | Next session, the agent... |
 |---|---|---|
 | "Never deploy on Fridays." | A *correction* card | Refuses to deploy on Friday |
 | "We picked Postgres, not SQLite." | A *decision* card | Configures Postgres without re-asking |
 | "Shipped v0.3, tests passed." | A *track record* card | Doesn't redo work it already finished |
 
-When the AI does something wrong, you ask `ingrain why "X"` and it shows you the exact note that led to it — like a paper trail through the AI's reasoning. **No other memory system has this.**
+When the agent does something wrong, you ask `ingrain why "X"` and it shows the exact note that led to it — a paper trail through the agent's reasoning. **No other memory system has this.**
 
-It runs as a **sidecar** on top of your existing AI memory — it can never make your AI dumber than it already was, only add useful notes on top. The notebook lives in a local SQLite file on your machine. **No API keys.** The writing is done by your existing AI's brain.
+Ingrain runs as a **sidecar** on top of your existing AI memory — the agent always sees default memory PLUS Ingrain's curated cards. So Ingrain can never make your AI dumber, only add useful notes on top. The notebook lives in a local SQLite file. **No API keys** — the writing is done by your existing AI's own model (e.g. via `hermes -z`).
 
 How well does this work? On the external [LongMemEval](https://github.com/xiaowu0162/LongMemEval) benchmark at n=50: **12 wins, 0 losses, 38 ties** vs. the AI's built-in memory. The four-benchmark table is below.
 
