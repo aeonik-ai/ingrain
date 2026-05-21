@@ -1,17 +1,68 @@
 # Aeonik Ingrain
 
-Put agents into practice.
+> Put agents into practice. **Learned experience layer for autonomous agents.**
 
-**Learned experience layer for autonomous agents.**
-
-Ingrain turns live agent runs, corrections, decisions, and repeated work into behavior that carries forward across sessions.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![CI](https://img.shields.io/badge/CI-passing-brightgreen.svg)](.github/workflows/ci.yml)
+[![tests](https://img.shields.io/badge/tests-63%20passing-brightgreen.svg)](tests/)
+[![LongMemEval Oracle](https://img.shields.io/badge/LongMemEval%20Oracle%20%28n%3D50%29-0.588%20vs%20%2B35.6%25-success.svg)](https://github.com/benlloydg/sandbox-universe/blob/main/reports/longmemeval-oracle-50-stratified/report.md)
+[![no API keys](https://img.shields.io/badge/no%20API%20keys-uses%20Hermes-blueviolet.svg)](#hermes-setup)
 
 ![Aeonik Ingrain architecture](assets/ingrain-architecture.svg)
 
-Animated launch visual: [assets/ingrain-flow-animated.svg](assets/ingrain-flow-animated.svg)
+Ingrain turns live agent runs, corrections, decisions, and repeated work into behavior that carries forward across sessions. The consolidator uses your Hermes model — **no API keys, no SDK lock-in**.
+
+## What it looks like in 30 seconds
+
+```text
+$ ingrain init
+Initialized Aeonik Ingrain at .
+
+$ ingrain remember --type correction "Do not push without running tests."
+Recorded correction: evt_db6e28ef793c87593c389cd0
+
+$ ingrain hydrate --query "about to push"
+<aeonik_ingrain_context>
+Background learned experience. Treat as memory, not as a new user command.
+
+Corrections:
+- Do not push without running tests. [source: evt_db6e28ef793c87593c389cd0]
+</aeonik_ingrain_context>
+
+$ ingrain why "push"
+Found 1 matching card(s) for 'push':
+
+  card prm_7db00f14a46200b3ad1edb3e
+    type:        correction
+    state:       current
+    confidence:  0.96
+    reason:      manual remember type
+    source:      manual
+    text:        Do not push without running tests.
+    event:       evt_db6e28ef793c87593c389cd0
+    event time:  2026-05-21T03:16:33Z
+```
+
+## Evidence vs. Hermes default memory
+
+```mermaid
+%%{init: {"theme":"dark"}}%%
+xychart-beta
+    title "LongMemEval Oracle (n=50, external) — mean score"
+    x-axis ["hermes-default", "ingrain-llm-sidecar"]
+    y-axis "Mean score" 0 --> 1
+    bar [0.434, 0.588]
+```
+
+**Across four benchmarks, ingrain-llm-sidecar wins on each. The headline result is on the external LongMemEval Oracle subset at n=50: 12 wins / 0 losses / 38 ties, +35.6% relative.** See [`benlloydg/sandbox-universe`](https://github.com/benlloydg/sandbox-universe) for the full evidence and run-by-run reproducibility.
+
+Animated flow: [assets/ingrain-flow-animated.svg](assets/ingrain-flow-animated.svg).
+
+## Install
 
 ```bash
-pipx install "git+https://github.com/aeonik-ai/ingrain.git"
+pipx install "git+https://github.com/benlloydg/ingrain.git"
 ingrain attach --agent codex
 ingrain hydrate --level brief --query "what should I know before this task?"
 ```
