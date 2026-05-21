@@ -34,9 +34,9 @@ ingrain-sidecar = "aeonik_ingrain.integrations.sandbox_universe.lane:IngrainSide
 ingrain-llm-sidecar = "aeonik_ingrain.integrations.sandbox_universe.lane:IngrainLLMSidecarLane"
 
 [project.urls]
-Homepage = "https://github.com/benlloydg/ingrain"
-Repository = "https://github.com/benlloydg/ingrain"
-Issues = "https://github.com/benlloydg/ingrain/issues"
+Homepage = "https://github.com/aeonik-ai/ingrain"
+Repository = "https://github.com/aeonik-ai/ingrain"
+Issues = "https://github.com/aeonik-ai/ingrain/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

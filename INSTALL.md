@@ -9,7 +9,7 @@ This document is an **install runbook** that you (the user) can paste into your 
 ## TL;DR for the user
 
 ```bash
-pipx install "git+https://github.com/benlloydg/ingrain.git"
+pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 ```
 
 Then tell your agent: *"Read `INSTALL.md` in the Ingrain repo and install yourself."*
@@ -34,7 +34,7 @@ python3 --version  # must be ≥ 3.10
 ## Any agent — base install (do this first)
 
 ```bash
-pipx install "git+https://github.com/benlloydg/ingrain.git"
+pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 ingrain --version
 ingrain doctor
 ```
@@ -179,7 +179,7 @@ ingrain why "push"
 1. Run `ingrain doctor` — most install issues show up here.
 2. Re-read the `Prerequisites` section. Most failures are wrong Python version or missing Hermes.
 3. Check the [CHANGELOG.md](CHANGELOG.md) for v0.2 known issues.
-4. Open an issue at https://github.com/benlloydg/ingrain/issues.
+4. Open an issue at https://github.com/aeonik-ai/ingrain/issues.
 
 ## What NOT to do
 

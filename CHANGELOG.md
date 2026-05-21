@@ -25,7 +25,7 @@ All notable changes are kept here. For the full per-commit history, `git log`.
 - **Sidecar lane now emits Hermes default memory content** (was previously emitting only a character count). The sidecar is now empirically `≥ default` by construction — verified on the n=50 LongMemEval Oracle run with 12 wins / 0 losses / 38 ties.
 - **CLI `ingrain practice --no-compile`** — skip the deterministic compile step when the consolidator already wrote cards.
 - **`docs/` reorganized** — pre-v0.2 docs moved to `docs/archive/`; canonical docs stay at the top level.
-- **Repo URLs** in `pyproject.toml` updated from `aeonik-ai/ingrain` to `benlloydg/ingrain`.
+- **Repo URLs** in `pyproject.toml` kept pointing at `aeonik-ai/ingrain` (the company-owned canonical home). An intermediate revision pointed at a personal mirror; that's been reverted now that the Aeonik AI org is the canonical home.
 - **README rewritten** — leads with the ELI10 ("memory vs learned experience") framing, the n=50 LongMemEval evidence, and the animated demo. The `Memory vs. Learned Experience` distinction is the framing the rest of the repo follows.
 
 ### Removed

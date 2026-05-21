@@ -85,7 +85,7 @@ Animated flow: [assets/ingrain-flow-animated.svg](assets/ingrain-flow-animated.s
 ## Install
 
 ```bash
-pipx install "git+https://github.com/benlloydg/ingrain.git"
+pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 ingrain attach --agent codex
 ingrain hydrate --level brief --query "what should I know before this task?"
 ```
@@ -479,3 +479,7 @@ If the correction carries forward without replaying the transcript, learned expe
 ## Status
 
 Alpha. Useful enough to test the idea, small enough to audit.
+
+---
+
+Built by [Aeonik AI](https://github.com/aeonik-ai). Ingrain is the memory infrastructure behind **Beings** — Aeonik's digital-being product. The accompanying benchmark suite ([`benlloydg/sandbox-universe`](https://github.com/benlloydg/sandbox-universe)) is maintained independently so any memory system — Ingrain, MemGPT, Mem0, Letta, Zep — can be scored on the same protocol.

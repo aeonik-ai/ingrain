@@ -6,9 +6,9 @@ State of the Ingrain repo for a public release at v0.2. Living document — upda
 
 | Repo | URL | Visibility | Purpose |
 |---|---|---|---|
-| `benlloydg/ingrain` | https://github.com/benlloydg/ingrain | private (pending public) | Learned-experience layer (the memory product) |
-| `benlloydg/sandbox-universe` | https://github.com/benlloydg/sandbox-universe | private (pending public) | Trace-level benchmark + cross-validation harness |
-| `aeonik-ai/ingrain` | https://github.com/aeonik-ai/ingrain | private | Pre-split snapshot; archive only |
+| `aeonik-ai/ingrain` | https://github.com/aeonik-ai/ingrain | private (pending public) | Learned-experience layer (the memory product). **Canonical home — Aeonik AI IP.** |
+| `benlloydg/sandbox-universe` | https://github.com/benlloydg/sandbox-universe | private (pending public) | Trace-level benchmark + cross-validation harness. **Intentionally personal-org / vendor-neutral for benchmark credibility.** |
+| `benlloydg/ingrain` | https://github.com/benlloydg/ingrain | private | Personal backup mirror; not canonical. |
 
 ## v0.2 evidence summary
 
@@ -40,7 +40,7 @@ The deterministic regex compiler (`compiler/rules.py`) is now a no-LLM fallback.
 ### Code
 
 - [x] LICENSE (MIT)
-- [x] pyproject.toml URLs point to `benlloydg/ingrain`
+- [x] pyproject.toml URLs point to `aeonik-ai/ingrain` (company-owned canonical home)
 - [x] CI workflow runs tests + LES-Core gate on every push
 - [x] Makefile with `make install / test / lint / check / eval / les-hard`
 - [x] 63 unit tests pass

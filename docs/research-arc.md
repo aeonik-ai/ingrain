@@ -2,7 +2,7 @@
 
 ## When I tested my own AI-memory benchmark, it failed
 
-A short writeup of the engineering and research arc behind [Aeonik Ingrain](https://github.com/benlloydg/ingrain) and [Sandbox Universe](https://github.com/benlloydg/sandbox-universe). Aimed at a reader who has 10 minutes and wants the honest version.
+A short writeup of the engineering and research arc behind [Aeonik Ingrain](https://github.com/aeonik-ai/ingrain) (the memory infrastructure behind Aeonik's *Beings* product) and [Sandbox Universe](https://github.com/benlloydg/sandbox-universe) (the vendor-neutral benchmark). Aimed at a reader who has 10 minutes and wants the honest version.
 
 ---
 
@@ -109,7 +109,7 @@ In order of expected leverage:
 
 ## Receipts
 
-- Ingrain: [github.com/benlloydg/ingrain](https://github.com/benlloydg/ingrain)
+- Ingrain: [github.com/aeonik-ai/ingrain](https://github.com/aeonik-ai/ingrain)
 - Sandbox Universe (benchmarks + reports): [github.com/benlloydg/sandbox-universe](https://github.com/benlloydg/sandbox-universe)
 - All committed runs (per-question raw outputs, answers, summaries): [`sandbox-universe/reports/INDEX.md`](https://github.com/benlloydg/sandbox-universe/blob/main/reports/INDEX.md)
 - Sidecar isolation analysis (bootstrap CI, sign test): [`reports/v0/analysis/sidecar-isolation.md`](https://github.com/benlloydg/sandbox-universe/blob/main/reports/v0/analysis/sidecar-isolation.md)
