@@ -22,3 +22,8 @@ les-hard:
 clean:
 	rm -rf .pytest_cache .mypy_cache .ruff_cache build dist *.egg-info
 	find . -name __pycache__ -type d -exec rm -rf {} +
+
+# Generate the CLI demo GIF from assets/demo.tape. Requires `vhs` from
+# charmbracelet (brew install vhs) and `ingrain` installed in this env.
+demo:
+	vhs assets/demo.tape
