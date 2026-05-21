@@ -30,6 +30,8 @@ Ingrain runs as a **sidecar** on top of your existing AI memory — the agent al
 
 How well does this work? On the external [LongMemEval](https://github.com/xiaowu0162/LongMemEval) benchmark at n=50: **12 wins, 0 losses, 38 ties** vs. the AI's built-in memory. The four-benchmark table is below.
 
+📄 **Want the full story?** [The Research Arc](docs/research-arc.md) — how I built a memory benchmark, ran my system on it, ran a different benchmark, found my own benchmark hid a bug, fixed it, and cross-validated. ~10 min read.
+
 ![Aeonik Ingrain architecture](assets/ingrain-architecture.svg)
 
 ![Ingrain CLI demo](assets/demo.gif)
