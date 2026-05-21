@@ -90,6 +90,8 @@ ingrain attach --agent codex
 ingrain hydrate --level brief --query "what should I know before this task?"
 ```
 
+**Want your agent to install itself?** Paste [INSTALL.md](INSTALL.md) into Hermes / Claude Code / Cursor / Codex and ask it to follow the runbook. The same file detects which agent it's in and runs the right install path.
+
 ```text
 Aeonik Ingrain LES-Core Smoke Eval
 
