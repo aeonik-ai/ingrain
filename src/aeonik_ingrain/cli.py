@@ -97,6 +97,27 @@ def build_parser() -> argparse.ArgumentParser:
         help="Do NOT run the deterministic compile_store first. Use this when promotions were already written by `ingrain consolidate`.",
     )
 
+    why = sub.add_parser(
+        "why",
+        help="Audit trail: show source events for any card matching the query.",
+    )
+    why.add_argument(
+        "query",
+        nargs="+",
+        help="Substring to match against card text. Case-insensitive.",
+    )
+    why.add_argument(
+        "--include-superseded",
+        action="store_true",
+        help="Also show superseded cards (default: current only).",
+    )
+    why.add_argument(
+        "--limit",
+        type=int,
+        default=20,
+        help="Max matching cards to show.",
+    )
+
     skill = sub.add_parser("skill", help="Install or print agent skill instructions.")
     skill_sub = skill.add_subparsers(dest="skill_command")
     skill_install = skill_sub.add_parser("install", help="Install an Ingrain skill for an agent.")
@@ -305,6 +326,66 @@ def main(argv: list[str] | None = None) -> int:
         result = write_practice_artifacts(store, output_path=args.output)
         print(f"Wrote {result['practice_path']}")
         print(f"Wrote {result['card_count']} practice cards into {store.practice_cards_dir}")
+        return 0
+
+    if args.command == "why":
+        store.initialize()
+        query = " ".join(args.query).lower().strip()
+        if not query:
+            print("why: query must be non-empty", file=sys.stderr)
+            return 2
+        state_filter = None if args.include_superseded else "current"
+        cards = store.list_promotions(state=state_filter)
+        events_by_id: dict[str, dict] = {}
+        for ev in store.list_events():
+            events_by_id[ev["id"]] = ev
+
+        matches = [c for c in cards if query in (c.get("text") or "").lower()]
+        if not matches:
+            also_in_event = [
+                ev for ev in events_by_id.values() if query in (ev.get("text") or "").lower()
+            ]
+            print(f"No cards match {' '.join(args.query)!r}.")
+            if also_in_event:
+                print(f"\nBut {len(also_in_event)} event(s) match:")
+                for ev in also_in_event[:5]:
+                    print(f"  [event {ev['id']}] {ev.get('actor','?')}: {(ev.get('text','') or '')[:140]}")
+                print(
+                    "\nThese events were not promoted to any current card. Run `ingrain consolidate` "
+                    "or `ingrain compile` to see if they would be."
+                )
+            return 0
+
+        print(f"Found {len(matches)} matching card(s) for {' '.join(args.query)!r}:")
+        for card in matches[: args.limit]:
+            event_id = card.get("event_id", "?")
+            event = events_by_id.get(event_id, {})
+            meta = card.get("meta_json") or "{}"
+            try:
+                meta_obj = json.loads(meta)
+            except json.JSONDecodeError:
+                meta_obj = {}
+            source = meta_obj.get("source") or "?"
+            print()
+            print(f"  card {card['id']}")
+            print(f"    type:        {card.get('promoted_type')}")
+            print(f"    state:       {card.get('current_state')}")
+            print(f"    confidence:  {card.get('confidence'):.2f}")
+            print(f"    reason:      {card.get('reason')}")
+            print(f"    source:      {source}")
+            print(f"    text:        {(card.get('text') or '')[:200]}")
+            print(f"    event:       {event_id}")
+            if event:
+                print(f"    event text:  {(event.get('text') or '')[:200]}")
+                print(f"    event actor: {event.get('actor', '?')}")
+                print(f"    event time:  {event.get('created_at', '?')}")
+            else:
+                print(f"    event:       (not found — event may have been pruned)")
+            if card.get("current_state") == "superseded":
+                superseded_by = meta_obj.get("superseded_by", "?")
+                print(f"    superseded_by: {superseded_by}")
+        if len(matches) > args.limit:
+            print(f"\n... and {len(matches) - args.limit} more. Use --limit to see more.")
         return 0
 
     if args.command == "skill":
