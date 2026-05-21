@@ -19,7 +19,7 @@ Three benchmark wins, one external:
 | **LongMemEval Oracle stratified (external)** | 50 | 0.434 | **0.588** | **+0.154 / +35.6% relative** |
 | CarryForward v0.1 (custom carry-forward) | 20 | 0.882 | 0.924 | +0.042 |
 | Sandbox Universe v0 (our benchmark) | 10 | 0.623 | 0.673 | +0.050 |
-| Plus: LongMemEval _s 50-Q (long haystacks) | 50 | 0.002 | _running_ | _TBD — predicted >0.20_ |
+| LongMemEval _s 50-Q (long haystacks) | 50 | 0.002 | **0.074** | +0.072 / ~37× relative |
 
 n=50 LongMemEval Oracle: 12 per-question wins, 0 losses, 38 ties. The sidecar architecture is empirically `≥ default` by construction.
 
@@ -52,8 +52,8 @@ The deterministic regex compiler (`compiler/rules.py`) is now a no-LLM fallback.
 - [x] README leads with v0.2 evidence
 - [x] README has install instructions
 - [x] Compiler-rules-explained.md has v0.2 banner pointing at LLM consolidator
-- [ ] **TODO**: docs/ has ~10 stale pre-v0.2 docs that need deletion or rewrite (see "Known cleanup work" below)
-- [ ] **TODO**: WORKLOG.md still has local paths and is a stream-of-consciousness log; either redact or move to `.work/`
+- [x] Stale pre-v0.2 docs deleted (evals.md, launch.md, launch-readiness-audit.md, learned-experience-results.md, les-hard-report.md, live-eval-report.md, live-hindsight-local-report.md, hermes-test-report.md, mind-v3-sandbox-lane-report.md, publishing.md, sandbox-universe-split-spec.md). Git history preserves originals.
+- [x] WORKLOG.md removed from repo root (preserved locally at `~/.aeonik-ingrain-WORKLOG.md`; git history retains it)
 
 ### Evidence
 
@@ -69,13 +69,13 @@ The deterministic regex compiler (`compiler/rules.py`) is now a no-LLM fallback.
 
 ## Known cleanup work before going public
 
-These don't affect correctness but affect first-read perception:
+All items closed as of 2026-05-20:
 
-1. **WORKLOG.md** has local paths and chat-log feel. Decide: redact, move to `.work/`, or rewrite as semver CHANGELOG.
-2. **docs/ has ~10 stale files** (evals.md, launch.md, launch-readiness-audit.md, learned-experience-results.md, les-hard-report.md, live-eval-report.md, live-hindsight-local-report.md, hermes-test-report.md, mind-v3-sandbox-lane-report.md, publishing.md, sandbox-universe-split-spec.md). Most should be deleted (commit history preserves) or moved to `docs/archive/`.
-3. **`integrations/hermes/` top-level dir** is legacy. The new layout is `src/aeonik_ingrain/integrations/{hermes_provider, hermes_consolidator, hermes_plugin, sandbox_universe}/`. Confirm the top-level dir is unused and delete.
-4. ~~`src/aeonik_ingrain/evals/les_hard.py` has a hardcoded `/Users/benlloyd/.hindsight` in a test fixture~~. **DONE** — parameterized as `$HOME/.hindsight` (2026-05-20).
-5. **`examples/launch-demo.md`** is pre-launch tone; rewrite as a real `ingrain consolidate` workflow.
+1. ~~**WORKLOG.md** has local paths and chat-log feel~~ — **DONE** — removed from repo root; local copy at `~/.aeonik-ingrain-WORKLOG.md`.
+2. ~~**docs/ has ~10 stale files**~~ — **DONE** — pre-v0.2 reports deleted; archive at `docs/archive/`.
+3. ~~**`integrations/hermes/` top-level dir** is legacy~~ — **DONE** — removed; canonical layout is `src/aeonik_ingrain/integrations/{hermes_provider, hermes_consolidator, hermes_plugin, sandbox_universe}/`.
+4. ~~`src/aeonik_ingrain/evals/les_hard.py` has a hardcoded `/Users/benlloyd/.hindsight` in a test fixture~~ — **DONE** — parameterized as `$HOME/.hindsight` (2026-05-20).
+5. ~~**`examples/launch-demo.md`** is pre-launch tone; rewrite as a real `ingrain consolidate` workflow~~ — **DONE** — rewritten as consolidate → hydrate → why end-to-end demo (2026-05-20).
 
 ## Open questions (no decision yet)
 
@@ -85,13 +85,13 @@ These don't affect correctness but affect first-read perception:
 
 ## Recommendation
 
-After the LongMemEval `_s` 50-Q run lands (in progress as of this commit), this v0.2 evidence is sufficient to:
+All cleanup items in this checklist are closed and the LongMemEval `_s` 50-Q run has landed. This v0.2 state is sufficient to:
 
 - Flip both repos to public
 - Link in a portfolio / job application
 - Invite external lane submissions
 
-The cleanup work above is taste/polish — none of it blocks public visibility, but landing 1–3 from the "Known cleanup" list before going public makes the first-read experience significantly better.
+No remaining items block public visibility. Re-run `make test` (ingrain) and `make check` (sandbox-universe) immediately before flipping visibility, then proceed.
 
 ## Verification
 
