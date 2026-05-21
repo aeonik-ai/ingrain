@@ -76,27 +76,31 @@ default_context = fresh.format_for_system_prompt("memory") or ""
 
 ingrain_home = os.environ["INGRAIN_HOME"]
 base = ["ingrain", "--home", ingrain_home]
-for event in payload["events"]:
-    subprocess.run(
-        base
-        + [
-            "record",
-            "--source",
-            "sandbox_universe_sidecar",
-            "--runner",
-            "hermes-default-plus-ingrain-sidecar",
-            "--event-type",
-            "interaction",
-            "--actor",
-            "user",
-            "--session-id",
-            payload["name"],
-            event,
-        ],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
+
+# Batch ingest: write all events to a JSONL file and call `ingrain record
+# --batch` once. ~30x faster than spawning ingrain-record per event for
+# long traces (e.g. LongMemEval haystacks with 100-300 turns).
+batch_path = os.path.join(os.environ.get("TMPDIR", "/tmp"), f"ingrain-batch-{os.getpid()}-{payload['name']}.jsonl")
+with open(batch_path, "w", encoding="utf-8") as fh:
+    for event in payload["events"]:
+        fh.write(json.dumps({
+            "text": event,
+            "source": "sandbox_universe_sidecar",
+            "runner": "hermes-default-plus-ingrain-sidecar",
+            "event_type": "interaction",
+            "actor": "user",
+            "session_id": payload["name"],
+        }) + "\n")
+subprocess.run(
+    base + ["record", "--batch", batch_path],
+    check=True,
+    capture_output=True,
+    text=True,
+)
+try:
+    os.remove(batch_path)
+except OSError:
+    pass
 use_llm = os.environ.get("INGRAIN_USE_LLM_CONSOLIDATOR") == "1"
 practice_args = ["practice", "--output", os.path.join(ingrain_home, "PRACTICE.md")]
 if use_llm:

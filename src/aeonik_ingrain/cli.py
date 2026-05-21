@@ -48,7 +48,7 @@ def build_parser() -> argparse.ArgumentParser:
     remember.add_argument("--type", default="lesson", choices=["correction", "decision", "lesson", "project_fact", "track_record", "risk", "status"])
 
     record = sub.add_parser("record", help=argparse.SUPPRESS)
-    record.add_argument("text", nargs="+", help="Raw event text.")
+    record.add_argument("text", nargs="*", help="Raw event text. Required unless --batch is given.")
     record.add_argument("--source", default="manual")
     record.add_argument("--runner", default="generic")
     record.add_argument("--event-type", default="observation", choices=sorted(MIND_EVENT_TYPES))
@@ -57,6 +57,15 @@ def build_parser() -> argparse.ArgumentParser:
     record.add_argument("--project-id")
     record.add_argument("--thread-id")
     record.add_argument("--meta-json", default="{}")
+    record.add_argument(
+        "--batch",
+        help=(
+            "Path to a JSONL file. Each line is one event record. "
+            "Recognized keys: text (required), source, runner, event_type, "
+            "actor, session_id, project_id, thread_id, meta. "
+            "Per-line keys override the --source / --runner / etc. flags."
+        ),
+    )
 
     ingest = sub.add_parser("ingest", help="Ingest runner history.")
     ingest_sub = ingest.add_subparsers(dest="ingest_target")
@@ -193,10 +202,55 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "record":
         store.initialize()
         try:
-            meta = json.loads(args.meta_json or "{}")
+            default_meta = json.loads(args.meta_json or "{}")
         except json.JSONDecodeError as exc:
             print(f"Invalid --meta-json: {exc}", file=sys.stderr)
             return 2
+
+        if args.batch:
+            # Batch mode: read JSONL, write all events in one process.
+            # ~30x faster than spawning ingrain-record per event when
+            # ingesting long traces.
+            from pathlib import Path as _Path
+            batch_path = _Path(args.batch).expanduser()
+            if not batch_path.exists():
+                print(f"--batch file not found: {batch_path}", file=sys.stderr)
+                return 2
+            inserted = 0
+            skipped = 0
+            for line_no, raw in enumerate(batch_path.read_text(encoding="utf-8").splitlines(), 1):
+                line = raw.strip()
+                if not line:
+                    continue
+                try:
+                    record = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    print(f"--batch line {line_no}: invalid JSON ({exc}); skipping", file=sys.stderr)
+                    skipped += 1
+                    continue
+                text = record.get("text")
+                if not text:
+                    skipped += 1
+                    continue
+                ref = store.add_event(
+                    source=record.get("source", args.source),
+                    runner=record.get("runner", args.runner),
+                    event_type=record.get("event_type", args.event_type),
+                    actor=record.get("actor", args.actor),
+                    text=str(text),
+                    session_id=record.get("session_id", args.session_id),
+                    project_id=record.get("project_id", args.project_id),
+                    thread_id=record.get("thread_id", args.thread_id),
+                    meta={**default_meta, **(record.get("meta") or {})},
+                )
+                inserted += 1
+            print(f"Recorded {inserted} events from {batch_path} ({skipped} skipped).")
+            return 0
+
+        if not args.text:
+            print("record requires either positional text or --batch <file>", file=sys.stderr)
+            return 2
+
         ref = store.add_event(
             source=args.source,
             runner=args.runner,
@@ -206,7 +260,7 @@ def main(argv: list[str] | None = None) -> int:
             session_id=args.session_id,
             project_id=args.project_id,
             thread_id=args.thread_id,
-            meta=meta,
+            meta=default_meta,
         )
         print(f"Recorded event: {ref.id}")
         return 0
