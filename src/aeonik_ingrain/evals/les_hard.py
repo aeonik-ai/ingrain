@@ -174,11 +174,11 @@ SCENARIOS: tuple[HardScenario, ...] = (
         rationale="Provider tests should isolate HOME to avoid permission failures.",
         query="run Hindsight provider evals safely",
         events=(
-            "Failed: Hindsight wrote to /Users/benlloyd/.hindsight and hit Operation not permitted.",
+            "Failed: Hindsight wrote to $HOME/.hindsight and hit Operation not permitted.",
             "Lesson: For Hindsight provider evals, set HOME to a temporary writable directory and set HINDSIGHT_BANK_ID per universe.",
         ),
         expected=("HOME", "temporary writable directory", "HINDSIGHT_BANK_ID"),
-        forbidden=("use /Users/benlloyd/.hindsight",),
+        forbidden=("use $HOME/.hindsight",),
         action_terms=("set HOME", "HINDSIGHT_BANK_ID"),
     ),
     HardScenario(

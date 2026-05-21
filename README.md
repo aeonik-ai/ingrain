@@ -1,6 +1,6 @@
 # Aeonik Ingrain
 
-> Put agents into practice. **Learned experience layer for autonomous agents.**
+> **Memory for AI agents.** Tell your agent something once. It actually remembers.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -9,9 +9,22 @@
 [![LongMemEval Oracle](https://img.shields.io/badge/LongMemEval%20Oracle%20%28n%3D50%29-0.588%20vs%20%2B35.6%25-success.svg)](https://github.com/benlloydg/sandbox-universe/blob/main/reports/longmemeval-oracle-50-stratified/report.md)
 [![no API keys](https://img.shields.io/badge/no%20API%20keys-uses%20Hermes-blueviolet.svg)](#hermes-setup)
 
+## Explain it to me like I'm 10
+
+You tell your AI assistant "don't push to main without running tests." Two days later it pushes to main without running tests. **You're not crazy — its memory is just very short.**
+
+Ingrain is a notebook for your AI. Every time you correct it, decide something, or finish a task, Ingrain writes it down. Next time the AI starts up, it reads its own notebook first. So:
+
+- Monday correction → still obeyed Friday.
+- Decisions you made last month → still in play this week.
+- Old plans you cancelled → marked dead, not revived.
+- When the AI does something wrong, `ingrain why "X"` tells you exactly which note led to it. (No other memory system has this.)
+
+It runs as a **sidecar** on top of your existing AI memory — it never makes your AI dumber than it already was. On the [LongMemEval](https://github.com/xiaowu0162/LongMemEval) external benchmark, n=50: **12 wins, 0 losses, 38 ties.** No API key needed — it borrows your existing AI's brain to do the writing.
+
 ![Aeonik Ingrain architecture](assets/ingrain-architecture.svg)
 
-Ingrain turns live agent runs, corrections, decisions, and repeated work into behavior that carries forward across sessions. The consolidator uses your Hermes model — **no API keys, no SDK lock-in**.
+![Ingrain CLI demo](assets/demo.gif)
 
 ## What it looks like in 30 seconds
 

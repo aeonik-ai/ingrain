@@ -74,7 +74,7 @@ These don't affect correctness but affect first-read perception:
 1. **WORKLOG.md** has local paths and chat-log feel. Decide: redact, move to `.work/`, or rewrite as semver CHANGELOG.
 2. **docs/ has ~10 stale files** (evals.md, launch.md, launch-readiness-audit.md, learned-experience-results.md, les-hard-report.md, live-eval-report.md, live-hindsight-local-report.md, hermes-test-report.md, mind-v3-sandbox-lane-report.md, publishing.md, sandbox-universe-split-spec.md). Most should be deleted (commit history preserves) or moved to `docs/archive/`.
 3. **`integrations/hermes/` top-level dir** is legacy. The new layout is `src/aeonik_ingrain/integrations/{hermes_provider, hermes_consolidator, hermes_plugin, sandbox_universe}/`. Confirm the top-level dir is unused and delete.
-4. **`src/aeonik_ingrain/evals/les_hard.py`** has a hardcoded `/Users/benlloyd/.hindsight` in a test fixture (it's the "forbidden value" of a real scenario). Either parameterize or leave as honest historical content.
+4. ~~`src/aeonik_ingrain/evals/les_hard.py` has a hardcoded `/Users/benlloyd/.hindsight` in a test fixture~~. **DONE** — parameterized as `$HOME/.hindsight` (2026-05-20).
 5. **`examples/launch-demo.md`** is pre-launch tone; rewrite as a real `ingrain consolidate` workflow.
 
 ## Open questions (no decision yet)

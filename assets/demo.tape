@@ -23,7 +23,11 @@ Set Padding 20
 Set TypingSpeed 50ms
 Set PlaybackSpeed 1.0
 
-# Hidden setup: reset the demo dir + cd into it.
+# Hidden setup: reset the demo dir, cd into it, clear the screen.
+# Assumes `ingrain` is on PATH (pipx install aeonik-ingrain) and Hermes
+# is installed (the `ingrain consolidate` step shells out to `hermes -z`).
+# If your `ingrain` lives in a venv, activate it BEFORE running `vhs`
+# instead of inside the tape — keeps the public tape generic.
 Hide
 Type "rm -rf /tmp/ingrain-demo && mkdir /tmp/ingrain-demo && cd /tmp/ingrain-demo && clear"
 Enter
