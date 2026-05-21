@@ -358,21 +358,17 @@ ingrain les-hard
 
 The current LES-Hard v0 result is committed under `docs/evidence/les-hard-v0/`: Ingrain scores `542/560` across 28 preregistered scenarios. It is an Ingrain self-eval, not a provider comparison.
 
-For a live OpenViking resource-retrieval check, run a local OpenViking server and then:
+## More reading
 
-```bash
-ingrain compare --openviking-endpoint http://127.0.0.1:1933
-```
-
-This uses real OpenViking upload, indexing, search, and read endpoints. The current direct resource-retrieval result is `88/100` and is committed under `docs/evidence/live-openviking-resource/`. It does not claim to exercise OpenViking's LLM memory extraction path.
-
-See [docs/evals.md](docs/evals.md).
-Learned-experience results live in [docs/learned-experience-results.md](docs/learned-experience-results.md).
-CLI + Skill details live in [docs/cli-skill.md](docs/cli-skill.md).
-Launch copy and demo framing live in [docs/launch.md](docs/launch.md).
-Visual demo notes live in [docs/visual-demo.md](docs/visual-demo.md).
-Current Hermes compatibility is mapped in [docs/hermes-current-map.md](docs/hermes-current-map.md).
-Hermes memory-provider positioning lives in [docs/hermes-memory-provider-comparison.md](docs/hermes-memory-provider-comparison.md).
+- [docs/research-arc.md](docs/research-arc.md) — the full engineering arc and honest writeup (10 min read).
+- [docs/cli-skill.md](docs/cli-skill.md) — CLI + agent-skill setup detail.
+- [docs/eval-standards.md](docs/eval-standards.md) — what Ingrain claims and what it doesn't.
+- [docs/compiler-rules-explained.md](docs/compiler-rules-explained.md) — how the legacy regex compiler works (kept as a no-LLM fallback; not the recommended path).
+- [docs/hermes.md](docs/hermes.md) — Hermes integration notes.
+- [docs/learned-experience-model.md](docs/learned-experience-model.md) — the card taxonomy.
+- [docs/philosophy.md](docs/philosophy.md), [docs/visual-demo.md](docs/visual-demo.md) — short framing notes.
+- [docs/archive/](docs/archive/) — pre-v0.2 reports and pre-split historical docs.
+- [AUDIT.md](AUDIT.md) — public-readiness checklist.
 
 ## How It Works
 
