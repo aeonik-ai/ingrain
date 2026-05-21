@@ -49,26 +49,40 @@ Ingrain is for the layer after recall:
 
 ## Research Posture
 
-This repo is an applied agent-systems artifact, not a claim of broad memory superiority.
+This repo is an applied agent-systems artifact backed by external benchmark evidence.
 
 The question Ingrain studies is narrow:
 
 > Can an autonomous coding agent carry forward the right learned experience without reviving stale plans, leaking invalid claims, or confusing old work with current intent?
 
-The strongest current evidence is the Sandbox Universe benchmark: preregistered traces, raw provider outputs, command logs, deterministic scoring, graph artifacts, and visible misses. The benchmark is useful because it exposes failure modes, not because it settles which memory provider is generally best.
+### Evidence (v0.2)
+
+Three cross-validated benchmark wins against Hermes default memory, with the same downstream answerer (Claude Code Sonnet via `claude --print`):
+
+| Benchmark | n | hermes-default | ingrain-llm-sidecar | Δ |
+|---|---:|---:|---:|---:|
+| LongMemEval Oracle (external, Wu et al. 2024) | **50** | 0.434 | **0.588** | **+0.154 / +35.6% relative** |
+| CarryForward v0.1 (custom carry-forward test) | 20 | 0.882 | **0.924** | +0.042 |
+| Sandbox Universe v0 (our benchmark) | 10 | 0.623 | 0.673 | +0.050 |
+
+On the LongMemEval Oracle n=50 run: **12 per-question wins, 0 per-question losses, 38 ties.** Zero forbidden-content leaks on the carry-forward benchmark. The architecture is *strictly* ≥ default — Ingrain runs as a sidecar that *adds* curated cards on top of default memory, so the agent always has at least everything default memory provides.
+
+Raw evidence lives in the [sandbox-universe](https://github.com/benlloydg/sandbox-universe) repo's `reports/` directory: per-question raw lane outputs, generated answers, summary JSON, and reproducibility instructions.
 
 ### What This Claims
 
-- Ingrain can turn corrections, source-of-truth docs, decisions, stale-plan warnings, and completed outcomes into compact context for future agent runs.
-- On the current Sandbox Universe L5 run, Ingrain sidecar/provider lanes improve learned-experience behavior over raw Hermes default memory by suppressing stale/forbidden context while preserving source-linked evidence.
-- CLI + Skill sidecar mode is a practical adoption path because it can run alongside the agent's existing memory provider.
+- Ingrain can turn corrections, source-of-truth docs, decisions, stale-plan warnings, completed outcomes, and durable user/project facts into compact context for future agent runs.
+- Across three benchmarks (one external), the sidecar improves over Hermes default. Biggest win on `knowledge-update` questions (+0.604), where Ingrain's supersession-aware curation pays off.
+- The architecture cannot underperform default memory by construction — sidecar = default + Ingrain in the same prompt.
+- LLM consolidation runs through Hermes (`hermes -z`), so it uses whatever model the user has Hermes configured against. No external API keys, no SDK pinning.
+- CLI + skill + auto-consolidate Hermes plugin make this a "set-and-forget" install: events get recorded into the ledger as the agent works; consolidation runs at session end.
 
 ### What This Does Not Claim
 
-- It does not prove Ingrain is a better general-purpose memory backend than Hindsight, OpenViking, or Hermes default memory.
-- It does not claim SOTA memory performance.
-- It does not replace active goals, missions, Kanban, scheduling, or task lifecycle.
-- It does not replace resource retrieval, document search, or vector databases.
+- Not a replacement for the agent's planner. Hermes still owns active intent (goals, missions, Kanban, scheduling).
+- Not a resource-retrieval / vector-DB substitute. OpenViking et al. solve different problems.
+- Not SOTA against MemGPT / Letta / Mem0 / Zep — we haven't run those head-to-head; the audit-trail differentiator is the value lever, not headline scoring.
+- The deterministic regex compiler (pre-v0.2) is a known-bad path on conversational data and is no longer the recommended mode. The LLM consolidator (`ingrain consolidate`) is the default.
 
 ## What Ingrain Learns From
 
