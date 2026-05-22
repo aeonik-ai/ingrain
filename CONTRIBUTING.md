@@ -21,7 +21,7 @@ Thanks for the interest. Ingrain is small and still pre-v1; the path to contribu
 git clone https://github.com/aeonik-ai/ingrain.git
 cd ingrain
 pip install -e ".[dev]"
-make test      # 63 unit tests, no LLM, no network
+make test      # 64 unit tests, no LLM, no network
 make eval      # LES-Core regression gate
 ```
 

@@ -14,7 +14,7 @@ Companion benchmark repo: [`benlloydg/sandbox-universe`](https://github.com/benl
 
 ```bash
 make install     # pip install -e .
-make test        # 63 unit tests, no LLM, no network. Must pass.
+make test        # 64 unit tests, no LLM, no network. Must pass.
 make eval        # LES-Core regression gate (deterministic, ~1s).
 ```
 

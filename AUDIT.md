@@ -43,7 +43,7 @@ The deterministic regex compiler (`compiler/rules.py`) is now a no-LLM fallback.
 - [x] pyproject.toml URLs point to `aeonik-ai/ingrain` (company-owned canonical home)
 - [x] CI workflow runs tests + LES-Core gate on every push
 - [x] Makefile with `make install / test / lint / check / eval / les-hard`
-- [x] 63 unit tests pass
+- [x] 64 unit tests pass
 - [x] No `.env`, `.ingrain/`, `data/`, `.claude/` committed (gitignored)
 - [x] No API keys or auth tokens in source
 
@@ -99,7 +99,7 @@ No remaining items block public visibility. Re-run `make test` (ingrain) and `ma
 # Ingrain
 cd ingrain
 make install
-make test       # 63 tests
+make test       # 64 tests
 make eval       # LES-Core (regression gate, no LLM, no network)
 make les-hard   # LES-Hard (self-eval)
 
