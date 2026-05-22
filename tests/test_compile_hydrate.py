@@ -51,6 +51,31 @@ class CompileHydrateTests(unittest.TestCase):
             self.assertEqual(len(promotions), 1)
             self.assertIn("stale-plan warnings", promotions[0]["text"])
 
+    def test_duplicate_current_promotions_are_merged(self):
+        with TemporaryDirectory() as tmp:
+            store = IngrainStore(Path(tmp) / ".ingrain")
+            store.add_event(
+                source="test",
+                runner="hermes",
+                event_type="interaction",
+                actor="user",
+                text="Remember: Do not ship unapproved claims.",
+            )
+            store.add_event(
+                source="test",
+                runner="hermes",
+                event_type="interaction",
+                actor="user",
+                text="Do not ship unapproved claims.",
+            )
+            compile_store(store)
+            promotions = store.list_promotions()
+            self.assertEqual(len(promotions), 1)
+            self.assertEqual(promotions[0]["text"], "Do not ship unapproved claims.")
+            self.assertEqual(len(promotions[0]["meta"].get("duplicate_event_ids", [])), 2)
+            pages = {page["path"]: page for page in store.list_compiled_pages()}
+            self.assertEqual(len(pages["corrections.md"]["source_event_ids"]), 2)
+
     def test_source_of_truth_trace_promotes_without_magic_phrase(self):
         with TemporaryDirectory() as tmp:
             store = IngrainStore(Path(tmp) / ".ingrain")

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from dataclasses import asdict
+import re
 from typing import Any
 
 from aeonik_ingrain.db import IngrainStore, utc_now
@@ -21,10 +21,42 @@ PAGE_BY_TYPE = {
 }
 
 
+def _dedupe_candidates(candidates: list[PromotionCandidate]) -> list[PromotionCandidate]:
+    """Merge duplicate compiled facts while keeping source traceability."""
+    merged: dict[tuple[str, str, str], PromotionCandidate] = {}
+    event_ids_by_key: dict[tuple[str, str, str], list[str]] = defaultdict(list)
+    order: list[tuple[str, str, str]] = []
+
+    for candidate in candidates:
+        key = (candidate.promoted_type, _normalize_text(candidate.text), candidate.current_state)
+        if key not in merged:
+            merged[key] = candidate
+            order.append(key)
+        elif candidate.confidence > merged[key].confidence:
+            replacement = candidate
+            replacement.meta = {**merged[key].meta, **candidate.meta}
+            merged[key] = replacement
+        if candidate.event_id not in event_ids_by_key[key]:
+            event_ids_by_key[key].append(candidate.event_id)
+
+    deduped: list[PromotionCandidate] = []
+    for key in order:
+        candidate = merged[key]
+        event_ids = event_ids_by_key[key]
+        if len(event_ids) > 1:
+            candidate.meta = {**candidate.meta, "duplicate_event_ids": event_ids}
+        deduped.append(candidate)
+    return deduped
+
+
+def _normalize_text(text: str) -> str:
+    return re.sub(r"\s+", " ", text.strip().rstrip(" .").casefold())
+
+
 def compile_store(store: IngrainStore) -> dict[str, Any]:
     store.initialize()
     events = store.list_events()
-    candidates = extract_promotions(events)
+    candidates = _dedupe_candidates(extract_promotions(events))
     store.clear_promotions()
 
     for candidate in candidates:
@@ -59,7 +91,7 @@ def _write_pages(store: IngrainStore, promotions: list[dict[str, Any]]) -> None:
     for path, title, page_type in _all_pages():
         page_promotions = by_path.get(path, [])
         content = _render_page(title, page_promotions)
-        source_ids = sorted({p["event_id"] for p in page_promotions})
+        source_ids = sorted({event_id for p in page_promotions for event_id in _promotion_source_ids(p)})
         store.write_compiled_page(path=path, title=title, page_type=page_type, content=content, source_event_ids=source_ids)
 
     index_content = _render_index(promotions)
@@ -68,8 +100,18 @@ def _write_pages(store: IngrainStore, promotions: list[dict[str, Any]]) -> None:
         title="Aeonik Ingrain Index",
         page_type="index",
         content=index_content,
-        source_event_ids=sorted({p["event_id"] for p in promotions}),
+        source_event_ids=sorted({event_id for p in promotions for event_id in _promotion_source_ids(p)}),
     )
+
+
+def _promotion_source_ids(promotion: dict[str, Any]) -> list[str]:
+    source_ids = [promotion["event_id"]] if promotion.get("event_id") else []
+    raw_meta = promotion.get("meta")
+    meta = raw_meta if isinstance(raw_meta, dict) else {}
+    for event_id in meta.get("duplicate_event_ids", []):
+        if event_id and event_id not in source_ids:
+            source_ids.append(event_id)
+    return source_ids
 
 
 def _all_pages() -> list[tuple[str, str, str]]:
@@ -149,7 +191,8 @@ def _format_item(item: dict[str, Any]) -> str:
 
 
 def _trace_suffix(item: dict[str, Any]) -> str:
-    meta = item.get("meta") if isinstance(item.get("meta"), dict) else {}
+    raw_meta = item.get("meta")
+    meta = raw_meta if isinstance(raw_meta, dict) else {}
     source_id = meta.get("trace_source_id")
     thread = meta.get("trace_thread")
     parts = []
