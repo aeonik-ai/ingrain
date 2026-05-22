@@ -288,11 +288,13 @@ ingrain doctor
 ingrain install hermes-plugin
 ```
 
-## The Banana Test
+## Behavioral carry-forward test
 
-Correct the agent once. Kill the session. Start fresh. Ask it to do related work.
+The simplest way to test Ingrain is to correct the agent once, start a fresh session, and ask for related work.
 
-If the correction carries forward without replaying the transcript, learned experience is working.
+If the correction changes behavior without replaying the transcript, learned experience is working.
+
+We sometimes call the silly version the “banana test”: give the agent a deliberately memorable correction, then verify that it carries forward and remains auditable with `ingrain why`.
 
 See [examples/banana-test.md](examples/banana-test.md).
 
