@@ -320,7 +320,7 @@ See [examples/banana-test.md](examples/banana-test.md).
 
 ## Status
 
-Alpha. Useful enough to test the idea, small enough to audit.
+Experimental alpha. Useful enough to test the idea, small enough to audit, but not yet a production memory layer. Expect rough edges, narrow benchmark coverage, and fast iteration.
 
 ---
 
