@@ -7,25 +7,53 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
-  publish:
-    name: Build and publish to PyPI
+  checks:
+    name: Release checks
     runs-on: ubuntu-latest
-    environment: pypi
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
 
       - name: Install build tooling
         run: python -m pip install --upgrade build twine
+
+      - name: Install package for release checks
+        run: python -m pip install -e .
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests
+
+      - name: Run LES-Core regression gate
+        run: |
+          ingrain eval --json > /tmp/ingrain-eval.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          result = json.loads(Path("/tmp/ingrain-eval.json").read_text())
+          total = result.get("total")
+          max_total = result.get("max_total")
+          practice_checks = result.get("practice_checks")
+          if not isinstance(total, int) or not isinstance(max_total, int) or max_total <= 0:
+              raise SystemExit(f"LES-Core gate malformed totals: total={total!r}, max_total={max_total!r}")
+          if not isinstance(practice_checks, dict) or not practice_checks:
+              raise SystemExit(f"LES-Core gate missing practice checks: {practice_checks!r}")
+          failed_checks = [name for name, passed in practice_checks.items() if passed is not True]
+          if total != max_total or failed_checks:
+              raise SystemExit(
+                  f"LES-Core gate failed: total={total}/{max_total}, "
+                  f"failed_checks={failed_checks}, practice_checks={practice_checks}"
+              )
+          print(f"LES-Core gate passed: {total}/{max_total}")
+          PY
 
       - name: Build distributions
         run: python -m build
@@ -33,5 +61,35 @@ jobs:
       - name: Verify distributions
         run: python -m twine check dist/*
 
+      - name: Smoke install built wheel
+        run: |
+          python -m pip install --force-reinstall --no-deps --target /tmp/ingrain-wheel-smoke dist/*.whl
+          VERSION=$(PYTHONPATH=/tmp/ingrain-wheel-smoke python -m aeonik_ingrain.cli --version)
+          test "$VERSION" = "0.2.0"
+          PYTHONPATH=/tmp/ingrain-wheel-smoke python -m aeonik_ingrain.cli --help > /tmp/ingrain-help.txt
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: python-package-distributions
+          path: dist/*
+          retention-days: 7
+
+  publish:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    needs: checks
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: python-package-distributions
+          path: dist
+
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b # release/v1
