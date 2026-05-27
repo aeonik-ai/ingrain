@@ -14,6 +14,10 @@ Agents can search old chats. They still repeat mistakes, revive stale plans, and
 
 ![Aeonik Ingrain architecture](assets/ingrain-architecture.svg)
 
+## Status
+
+**v0.2 with documented benchmarks.** Ingrain is intentionally narrow, local-first, and fast-moving: useful enough to try in real agent projects, small enough to audit, and not yet a production memory layer. Expect rough edges and expanding benchmark coverage.
+
 ## The short version
 
 Most memory tools answer: **“what did we talk about?”**
@@ -41,9 +45,9 @@ Ingrain is for people building or using coding agents that need to carry forward
 - completed outcomes / track record
 - compact, auditable context for future sessions
 
-It currently works best with **Hermes**, with skill-based setup for **Codex**, **Claude Code**, **Cursor**, and generic agent runners.
+It is designed to sit beside the agent runner you already use: **Claude Code**, **Cursor**, **Codex**, or generic shell-based runners. There is also a deeper Aeonik-substrate integration path.
 
-Ingrain is **not** a vector database, document store, planner, task manager, or replacement for your agent runtime. Hermes or your runner still owns active intent: goals, missions, Kanban, scheduling, and what to do next.
+Ingrain is **not** a vector database, document store, planner, task manager, or replacement for your agent runtime. Your runner still owns active intent: goals, missions, Kanban, scheduling, and what to do next.
 
 ## 30-second demo
 
@@ -77,7 +81,7 @@ Found 1 matching card(s) for 'push':
 
 ![Ingrain CLI demo](assets/demo.gif)
 
-## Install
+## Install + attach to your agent
 
 Current PyPI install:
 
@@ -95,33 +99,36 @@ Latest GitHub install:
 pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 ```
 
-Attach Ingrain to an agent skill target:
+Start with the skill-based path for the agent you already use:
 
 ```bash
-ingrain attach --agent codex
+ingrain skill install claude   # Claude Code
+ingrain skill install cursor   # Cursor
+ingrain skill install codex    # OpenAI Codex CLI
+ingrain skill install generic  # any runner that reads project instructions
 ```
 
-Supported skill targets:
+Then use the basic learned-experience loop from your agent/session:
 
 ```bash
-ingrain skill install codex
-ingrain skill install claude
-ingrain skill install cursor
-ingrain skill install generic
+ingrain hydrate --level brief --query "what should I know before working here?"
+# ...work normally...
+ingrain remember --type correction "Do not announce unapproved features as shipped. Offer approval-safe alternatives."
+ingrain consolidate
 ```
 
-Want your agent to install itself? Paste [INSTALL.md](INSTALL.md) into Hermes / Claude Code / Cursor / Codex and ask it to follow the runbook.
+If you want the agent to install itself, paste [INSTALL.md](INSTALL.md) into Claude Code / Cursor / Codex / your runner and ask it to follow the runbook. The skill path is intentionally the front door; no Aeonik substrate required, sir Lancelot may remain seated.
 
-## Hermes setup
+## Hermes / Aeonik substrate setup
 
-The recommended Hermes path is the **sidecar plugin**:
+If you are building on Hermes or the Aeonik substrate, the tighter path is the **sidecar plugin**:
 
 ```bash
 ingrain install hermes-plugin
 # Restart Hermes once. Done.
 ```
 
-The plugin records tool-call events into the Ingrain ledger and runs consolidation at session end through Hermes’s own model (`hermes -z`). Hermes default memory keeps working; Ingrain adds curated learned-experience cards alongside it.
+The plugin records tool-call events into the Ingrain ledger and runs consolidation at session end through the runner’s configured model (`hermes -z`). Default memory keeps working; Ingrain adds curated learned-experience cards alongside it.
 
 Manual / one-shot workflow:
 
@@ -132,12 +139,11 @@ ingrain hydrate --query "what should I know before continuing this project?"
 ```
 
 There is also a memory-provider mode:
-
 ```bash
 ingrain install hermes
 ```
 
-Provider mode swaps Ingrain into Hermes’s `memory.provider` slot. The sidecar plugin is safer for most users because default memory remains active.
+Provider mode swaps Ingrain into the runner’s `memory.provider` slot. The sidecar plugin is safer for most users because default memory remains active.
 
 ## How it works
 
@@ -203,15 +209,16 @@ Raw evidence lives in [`benlloydg/sandbox-universe`](https://github.com/benlloyd
 ## What this claims
 
 - Ingrain can turn corrections, source-of-truth docs, decisions, stale-plan warnings, completed outcomes, and durable user/project facts into compact context for future agent runs.
-- The LLM consolidator runs through Hermes (`hermes -z`), so it uses whatever model the user has Hermes configured against. No separate SDK key is required.
+- Skill-based setup lets Claude Code, Cursor, Codex, and generic runners hydrate and record learned experience without replacing the runner.
+- In the Aeonik-substrate path, the LLM consolidator runs through the configured runner model (`hermes -z`). No separate SDK key is required.
 - `ingrain why <query>` makes learned experience auditable by showing source-linked cards and events.
-- CLI + skill + Hermes plugin make the system usable as a set-and-forget sidecar for agent sessions.
+- CLI + skills + optional Hermes plugin make the system usable as either a manual learned-experience loop or a set-and-forget sidecar.
 
 ## What this does not claim
 
 - Not a replacement for your agent’s planner, active goals, missions, Kanban, or scheduler.
 - Not a resource-retrieval / vector-database substitute. Tools like OpenViking solve a different problem: external knowledge and document retrieval.
-- Not a SOTA claim against MemGPT, Letta, Mem0, or Zep. Those head-to-head runs have not been completed.
+- Not a SOTA claim against MemGPT, Letta, Mem0, or Zep. Those head-to-head runs have not been completed yet; Mem0 and Letta comparison lanes are planned for v0.3.
 - Not proof that every added context card is always helpful. Ingrain’s job is to make behavior-changing lessons compact, current, and auditable; users should still treat learned context as background signal.
 
 ## Ingrain vs. OpenViking
@@ -262,10 +269,11 @@ Ingrain is local-first.
 - local SQLite storage by default
 - no network calls by default
 - deterministic commands make no LLM calls
-- LLM consolidation uses your existing Hermes model when explicitly run or when the Hermes plugin is installed
+- skill-based Claude Code / Cursor / Codex / generic runner setup can be used manually
+- Optional plugin consolidation uses the user’s existing configured model only when explicitly run or installed
 - redacts common secrets before storage
 - does not store chain-of-thought
-- does not mutate Hermes goals, missions, Kanban, scheduling, or task lifecycle
+- does not mutate agent goals, missions, Kanban, scheduling, or task lifecycle
 - includes source event IDs in compiled pages and practice cards
 
 ## Commands
@@ -311,17 +319,14 @@ See [examples/banana-test.md](examples/banana-test.md).
 
 ## Roadmap
 
+- Claude Code, Cursor, Codex, and generic runner skill UX polish
+- v0.3 comparison lanes for Mem0 and Letta, with blocked/live labels and raw evidence
 - provider chaining with OpenViking retrieval providers
 - Claude Code and Codex transcript adapters
-- optional external memory-system lanes for comparison
 - hosted Aeonik MIND backend
 - team/project shared learned experience
 - richer LES behavioral evals
 
-## Status
-
-Experimental alpha. Useful enough to test the idea, small enough to audit, but not yet a production memory layer. Expect rough edges, narrow benchmark coverage, and fast iteration.
-
 ---
 
-Built by [Aeonik AI](https://github.com/aeonik-ai). Ingrain is the learned-experience infrastructure behind **Beings** — Aeonik’s digital-being product. The accompanying benchmark suite ([`benlloydg/sandbox-universe`](https://github.com/benlloydg/sandbox-universe)) is maintained independently so other memory systems can be scored on the same protocol.
+Built by [Aeonik AI](https://github.com/aeonik-ai). Ingrain is the learned-experience infrastructure behind **Beiiings** — Aeonik’s digital-being product. The accompanying benchmark suite ([`benlloydg/sandbox-universe`](https://github.com/benlloydg/sandbox-universe)) is maintained independently so other memory systems can be scored on the same protocol.
