@@ -79,14 +79,20 @@ Found 1 matching card(s) for 'push':
 
 ## Install
 
-Current GitHub install:
+Current PyPI install:
 
 ```bash
-pipx install "git+https://github.com/aeonik-ai/ingrain.git"
+pipx install aeonik-ingrain
 cd your-project
 ingrain init
 ingrain remember --type correction "Do not announce unapproved features as shipped. Offer approval-safe alternatives."
 ingrain hydrate --level brief --query "draft the launch post"
+```
+
+Latest GitHub install:
+
+```bash
+pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 ```
 
 Attach Ingrain to an agent skill target:
@@ -102,12 +108,6 @@ ingrain skill install codex
 ingrain skill install claude
 ingrain skill install cursor
 ingrain skill install generic
-```
-
-After the PyPI release:
-
-```bash
-pipx install aeonik-ingrain
 ```
 
 Want your agent to install itself? Paste [INSTALL.md](INSTALL.md) into Hermes / Claude Code / Cursor / Codex and ask it to follow the runbook.
