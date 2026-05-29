@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/aeonik-repo-header-21x9.png" alt="Aeonik abstract gradient header" width="100%" />
+</p>
+
 # Aeonik Ingrain
 
 **A local-first learned-experience layer for AI agents.**
