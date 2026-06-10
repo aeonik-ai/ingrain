@@ -12,6 +12,8 @@ This document is an **install runbook** that you (the user) can paste into your 
 pipx install "git+https://github.com/aeonik-ai/ingrain.git"
 ```
 
+Install package: `aeonik-ingrain`. CLI command: `ingrain`. Do **not** install the bare PyPI package `ingrain`; that is a different project.
+
 Then tell your agent: *"Read `INSTALL.md` in the Ingrain repo and install yourself."*
 
 ---
@@ -63,6 +65,14 @@ ingrain install hermes-plugin
 ```
 
 **Verify**: `ls ~/.hermes/plugins/ingrain-auto/` should show `__init__.py` and `plugin.yaml`. Restart Hermes for the plugin to load.
+
+Run the native dogfood verifier:
+
+```bash
+ingrain verify hermes --hermes-home ~/.hermes --home ~/.hermes/ingrain --json
+```
+
+This local check reports package sanity, Hermes plugin/config state, store counts, and source-linked hydration. Add `--live` to attempt one real Hermes recall probe; blocked live checks are reported as blocked, not simulated.
 
 After restart, every Hermes session will:
 - Record each tool call into the Ingrain ledger via `post_tool_call`

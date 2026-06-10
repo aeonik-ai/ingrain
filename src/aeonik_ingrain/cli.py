@@ -33,6 +33,7 @@ from aeonik_ingrain.practice import write_practice_artifacts
 from aeonik_ingrain.report import build_report
 from aeonik_ingrain.security import has_likely_secret
 from aeonik_ingrain.skills import AGENTS, install_skill, render_skill
+from aeonik_ingrain.verify import verify_hermes, write_receipts
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -72,6 +73,21 @@ def build_parser() -> argparse.ArgumentParser:
     hermes = ingest_sub.add_parser("hermes", help="Ingest Hermes state and built-in memory.")
     hermes.add_argument("--hermes-home", help="Hermes home directory. Defaults to HERMES_HOME or ~/.hermes.")
     hermes.add_argument("--limit", type=int, default=250, help="Max rows per candidate Hermes table.")
+
+    verify = sub.add_parser("verify", help="Verify Ingrain integrations and dogfood state.")
+    verify_sub = verify.add_subparsers(dest="verify_target")
+    verify_hermes_parser = verify_sub.add_parser("hermes", help="Verify Hermes provider/sidecar dogfood health.")
+    verify_hermes_parser.add_argument("--home", dest="home", help="Ingrain home directory. Accepted here for natural `ingrain verify hermes --home ...` usage.")
+    verify_hermes_parser.add_argument("--hermes-home", help="Hermes home directory. Defaults to HERMES_HOME or ~/.hermes.")
+    verify_hermes_parser.add_argument("--live", action="store_true", help="Run one real Hermes CLI memory recall probe.")
+    verify_hermes_parser.add_argument("--write-canary", action="store_true", help="Seed the provided --canary/--expected phrase before the live probe. Without --canary/--expected, --live seeds a generated canary automatically.")
+    verify_hermes_parser.add_argument("--canary", help="Canary phrase to seed/check. Defaults to a generated phrase when needed.")
+    verify_hermes_parser.add_argument("--expected", help="Expected phrase in the live Hermes output. Defaults to --canary.")
+    verify_hermes_parser.add_argument("--hermes-bin", help="Hermes CLI binary to run for --live. Defaults to PATH lookup.")
+    verify_hermes_parser.add_argument("--timeout", type=int, default=90, help="Live Hermes recall timeout in seconds.")
+    verify_hermes_parser.add_argument("--json", action="store_true", help="Print machine-readable JSON result.")
+    verify_hermes_parser.add_argument("--json-output", "--output", dest="json_output", help="Write JSON receipt to this path.")
+    verify_hermes_parser.add_argument("--markdown-output", help="Write Markdown receipt to this path.")
 
     sub.add_parser("compile", help="Compile ledger events into learned experience (deterministic regex).")
 
@@ -297,6 +313,34 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(result, indent=2, sort_keys=True))
             return 0
         print("Specify an ingest target, e.g. `ingrain ingest hermes`", file=sys.stderr)
+        return 2
+
+    if args.command == "verify":
+        if args.verify_target == "hermes":
+            result = verify_hermes(
+                hermes_home=args.hermes_home,
+                ingrain_home=store.home,
+                live=args.live,
+                hermes_bin=args.hermes_bin,
+                canary=args.canary,
+                expected=args.expected,
+                write_canary=args.write_canary,
+                timeout=args.timeout,
+            )
+            write_receipts(result, json_output=args.json_output, markdown_output=args.markdown_output)
+            if args.json:
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                verdict = result.get("verdict", "unknown")
+                print(f"Ingrain Hermes verification: {verdict}")
+                for warning in result.get("warnings", []):
+                    print(f"Warning: {warning}")
+                if args.json_output:
+                    print(f"Wrote {args.json_output}")
+                if args.markdown_output:
+                    print(f"Wrote {args.markdown_output}")
+            return 0 if result.get("verdict") != "fail" else 1
+        print("Specify a verify target, e.g. `ingrain verify hermes`", file=sys.stderr)
         return 2
 
     if args.command == "compile":
