@@ -16,6 +16,14 @@ Ingrain can run as:
 - a CLI + Skill practice layer that keeps `PRACTICE.md` beside the repo
 - a live provider that owns the external slot
 
+Verify the current dogfood state with:
+
+```bash
+ingrain verify hermes --hermes-home ~/.hermes --home ~/.hermes/ingrain --json
+```
+
+Use `--live` for one real Hermes recall probe. The verifier labels missing Hermes/runtime evidence as `blocked`; it does not simulate provider success.
+
 This means Ingrain and OpenViking can be used together in sidecar mode today, but not as simultaneous live providers unless Hermes gains provider chaining.
 
 Recommended v0 default:

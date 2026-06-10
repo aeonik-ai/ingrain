@@ -64,8 +64,9 @@ jobs:
       - name: Smoke install built wheel
         run: |
           python -m pip install --force-reinstall --no-deps --target /tmp/ingrain-wheel-smoke dist/*.whl
+          EXPECTED_VERSION=$(python -c 'import tomllib, pathlib; print(tomllib.loads(pathlib.Path("pyproject.toml").read_text())["project"]["version"])')
           VERSION=$(PYTHONPATH=/tmp/ingrain-wheel-smoke python -m aeonik_ingrain.cli --version)
-          test "$VERSION" = "0.2.0"
+          test "$VERSION" = "$EXPECTED_VERSION"
           PYTHONPATH=/tmp/ingrain-wheel-smoke python -m aeonik_ingrain.cli --help > /tmp/ingrain-help.txt
 
       - name: Upload distributions

@@ -97,6 +97,8 @@ ingrain remember --type correction "Do not announce unapproved features as shipp
 ingrain hydrate --level brief --query "draft the launch post"
 ```
 
+Install package: `aeonik-ingrain`. CLI command: `ingrain`. Do **not** install the bare PyPI package `ingrain`; that is a different project.
+
 Latest GitHub install:
 
 ```bash
@@ -133,6 +135,14 @@ ingrain install hermes-plugin
 ```
 
 The plugin records tool-call events into the Ingrain ledger and runs consolidation at session end through the runner’s configured model (`hermes -z`). Default memory keeps working; Ingrain adds curated learned-experience cards alongside it.
+
+Verify the dogfood install without changing capture/consolidation behavior:
+
+```bash
+ingrain verify hermes --hermes-home ~/.hermes --home ~/.hermes/ingrain --json
+```
+
+Add `--live` only when you want a real Hermes CLI recall probe. If Hermes is unavailable, the command reports `blocked`; it does not fake provider evidence.
 
 Manual / one-shot workflow:
 
