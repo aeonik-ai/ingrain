@@ -1,12 +1,15 @@
 import json
+import re
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import mock
 
 from aeonik_ingrain.cli import main
+from aeonik_ingrain.compiler.hydrate import hydrate
+from aeonik_ingrain.compiler.pages import compile_store
 from aeonik_ingrain.db import IngrainStore
-from aeonik_ingrain.verify import format_markdown_receipt, verify_hermes
+from aeonik_ingrain.verify import _redact, format_markdown_receipt, verify_hermes
 
 
 class VerifyHermesTests(unittest.TestCase):
@@ -107,6 +110,44 @@ class VerifyHermesTests(unittest.TestCase):
             self.assertEqual(blocked["live_recall"]["status"], "blocked")
             self.assertFalse(blocked["live_recall"]["ok"])
 
+    def test_live_verify_canary_is_repeatable_after_session_compile(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            store = IngrainStore(root / ".ingrain")
+
+            def runner(command, timeout):
+                context = hydrate(IngrainStore(store.home), query=command[-1], limit=10)
+                match = re.search(r"canary phrase: ([^\n\[]+)", context)
+                if not match:
+                    return {"exit_code": 0, "stdout": "missing canary", "stderr": "", "elapsed_seconds": 0.1}
+                phrase = match.group(1).strip()
+                compile_store(IngrainStore(store.home))
+                return {"exit_code": 0, "stdout": phrase, "stderr": "", "elapsed_seconds": 0.1}
+
+            with mock.patch("aeonik_ingrain.verify.distribution_version", side_effect=lambda name: "0.2.0" if name == "aeonik-ingrain" else None):
+                first = verify_hermes(
+                    hermes_home=root / "hermes",
+                    ingrain_home=store.home,
+                    live=True,
+                    hermes_bin="/bin/hermes",
+                    subprocess_runner=runner,
+                )
+                second = verify_hermes(
+                    hermes_home=root / "hermes",
+                    ingrain_home=store.home,
+                    live=True,
+                    hermes_bin="/bin/hermes",
+                    subprocess_runner=runner,
+                )
+
+            self.assertEqual(first["live_recall"]["status"], "live")
+            self.assertEqual(second["live_recall"]["status"], "live")
+            self.assertNotEqual(first["live_recall"]["canary"], second["live_recall"]["canary"])
+            verify_cards = [p for p in store.list_promotions() if (p.get("meta") or {}).get("verify_canary")]
+            self.assertTrue(verify_cards)
+            self.assertTrue(all(card["promoted_type"] == "project_fact" for card in verify_cards))
+            self.assertTrue(all("Remember the Ingrain verification canary" not in card["text"] for card in verify_cards))
+
     def test_cli_verify_hermes_json_and_markdown_receipt(self):
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -133,6 +174,44 @@ class VerifyHermesTests(unittest.TestCase):
             data = json.loads(json_receipt.read_text(encoding="utf-8"))
             self.assertIn("store", data)
             self.assertTrue(stdout.write.called)
+
+    def test_cli_verify_hermes_blocked_exits_nonzero(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            with mock.patch("sys.stdout"):
+                code = main([
+                    "verify",
+                    "hermes",
+                    "--home",
+                    str(root / ".ingrain"),
+                    "--hermes-home",
+                    str(root / "hermes"),
+                    "--live",
+                    "--hermes-bin",
+                    "",
+                    "--json",
+                ])
+            self.assertEqual(code, 1)
+
+    def test_local_verify_reports_db_existence_before_touching_store(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            home = root / "fresh-ingrain"
+
+            with mock.patch("aeonik_ingrain.verify.distribution_version", side_effect=lambda name: "0.2.0" if name == "aeonik-ingrain" else None):
+                result = verify_hermes(hermes_home=root / "hermes", ingrain_home=home, live=False)
+
+            self.assertFalse(result["store"]["db_exists_before_verify"])
+            self.assertFalse(result["store"]["db_readable_before_verify"])
+            self.assertTrue(result["store"]["db_exists_after_verify"])
+            self.assertTrue(result["store"]["db_readable"])
+
+    def test_redact_masks_standalone_secret_tokens(self):
+        text = _redact("token=abc ghp_ABC123 github_pat_ABC123 sk-proj-abcdef")
+        self.assertIn("token=[REDACTED]", text)
+        self.assertNotIn("ghp_ABC123", text)
+        self.assertNotIn("github_pat_ABC123", text)
+        self.assertNotIn("sk-proj-abcdef", text)
 
     def test_markdown_receipt_mentions_blockers_and_warnings(self):
         result = {

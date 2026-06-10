@@ -339,7 +339,7 @@ def main(argv: list[str] | None = None) -> int:
                     print(f"Wrote {args.json_output}")
                 if args.markdown_output:
                     print(f"Wrote {args.markdown_output}")
-            return 0 if result.get("verdict") != "fail" else 1
+            return 1 if result.get("verdict") in {"blocked", "fail"} else 0
         print("Specify a verify target, e.g. `ingrain verify hermes`", file=sys.stderr)
         return 2
 

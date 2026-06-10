@@ -12,6 +12,7 @@ import os
 import platform
 import re
 import shutil
+import sqlite3
 import subprocess
 import time
 import uuid
@@ -62,6 +63,8 @@ def verify_hermes(
     h_home = Path(hermes_home).expanduser() if hermes_home else Path(os.environ.get("HERMES_HOME", "~/.hermes")).expanduser()
     store = IngrainStore(ingrain_home)
     warnings: list[str] = []
+    db_exists_before_verify = store.db_path.exists()
+    db_readable_before_verify = _sqlite_db_readable(store.db_path)
 
     expected_dist = distribution_version("aeonik-ingrain")
     bare_dist = distribution_version("ingrain")
@@ -127,7 +130,10 @@ def verify_hermes(
         "store": {
             "home": str(store.home),
             "db_path": str(store.db_path),
-            "db_readable": store.db_path.exists(),
+            "db_exists_before_verify": db_exists_before_verify,
+            "db_readable_before_verify": db_readable_before_verify,
+            "db_exists_after_verify": store.db_path.exists(),
+            "db_readable": _sqlite_db_readable(store.db_path),
             "ledger_events": len(events),
             "promotions": len(promotions),
             "compiled_pages": len(pages),
@@ -162,6 +168,20 @@ def _safe_list(fn: Callable[..., list[dict[str, Any]]]) -> list[dict[str, Any]]:
         return fn()
     except Exception:
         return []
+
+
+def _sqlite_db_readable(path: Path) -> bool:
+    if not path.exists():
+        return False
+    try:
+        conn = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+        try:
+            conn.execute("SELECT name FROM sqlite_master LIMIT 1").fetchone()
+        finally:
+            conn.close()
+    except sqlite3.Error:
+        return False
+    return True
 
 
 def _latest_by_created_at(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
@@ -261,29 +281,38 @@ def _check_live_recall(
     if not live:
         return {"attempted": False, "ok": False, "status": "skipped"}
 
-    phrase = expected or canary or f"ingrain canary {uuid.uuid4().hex[:8]}"
     should_write_canary = write_canary or not (expected or canary)
+    verification_id = uuid.uuid4().hex[:8] if should_write_canary else None
+    phrase = expected or canary or f"ingrain verify phrase {verification_id}"
     if should_write_canary:
+        canary_text = f"Ingrain verification id {verification_id} canary phrase: {phrase}"
+        canary_meta = {
+            "remember_type": "project_fact",
+            "verify_canary": True,
+            "verification_id": verification_id,
+            "transient": True,
+        }
         event = store.add_event(
             source="ingrain_verify",
             runner="ingrain",
             event_type="interaction",
             actor="user",
-            text=f"Remember the Ingrain verification canary phrase: {phrase}",
-            meta={"verify_canary": True},
+            text=canary_text,
+            meta=canary_meta,
         )
         store.add_promotion(
             event_id=event.id,
             promoted_type="project_fact",
-            text=f"Ingrain verification canary phrase: {phrase}",
+            text=canary_text,
             confidence=1.0,
             reason="Temporary verification canary seeded by `ingrain verify hermes --live`.",
+            meta=canary_meta,
         )
         store.write_compiled_page(
             path="verify/canary.md",
             title="Verification Canary",
             page_type="project_fact",
-            content=f"# Verification Canary\n\n- Ingrain verification canary phrase: {phrase}\n",
+            content=f"# Verification Canary\n\n- {canary_text}\n",
             source_event_ids=[event.id],
         )
 
@@ -297,6 +326,12 @@ def _check_live_recall(
             "blocker": "Hermes binary not found. Pass --hermes-bin or install Hermes CLI.",
         }
 
+    prompt = "Ingrain verification probe. Without files or session_search, answer only the Ingrain canary phrase from active memory."
+    if verification_id:
+        prompt = (
+            "Ingrain verification probe. Without files or session_search, answer only the canary phrase "
+            f"for verification id {verification_id} from active memory. Ignore canaries with other verification ids."
+        )
     command = [
         resolved_hermes,
         "chat",
@@ -304,7 +339,7 @@ def _check_live_recall(
         "--toolsets",
         "memory",
         "-q",
-        "Ingrain verification probe. Without files or session_search, answer only the Ingrain canary phrase from active memory.",
+        prompt,
     ]
     runner = subprocess_runner or (lambda command, timeout: _run_subprocess(command, timeout, env_overrides={"INGRAIN_HOME": str(store.home)}))
     started = time.monotonic()
@@ -316,6 +351,7 @@ def _check_live_recall(
             "ok": False,
             "status": "blocked",
             "canary": phrase,
+            "verification_id": verification_id,
             "command": command,
             "elapsed_seconds": round(time.monotonic() - started, 3),
             "blocker": str(exc),
@@ -327,6 +363,7 @@ def _check_live_recall(
         "ok": ok,
         "status": "live" if ok else "failed",
         "canary": phrase,
+        "verification_id": verification_id,
         "command": command,
         "exit_code": completed.get("exit_code"),
         "elapsed_seconds": completed.get("elapsed_seconds", round(time.monotonic() - started, 3)),
@@ -349,7 +386,15 @@ def _run_subprocess(command: list[str], timeout: int, env_overrides: dict[str, s
 
 
 def _redact(text: str) -> str:
-    return SECRETISH_RE.sub(lambda m: m.group(0).split("=", 1)[0].split(":", 1)[0] + "=[REDACTED]", text)
+    def replace(match: re.Match[str]) -> str:
+        value = match.group(0)
+        for separator in ("=", ":"):
+            if separator in value:
+                key = value.split(separator, 1)[0].rstrip()
+                return f"{key}{separator}[REDACTED]"
+        return "[REDACTED]"
+
+    return SECRETISH_RE.sub(replace, text)
 
 
 def format_markdown_receipt(result: dict[str, Any]) -> str:
