@@ -2,6 +2,27 @@
 
 All notable changes are kept here. For the full per-commit history, `git log`.
 
+## v0.2.1 — 2026-06-10
+
+### Added
+
+- **`ingrain verify hermes`** — local Hermes dogfood verifier for package sanity,
+  plugin/config state, store counts, source-linked hydration, and optional live
+  recall receipts.
+- **JSON and Markdown verification receipts** for public dogfood evidence.
+- **Hermes verification hardening spec** documenting repeatability, redaction,
+  blocked-state, and live-evidence requirements.
+
+### Fixed
+
+- Live verifier canaries are keyed by verification ID so repeated probes do not
+  satisfy later runs with stale canary cards.
+- `blocked` verifier results now exit nonzero for scripts and CI.
+- Receipt snippets redact standalone secret-shaped tokens, not only key-value
+  secret fields.
+- Store receipts distinguish pre-existing database state from post-verifier
+  readability.
+
 ## v0.2.0 — 2026-05-20
 
 **Architectural shift: deterministic regex compiler → LLM consolidator.** Driven by external benchmark evidence; full arc in [`docs/research-arc.md`](docs/research-arc.md).

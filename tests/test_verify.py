@@ -49,7 +49,7 @@ class VerifyHermesTests(unittest.TestCase):
             (hermes_home / "config.yaml").write_text("memory:\n  provider: ingrain\n", encoding="utf-8")
             store = self._store_with_card(root)
 
-            with mock.patch("aeonik_ingrain.verify.distribution_version", side_effect=lambda name: "0.2.0" if name == "aeonik-ingrain" else None), mock.patch("aeonik_ingrain.verify.shutil.which", return_value="/usr/local/bin/ingrain"):
+            with mock.patch("aeonik_ingrain.verify.distribution_version", side_effect=lambda name: "0.2.1" if name == "aeonik-ingrain" else None), mock.patch("aeonik_ingrain.verify.shutil.which", return_value="/usr/local/bin/ingrain"):
                 result = verify_hermes(hermes_home=hermes_home, ingrain_home=store.home, live=False)
 
             self.assertTrue(result["ok"])
@@ -74,7 +74,7 @@ class VerifyHermesTests(unittest.TestCase):
             store.add_event(source="hermes_live", runner="hermes", event_type="interaction", text="raw only")
 
             def fake_version(name: str):
-                return {"aeonik-ingrain": "0.2.0", "ingrain": "9.9.9"}.get(name)
+                return {"aeonik-ingrain": "0.2.1", "ingrain": "9.9.9"}.get(name)
 
             with mock.patch("aeonik_ingrain.verify.distribution_version", side_effect=fake_version):
                 result = verify_hermes(hermes_home=root / "hermes", ingrain_home=store.home, live=False)
@@ -124,7 +124,7 @@ class VerifyHermesTests(unittest.TestCase):
                 compile_store(IngrainStore(store.home))
                 return {"exit_code": 0, "stdout": phrase, "stderr": "", "elapsed_seconds": 0.1}
 
-            with mock.patch("aeonik_ingrain.verify.distribution_version", side_effect=lambda name: "0.2.0" if name == "aeonik-ingrain" else None):
+            with mock.patch("aeonik_ingrain.verify.distribution_version", side_effect=lambda name: "0.2.1" if name == "aeonik-ingrain" else None):
                 first = verify_hermes(
                     hermes_home=root / "hermes",
                     ingrain_home=store.home,
@@ -198,7 +198,7 @@ class VerifyHermesTests(unittest.TestCase):
             root = Path(tmp)
             home = root / "fresh-ingrain"
 
-            with mock.patch("aeonik_ingrain.verify.distribution_version", side_effect=lambda name: "0.2.0" if name == "aeonik-ingrain" else None):
+            with mock.patch("aeonik_ingrain.verify.distribution_version", side_effect=lambda name: "0.2.1" if name == "aeonik-ingrain" else None):
                 result = verify_hermes(hermes_home=root / "hermes", ingrain_home=home, live=False)
 
             self.assertFalse(result["store"]["db_exists_before_verify"])
