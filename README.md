@@ -200,6 +200,18 @@ ingrain hydrate --level evidence --query "audit source-linked context"
 
 The hydration output is fenced as background learned experience, not a new user command.
 
+Rust read-only inspector from the source tree:
+
+```bash
+cargo run -p ingrain-cli -- hydrate --home .ingrain --query "small context" --level evidence
+cargo run -p ingrain-cli -- report --home .ingrain --json
+cargo run -p ingrain-cli -- verify-store --home .ingrain --json
+```
+
+The Rust path reads the existing SQLite schema without migrations or writes. It is
+for fast local inspection, hydration parity checks, and store-health reporting;
+the Python CLI remains the primary install and agent-integration surface.
+
 ## Early evidence
 
 Ingrain is an applied agent-systems artifact with early benchmark evidence against Hermes default memory. The main question is narrow:
@@ -308,6 +320,7 @@ ingrain les-hard
 ingrain report
 ingrain doctor
 ingrain install hermes-plugin
+cargo run -p ingrain-cli -- report --home .ingrain --json
 ```
 
 ## Behavioral carry-forward test
@@ -327,6 +340,7 @@ See [examples/banana-test.md](examples/banana-test.md).
 - [docs/eval-standards.md](docs/eval-standards.md) — what Ingrain claims and what it does not.
 - [docs/learned-experience-model.md](docs/learned-experience-model.md) — card taxonomy.
 - [docs/hermes.md](docs/hermes.md) — Hermes integration notes.
+- [docs/rust-core-spec.md](docs/rust-core-spec.md) — Rust read-only core spec.
 - [docs/compiler-rules-explained.md](docs/compiler-rules-explained.md) — legacy deterministic compiler, kept as a no-LLM fallback.
 - [docs/philosophy.md](docs/philosophy.md), [docs/visual-demo.md](docs/visual-demo.md) — short framing notes.
 - [AUDIT.md](AUDIT.md) — public-readiness checklist.
